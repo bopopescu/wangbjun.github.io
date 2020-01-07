@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/blog/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="PHP," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/blog/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="在Web开发里面，有前后端之分，它们之间的交互主要通过传参的方式，但是这个传参也分几种形式，比如说Form表单提交、Ajax提交…今天我就在这里总结一下开发中常见的几种形式： 1. Form表单提交这种方式是最原始最常见的方式，提交的时候也有可能是通过js触发，其请求头Content-Type为: application&#x2F;x-www-form-urlencoded，示例如下： 前端代码：12345">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈PHP前后端传参常见的几种方式">
+<meta property="og:url" content="https://wangbjun.github.io/blog/2017/09/05/php-form-pass-method/index.html">
+<meta property="og:site_name" content="JWang的博客">
+<meta property="og:description" content="在Web开发里面，有前后端之分，它们之间的交互主要通过传参的方式，但是这个传参也分几种形式，比如说Form表单提交、Ajax提交…今天我就在这里总结一下开发中常见的几种形式： 1. Form表单提交这种方式是最原始最常见的方式，提交的时候也有可能是通过js触发，其请求头Content-Type为: application&#x2F;x-www-form-urlencoded，示例如下： 前端代码：12345">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3571187-3b1aa32292a0f9e5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3571187-c2d0236765996437.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3571187-cbf271fe3dd4bad7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3571187-7f20f6b265d2e8bf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3571187-5ca0c75d95ef56bb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3571187-8a85e131e56d62b8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="article:published_time" content="2017-09-05T07:00:00.000Z">
+<meta property="article:modified_time" content="2020-01-07T11:29:54.874Z">
+<meta property="article:author" content="Ben Jun">
+<meta property="article:tag" content="PHP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/3571187-3b1aa32292a0f9e5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://wangbjun.github.io/blog/2017/09/05/php-form-pass-method/"/>
+
+
+
+
+
+  <title>浅谈PHP前后端传参常见的几种方式 | JWang的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">JWang的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/blog/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/blog/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/blog/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/blog/blog/2017/09/05/php-form-pass-method/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben Jun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JWang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">浅谈PHP前后端传参常见的几种方式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-05T15:00:00+08:00">
+                2017-09-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在Web开发里面，有前后端之分，它们之间的交互主要通过传参的方式，但是这个传参也分几种形式，比如说Form表单提交、Ajax提交…今天我就在这里总结一下开发中常见的几种形式：</p>
+<h3 id="1-Form表单提交"><a href="#1-Form表单提交" class="headerlink" title="1. Form表单提交"></a>1. Form表单提交</h3><p>这种方式是最原始最常见的方式，提交的时候也有可能是通过js触发，其请求头Content-Type为: application/x-www-form-urlencoded，示例如下：</p>
+<h5 id="前端代码："><a href="#前端代码：" class="headerlink" title="前端代码："></a>前端代码：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;form action&#x3D;&quot;backend.php&quot; method&#x3D;&quot;post&quot;&gt;</span><br><span class="line">        &lt;label for&#x3D;&quot;name&quot;&gt;姓名:&lt;&#x2F;label&gt;</span><br><span class="line">        &lt;input type&#x3D;&quot;text&quot; id&#x3D;&quot;name&quot; name&#x3D;&quot;name&quot;&gt;</span><br><span class="line">        &lt;label for&#x3D;&quot;name&quot;&gt;年龄:&lt;&#x2F;label&gt;</span><br><span class="line">        &lt;input type&#x3D;&quot;text&quot; id&#x3D;&quot;age&quot; name&#x3D;&quot;age&quot;&gt;</span><br><span class="line">        &lt;input type&#x3D;&quot;submit&quot; value&#x3D;&quot;提交&quot;&gt;</span><br><span class="line">    &lt;&#x2F;form&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<h5 id="后端接收："><a href="#后端接收：" class="headerlink" title="后端接收："></a>后端接收：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">var_dump($_POST[&#39;name&#39;]);</span><br><span class="line">var_dump($_GET[&#39;age&#39;]);</span><br><span class="line">var_dump($_REQUEST[&#39;age]);</span><br></pre></td></tr></table></figure>
+<h5 id="请求头："><a href="#请求头：" class="headerlink" title="请求头："></a>请求头：</h5><p><img src="http://upload-images.jianshu.io/upload_images/3571187-3b1aa32292a0f9e5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>这种提交方式也是ajax默认的提交方式,请求参数是以key-value键值对的形式传递到后端,在PHP里面通$_POST等超全局变量就可以获取到,简单实用。其未经解析的原始的数据其实是：name=PHP&amp;age=25<br><img src="http://upload-images.jianshu.io/upload_images/3571187-c2d0236765996437.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h3 id="2-JSON形式提交"><a href="#2-JSON形式提交" class="headerlink" title="2. JSON形式提交"></a>2. JSON形式提交</h3><p>这种形式，需要设置一下请求头Content-Type为application/json，实例如下：</p>
+<h5 id="前端代码：-1"><a href="#前端代码：-1" class="headerlink" title="前端代码："></a>前端代码：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">           type: &#39;POST&#39;,</span><br><span class="line">           url: &quot;backend.php&quot;,</span><br><span class="line">           data: &#123;</span><br><span class="line">               &#39;name&#39;: &#39;hello&#39;,</span><br><span class="line">               &#39;age&#39;: 15,</span><br><span class="line">           &#125;,</span><br><span class="line">           contentType: &#39;application&#x2F;json&#39;,</span><br><span class="line">           dataType: &quot;json&quot;,</span><br><span class="line">           success: function (data) &#123;</span><br><span class="line">               console.log(data);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;);</span><br></pre></td></tr></table></figure>
+<h5 id="请求头：-1"><a href="#请求头：-1" class="headerlink" title="请求头："></a>请求头：</h5><p><img src="http://upload-images.jianshu.io/upload_images/3571187-cbf271fe3dd4bad7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>从上面的截图可以看到，请求参数那里变成Request Payload，虽然格式上看上去和之前form提交差不多，但是这时候如果后台用$_POST这类方法是无法获取的，需要换一种方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$input &#x3D; file_get_contents(&#39;php:&#x2F;&#x2F;input&#39;);</span><br></pre></td></tr></table></figure>
+<p>上面这种方式获取到的内容是字符串: name=Jun&amp;age=15，在这个例子里面反而不容易处理了，实际上采用json这种方式提交的参数的话，一般都是把需要的数据封装成json格式提交，在js里面就是把数据放到对象里面，然后序列化：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">var data &#x3D; &#123;</span><br><span class="line">    &#39;name&#39;: &#39;Jun&#39;,</span><br><span class="line">    &#39;age&#39;: 15,</span><br><span class="line">&#125;;</span><br><span class="line">$.ajax(&#123;</span><br><span class="line">    type: &#39;POST&#39;,</span><br><span class="line">    url: &quot;backend.php&quot;,</span><br><span class="line">    data: JSON.stringify(data),</span><br><span class="line">    contentType: &#39;application&#x2F;json&#39;,</span><br><span class="line">    dataType: &quot;json&quot;,</span><br><span class="line">    success: function (data) &#123;</span><br><span class="line">        console.log(data);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>这是再查看请求头：<br><img src="http://upload-images.jianshu.io/upload_images/3571187-7f20f6b265d2e8bf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>可以看到参数变成json格式，这时候PHP后端就可以采用json_decode函数去获取参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$input &#x3D; json_decode(file_get_contents(&#39;php:&#x2F;&#x2F;input&#39;), true);</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-文件上传"><a href="#3-文件上传" class="headerlink" title="3.文件上传"></a>3.文件上传</h3><blockquote>
+<p>一般上传图片等各种文件的时候用的到，Content-Type是 multipart/form-data</p>
+</blockquote>
+<p>请求头类似如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">------WebKitFormBoundary63FiWN3UoYxd8OT6</span><br><span class="line">Content-Disposition: form-data; name&#x3D;&quot;UploadFile&quot;; filename&#x3D;&quot;QQ截图20170925101502.png&quot;</span><br><span class="line">Content-Type: image&#x2F;png</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">------WebKitFormBoundary63FiWN3UoYxd8OT6</span><br><span class="line">Content-Disposition: form-data; name&#x3D;&quot;sid&quot;</span><br><span class="line"></span><br><span class="line">sid</span><br><span class="line">------WebKitFormBoundary63FiWN3UoYxd8OT6</span><br><span class="line">Content-Disposition: form-data; name&#x3D;&quot;fun&quot;</span><br><span class="line"></span><br><span class="line">add</span><br><span class="line">------WebKitFormBoundary63FiWN3UoYxd8OT6</span><br><span class="line">Content-Disposition: form-data; name&#x3D;&quot;mode&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-总结"><a href="#4-总结" class="headerlink" title="4. 总结"></a>4. 总结</h3><p>这几种方式功能上说没什么区别，都能实现数据的提交，大家选择自己喜欢的方式就行，最重要的是前后端协调好, 虽然这里后端是以PHP为例，但是其他语言也是大同小异。最后，再说一下数组提交，这个倒不是新的提交方式，我这里是指遇到那种一个字段提交多个数据的情况，比如说删除多个文章，一般前端需要传多个id，举例子字段名字叫ids，一般有这2种方案：</p>
+<h6 id="1-逗号相隔"><a href="#1-逗号相隔" class="headerlink" title="1. 逗号相隔"></a>1. 逗号相隔</h6><p><img src="http://upload-images.jianshu.io/upload_images/3571187-5ca0c75d95ef56bb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>这样传参，后端获取到之后是一个字符串，在PHP里面可以用explode这样的函数去把字符串拆分成数组，非常方便，当然你也可以选择其他分隔符，比如说“-”，“+”等字符。</p>
+<h6 id="2-JSON形式"><a href="#2-JSON形式" class="headerlink" title="2. JSON形式"></a>2. JSON形式</h6><p>这就是文中说的第二种方式，把id放在数组里面以json方式传到后台，这样后台可以直接获取到一个数组.<br><img src="http://upload-images.jianshu.io/upload_images/3571187-8a85e131e56d62b8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/blog/tags/PHP/" rel="tag"># PHP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2017/06/09/php-multi-process/" rel="next" title="PHP多进程编程应用">
+                <i class="fa fa-chevron-left"></i> PHP多进程编程应用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2018/01/05/mysql-group-orderby/" rel="prev" title="解决MySQL分组排序求最值问题">
+                解决MySQL分组排序求最值问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/blog/images/avatar.gif"
+               alt="Ben Jun" />
+          <p class="site-author-name" itemprop="name">Ben Jun</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/blog/archives/">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/blog/categories/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/blog/tags/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Form表单提交"><span class="nav-number">1.</span> <span class="nav-text">1. Form表单提交</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#前端代码："><span class="nav-number">1.0.1.</span> <span class="nav-text">前端代码：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#后端接收："><span class="nav-number">1.0.2.</span> <span class="nav-text">后端接收：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#请求头："><span class="nav-number">1.0.3.</span> <span class="nav-text">请求头：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-JSON形式提交"><span class="nav-number">2.</span> <span class="nav-text">2. JSON形式提交</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#前端代码：-1"><span class="nav-number">2.0.1.</span> <span class="nav-text">前端代码：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#请求头：-1"><span class="nav-number">2.0.2.</span> <span class="nav-text">请求头：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-文件上传"><span class="nav-number">3.</span> <span class="nav-text">3.文件上传</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-总结"><span class="nav-number">4.</span> <span class="nav-text">4. 总结</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-逗号相隔"><span class="nav-number">4.0.0.1.</span> <span class="nav-text">1. 逗号相隔</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-JSON形式"><span class="nav-number">4.0.0.2.</span> <span class="nav-text">2. JSON形式</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ben Jun</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
