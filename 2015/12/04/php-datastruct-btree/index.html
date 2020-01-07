@@ -39,7 +39,7 @@
 
   
   
-  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
@@ -73,9 +73,9 @@
 
 
 
-<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/blog/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="PHP," />
@@ -87,7 +87,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/blog/favicon.png?v=5.1.2" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.2" />
 
 
 
@@ -97,7 +97,7 @@
 <meta name="description" content="有一点需要说明，一般讲算法是不会用PHP来实现的，而且实际应用中用PHP来实现也木有多大意思，所以这里用PHP实现的意思在于方便大家熟悉，了解其中概念。 如果要讲二叉树，肯定得先讲讲树，这里也不讲了，只讲一点，二叉树是一种特殊的树，这里为什么说是二叉树而不是三叉树呢？看图 这是典型的树结构图：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PHP数据结构之二叉树">
-<meta property="og:url" content="https://wangbjun.github.io/blog/2015/12/04/php-datastruct-btree/index.html">
+<meta property="og:url" content="https://wangbjun.github.io/2015/12/04/php-datastruct-btree/index.html">
 <meta property="og:site_name" content="JWang的博客">
 <meta property="og:description" content="有一点需要说明，一般讲算法是不会用PHP来实现的，而且实际应用中用PHP来实现也木有多大意思，所以这里用PHP实现的意思在于方便大家熟悉，了解其中概念。 如果要讲二叉树，肯定得先讲讲树，这里也不讲了，只讲一点，二叉树是一种特殊的树，这里为什么说是二叉树而不是三叉树呢？看图 这是典型的树结构图：">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/5f6e3e27ly1fv8v3f7a7pj20do0asgn6.jpg">
@@ -115,7 +115,7 @@
 <script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/blog/',
+    root: '/',
     scheme: 'Muse',
     sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -137,7 +137,7 @@
 
 
 
-  <link rel="canonical" href="https://wangbjun.github.io/blog/2015/12/04/php-datastruct-btree/"/>
+  <link rel="canonical" href="https://wangbjun.github.io/2015/12/04/php-datastruct-btree/"/>
 
 
 
@@ -177,7 +177,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/blog/"  class="brand" rel="start">
+      <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">JWang的博客</span>
         <span class="logo-line-after"><i></i></span>
@@ -205,7 +205,7 @@
       
         
         <li class="menu-item menu-item-home">
-          <a href="/blog/" rel="section">
+          <a href="/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
@@ -215,7 +215,7 @@
       
         
         <li class="menu-item menu-item-categories">
-          <a href="/blog/categories/" rel="section">
+          <a href="/categories/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
@@ -225,7 +225,7 @@
       
         
         <li class="menu-item menu-item-about">
-          <a href="/blog/about/" rel="section">
+          <a href="/about/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
@@ -235,7 +235,7 @@
       
         
         <li class="menu-item menu-item-archives">
-          <a href="/blog/archives/" rel="section">
+          <a href="/archives/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
@@ -245,7 +245,7 @@
       
         
         <li class="menu-item menu-item-tags">
-          <a href="/blog/tags/" rel="section">
+          <a href="/tags/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
@@ -286,12 +286,12 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/blog/blog/2015/12/04/php-datastruct-btree/">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2015/12/04/php-datastruct-btree/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben Jun">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -338,7 +338,7 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/PHP/" itemprop="url" rel="index">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
                     <span itemprop="name">PHP</span>
                   </a>
                 </span>
@@ -427,7 +427,7 @@
       
         <div class="post-tags">
           
-            <a href="/blog/tags/PHP/" rel="tag"># PHP</a>
+            <a href="/tags/PHP/" rel="tag"># PHP</a>
           
         </div>
       
@@ -440,7 +440,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/blog/2015/12/01/php-double-linklist/" rel="next" title="PHP数据结构之双向链表">
+              <a href="/2015/12/01/php-double-linklist/" rel="next" title="PHP数据结构之双向链表">
                 <i class="fa fa-chevron-left"></i> PHP数据结构之双向链表
               </a>
             
@@ -450,7 +450,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/blog/2016/01/05/php-autoload/" rel="prev" title="PHP类的自动加载机制">
+              <a href="/2016/01/05/php-autoload/" rel="prev" title="PHP类的自动加载机制">
                 PHP类的自动加载机制 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -517,7 +517,7 @@
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="/blog/images/avatar.gif"
+               src="/images/avatar.gif"
                alt="Ben Jun" />
           <p class="site-author-name" itemprop="name">Ben Jun</p>
            
@@ -528,7 +528,7 @@
 
           
             <div class="site-state-item site-state-posts">
-              <a href="/blog/archives/">
+              <a href="/archives/">
                 <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">日志</span>
               </a>
@@ -539,7 +539,7 @@
             
             
             <div class="site-state-item site-state-categories">
-              <a href="/blog/categories/index.html">
+              <a href="/categories/index.html">
                 <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">分类</span>
               </a>
@@ -550,7 +550,7 @@
             
             
             <div class="site-state-item site-state-tags">
-              <a href="/blog/tags/index.html">
+              <a href="/tags/index.html">
                 <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               </a>
@@ -674,46 +674,46 @@
 
 
   
-  <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
 
   
-  <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
 
   
-  <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
   
-  <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
 
   
-  <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
   
-  <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.2"></script>
-
-  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.2"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.2"></script>
-<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.2"></script>
-
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
 
   
 
 
-  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
 
 
 

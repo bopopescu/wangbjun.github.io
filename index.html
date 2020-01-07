@@ -39,7 +39,7 @@
 
   
   
-  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
@@ -73,9 +73,9 @@
 
 
 
-<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/blog/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Hexo, NexT" />
@@ -87,7 +87,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/blog/favicon.png?v=5.1.2" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.2" />
 
 
 
@@ -97,7 +97,7 @@
 <meta name="description" content="PHP、Golang、Linux、Web开发">
 <meta property="og:type" content="website">
 <meta property="og:title" content="JWang的博客">
-<meta property="og:url" content="https://wangbjun.github.io/blog/index.html">
+<meta property="og:url" content="https://wangbjun.github.io/index.html">
 <meta property="og:site_name" content="JWang的博客">
 <meta property="og:description" content="PHP、Golang、Linux、Web开发">
 <meta property="article:author" content="Ben Jun">
@@ -109,7 +109,7 @@
 <script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    root: '/blog/',
+    root: '/',
     scheme: 'Muse',
     sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -131,7 +131,7 @@
 
 
 
-  <link rel="canonical" href="https://wangbjun.github.io/blog/"/>
+  <link rel="canonical" href="https://wangbjun.github.io/"/>
 
 
 
@@ -173,7 +173,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/blog/"  class="brand" rel="start">
+      <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">JWang的博客</span>
         <span class="logo-line-after"><i></i></span>
@@ -201,7 +201,7 @@
       
         
         <li class="menu-item menu-item-home">
-          <a href="/blog/" rel="section">
+          <a href="/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
@@ -211,7 +211,7 @@
       
         
         <li class="menu-item menu-item-categories">
-          <a href="/blog/categories/" rel="section">
+          <a href="/categories/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
@@ -221,7 +221,7 @@
       
         
         <li class="menu-item menu-item-about">
-          <a href="/blog/about/" rel="section">
+          <a href="/about/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
@@ -231,7 +231,7 @@
       
         
         <li class="menu-item menu-item-archives">
-          <a href="/blog/archives/" rel="section">
+          <a href="/archives/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
@@ -241,7 +241,7 @@
       
         
         <li class="menu-item menu-item-tags">
-          <a href="/blog/tags/" rel="section">
+          <a href="/tags/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
@@ -282,12 +282,12 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/blog/blog/2018/04/05/php-socket-programing/">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2018/04/05/php-socket-programing/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben Jun">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -301,7 +301,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2018/04/05/php-socket-programing/" itemprop="url">PHP Socket 网络编程</a></h1>
+                <a class="post-title-link" href="/2018/04/05/php-socket-programing/" itemprop="url">PHP Socket 网络编程</a></h1>
         
 
         <div class="post-meta">
@@ -336,7 +336,7 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/PHP/" itemprop="url" rel="index">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
                     <span itemprop="name">PHP</span>
                   </a>
                 </span>
@@ -379,7 +379,7 @@
 <h2 id="Socket"><a href="#Socket" class="headerlink" title="Socket"></a>Socket</h2><p>Socket并不是一个协议，本质上说Socket是对 TCP/IP 协议的封装，它是一组接口，在设计模式中，Socket 其实就是一个门面（facade）模式，它把复杂的 TCP/IP 协议族隐藏在 Socket 接口后面，对用户来说，一组简单的接口就是全部，让 Socket 去组织数据，以符合指定的协议。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/blog/2018/04/05/php-socket-programing/#more" rel="contents">
+            <a class="btn" href="/2018/04/05/php-socket-programing/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -430,12 +430,12 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/blog/blog/2018/04/05/php-closure-function/">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2018/04/05/php-closure-function/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben Jun">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -449,7 +449,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2018/04/05/php-closure-function/" itemprop="url">PHP匿名函数和闭包</a></h1>
+                <a class="post-title-link" href="/2018/04/05/php-closure-function/" itemprop="url">PHP匿名函数和闭包</a></h1>
         
 
         <div class="post-meta">
@@ -484,7 +484,7 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/PHP/" itemprop="url" rel="index">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
                     <span itemprop="name">PHP</span>
                   </a>
                 </span>
@@ -533,7 +533,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">class Closure#1 (0) &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/blog/2018/04/05/php-closure-function/#more" rel="contents">
+            <a class="btn" href="/2018/04/05/php-closure-function/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -584,12 +584,12 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/blog/blog/2018/01/05/mysql-group-orderby/">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2018/01/05/mysql-group-orderby/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben Jun">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -603,7 +603,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2018/01/05/mysql-group-orderby/" itemprop="url">解决MySQL分组排序求最值问题</a></h1>
+                <a class="post-title-link" href="/2018/01/05/mysql-group-orderby/" itemprop="url">解决MySQL分组排序求最值问题</a></h1>
         
 
         <div class="post-meta">
@@ -638,7 +638,7 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/MySQL/" itemprop="url" rel="index">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index">
                     <span itemprop="name">MySQL</span>
                   </a>
                 </span>
@@ -683,7 +683,7 @@
 <p>1.求某个分类ID下，查看次数最多的3条数据？这个问题很简单，基本上大家都能写出来这样的sql:</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/blog/2018/01/05/mysql-group-orderby/#more" rel="contents">
+            <a class="btn" href="/2018/01/05/mysql-group-orderby/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -734,12 +734,12 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/blog/blog/2017/09/05/php-form-pass-method/">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2017/09/05/php-form-pass-method/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben Jun">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -753,7 +753,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2017/09/05/php-form-pass-method/" itemprop="url">浅谈PHP前后端传参常见的几种方式</a></h1>
+                <a class="post-title-link" href="/2017/09/05/php-form-pass-method/" itemprop="url">浅谈PHP前后端传参常见的几种方式</a></h1>
         
 
         <div class="post-meta">
@@ -788,7 +788,7 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/PHP/" itemprop="url" rel="index">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
                     <span itemprop="name">PHP</span>
                   </a>
                 </span>
@@ -831,7 +831,7 @@
 <h5 id="前端代码："><a href="#前端代码：" class="headerlink" title="前端代码："></a>前端代码：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;form action&#x3D;&quot;backend.php&quot; method&#x3D;&quot;post&quot;&gt;</span><br><span class="line">        &lt;label for&#x3D;&quot;name&quot;&gt;姓名:&lt;&#x2F;label&gt;</span><br><span class="line">        &lt;input type&#x3D;&quot;text&quot; id&#x3D;&quot;name&quot; name&#x3D;&quot;name&quot;&gt;</span><br><span class="line">        &lt;label for&#x3D;&quot;name&quot;&gt;年龄:&lt;&#x2F;label&gt;</span><br><span class="line">        &lt;input type&#x3D;&quot;text&quot; id&#x3D;&quot;age&quot; name&#x3D;&quot;age&quot;&gt;</span><br><span class="line">        &lt;input type&#x3D;&quot;submit&quot; value&#x3D;&quot;提交&quot;&gt;</span><br><span class="line">    &lt;&#x2F;form&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/blog/2017/09/05/php-form-pass-method/#more" rel="contents">
+            <a class="btn" href="/2017/09/05/php-form-pass-method/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -882,12 +882,12 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/blog/blog/2017/06/09/php-multi-process/">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2017/06/09/php-multi-process/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben Jun">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -901,7 +901,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2017/06/09/php-multi-process/" itemprop="url">PHP多进程编程应用</a></h1>
+                <a class="post-title-link" href="/2017/06/09/php-multi-process/" itemprop="url">PHP多进程编程应用</a></h1>
         
 
         <div class="post-meta">
@@ -936,7 +936,7 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/PHP/" itemprop="url" rel="index">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
                     <span itemprop="name">PHP</span>
                   </a>
                 </span>
@@ -980,7 +980,7 @@
 <p>但是这种方式依赖外部工具，不够灵活！其实我们也可以采用多进程|多线程的方式</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/blog/2017/06/09/php-multi-process/#more" rel="contents">
+            <a class="btn" href="/2017/06/09/php-multi-process/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1031,12 +1031,12 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/blog/blog/2017/06/05/php-priority-queue/">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2017/06/05/php-priority-queue/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben Jun">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1050,7 +1050,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2017/06/05/php-priority-queue/" itemprop="url">PHP优先队列</a></h1>
+                <a class="post-title-link" href="/2017/06/05/php-priority-queue/" itemprop="url">PHP优先队列</a></h1>
         
 
         <div class="post-meta">
@@ -1085,7 +1085,7 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/PHP/" itemprop="url" rel="index">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
                     <span itemprop="name">PHP</span>
                   </a>
                 </span>
@@ -1128,7 +1128,7 @@
 <p>优先队列（Priprity Queue），顾名思义，就是带有优先级的队列，也就是说不是按请求的顺序排序，而且根据某一些规则属性。举个例子：有一些12306的刷票软件，花钱买了加速包抢到票的几率更高。这里所谓几率更高换个说法就是优先级更高，如果只有10张票，肯定是先让那些花了钱的先抢到票，没花钱的话排后面。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/blog/2017/06/05/php-priority-queue/#more" rel="contents">
+            <a class="btn" href="/2017/06/05/php-priority-queue/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1179,12 +1179,12 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/blog/blog/2017/05/06/php-orm/">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2017/05/06/php-orm/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben Jun">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1198,7 +1198,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2017/05/06/php-orm/" itemprop="url">PHP开发中ORM的应用</a></h1>
+                <a class="post-title-link" href="/2017/05/06/php-orm/" itemprop="url">PHP开发中ORM的应用</a></h1>
         
 
         <div class="post-meta">
@@ -1233,7 +1233,7 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/PHP/" itemprop="url" rel="index">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
                     <span itemprop="name">PHP</span>
                   </a>
                 </span>
@@ -1277,7 +1277,7 @@
 <p>ORM并不是PHP独有的东西，只要和数据库打交道的语言都可以使用ORM，比如Java Web三大框架里面Hibernate，还有Doctrine(PHP重量级的ORM) ，Eloquent（laravel框架默认ORM，也可以单独使用）。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/blog/2017/05/06/php-orm/#more" rel="contents">
+            <a class="btn" href="/2017/05/06/php-orm/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1328,12 +1328,12 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/blog/blog/2017/02/05/php-di-symfony/">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2017/02/05/php-di-symfony/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben Jun">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1347,7 +1347,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2017/02/05/php-di-symfony/" itemprop="url">三、Symfony服务容器介绍</a></h1>
+                <a class="post-title-link" href="/2017/02/05/php-di-symfony/" itemprop="url">三、Symfony服务容器介绍</a></h1>
         
 
         <div class="post-meta">
@@ -1382,7 +1382,7 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index">
+                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index">
                     <span itemprop="name">设计模式</span>
                   </a>
                 </span>
@@ -1429,7 +1429,7 @@
 <p>在依赖注入这系列文章里，之前我们已经谈过一些基本思想。前面2篇文章介绍的东西对于更好的理解我们接下来文章要说的非常重要，现在是时候了解Symfony2里面服务容器的实现了。<br>Symfony里面依赖注入容器是被一个叫sfServiceContainer的类管理的，这是一个非常轻的类，它实现了我们上篇文章里面说到的基本特性。<br>在Symfony里面，一个服务就是一个被容器管理的对象。在上一篇文章Zend_Mail例子里，我们有2个：mailer服务和mail_transport服务：</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/blog/2017/02/05/php-di-symfony/#more" rel="contents">
+            <a class="btn" href="/2017/02/05/php-di-symfony/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1480,12 +1480,12 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/blog/blog/2017/02/04/php-di-need/">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2017/02/04/php-di-need/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben Jun">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1499,7 +1499,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2017/02/04/php-di-need/" itemprop="url">二、你需要一个依赖注入容器吗？</a></h1>
+                <a class="post-title-link" href="/2017/02/04/php-di-need/" itemprop="url">二、你需要一个依赖注入容器吗？</a></h1>
         
 
         <div class="post-meta">
@@ -1534,7 +1534,7 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index">
+                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index">
                     <span itemprop="name">设计模式</span>
                   </a>
                 </span>
@@ -1582,7 +1582,7 @@
 <p>首先，先看看一句大胆的言论：“大多数情况下，你不需要一个依赖注入容器也能受益于依赖注入” </p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/blog/2017/02/04/php-di-need/#more" rel="contents">
+            <a class="btn" href="/2017/02/04/php-di-need/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1633,12 +1633,12 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/blog/blog/2017/02/01/php-di-what-is/">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2017/02/01/php-di-what-is/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben Jun">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1652,7 +1652,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2017/02/01/php-di-what-is/" itemprop="url">一、什么是依赖注入？</a></h1>
+                <a class="post-title-link" href="/2017/02/01/php-di-what-is/" itemprop="url">一、什么是依赖注入？</a></h1>
         
 
         <div class="post-meta">
@@ -1687,7 +1687,7 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index">
+                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index">
                     <span itemprop="name">设计模式</span>
                   </a>
                 </span>
@@ -1735,7 +1735,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$_SESSION[&#39;language&#39;] &#x3D; &#39;fr&#39;;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/blog/2017/02/01/php-di-what-is/#more" rel="contents">
+            <a class="btn" href="/2017/02/01/php-di-what-is/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1777,7 +1777,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><a class="page-number" href="/blog/page/3/">3</a><a class="extend next" rel="next" href="/blog/page/2/">Next</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next</a>
   </nav>
 
 
@@ -1811,7 +1811,7 @@
       <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="/blog/images/avatar.gif"
+               src="/images/avatar.gif"
                alt="Ben Jun" />
           <p class="site-author-name" itemprop="name">Ben Jun</p>
            
@@ -1822,7 +1822,7 @@
 
           
             <div class="site-state-item site-state-posts">
-              <a href="/blog/archives/">
+              <a href="/archives/">
                 <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">日志</span>
               </a>
@@ -1833,7 +1833,7 @@
             
             
             <div class="site-state-item site-state-categories">
-              <a href="/blog/categories/index.html">
+              <a href="/categories/index.html">
                 <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">分类</span>
               </a>
@@ -1844,7 +1844,7 @@
             
             
             <div class="site-state-item site-state-tags">
-              <a href="/blog/tags/index.html">
+              <a href="/tags/index.html">
                 <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               </a>
@@ -1952,46 +1952,46 @@
 
 
   
-  <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
 
   
-  <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
 
   
-  <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
   
-  <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
 
   
-  <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
   
-  <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
-
-  
-
-
-  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.2"></script>
-
-  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.2"></script>
-
-
-
-  
-  
-
-  
-    <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.2"></script>
-<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.2"></script>
-
-  
 
   
 
 
-  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
 
 
 
