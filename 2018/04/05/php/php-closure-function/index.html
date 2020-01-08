@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="PHP,Closure," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="一.什么是闭包？先看看百度百科的介绍：  闭包包含自由（未绑定到特定对象）变量，这些变量不是在这个代码块内或者任何全局上下文中定义的，而是在定义代码块的环境中定义（局部变量）。“闭包” 一词来源于以下两者的结合：要执行的代码块（由于自由变量被包含在代码块中，这些自由变量以及它们引用的对象没有被释放）和为自由变量提供绑定的计算环境（作用域）。在PHP、Scala、Scheme、Common Lisp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP匿名函数和闭包">
+<meta property="og:url" content="https://wangbjun.github.io/2018/04/05/php/php-closure-function/index.html">
+<meta property="og:site_name" content="JWang的博客">
+<meta property="og:description" content="一.什么是闭包？先看看百度百科的介绍：  闭包包含自由（未绑定到特定对象）变量，这些变量不是在这个代码块内或者任何全局上下文中定义的，而是在定义代码块的环境中定义（局部变量）。“闭包” 一词来源于以下两者的结合：要执行的代码块（由于自由变量被包含在代码块中，这些自由变量以及它们引用的对象没有被释放）和为自由变量提供绑定的计算环境（作用域）。在PHP、Scala、Scheme、Common Lisp">
+<meta property="article:published_time" content="2018-04-05T11:00:03.000Z">
+<meta property="article:modified_time" content="2020-01-08T09:43:32.165Z">
+<meta property="article:author" content="Ben Jun">
+<meta property="article:tag" content="PHP">
+<meta property="article:tag" content="Closure">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://wangbjun.github.io/2018/04/05/php/php-closure-function/"/>
+
+
+
+
+
+  <title>PHP匿名函数和闭包 | JWang的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">JWang的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2018/04/05/php/php-closure-function/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben Jun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JWang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">PHP匿名函数和闭包</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-05T19:00:03+08:00">
+                2018-04-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" itemprop="url" rel="index">
+                    <span itemprop="name">编程开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="一-什么是闭包？"><a href="#一-什么是闭包？" class="headerlink" title="一.什么是闭包？"></a>一.什么是闭包？</h3><p>先看看百度百科的介绍：</p>
+<blockquote>
+<p>闭包包含自由（未绑定到特定对象）变量，这些变量不是在这个代码块内或者任何全局上下文中定义的，而是在定义代码块的环境中定义（局部变量）。<br>“闭包” 一词来源于以下两者的结合：要执行的代码块（由于自由变量被包含在代码块中，这些自由变量以及它们引用的对象没有被释放）和为自由变量提供绑定的计算环境（作用域）。<br>在PHP、Scala、Scheme、Common Lisp、Smalltalk、Groovy、JavaScript、Ruby、 Python、Go、Lua、objective c、swift 以及Java（Java8及以上）等语言中都能找到对闭包不同程度的支持。</p>
+</blockquote>
+<p>说实话，这个介绍虽然专业，但是有点僵硬不太容易理解，闭包是一种设计思想，而不是一种语法特性，在PHP语言里面，匿名函数就是闭包的一种实现。</p>
+<h3 id="二-匿名函数"><a href="#二-匿名函数" class="headerlink" title="二.匿名函数"></a>二.匿名函数</h3><p>这个我相信大家都多多少少用过，看一下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$f &#x3D; function () &#123;</span><br><span class="line">    $a &#x3D; 1;</span><br><span class="line">    $b &#x3D; 2;</span><br><span class="line">    return $a + $b;</span><br><span class="line">&#125;;</span><br><span class="line">var_dump($f);</span><br></pre></td></tr></table></figure>
+<p>输出结果是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">class Closure#1 (0) &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<p>可见，PHP中匿名函数就是闭包，也可以理解为闭包就是把这个函数赋值给一个变量，这时候这个变量保存的就是这个函数的内存地址。</p>
+<p>如何去调用这个闭包函数呢？很简单，在这个例子里面只要 <strong>$f()</strong> 就可以了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var_dump($f()); #结果是：3</span><br></pre></td></tr></table></figure>
+
+<p>当然这个匿名函数也是可以传参的，你可以这样写：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$f &#x3D; function ($c) &#123;</span><br><span class="line">    $a &#x3D; 1;</span><br><span class="line">    $b &#x3D; 2;</span><br><span class="line">    return $a + $b + $c;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>这样你在调用的时候就可以传入参数，类似 <strong>$f(3)</strong>, 但是有一点需要注意，如果这时候你想在定义闭包函数的时候使用外部变量，举个例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$out &#x3D; 100;</span><br><span class="line">$f &#x3D; function ($c) &#123;</span><br><span class="line">    $a &#x3D; 1;</span><br><span class="line">    $b &#x3D; 2;</span><br><span class="line">    return $out - ($a + $b + $c); #报错，无法引用外部变量out</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>这时候就体现了闭包封闭的特性，但是PHP提供了一个 use 关键字，可以使用下面这个写法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$out &#x3D; 100;</span><br><span class="line">$f &#x3D; function ($c) use ($out) &#123;</span><br><span class="line">    $a &#x3D; 1;</span><br><span class="line">    $b &#x3D; 2;</span><br><span class="line">    return $out - ($a + $b + $c);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="三-闭包到底有啥用？"><a href="#三-闭包到底有啥用？" class="headerlink" title="三.闭包到底有啥用？"></a>三.闭包到底有啥用？</h3><p>一般来说还是在框架以及一些架构设计里面会用到，这里先举2个小例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$arr &#x3D; [1, 2, 3, 4, 5];</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;使用array_reduce求和</span><br><span class="line"></span><br><span class="line">function sum($arr)</span><br><span class="line">&#123;</span><br><span class="line">    return array_reduce($arr, function ($x, $y) &#123;</span><br><span class="line">        return $x + $y;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var_dump(sum($arr));</span><br></pre></td></tr></table></figure>
+<p>代码里面使用了 array_reduce 这个函数求一个数组的和，但是，如果不需要立刻求和，而是在后面的代码中，根据需要再计算怎么办？可以不返回求和的结果，而是返回求和的函数！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function lazySum($arr)</span><br><span class="line">&#123;</span><br><span class="line">    return function () use ($arr) &#123;</span><br><span class="line">        return array_reduce($arr, function ($x, $y) &#123;</span><br><span class="line">            return $x + $y;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line">$sum &#x3D; lazySum($arr);</span><br><span class="line">var_dump($sum());</span><br></pre></td></tr></table></figure>
+<p>结果是一样的，虽然这种写法有点奇怪</p>
+<hr>
+<p>有一道面试题就涉及到了闭包的特性：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">function plus()</span><br><span class="line">&#123;</span><br><span class="line">    $funcArr &#x3D; [];</span><br><span class="line">    for ($i &#x3D; 1; $i &lt;&#x3D; 3; $i++) &#123;</span><br><span class="line">        $funcArr[] &#x3D; function () use (&amp;$i) &#123;</span><br><span class="line">            return $i * $i;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    return $funcArr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$res &#x3D; plus();</span><br><span class="line"></span><br><span class="line">var_dump($res[0]());</span><br><span class="line">var_dump($res[1]());</span><br><span class="line">var_dump($res[2]());</span><br></pre></td></tr></table></figure>
+<p>plus 函数会返回3个闭包函数，然后依次调用这个几个函数, 有人以为结果可能是1,4,9，其实结果都是16，需要注意的是use 那里使用的是引用传递，这就意味着在生成这3个闭包函数的时候i的值并不是循环的时候的1,2,3，而且到最后 $i++ 之后的值也就是 4，这说明闭包函数是调用的时候才会执行。</p>
+<h3 id="四-闭包在PHP框架里面使用"><a href="#四-闭包在PHP框架里面使用" class="headerlink" title="四.闭包在PHP框架里面使用"></a>四.闭包在PHP框架里面使用</h3><p>1.一个是IOC容器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * 闭包的使用IOC</span><br><span class="line"> * Class Container</span><br><span class="line"> *&#x2F;</span><br><span class="line">class Container</span><br><span class="line">&#123;</span><br><span class="line">    protected static $bindings;</span><br><span class="line"></span><br><span class="line">    public static function bind(string $abstract, Closure $concrete)</span><br><span class="line">    &#123;</span><br><span class="line">        static::$bindings[$abstract] &#x3D; $concrete;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static function make(string $abstract)</span><br><span class="line">    &#123;</span><br><span class="line">        return call_user_func(static::$bindings[$abstract]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class talk</span><br><span class="line">&#123;</span><br><span class="line">    public function greet($target)</span><br><span class="line">    &#123;</span><br><span class="line">        echo &quot;Hello &quot; . $target-&gt;getName();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class say</span><br><span class="line">&#123;</span><br><span class="line">    public function getName()</span><br><span class="line">    &#123;</span><br><span class="line">        return &quot;World\n&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$talk &#x3D; new talk();</span><br><span class="line"></span><br><span class="line">Container::bind(&#39;foo&#39;, function () &#123;</span><br><span class="line">    return new say();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$talk-&gt;greet(Container::make(&#39;foo&#39;));</span><br></pre></td></tr></table></figure>
+<p>接触过laravel框架的应该都见过这种写法，laravel框架称之为服务容器，其设计思想基本上就是这样，也就是在框架初始化的时候注册绑定一堆服务，然后框架里面随时就可以调用这些服务了。</p>
+<p>2.闭包路由</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * 演示闭包的使用,路由</span><br><span class="line"> * Class App</span><br><span class="line"> *&#x2F;</span><br><span class="line">class App</span><br><span class="line">&#123;</span><br><span class="line">    protected $routes &#x3D; [];</span><br><span class="line">    protected $responseStatus &#x3D; &#39;200 OK&#39;;</span><br><span class="line">    protected $responseContentType &#x3D; &#39;text&#x2F;html&#39;;</span><br><span class="line">    protected $responseBody &#x3D; &#39;Hello World&#39;;</span><br><span class="line"></span><br><span class="line">    public function addRoute(string $path, Closure $callback)</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;routes[$path] &#x3D; $callback-&gt;bindTo($this, __CLASS__);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public function dispatch(string $path)</span><br><span class="line">    &#123;</span><br><span class="line">        foreach ($this-&gt;routes as $routePath &#x3D;&gt; $callback) &#123;</span><br><span class="line">            if ($routePath &#x3D;&#x3D;&#x3D; $path) &#123;</span><br><span class="line">                $callback();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        header(&#39;HTTP&#x2F;1.1 &#39; . $this-&gt;responseStatus);</span><br><span class="line">        header(&#39;Content-Type: &#39; . $this-&gt;responseContentType);</span><br><span class="line">        header(&#39;Content-Length: &#39; . mb_strlen($this-&gt;responseBody));</span><br><span class="line">        echo $this-&gt;responseBody;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">require &#39;App.php&#39;;</span><br><span class="line"></span><br><span class="line">$app &#x3D; new App();</span><br><span class="line"></span><br><span class="line">$app-&gt;addRoute(&quot;&#x2F;&quot;, function () &#123;</span><br><span class="line">    $this-&gt;responseBody &#x3D; &quot;Hello Closure!\n&quot;;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$app-&gt;dispatch(&quot;&#x2F;&quot;);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/PHP/" rel="tag"># PHP</a>
+          
+            <a href="/tags/Closure/" rel="tag"># Closure</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/05/php/php-socket-programing/" rel="next" title="PHP Socket 网络编程">
+                <i class="fa fa-chevron-left"></i> PHP Socket 网络编程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/07/where-is-variable-value/" rel="prev" title="变量名存放在哪里？">
+                变量名存放在哪里？ <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Ben Jun" />
+          <p class="site-author-name" itemprop="name">Ben Jun</p>
+           
+              <p class="site-description motion-element" itemprop="description">PHP、Golang、Linux、Web开发</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-什么是闭包？"><span class="nav-number">1.</span> <span class="nav-text">一.什么是闭包？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-匿名函数"><span class="nav-number">2.</span> <span class="nav-text">二.匿名函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-闭包到底有啥用？"><span class="nav-number">3.</span> <span class="nav-text">三.闭包到底有啥用？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四-闭包在PHP框架里面使用"><span class="nav-number">4.</span> <span class="nav-text">四.闭包在PHP框架里面使用</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ben Jun</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
