@@ -282,7 +282,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2015/12/01/php-double-linklist/">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2017/02/05/php-di-symfony/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben Jun">
@@ -301,7 +301,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/12/01/php-double-linklist/" itemprop="url">PHP数据结构之双向链表</a></h1>
+                <a class="post-title-link" href="/2017/02/05/php-di-symfony/" itemprop="url">三、Symfony服务容器介绍</a></h1>
         
 
         <div class="post-meta">
@@ -313,8 +313,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-01T11:01:13+08:00">
-                2015-12-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-05T18:10:00+08:00">
+                2017-02-05
               </time>
             
 
@@ -336,8 +336,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">PHP</span>
+                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
                   </a>
                 </span>
 
@@ -374,12 +374,16 @@
 
       
         
-          <p>其实这些都是PHP SPL 标准库里面的东西, SPL是用于解决典型问题(standard problems)的一组接口与类的集合。说白了，这是PHP官方实现的一些数据结构,<br>印象中Java的标准库就很强大，不要慌，PHP也有。</p>
-<p><img src="http://ww1.sinaimg.cn/large/5f6e3e27ly1fv0rjzmm26j20hz0himyz.jpg" alt=""></p>
-<p>按顺序来，先讲一下这个双向链表(double link list)，数据结构讲的是思想，不分编程语言，所以先回顾一下基本概念吧。</p>
+          <blockquote>
+<p>此文是本人翻译的来自国外某网站一篇文章 <a href="http://fabien.potencier.org/do-you-need-a-dependency-injection-container.html" target="_blank" rel="noopener">Do you need a Dependency Injection Container?</a></p>
+</blockquote>
+<blockquote>
+<p>这篇文章是一系列关于依赖注入和PHP轻量级容器实现文章中的一部分：<br><a href="http://fabien.potencier.org/article/11/what-is-dependency-injection" target="_blank" rel="noopener">Part 1: What is Dependency Injection?</a><br><a href="http://fabien.potencier.org/article/12/do-you-need-a-dependency-injection-container" target="_blank" rel="noopener">Part 2: Do you need a Dependency Injection Container?</a><br><a href="http://fabien.potencier.org/article/13/introduction-to-the-symfony-service-container" target="_blank" rel="noopener">Part 3: Introduction to the Symfony Service Container</a><br><a href="http://fabien.potencier.org/article/14/symfony-service-container-using-a-builder-to-create-services" target="_blank" rel="noopener">Part 4: Symfony Service Container: Using a Builder to create Services</a><br><a href="http://fabien.potencier.org/article/15/symfony-service-container-using-xml-or-yaml-to-describe-services" target="_blank" rel="noopener">Part 5: Symfony Service Container: Using XML or YAML to describe Services</a><br><a href="http://fabien.potencier.org/article/16/symfony-service-container-the-need-for-speed" target="_blank" rel="noopener">Part 6: The Need for Speed</a></p>
+</blockquote>
+<p>在依赖注入这系列文章里，之前我们已经谈过一些基本思想。前面2篇文章介绍的东西对于更好的理解我们接下来文章要说的非常重要，现在是时候了解Symfony2里面服务容器的实现了。<br>Symfony里面依赖注入容器是被一个叫sfServiceContainer的类管理的，这是一个非常轻的类，它实现了我们上篇文章里面说到的基本特性。<br>在Symfony里面，一个服务就是一个被容器管理的对象。在上一篇文章Zend_Mail例子里，我们有2个：mailer服务和mail_transport服务：</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2015/12/01/php-double-linklist/#more" rel="contents">
+            <a class="btn" href="/2017/02/05/php-di-symfony/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -430,7 +434,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2015/03/25/php-radio/">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2017/02/04/php-di-need/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben Jun">
@@ -449,7 +453,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/03/25/php-radio/" itemprop="url">PHP实现语音播报</a></h1>
+                <a class="post-title-link" href="/2017/02/04/php-di-need/" itemprop="url">二、你需要一个依赖注入容器吗？</a></h1>
         
 
         <div class="post-meta">
@@ -461,8 +465,919 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-03-25T09:00:01+08:00">
-                2015-03-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-04T13:10:08+08:00">
+                2017-02-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>此文是本人翻译的来自国外某网站一篇文章 <a href="http://fabien.potencier.org/do-you-need-a-dependency-injection-container.html" target="_blank" rel="noopener">Do you need a Dependency Injection Container?</a></p>
+</blockquote>
+<blockquote>
+<p>这篇文章是一系列关于依赖注入和PHP轻量级容器实现文章中的一部分：<br><a href="http://fabien.potencier.org/article/11/what-is-dependency-injection" target="_blank" rel="noopener">Part 1: What is Dependency Injection?</a><br><a href="http://fabien.potencier.org/article/12/do-you-need-a-dependency-injection-container" target="_blank" rel="noopener">Part 2: Do you need a Dependency Injection Container?</a><br><a href="http://fabien.potencier.org/article/13/introduction-to-the-symfony-service-container" target="_blank" rel="noopener">Part 3: Introduction to the Symfony Service Container</a><br><a href="http://fabien.potencier.org/article/14/symfony-service-container-using-a-builder-to-create-services" target="_blank" rel="noopener">Part 4: Symfony Service Container: Using a Builder to create Services</a><br><a href="http://fabien.potencier.org/article/15/symfony-service-container-using-xml-or-yaml-to-describe-services" target="_blank" rel="noopener">Part 5: Symfony Service Container: Using XML or YAML to describe Services</a><br><a href="http://fabien.potencier.org/article/16/symfony-service-container-the-need-for-speed" target="_blank" rel="noopener">Part 6: The Need for Speed</a></p>
+</blockquote>
+<p>在这系列第一篇关于依赖注入的文章里，我尝试给出了一个依赖注入的web实例，今天我将要谈谈依赖注入容器。</p>
+<p>首先，先看看一句大胆的言论：“大多数情况下，你不需要一个依赖注入容器也能受益于依赖注入” </p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/02/04/php-di-need/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2017/02/01/php-di-what-is/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben Jun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JWang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/02/01/php-di-what-is/" itemprop="url">一、什么是依赖注入？</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-01T19:10:00+08:00">
+                2017-02-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>此文是本人翻译的来自国外某网站一篇文章 <a href="http://fabien.potencier.org/what-is-dependency-injection.html" target="_blank" rel="noopener">What is Dependency Injection?</a>,第一次翻译，各位见谅</p>
+</blockquote>
+<blockquote>
+<p>这篇文章是一系列关于依赖注入和PHP轻量级容器实现文章中的一部分：<br><a href="http://fabien.potencier.org/article/11/what-is-dependency-injection" target="_blank" rel="noopener">Part 1: What is Dependency Injection?</a><br><a href="http://fabien.potencier.org/article/12/do-you-need-a-dependency-injection-container" target="_blank" rel="noopener">Part 2: Do you need a Dependency Injection Container?</a><br><a href="http://fabien.potencier.org/article/13/introduction-to-the-symfony-service-container" target="_blank" rel="noopener">Part 3: Introduction to the Symfony Service Container</a><br><a href="http://fabien.potencier.org/article/14/symfony-service-container-using-a-builder-to-create-services" target="_blank" rel="noopener">Part 4: Symfony Service Container: Using a Builder to create Services</a><br><a href="http://fabien.potencier.org/article/15/symfony-service-container-using-xml-or-yaml-to-describe-services" target="_blank" rel="noopener">Part 5: Symfony Service Container: Using XML or YAML to describe Services</a><br><a href="http://fabien.potencier.org/article/16/symfony-service-container-the-need-for-speed" target="_blank" rel="noopener">Part 6: The Need for Speed</a></p>
+</blockquote>
+<p>今天，我一开始不会讲容器，我希望先通过一些具体的实例来介绍一下依赖注入的理念以及其所尝试解决的问题和它能给开发者带来的好处。如果你已经了解依赖注入，你可以跳过这篇文章去看下一篇。<br>依赖注入可能是我知道的最简单的设计模式之一，很可能你已经使用过，但是同时也是最难解释的，原因可能是大多数介绍依赖注入的文章用的例子都比较无聊。我想了一个比较适合PHP领域的例子，因为PHP主要用在web开发，所以让我们来看一个简单的web实例。<br>为了解决http协议无状态的问题，web应用需要一种在web请求之间记录用户信息的方法，简单的通过cookie或者session都能解决：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$_SESSION[&#39;language&#39;] &#x3D; &#39;fr&#39;;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/02/01/php-di-what-is/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2017/01/02/php-designpattern-filter/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben Jun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JWang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/01/02/php-designpattern-filter/" itemprop="url">PHP设计模式之过滤器模式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-02T09:00:00+08:00">
+                2017-01-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="过滤器模式"><a href="#过滤器模式" class="headerlink" title="过滤器模式"></a>过滤器模式</h1><blockquote>
+<p>过滤器模式（Filter Pattern）或标准模式（Criteria Pattern）是一种设计模式，这种模式允许开发人员使用不同的标准来过滤一组对象，通过逻辑运算以解耦的方式把它们连接起来。这种类型的设计模式属于结构型模式，它结合多个标准来获得单一标准。</p>
+</blockquote>
+<p>日常生活中也有过滤器，这个比较容易理解，就是使用设备过滤出自己想要的，去掉那些不符合条件的。但是在编程里面是怎么实现的呢？</p>
+<p>举个例子，有一组用户参与抽奖活动，我们需要筛选一部分符合条件的用户抽奖，其它不符合条件的用户咱直接提示未中奖！比如说需要注册时间大于3个月、消费金额大于100元、没有违规行为、活跃度大约500、性别为女。。。等条件！</p>
+<p>有人说问为什么不使用数据库筛选，一条sql数据就搞定了啊，实际上有可能是因为这些数据并不是在一个表里面，有些数据可能需要计算得出。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/01/02/php-designpattern-filter/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2016/11/25/php-designpattern-single/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben Jun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JWang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/11/25/php-designpattern-single/" itemprop="url">PHP设计模式之单例模式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-25T18:00:00+08:00">
+                2016-11-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<blockquote>
+<p>单例模式（Singleton Pattern）是最简单的设计模式之一。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。<br> 这种模式涉及到一个单一的类，该类负责创建自己的对象，同时确保只有单个对象被创建。这个类提供了一种访问其唯一的对象的方式，可以直接访问，不需要实例化该类的对象。</p>
+</blockquote>
+</blockquote>
+<hr>
+<p>最大好处是减少了内存的开销，尤其是频繁的创建和销毁实例，而且可以避免对一些资源的多重占用，对于PHP Web应用来说，虽然每次请求结束之后所有对象都会被销毁，但是依然有意义。</p>
+<p>举个例子，一个请求有好几个操作，必须调用好几个对象的不同方法，刚好在这个几个方法里面都会用到redis，如果不使用单例模式，那么在每个对象里面都会重新实例化一次redis，浪费内存和时间，建立网络连接也耗时，但是如果使用单例，则只需要在第一次调用redis的使用实例化对象。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/11/25/php-designpattern-single/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2016/11/21/php-designpattern-decorator/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben Jun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JWang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/11/21/php-designpattern-decorator/" itemprop="url">PHP设计模式之装饰器模式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-21T11:20:08+08:00">
+                2016-11-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="装饰器模式"><a href="#装饰器模式" class="headerlink" title="装饰器模式"></a>装饰器模式</h1><blockquote>
+<p>动态地给一个对象添加一些额外的职责，就增加功能来说，装饰器模式比生成子类更为灵活；它允许向一个现有的对象添加新的功能，同时又不改变其结构。</p>
+</blockquote>
+<p>这个模式算是比较容易理解，它主要解决类的功能扩展问题，当我们需要给一个类增加功能时候，我们可以选直接修改当前类，也可以继承当前类然后增加新方法。但是装饰模式更强调的是动态扩展类的功能，而不是直接修改类的功能。</p>
+<p>举个例子：大家早餐买煎饼果子的时候，可以选择加鸡蛋、辣条、火腿肠，但是也可以选择什么都不加。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/11/21/php-designpattern-decorator/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2016/09/05/php-designpattern-factory/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben Jun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JWang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/09/05/php-designpattern-factory/" itemprop="url">PHP设计模式之简单工厂模式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-05T15:00:00+08:00">
+                2016-09-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。在工厂模式中，我们在创建对象时不会对客户端暴露创建逻辑，并且是通过使用一个共同的接口来指向新创建的对象。</p>
+</blockquote>
+<hr>
+<p>工厂模式其实就是用来创建对象的，对象是什么的，当然是类的实例，在学习设计模式之前，请先回忆一下面向对象编程，牢记面向对象三大特性：封装，继承，多态！<br>很多语言并不是完全面向对象的，比如PHP，JS等脚本语言，但这并无妨碍我们去学习其设计思想，但是我们必须从面向对象的思路去理解这种设计！</p>
+<p>在完全面向对象的世界里面，首先必须有类，然后才有对象，对象有属性和方法，在程序运行的时候我们需要先创建一个类，然后使用 <strong>new</strong> 去实例化一个类得到一个对象，然后去调用这个类的相关属性活方法。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/09/05/php-designpattern-factory/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2016/03/09/php-oop-thinking/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben Jun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JWang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/03/09/php-oop-thinking/" itemprop="url">闲谈PHP面向对象编程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-09T15:00:00+08:00">
+                2016-03-09
               </time>
             
 
@@ -522,13 +1437,331 @@
 
       
         
-          <p>大家估计都知道现在很多AI音响能够给你播报天气，叫你起床…甚至能够接受语音指令！所谓的人工智能音响，听起来很高大上，都说PHP是最好的编程语言，今天我就带大家来实现一个语音播报功能，写个美女叫你早上起床！<br>先大体说一个思路，PHP怎么实现语音播报呢？其实就是调个API（接口）的事情，这个就尴尬了。实际上，现在很多AI平台都提供一些成熟的接口供你使用，比如语音转文字，文字转语音，语音唤醒等等，<br>这里我使用的是百度的语音合成<a href="https://ai.baidu.com/tech/speech/tts" target="_blank" rel="noopener">接口,点击查看</a>, 思路就是使用PHP获取当前的时间和天气状况，然后调用接口转换成甜美的妹子语音播放出来。。。你没看错，就是这么简单！</p>
-<p>第一步：获取时间信息</p>
-<p>举个例子，文字内容可能是这样：“主人，早上好，今天是2017年12月18号上午8点整，星期一”，这样的内容用PHP自带的几个时间函数就能搞定，然后拼接成字符文字！下面是一些简单实例代码：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/3571187-e38927d3c3b1ea69?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="PHP实现智能语音播报天气"></p>
+          
+            <p>关于面向过程和面向对象编程之间的区别这里不多说,简单看了一个例子,如何解决把大象装进冰箱这个问题?</p>
+<h3 id="面向过程方案"><a href="#面向过程方案" class="headerlink" title="面向过程方案:"></a>面向过程方案:</h3><p>第一步.打开冰箱</p>
+<p>第二步.把大象放进冰箱</p>
+<p>第三步,关上冰箱</p>
+<p>这个方案看上去没什么毛病,简单明了,当然第二步可以拆分的更细,拆成更多小步骤!用代码简单演示如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">&#x2F;&#x2F;1.打开冰箱</span><br><span class="line">function openFridge($fridge)</span><br><span class="line">&#123;</span><br><span class="line">    echo &quot;打开冰箱:&quot; . $fridge[&#39;name&#39;];</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F;2.放置大象</span><br><span class="line">function placeElephant($elephant, $fridge)</span><br><span class="line">&#123;</span><br><span class="line">    if ($elephant[&#39;weight&#39;] &gt; $fridge[&#39;width&#39;]) &#123;</span><br><span class="line">        echo &quot;大象太大了!&quot;;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">    echo &quot;把&#123;$elephant[&#39;name&#39;]&#125;放进去:&quot; . $fridge[&#39;name&#39;];</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F;3.关上冰箱</span><br><span class="line">function closeFridge($fridge)</span><br><span class="line">&#123;</span><br><span class="line">    echo &quot;关掉冰箱:&quot; . $fridge[&#39;name&#39;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后实际操作的代码:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$fridge &#x3D; [</span><br><span class="line">    &#39;name&#39;   &#x3D;&gt; &#39;西门子冰箱&#39;,</span><br><span class="line">    &#39;width&#39;  &#x3D;&gt; 20,</span><br><span class="line">    &#39;height&#39; &#x3D;&gt; 50,</span><br><span class="line">];</span><br><span class="line">$elephant &#x3D; [</span><br><span class="line">    &#39;name&#39;   &#x3D;&gt; &#39;非洲大象&#39;,</span><br><span class="line">    &#39;weight&#39; &#x3D;&gt; 100,</span><br><span class="line">];</span><br><span class="line">&#x2F;&#x2F;三步走</span><br><span class="line">openFridge($fridge);</span><br><span class="line">placeElephant($elephant, $fridge);</span><br><span class="line">closeFridge($fridge);</span><br></pre></td></tr></table></figure>
+<p>面向过程编程典型的做法就是定义一大堆函数,一个函数干一件事,然后依次调用各个函数完成一个功能.优点也有,比如简单省事,缺点也很多,比如项目大了之后维护是噩梦!</p>
+<h3 id="面向对象方案"><a href="#面向对象方案" class="headerlink" title="面向对象方案:"></a>面向对象方案:</h3><p>首先,得有2个类,一个是大象类:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;大象类</span><br><span class="line">class Elephant</span><br><span class="line">&#123;</span><br><span class="line">    private $name;</span><br><span class="line">    private $weight;</span><br><span class="line">    public function __construct($name, $weight)</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;name     &#x3D; $name;</span><br><span class="line">        $this-&gt;weight   &#x3D; $weight;</span><br><span class="line">    &#125;</span><br><span class="line">    ....</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>另一个是冰箱类:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">class Fridge</span><br><span class="line">&#123;</span><br><span class="line">    private $name;</span><br><span class="line">    private $width;</span><br><span class="line">    public function __construct($name, $width)</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;name   &#x3D; $name;</span><br><span class="line">        $this-&gt;width  &#x3D; $width;</span><br><span class="line">    &#125;</span><br><span class="line">    public function open()</span><br><span class="line">    &#123;</span><br><span class="line">        echo &quot;打开&#123;$this-&gt;name&#125;冰箱&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    public function close()</span><br><span class="line">    &#123;</span><br><span class="line">        echo &quot;关闭&#123;$this-&gt;name&#125;冰箱&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    public function store($something)</span><br><span class="line">    &#123;</span><br><span class="line">        echo &quot;放置&#123;$something&#125;&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>实际操作的时候代码:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$e &#x3D; new Elephant(&#39;非洲大象&#39;, 12);</span><br><span class="line">$f &#x3D; new Fridge(&#39;西门子冰箱&#39;, 25);</span><br><span class="line">$f-&gt;open();</span><br><span class="line">$e-&gt;store($e);</span><br><span class="line">$f-&gt;close();</span><br></pre></td></tr></table></figure>
+<p>当然这里还有一点小疑问,那就是大象放进冰箱这个操作是属于哪个对象?是冰箱的功能,还是大象的功能?换句话说是大象自己走进冰箱,还是大象被放进冰箱呢?很多时候,这2种方案都能实现你所需要的功能,那就得结合实际情况分析了!</p>
+<p>换一种思路,假如说,我们定义冰箱有一个功能就是放东西,但是这个东西必须满足一定条件,比如说让对象自己选择采用何种方式放进冰箱等等,这时候我们可以定义一个接口:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">interface Fridgeable</span><br><span class="line">&#123;</span><br><span class="line">    public function intoFridge();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后让需要放进冰箱的对象实现这个接口:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class Elephant implements Fridgeable</span><br><span class="line">&#123;</span><br><span class="line">    ....</span><br><span class="line">    &#x2F;&#x2F;实现接口</span><br><span class="line">    public function intoFridge()</span><br><span class="line">    &#123;</span><br><span class="line">         echo &quot;大象飞进了冰箱&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这时候冰箱类就可以这样写:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">public function store(Fridgeable $fridgeable)</span><br><span class="line">&#123;</span><br><span class="line">        $this-&gt;open();</span><br><span class="line">        $fridgeable-&gt;intoFridge();</span><br><span class="line">        $this-&gt;close();</span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>这时候操作就变成:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$e &#x3D; new Elephant(&#39;非洲大象&#39;, 12);</span><br><span class="line">$f &#x3D; new Fridge(&#39;西门子冰箱&#39;, 25);</span><br><span class="line">$f-&gt;store($e);</span><br></pre></td></tr></table></figure>
+<p>假如这时候还有一直兔子也要放进冰箱,我们只需要让这个兔子也实现这个接口即可:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class rabbit implements Fridgeable</span><br><span class="line">&#123;</span><br><span class="line">    ....</span><br><span class="line">    &#x2F;&#x2F;实现接口</span><br><span class="line">    public function intoFridge()</span><br><span class="line">    &#123;</span><br><span class="line">         echo &quot;兔子钻进了冰箱&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>而这种设计思想就叫依赖注入,又叫控制反转.冰箱只要定义好一个接口,所有想放进冰箱的对象只要实现这个接口就可以了,这样我们就不用在冰箱里面写一大堆代码,实现了解耦和扩展性!</p>
+<p>好啦,就说这么多了,如果不恰当的地方请指正哈!</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2016/02/05/php-array/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben Jun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JWang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/02/05/php-array/" itemprop="url">PHP数组解析和常见操作</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-02-05T19:00:03+08:00">
+                2016-02-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>在PHP里面使用最多的数据结构恐怕就是数组了，不过PHP的数组和我们传统意义上的数组区别很大，PHP的数组功能上相当于其它语言里面array+list+map数据结构的集合体，这就是动态语言的强大之处。在PHP里面有2种数组，一种是传统的索引数组，另一种是关联数组，其实就是其它语言里面map数据结构。</p>
+<h4 id="底层实现"><a href="#底层实现" class="headerlink" title="底层实现"></a>底层实现</h4><p>PHP的数组底层是使用HashTable实现，说到哈希表估计很多人都了解过，PHP数组通过一个映射函数把key映射到对于的value值上面，所以查找起来非常快，时间复杂度是O(1),哈希表都会遇到冲突问题，在PHP里面是通过链表的方式解决的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;Bucket：散列表中存储</span><br><span class="line">typedef struct _Bucket &#123;</span><br><span class="line">	zval              val;  &#x2F;&#x2F;存储的具体value，这里嵌入了一个zval，而不是一个指针</span><br><span class="line">	zend_ulong        h;    &#x2F;&#x2F;key根据times 33计算得到的哈希值，或者是数值索引编号</span><br><span class="line">	zend_string      *key;  &#x2F;&#x2F;存储元素的key</span><br><span class="line">&#125; Bucket;</span><br><span class="line"> </span><br><span class="line">&#x2F;&#x2F;HashTable结构</span><br><span class="line">typedef struct _zend_array HashTable;</span><br><span class="line"> </span><br><span class="line">struct _zend_array &#123;</span><br><span class="line">	zend_refcounted_h gc;</span><br><span class="line">	union &#123;</span><br><span class="line">		struct &#123;</span><br><span class="line">			ZEND_ENDIAN_LOHI_4(</span><br><span class="line">				zend_uchar    flags,</span><br><span class="line">				zend_uchar    nApplyCount,</span><br><span class="line">				zend_uchar    nIteratorsCount,</span><br><span class="line">				zend_uchar    reserve)</span><br><span class="line">		&#125; v;</span><br><span class="line">		uint32_t flags;</span><br><span class="line">	&#125; u;</span><br><span class="line">	uint32_t          nTableMask;      &#x2F;&#x2F;哈希值计算掩码，等于nTableSize的负值(nTableMask &#x3D; -nTableSize)</span><br><span class="line">	Bucket            *arData;         &#x2F;&#x2F;存储元素数组，指向第一个Bucket</span><br><span class="line">	uint32_t          nNumUsed;        &#x2F;&#x2F;已用Bucket数</span><br><span class="line">	uint32_t          nNumOfElements;  &#x2F;&#x2F;哈希表有效元素数</span><br><span class="line">	uint32_t          nTableSize;      &#x2F;&#x2F;哈希表总大小，为2的n次方</span><br><span class="line">	uint32_t          nInternalPointer;</span><br><span class="line">	zend_long         nNextFreeElement;  &#x2F;&#x2F;&#x2F;&#x2F;下一个可用的数值索引,如:arr[] &#x3D; 1;arr[&quot;a&quot;] &#x3D; 2;arr[] &#x3D; 3;则nNextFreeElement &#x3D; 2;</span><br><span class="line">	dtor_func_t       pDestructor;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2015/03/25/php-radio/#more" rel="contents">
+            <a class="btn" href="/2016/02/05/php-array/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2016/01/07/scrapy-param-pass/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben Jun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JWang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/01/07/scrapy-param-pass/" itemprop="url">关于Scrapy爬虫数据传递问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-07T12:08:45+08:00">
+                2016-01-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" itemprop="url" rel="index">
+                    <span itemprop="name">编程开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h2><p>这两天研究爬虫掉进一个大坑，爬了好久才爬出去，这里说几句，我写的爬图片的爬虫很简单，从一个图片列表进二级图片详情页，然后爬取二级详情页的所有图片，但是有个需求就是需要以二级详情页的标题为目录分类存放图片！思路很简单，就是在item里面增加一个字段title存放标题：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class PicscrapyItem(scrapy.Item):</span><br><span class="line">    image_urls &#x3D; scrapy.Field() # 图片地址</span><br><span class="line">    images &#x3D; scrapy.Field()</span><br><span class="line">    title &#x3D; scrapy.Field() # 图片标题（目录）</span><br></pre></td></tr></table></figure>
+<p>然后在pipelines里面获取item里面数据，保存的时候做一下处理：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class PicscrapyPipeline(ImagesPipeline):</span><br><span class="line">    item &#x3D; []</span><br><span class="line">    def get_media_requests(self, item, info):</span><br><span class="line">        self.item &#x3D; item</span><br><span class="line">        return [Request(x) for x in item.get(self.images_urls_field, [])]</span><br><span class="line"></span><br><span class="line">    # 重写函数，修改了下载图片名称的生成规则</span><br><span class="line">    def file_path(self, request, response&#x3D;None, info&#x3D;None):</span><br><span class="line">        if not isinstance(request, Request):</span><br><span class="line">            url &#x3D; request</span><br><span class="line">        else:</span><br><span class="line">            url &#x3D; request.url</span><br><span class="line">        url &#x3D; urlparse(url)</span><br><span class="line">        img_name &#x3D; url.path.split(&#39;&#x2F;&#39;)[5].split(&#39;.&#39;)[0]</span><br><span class="line">        return self.item[&#39;title&#39;] + &#39;&#x2F;%s.jpg&#39; % img_name</span><br></pre></td></tr></table></figure>
+<p>上面的代码看上去没毛病，重写了Scrapy框架ImagesPipeline的方法,根据title字段分目录存放，但是当我跑起来的时候看上去也没毛病，但是查看数据的时候却不对了，目录是出来了，但是牛头不对马嘴！</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/01/07/scrapy-param-pass/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -570,7 +1803,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/">Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    <a class="extend prev" rel="prev" href="/page/2/">Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next</a>
   </nav>
 
 
@@ -616,7 +1849,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">35</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -627,7 +1860,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -638,7 +1871,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

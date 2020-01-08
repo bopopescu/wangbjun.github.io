@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Golang," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="1.什么是粘包？“粘包”这个说法已经被诟病很久了，既然坊间流传这个说法咱们就沿用吧，关于这个问题比较准确的解释可以参考下面几点：  TCP是流传输协议,是一种面向连接的、可靠的、基于字节流的传输层通信协议 TCP没有包的概念，它只负责传输字节序列，UDP是面向数据报的协议，所以不存在拆包粘包问题 应该由应用层来维护消息和消息的边界，即需要一个应用层协议，比如HTTP  所以，本质上这是一个没有正确">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Golang处理TCP“粘包”问题">
+<meta property="og:url" content="https://wangbjun.github.io/2019/05/10/golang-tcp-package/index.html">
+<meta property="og:site_name" content="JWang的博客">
+<meta property="og:description" content="1.什么是粘包？“粘包”这个说法已经被诟病很久了，既然坊间流传这个说法咱们就沿用吧，关于这个问题比较准确的解释可以参考下面几点：  TCP是流传输协议,是一种面向连接的、可靠的、基于字节流的传输层通信协议 TCP没有包的概念，它只负责传输字节序列，UDP是面向数据报的协议，所以不存在拆包粘包问题 应该由应用层来维护消息和消息的边界，即需要一个应用层协议，比如HTTP  所以，本质上这是一个没有正确">
+<meta property="article:published_time" content="2019-05-10T04:05:45.000Z">
+<meta property="article:modified_time" content="2020-01-08T09:24:03.397Z">
+<meta property="article:author" content="Ben Jun">
+<meta property="article:tag" content="Golang">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://wangbjun.github.io/2019/05/10/golang-tcp-package/"/>
+
+
+
+
+
+  <title>Golang处理TCP“粘包”问题 | JWang的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">JWang的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2019/05/10/golang-tcp-package/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben Jun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JWang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Golang处理TCP“粘包”问题</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-10T12:05:45+08:00">
+                2019-05-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" itemprop="url" rel="index">
+                    <span itemprop="name">编程开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1-什么是粘包？"><a href="#1-什么是粘包？" class="headerlink" title="1.什么是粘包？"></a>1.什么是粘包？</h2><p>“粘包”这个说法已经被诟病很久了，既然坊间流传这个说法咱们就沿用吧，关于这个问题比较准确的解释可以参考下面几点：</p>
+<ol>
+<li>TCP是流传输协议,是一种面向连接的、可靠的、基于字节流的传输层通信协议</li>
+<li>TCP没有包的概念，它只负责传输字节序列，UDP是面向数据报的协议，所以不存在拆包粘包问题</li>
+<li>应该由应用层来维护消息和消息的边界，即需要一个应用层协议，比如HTTP</li>
+</ol>
+<p>所以，本质上这是一个没有正确使用TCP协议的而产生的问题，有网友说了一句非常形象的话：“打开家里的水龙头， 看着自来水往下流， 然后你告诉我， 看， 自来水粘在一起了， 不是有病？”</p>
+<a id="more"></a>
+
+<h2 id="2-如何解决粘包？"><a href="#2-如何解决粘包？" class="headerlink" title="2.如何解决粘包？"></a>2.如何解决粘包？</h2><p>通常来说，一般有下面几种方式：</p>
+<ol>
+<li>消息长度固定，提前确定包长度，读取的时候也安固定长度读取，适合定长消息包。</li>
+<li>使用特殊的字符或字符串作为消息的边界，例如 HTTP 协议的 headers 以“\r\n”为字段的分隔符</li>
+<li>自定义协议，将消息分为消息头和消息体，消息头中包含表示消息总长度</li>
+</ol>
+<h2 id="3-Golang实战"><a href="#3-Golang实战" class="headerlink" title="3.Golang实战"></a>3.Golang实战</h2><p>首先，来看一个存在粘包问题的例子：</p>
+<h4 id="一、Server端："><a href="#一、Server端：" class="headerlink" title="一、Server端："></a>一、Server端：</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"log"</span></span><br><span class="line">	<span class="string">"net"</span></span><br><span class="line">	<span class="string">"strings"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	listen, err := net.Listen(<span class="string">"tcp"</span>, <span class="string">"127.0.0.1:8888"</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">defer</span> listen.Close()</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		conn, err := listen.Accept()</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="built_in">panic</span>(err)</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span> &#123;</span><br><span class="line">			data := <span class="built_in">make</span>([]<span class="keyword">byte</span>, <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">			_, err := conn.Read(data)</span><br><span class="line"></span><br><span class="line">			<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">				log.Printf(<span class="string">"%s\n"</span>, err.Error())</span><br><span class="line">				<span class="keyword">break</span></span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			receive := <span class="keyword">string</span>(data)</span><br><span class="line">			log.Printf(<span class="string">"receive msg: %s\n"</span>, receive)</span><br><span class="line"></span><br><span class="line">			send := []<span class="keyword">byte</span>(strings.ToUpper(receive))</span><br><span class="line">			_, err = conn.Write(send)</span><br><span class="line">			<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">				log.Printf(<span class="string">"send msg failed, error: %s\n"</span>, err.Error())</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			log.Printf(<span class="string">"send msg: %s\n"</span>, receive)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>简单说一下这段代码，有点socket编程的基础的话应该很容易理解，基本上都是Listen -&gt; Accept -&gt; Read这个套路。</p>
+<blockquote>
+<p>有些人一下子就看出来这个服务有点“问题”，它是同步阻塞的，也就意味着这个服务同一时间只能处理一个连接请求，其实解决这个问题也很简单，得益于Go协程的强大，我们只需要开启一个协程单独处理每一个连接就行了。不过这不是今天的主题，有兴趣的童鞋可以自行研究。</p>
+</blockquote>
+<h4 id="二、Client端："><a href="#二、Client端：" class="headerlink" title="二、Client端："></a>二、Client端：</h4><p>这个服务的功能特别简单，客户端输入什么我就返回什么，客户端的话，这里我使用telnet来演示：</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">jwang@jwang:~$ telnet 127.0.0.1 8888</span><br><span class="line">Trying 127.0.0.1...</span><br><span class="line">Connected to 127.0.0.1.</span><br><span class="line">Escape character is '^]'.</span><br><span class="line">111111</span><br><span class="line">111111</span><br><span class="line">123456</span><br><span class="line">123456</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>当你按回车键的时候telnet会在消息后面自动追加”\r\n“换行符并发送消息！</p>
+</blockquote>
+<p>从代码里面可以看到，在接受消息的时候我们每次读取10个字节的内容输出并返回，如果输入的消息小于等于8（减去换行符）个字符的时候没有问题，但是当我们在telnet里面输入大于10个字符的内容的时候，这些数据的时候会被强行拆开处理。</p>
+<p>当然这里有人说了，可不可以一次读多点，然而读多少都会存在这个问题，而且TCP会有缓存区，不一定能够及时把消息发出去，像Nagle优化算法会将多次间隔较小、数据量小的数据，合并成一个大的数据块，然后进行封包，还是会存在问题。</p>
+<p>如果我们把这个内容看作是一个业务消息，这个业务消息就被拆分放到下个消息里面处理，必然会产生问题，这就是“粘包”问题的由来。说到底，还是用的人的问题，没有确定好数据边界，如果简单粗暴的读取固定长度的内容，必然会出现问题。</p>
+<h4 id="三、边界符解决粘包问题"><a href="#三、边界符解决粘包问题" class="headerlink" title="三、边界符解决粘包问题"></a>三、边界符解决粘包问题</h4><p>前面说过这个问题，我们可以通过定义一个边界符号解决粘包问题，比如说在上面的例子里面telnet会自动在每一条消息后面追加“\r\n”符号，我们恰好可以利用这点来区分消息。</p>
+<ol>
+<li>定义一个buffer来临时存放消息</li>
+<li>从conn里面读取固定字节大小内容，判断当前内容里面有没有分隔符</li>
+<li>如果没有找到分隔符，把当前内容追加到buffer里面，然后重复第2步</li>
+<li>如果找到分隔符，把当前内容里面分隔符之前的内容追加到buffer后输出</li>
+<li>然后重置buffer，把分隔符之后的内容追加到buff，重复第2步 </li>
+</ol>
+<p>不过Go里面提供了一个非常好用的buffer库，为我们节省了很多操作</p>
+<p>我们可以使用bufio库里面的NewReader把conn包装一下，然后使用ReadSlice方法读取内容，该方法会一直读直到遇到分隔符，非常简单实用。</p>
+<h5 id="一、Server端：-1"><a href="#一、Server端：-1" class="headerlink" title="一、Server端："></a>一、Server端：</h5><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"bufio"</span></span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"net"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	listen, err := net.Listen(<span class="string">"tcp"</span>, <span class="string">"127.0.0.1:8888"</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">defer</span> listen.Close()</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		conn, err := listen.Accept()</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="built_in">panic</span>(err)</span><br><span class="line">		&#125;</span><br><span class="line">		reader := bufio.NewReader(conn)</span><br><span class="line">		<span class="keyword">for</span> &#123;</span><br><span class="line">			slice, err := reader.ReadSlice(<span class="string">'\n'</span>)</span><br><span class="line">			<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">				<span class="keyword">continue</span></span><br><span class="line">			&#125;</span><br><span class="line">			fmt.Printf(<span class="string">"%s"</span>, slice)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="二、Client端：-1"><a href="#二、Client端：-1" class="headerlink" title="二、Client端："></a>二、Client端：</h5><p>Client这里可以直接使用telnet，也可以自己写一个，代码如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"log"</span></span><br><span class="line">	<span class="string">"net"</span></span><br><span class="line">	<span class="string">"strconv"</span></span><br><span class="line">	<span class="string">"testing"</span></span><br><span class="line">	<span class="string">"time"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Test</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">	conn, err := net.Dial(<span class="string">"tcp"</span>, <span class="string">"127.0.0.1:8888"</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Println(<span class="string">"dial error:"</span>, err)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">defer</span> conn.Close()</span><br><span class="line">	i := <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		<span class="keyword">var</span> err error</span><br><span class="line">		_, err = conn.Write([]<span class="keyword">byte</span>(strconv.Itoa(i) + <span class="string">" =&gt; 77777\n"</span>))</span><br><span class="line">		_, err = conn.Write([]<span class="keyword">byte</span>(strconv.Itoa(i) + <span class="string">" =&gt; 88888\n"</span>))</span><br><span class="line">		_, err = conn.Write([]<span class="keyword">byte</span>(strconv.Itoa(i) + <span class="string">" =&gt; 555555555555555555555555555555555555555555\n"</span>))</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="built_in">panic</span>(err)</span><br><span class="line">		&#125;</span><br><span class="line">		time.Sleep(time.Second * <span class="number">1</span>)</span><br><span class="line">		_, err = conn.Write([]<span class="keyword">byte</span>(strconv.Itoa(i) + <span class="string">" =&gt; 123456\n"</span>))</span><br><span class="line">		_, err = conn.Write([]<span class="keyword">byte</span>(strconv.Itoa(i) + <span class="string">" =&gt; 123456\n"</span>))</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="built_in">panic</span>(err)</span><br><span class="line">		&#125;</span><br><span class="line">		time.Sleep(time.Second * <span class="number">1</span>)</span><br><span class="line">		_, err = conn.Write([]<span class="keyword">byte</span>(strconv.Itoa(i) + <span class="string">" =&gt; 9999999\n"</span>))</span><br><span class="line">		_, err = conn.Write([]<span class="keyword">byte</span>(strconv.Itoa(i) + <span class="string">" =&gt; 0000000000000000000000000000000000000000000\n"</span>))</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="built_in">panic</span>(err)</span><br><span class="line">		&#125;</span><br><span class="line">		i++</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果要说缺点，这种方式主要存在2点，第一点是分隔符的选择问题，如果需要传输的消息包含分隔符，那就需要提前做转义处理。第二点就是性能问题，如果消息体特别大，每次查找分隔符的位置的话肯定会有一点消耗。</p>
+<h4 id="四、在头部放入信息长度"><a href="#四、在头部放入信息长度" class="headerlink" title="四、在头部放入信息长度"></a>四、在头部放入信息长度</h4><p>目前应用最广泛的是在消息的头部添加数据包长度，接收方根据消息长度进行接收；在一条TCP连接上，数据的流式传输在接收缓冲区里是有序的，其主要的问题就是第一个包的包尾与第二个包的包头共存接收缓冲区，所以根据长度读取是十分合适的。</p>
+<h5 id="一、Server端：-2"><a href="#一、Server端：-2" class="headerlink" title="一、Server端："></a>一、Server端：</h5><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"bufio"</span></span><br><span class="line">	<span class="string">"bytes"</span></span><br><span class="line">	<span class="string">"encoding/binary"</span></span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"net"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	listen, err := net.Listen(<span class="string">"tcp"</span>, <span class="string">"127.0.0.1:8888"</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">defer</span> listen.Close()</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		conn, err := listen.Accept()</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="built_in">panic</span>(err)</span><br><span class="line">		&#125;</span><br><span class="line">		reader := bufio.NewReader(conn)</span><br><span class="line">		<span class="keyword">for</span> &#123;</span><br><span class="line">			<span class="comment">//前4个字节表示数据长度</span></span><br><span class="line">			peek, err := reader.Peek(<span class="number">4</span>)</span><br><span class="line">			<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">				<span class="keyword">continue</span></span><br><span class="line">			&#125;</span><br><span class="line">			buffer := bytes.NewBuffer(peek)</span><br><span class="line">			<span class="comment">//读取数据长度</span></span><br><span class="line">			<span class="keyword">var</span> length <span class="keyword">int32</span></span><br><span class="line">			err = binary.Read(buffer, binary.BigEndian, &amp;length)</span><br><span class="line">			<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">				<span class="keyword">continue</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">//Buffered 返回缓存中未读取的数据的长度,如果缓存区的数据小于总长度，则意味着数据不完整</span></span><br><span class="line">			<span class="keyword">if</span> <span class="keyword">int32</span>(reader.Buffered()) &lt; length+<span class="number">4</span> &#123;</span><br><span class="line">				<span class="keyword">continue</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">//从缓存区读取大小为数据长度的数据</span></span><br><span class="line">			data := <span class="built_in">make</span>([]<span class="keyword">byte</span>, length+<span class="number">4</span>)</span><br><span class="line">			_, err = reader.Read(data)</span><br><span class="line">			<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">				<span class="keyword">continue</span></span><br><span class="line">			&#125;</span><br><span class="line">			fmt.Printf(<span class="string">"receive data: %s\n"</span>, data[<span class="number">4</span>:])</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="二、Client端：-2"><a href="#二、Client端：-2" class="headerlink" title="二、Client端："></a>二、Client端：</h5><p>需要注意的是发送数据的编码，这里使用了Go的binary库，先写入4个字节的头，再写入消息主体，最后一起发送过去。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"bytes"</span></span><br><span class="line">	<span class="string">"encoding/binary"</span></span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"log"</span></span><br><span class="line">	<span class="string">"net"</span></span><br><span class="line">	<span class="string">"testing"</span></span><br><span class="line">	<span class="string">"time"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Test</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">	conn, err := net.Dial(<span class="string">"tcp"</span>, <span class="string">"127.0.0.1:8888"</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Println(<span class="string">"dial error:"</span>, err)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">defer</span> conn.Close()</span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		data, _ := Encode(<span class="string">"123456789"</span>)</span><br><span class="line">		_, err := conn.Write(data)</span><br><span class="line">		data, _ = Encode(<span class="string">"888888888"</span>)</span><br><span class="line">		_, err = conn.Write(data)</span><br><span class="line">		time.Sleep(time.Second * <span class="number">1</span>)</span><br><span class="line">		data, _ = Encode(<span class="string">"777777777"</span>)</span><br><span class="line">		_, err = conn.Write(data)</span><br><span class="line">		data, _ = Encode(<span class="string">"123456789"</span>)</span><br><span class="line">		_, err = conn.Write(data)</span><br><span class="line">		time.Sleep(time.Second * <span class="number">1</span>)</span><br><span class="line">		fmt.Println(err)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Encode</span><span class="params">(message <span class="keyword">string</span>)</span> <span class="params">([]<span class="keyword">byte</span>, error)</span></span> &#123;</span><br><span class="line">	<span class="comment">// 读取消息的长度</span></span><br><span class="line">	<span class="keyword">var</span> length = <span class="keyword">int32</span>(<span class="built_in">len</span>(message))</span><br><span class="line">	<span class="keyword">var</span> pkg = <span class="built_in">new</span>(bytes.Buffer)</span><br><span class="line">	<span class="comment">// 写入消息头</span></span><br><span class="line">	err := binary.Write(pkg, binary.BigEndian, length)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 写入消息实体</span></span><br><span class="line">	err = binary.Write(pkg, binary.BigEndian, []<span class="keyword">byte</span>(message))</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> pkg.Bytes(), <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4、总结"><a href="#4、总结" class="headerlink" title="4、总结"></a>4、总结</h2><p>世界上本没有“粘包”，只不过是少数人没有正确处理TCP数据边界问题，成熟的应用层协议（http、ssh）都不会存在这个问题。但是如果你使用纯TCP自定义协议，那就需要自己处理好了。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Golang/" rel="tag"># Golang</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/12/designpattern-middleware/" rel="next" title="详解中间件设计模式">
+                <i class="fa fa-chevron-left"></i> 详解中间件设计模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/09/short-url/" rel="prev" title="短网址原理和实现">
+                短网址原理和实现 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Ben Jun" />
+          <p class="site-author-name" itemprop="name">Ben Jun</p>
+           
+              <p class="site-description motion-element" itemprop="description">PHP、Golang、Linux、Web开发</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-什么是粘包？"><span class="nav-number">1.</span> <span class="nav-text">1.什么是粘包？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-如何解决粘包？"><span class="nav-number">2.</span> <span class="nav-text">2.如何解决粘包？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Golang实战"><span class="nav-number">3.</span> <span class="nav-text">3.Golang实战</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、Server端："><span class="nav-number">3.0.1.</span> <span class="nav-text">一、Server端：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、Client端："><span class="nav-number">3.0.2.</span> <span class="nav-text">二、Client端：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、边界符解决粘包问题"><span class="nav-number">3.0.3.</span> <span class="nav-text">三、边界符解决粘包问题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#一、Server端：-1"><span class="nav-number">3.0.3.1.</span> <span class="nav-text">一、Server端：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#二、Client端：-1"><span class="nav-number">3.0.3.2.</span> <span class="nav-text">二、Client端：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四、在头部放入信息长度"><span class="nav-number">3.0.4.</span> <span class="nav-text">四、在头部放入信息长度</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#一、Server端：-2"><span class="nav-number">3.0.4.1.</span> <span class="nav-text">一、Server端：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#二、Client端：-2"><span class="nav-number">3.0.4.2.</span> <span class="nav-text">二、Client端：</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、总结"><span class="nav-number">4.</span> <span class="nav-text">4、总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ben Jun</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
