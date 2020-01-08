@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Golang," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="前言学习和使用golang也有一段时间了，golang最近2年在国内很火，提起golang和其它语言最大区别莫过于协程，不过咱今天先不说协程，我先说一下自己的一些理解。 对c熟悉的人应该对go不陌生，它们都属于强类型静态编译型语言，在语法上和PHP这种弱类型动态解释型语言不一样，虽然差异很大，但是基本语法都是差不多，掌握一种语言之后再去学其它语言语法不是什么大问题。 在IT行业，编程语言之争一直是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈Golang协程">
+<meta property="og:url" content="https://wangbjun.github.io/2018/12/10/golang/goroutine/index.html">
+<meta property="og:site_name" content="JWang的博客">
+<meta property="og:description" content="前言学习和使用golang也有一段时间了，golang最近2年在国内很火，提起golang和其它语言最大区别莫过于协程，不过咱今天先不说协程，我先说一下自己的一些理解。 对c熟悉的人应该对go不陌生，它们都属于强类型静态编译型语言，在语法上和PHP这种弱类型动态解释型语言不一样，虽然差异很大，但是基本语法都是差不多，掌握一种语言之后再去学其它语言语法不是什么大问题。 在IT行业，编程语言之争一直是">
+<meta property="article:published_time" content="2018-12-10T04:05:45.000Z">
+<meta property="article:modified_time" content="2020-01-08T17:38:47.321Z">
+<meta property="article:author" content="Ben Jun">
+<meta property="article:tag" content="Golang">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://wangbjun.github.io/2018/12/10/golang/goroutine/"/>
+
+
+
+
+
+  <title>浅谈Golang协程 | JWang的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">JWang的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2018/12/10/golang/goroutine/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben Jun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JWang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">浅谈Golang协程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-10T12:05:45+08:00">
+                2018-12-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" itemprop="url" rel="index">
+                    <span itemprop="name">编程开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>学习和使用golang也有一段时间了，golang最近2年在国内很火，提起golang和其它语言最大区别莫过于协程，不过咱今天先不说协程，我先说一下自己的一些理解。</p>
+<p>对c熟悉的人应该对go不陌生，它们都属于强类型静态编译型语言，在语法上和PHP这种弱类型动态解释型语言不一样，虽然差异很大，但是基本语法都是差不多，掌握一种语言之后再去学其它语言语法不是什么大问题。</p>
+<p>在IT行业，编程语言之争一直是个很热闹的话题，编程语言之间的区别不仅仅在于语法和特性，语法只是表达编程思想的方式，一个编程语言的背后往往是其强大的生态圈，比如c语言之所以经久不衰，那是因为它几乎可以认为是创世纪语言，是当代编程的起点，而PHP则以快速处理文本，快速搭建web网站出名，JS则是浏览器编程的唯一选择，Python拥有的科学计算库是其它语言没有的。</p>
+<p>说到go的优点，一般都集中在静态编译、毫秒级GC、简洁、并发并行等特性上面，go是2008年诞生的，由C语言之父设计，相对其它语言来说比较年轻，可以说在设计之初吸收了各大语言的优点。</p>
+<a id="more"></a>
+
+<h3 id="协程到底是什么东西？"><a href="#协程到底是什么东西？" class="headerlink" title="协程到底是什么东西？"></a>协程到底是什么东西？</h3><p>说到go必须得说协程，先说说为什么需要协程，都说go是为并发编程而生，指的就是go很容易写出高并发的程序，现代计算机硬件早已步入多核时代，前段时间AMD刚刚发布最新的锐龙3代，作为民用级的CPU现在已达到16核32线程，然而大部分编程语言依然弱智，只能利用单核性能，传说中一核有难多核围观…</p>
+<p>但是操作系统提供了多进程的能力，除了多进程之外，还有一个叫多线程，线程和进程区别不大，线程是程序执行的最小单位,一个进程可以有多个线程，编程语言可以使用多进程或多线程利用多核CPU的能力，然而现实并不是那么简单…</p>
+<p>进程和线程都可以解决多核CPU利用率的问题，比如PHP就整出来一个fpm，采用了master-worker模型，实际上采用多进程解决并发问题，已经非常不错了，但是依然存在问题，支持不了太高的并发。</p>
+<p>现在的Linux和Windows都是分时复用的多任务操作系统，上面跑着很多程序，所以操作系统需要在不同进程之间切换，这时候就产生了CPU上下文切换，具体技术细节咱可以不了解，但是存在的问题就是切换的时候非常消耗资源，默认情况下Linux只可以创建1024个进程，虽然可以修改，但是一旦进程或线程数过多，CPU的时间基本上都浪费在上下文切换上面了，何谈高效？</p>
+<p>可见，多进程和多线程并不是很完美，对于编程来说，难度非常大，所以目前只有Java有比较好的多线程模型，PHP虽然有相关扩展，但是很少有人使用，JS压根不支持！</p>
+<p>但是并不是必须使用多进程或多线程才可以实现高并发，很多时候，特别是web相关应用，当你读取文件或者调用API都会产生IO，但是由于计算机硬盘、网络传输速度比较慢，CPU就会一直在那等…时间就浪费了！后来有人想，既然在等IO，你就把CPU让出来让其它人用啊，当硬盘数据读取到、接口返回数据的时候我通知你一声就行了，这就是异步非阻塞IO，JS目前使用就是这种模型，Golang的协程也会用到。</p>
+<p>在我理解，go的协程是为了解决多核CPU利用率问题，go语言层面并不支持多进程或多线程，但是协程更好用，协程被称为用户态线程，不存在CPU上下文切换问题，效率非常高。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><h4 id="1-Hello-World"><a href="#1-Hello-World" class="headerlink" title="1.Hello World"></a>1.Hello World</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">go</span> say(<span class="string">"Hello World"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">say</span><span class="params">(s <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">    <span class="built_in">println</span>(s)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>go启动协程的方式就是使用关键字go，后面一般接一个函数或者匿名函数，但是如果你运行上面第一段代码，你会发现什么结果都没有，what？？？</p>
+<p>这至少说明你代码写的没问题，当你使用go启动协程之后,后面没有代码了，这时候主线程结束了，这个协程还没来得及执行就结束了… 聪明的小伙伴会想到，那我主线程先睡眠1s等一等？ Yes, 在main代码块最后一行加入：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">time.Sleep(time.Second*<span class="number">1</span>) # 表示睡眠<span class="number">1</span>s</span><br></pre></td></tr></table></figure>
+<p>再次运行，打印出Hello World，1s后程序终止！</p>
+<h4 id="2-WaitGroup"><a href="#2-WaitGroup" class="headerlink" title="2.WaitGroup"></a>2.WaitGroup</h4><p>上面睡眠这种做法肯定是不靠谱的，WaitGroup可以解决这个问题, 代码如下:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"sync"</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">var</span> wg = sync.WaitGroup&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	wg.Add(<span class="number">1</span>)</span><br><span class="line">	<span class="keyword">go</span> say(<span class="string">"Hello World"</span>)</span><br><span class="line">	wg.Wait()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">say</span><span class="params">(s <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">	<span class="built_in">println</span>(s)</span><br><span class="line">	wg.Done()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>简单说明一下用法，var 是声明了一个全局变量 wg，类型是sync.WaitGroup，wg.add(1) 是说我有1个协程需要执行，wg.Done 相当于 wg.Add(-1) 意思就是我这个协程执行完了。wg.Wait() 就是告诉主线程要等一下，等协程都执行完再退出。</p>
+<h4 id="3-并发还并行"><a href="#3-并发还并行" class="headerlink" title="3.并发还并行?"></a>3.并发还并行?</h4><p>当你同时启动多个协程的时候，会怎么执行呢？</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"strconv"</span></span><br><span class="line">	<span class="string">"sync"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> wg = sync.WaitGroup&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	wg.Add(<span class="number">5</span>)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">5</span>; i++ &#123;</span><br><span class="line">		<span class="keyword">go</span> say(<span class="string">"Hello World: "</span> + strconv.Itoa(i))</span><br><span class="line">	&#125;</span><br><span class="line">	wg.Wait()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">say</span><span class="params">(s <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">	<span class="built_in">println</span>(s)</span><br><span class="line">	wg.Done()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果去掉go，直接在循环里面调用这个函数5次，毫无疑问会一次输出 Hello World: 0 ~ 4, 但是在协程里面，输出的顺序是无序的，看上去像是“同时执行”，其实这只是并发。</p>
+<p>有一个问题，上面的例子里面是并发还并行呢？</p>
+<p>首先，我们得区分什么是并发什么是并行，举个比较熟悉的例子，并发就是一个锅同时炒2个菜，2个菜来回切换，并行就是你有多个锅，每个锅炒不同的菜，多个锅同时炒！</p>
+<p>对于计算机来说，这个锅就是CPU，单核CPU同一时间只能执行一个程序，但是CPU却可以在不同程序之间快速切换，所以你在浏览网页的同时还可以听歌！但是多核CPU就不一样了，操作系统可以一个CPU核心用来浏览网页，另一个CPU核心拿来听歌，所以多核CPU还是有用的。</p>
+<p>但是对于单一程序来说，基本上是很难利用多核CPU的，主要是编程实现非常麻烦，这也是为什么很多人都说多核CPU是一核有难多核围观…特别是一些比较老的程序，人家在设计的时候压根没考虑到多核CPU，毕竟10年前CPU还没有这么多核心。</p>
+<p>回到上面的例子，如果当前CPU是单核，那么上面程序就是并发执行，如果当前CPU是多核，那就是并行执行，结果都是一样的，如何证明请看下面的例子：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"runtime"</span></span><br><span class="line">	<span class="string">"strconv"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	runtime.GOMAXPROCS(<span class="number">1</span>)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">5</span>; i++ &#123;</span><br><span class="line">		<span class="keyword">go</span> say(<span class="string">"Hello World: "</span> + strconv.Itoa(i))</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">say</span><span class="params">(s <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">	<span class="built_in">println</span>(s)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>默认情况下，最新的go版本协程可以利用多核CPU，但是通过runtime.GOMAXPROCS() 我们可以设置所需的核心数（其实并不是CPU核心数），在上面的例子我们设置为1，也就是模拟单核CPU，运行这段程序你会发现无任何输出，如果你改成2，你会发现可以正常输出。</p>
+<p>这段程序逻辑很简单，使用一个for循环启动5个协程，然后写了一个for死循环，如果是单核CPU，当运行到for死循环的时候，由于没有任何io操作（或者能让出CPU的操作），会一直卡在那里，但是如果是多核CPU，go协程就会调用其它CPU去执行。</p>
+<p>如果你在for循环里面加入一个sleep操作，比如下面这样：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> &#123;</span><br><span class="line">		time.Sleep(time.Second)</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>运行上面代码，你会发现居然可以正常输出，多次运行你会发现其结果一直是从0到4，变成顺序执行了！这也说明单核CPU只能并发，不能并行！</p>
+<h4 id="4-channel"><a href="#4-channel" class="headerlink" title="4.channel"></a>4.channel</h4><p>channel，又叫管道，在go里面的管道是协程之间通信的渠道，类似于咱们常用的消息队列。在上面的例子里面我们是直接打印出来结果，假如现在的需求是把输出结果返回到主线程呢？</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"strconv"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> result = <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">string</span>)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">5</span>; i++ &#123;</span><br><span class="line">		<span class="keyword">go</span> say(<span class="string">"Hello World: "</span>+strconv.Itoa(i), result)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> s := <span class="keyword">range</span> result &#123;</span><br><span class="line">		<span class="built_in">println</span>(s)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">say</span><span class="params">(s <span class="keyword">string</span>, c <span class="keyword">chan</span> <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">	c &lt;- s</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>简单说明一下，这里就是实例化了一个string类型的管道，在调用函数的时候会把管道当作参数传递过去，然后在调用函数里面我们不输出结果，然后把结果通过管道返还回去，然后再主线程里面我们通过for range循环依次取出结果！</p>
+<p>结果如下，但是这个程序是有bug的，在程序的运行的最后会出现一个fatal error，提示所有的协程都进入睡眠状态，死锁！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Hello World: 4</span><br><span class="line">Hello World: 1</span><br><span class="line">Hello World: 0</span><br><span class="line">Hello World: 2</span><br><span class="line">Hello World: 3</span><br><span class="line">fatal error: all goroutines are asleep - deadlock!</span><br></pre></td></tr></table></figure>
+<p>go的管道默认是阻塞的(假如你不设置缓存的话)，你那边放一个，我这头才能取一个，如果你那边放了东西这边没人取，程序就会一直等下去，死锁了，同时，如果那边没人放东西，你这边取也取不到，也会发生死锁！</p>
+<p>如何解决这个问题呢？标准的做法是主动关闭管道，或者你知道你应该什么时候关闭管道, 当然你结束程序管道自然也会关掉！针对上面的演示代码，可以这样写：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> i = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> s := <span class="keyword">range</span> result &#123;</span><br><span class="line">    <span class="built_in">println</span>(s)</span><br><span class="line">    <span class="keyword">if</span> i &gt;= <span class="number">4</span> &#123;</span><br><span class="line">        <span class="built_in">close</span>(result)</span><br><span class="line">    &#125;</span><br><span class="line">    i++</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>因为我们明确知道总共会输出5个结果，所以这里简单做了一个判断，大于5就关闭管道退出for循环，就不会报错了！虽然丑了点，但是能用</p>
+<h4 id="5-生产者消费者模型"><a href="#5-生产者消费者模型" class="headerlink" title="5.生产者消费者模型"></a>5.生产者消费者模型</h4><p>利用channel和协程，我们可以非常容易的实现了一个生产者消费者模型，代码如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"strconv"</span></span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"time"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	ch1 := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)</span><br><span class="line">	ch2 := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">string</span>)</span><br><span class="line">	<span class="keyword">go</span> pump1(ch1)</span><br><span class="line">	<span class="keyword">go</span> pump2(ch2)</span><br><span class="line">	<span class="keyword">go</span> suck(ch1, ch2)</span><br><span class="line">	time.Sleep(time.Duration(time.Second*<span class="number">30</span>))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">pump1</span><span class="params">(ch <span class="keyword">chan</span> <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; ; i++ &#123;</span><br><span class="line">		ch &lt;- i * <span class="number">2</span></span><br><span class="line">		time.Sleep(time.Duration(time.Second))</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">pump2</span><span class="params">(ch <span class="keyword">chan</span> <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; ; i++ &#123;</span><br><span class="line">		ch &lt;- strconv.Itoa(i+<span class="number">5</span>)</span><br><span class="line">		time.Sleep(time.Duration(time.Second))</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">suck</span><span class="params">(ch1 <span class="keyword">chan</span> <span class="keyword">int</span>, ch2 <span class="keyword">chan</span> <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">	chRate := time.Tick(time.Duration(time.Second*<span class="number">5</span>)) <span class="comment">// 定时器</span></span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		<span class="keyword">select</span> &#123;</span><br><span class="line">		<span class="keyword">case</span> v := &lt;-ch1:</span><br><span class="line">			fmt.Printf(<span class="string">"Received on channel 1: %d\n"</span>, v)</span><br><span class="line">		<span class="keyword">case</span> v := &lt;-ch2:</span><br><span class="line">			fmt.Printf(<span class="string">"Received on channel 2: %s\n"</span>, v)</span><br><span class="line">		<span class="keyword">case</span> &lt;-chRate:</span><br><span class="line">			fmt.Printf(<span class="string">"Log log...\n"</span>)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Received on channel 1: 0</span><br><span class="line">Received on channel 2: 5</span><br><span class="line">Received on channel 2: 6</span><br><span class="line">Received on channel 1: 2</span><br><span class="line">Received on channel 1: 4</span><br><span class="line">Received on channel 2: 7</span><br><span class="line">Received on channel 1: 6</span><br><span class="line">Received on channel 2: 8</span><br><span class="line">Received on channel 2: 9</span><br><span class="line">Received on channel 1: 8</span><br><span class="line">Log log...</span><br><span class="line">Received on channel 2: 10</span><br><span class="line">Received on channel 1: 10</span><br><span class="line">Received on channel 1: 12</span><br><span class="line">Received on channel 2: 11</span><br><span class="line">Received on channel 2: 12</span><br><span class="line">Received on channel 1: 14</span><br></pre></td></tr></table></figure>
+<p>这个程序建立了2个管道一个传输int，一个传输string，同时启动了3个协程，前2个协程非常简单，就是每隔1s向管道输出数据，第三个协程是不停的从管道取数据，和之前的例子不一样的地方是，pump1 和 pump2是2个不同的管道，通过select可以实现在不同管道之间切换，哪个管道有数据就从哪个管道里面取数据，如果都没数据就等着，还有一个定时器功能可以每隔一段时间向管道输出内容！而且我们可以很容易启动多个消费者。</p>
+<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><h4 id="1-Web应用"><a href="#1-Web应用" class="headerlink" title="1.Web应用"></a>1.Web应用</h4><p>使用go自带的http库几行代码就可以启动一个http server，代码如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">http.HandleFunc(<span class="string">"/"</span>, <span class="function"><span class="keyword">func</span><span class="params">(writer http.ResponseWriter, request *http.Request)</span></span> &#123;</span><br><span class="line">		_, _ = fmt.Fprintln(writer, <span class="string">"Hello World"</span>)</span><br><span class="line">	&#125;)</span><br><span class="line">	_ = http.ListenAndServe(<span class="string">"127.0.0.1:8080"</span>, <span class="literal">nil</span>)</span><br></pre></td></tr></table></figure>
+<p>虽然简单，但是非常高效，因为其底层使用了go协程，对于每一个请求都会启动一个协程去处理，所以并发可以轻轻松松达到上万QPS。</p>
+<h4 id="2-并发编程"><a href="#2-并发编程" class="headerlink" title="2.并发编程"></a>2.并发编程</h4><p>举一个非常简单的例子，假设我们在业务里面需要从3个不同的数据库获取数据，每次耗时100ms，正常写法就是从上到下依次执行，总耗时300ms，但是使用协程这3个操作可以“同时”进行，耗时大大减少。</p>
+<p>几乎所有IO密集型的应用，都可以利用协程提高速度，提高程序并发能力，不必把CPU时间浪费在等待的过程中，同时还可以充分利用多核CPU的计算能力。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Golang/" rel="tag"># Golang</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/09/linux/custom-google-tz/" rel="next" title="自建梯子访问Google等学术网站">
+                <i class="fa fa-chevron-left"></i> 自建梯子访问Google等学术网站
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/03/jwt-token-info/" rel="prev" title="Token 和 JWT Token">
+                Token 和 JWT Token <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Ben Jun" />
+          <p class="site-author-name" itemprop="name">Ben Jun</p>
+           
+              <p class="site-description motion-element" itemprop="description">PHP、Golang、Linux、Web开发</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#协程到底是什么东西？"><span class="nav-number">2.</span> <span class="nav-text">协程到底是什么东西？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例"><span class="nav-number">3.</span> <span class="nav-text">实例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Hello-World"><span class="nav-number">3.1.</span> <span class="nav-text">1.Hello World</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-WaitGroup"><span class="nav-number">3.2.</span> <span class="nav-text">2.WaitGroup</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-并发还并行"><span class="nav-number">3.3.</span> <span class="nav-text">3.并发还并行?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-channel"><span class="nav-number">3.4.</span> <span class="nav-text">4.channel</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-生产者消费者模型"><span class="nav-number">3.5.</span> <span class="nav-text">5.生产者消费者模型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用"><span class="nav-number">4.</span> <span class="nav-text">应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Web应用"><span class="nav-number">4.1.</span> <span class="nav-text">1.Web应用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-并发编程"><span class="nav-number">4.2.</span> <span class="nav-text">2.并发编程</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ben Jun</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
