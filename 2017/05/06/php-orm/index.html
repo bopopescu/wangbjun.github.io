@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="PHP,ORM," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="1.什么是ORM？ 对象关系映射（Object Relational Mapping，简称ORM）模式是一种为了解决面向对象与关系数据库存在的互不匹配的现象的技术。简单的说，ORM是通过使用描述对象和数据库之间映射的元数据，将程序中的对象自动持久化到关系数据库中。  ORM并不是PHP独有的东西，只要和数据库打交道的语言都可以使用ORM，比如Java Web三大框架里面Hibernate，还有Do">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP开发中ORM的应用">
+<meta property="og:url" content="https://wangbjun.github.io/2017/05/06/php-orm/index.html">
+<meta property="og:site_name" content="JWang的博客">
+<meta property="og:description" content="1.什么是ORM？ 对象关系映射（Object Relational Mapping，简称ORM）模式是一种为了解决面向对象与关系数据库存在的互不匹配的现象的技术。简单的说，ORM是通过使用描述对象和数据库之间映射的元数据，将程序中的对象自动持久化到关系数据库中。  ORM并不是PHP独有的东西，只要和数据库打交道的语言都可以使用ORM，比如Java Web三大框架里面Hibernate，还有Do">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/5f6e3e27ly1fx6n9nprvzj208n09raab.jpg">
+<meta property="article:published_time" content="2017-05-06T11:10:03.000Z">
+<meta property="article:modified_time" content="2020-01-08T09:43:32.197Z">
+<meta property="article:author" content="Ben Jun">
+<meta property="article:tag" content="PHP">
+<meta property="article:tag" content="ORM">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/5f6e3e27ly1fx6n9nprvzj208n09raab.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://wangbjun.github.io/2017/05/06/php-orm/"/>
+
+
+
+
+
+  <title>PHP开发中ORM的应用 | JWang的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">JWang的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2017/05/06/php-orm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben Jun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JWang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">PHP开发中ORM的应用</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-06T19:10:03+08:00">
+                2017-05-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" itemprop="url" rel="index">
+                    <span itemprop="name">编程开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="1-什么是ORM？"><a href="#1-什么是ORM？" class="headerlink" title="1.什么是ORM？"></a>1.什么是ORM？</h3><blockquote>
+<p>对象关系映射（Object Relational Mapping，简称ORM）模式是一种为了解决面向对象与关系数据库存在的互不匹配的现象的技术。简单的说，ORM是通过使用描述对象和数据库之间映射的元数据，将程序中的对象自动持久化到关系数据库中。</p>
+</blockquote>
+<p>ORM并不是PHP独有的东西，只要和数据库打交道的语言都可以使用ORM，比如Java Web三大框架里面Hibernate，还有Doctrine(PHP重量级的ORM) ，Eloquent（laravel框架默认ORM，也可以单独使用）。</p>
+<a id="more"></a>
+
+<p>ORM是完全采用面向对象的方式去操作数据库，不用去拼SQL，对于复杂的SQL，ORM也支持直接运行原生SQL，咱先回顾一下平时咱们都是怎么操作数据库？举个例子，现在有一个库blog，一张表article，大部分的时候都是这是方式：新建MySQL连接，然后执行数据库操作，需要手写SQL：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$connect = mysqli_connect(<span class="string">"localhost"</span>, <span class="string">"root"</span>, <span class="string">"123456"</span>, <span class="string">"blog"</span>, <span class="string">"3306"</span>) <span class="keyword">or</span> <span class="keyword">die</span>(<span class="string">"数据库连接失败！"</span>);</span><br><span class="line">$connect-&gt;set_charset(<span class="string">"utf8"</span>);</span><br><span class="line"></span><br><span class="line">$id = <span class="number">1</span>;</span><br><span class="line">$sql = <span class="string">"SELECT * FROM article WHERE id = $id"</span>;</span><br><span class="line">$query = mysqli_query($connect, $sql);</span><br><span class="line"><span class="keyword">if</span> (!$query) &#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">"数据库查询失败!"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$assoc = $query-&gt;fetch_assoc();</span><br><span class="line">var_dump($assoc);</span><br></pre></td></tr></table></figure>
+<p>上面的写法有一些缺点，有一种更好的方式是使用PDO，扩展性更强，而且可以使用预处理防止SQL注入:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    $pdo = <span class="keyword">new</span> PDO(<span class="string">"mysql:host=localhost;dbname=blog"</span>, <span class="string">"root"</span>, <span class="string">"123456"</span>);</span><br><span class="line">&#125; <span class="keyword">catch</span> (PDOException $exception) &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"Connect Failed"</span> . $exception-&gt;getMessage();</span><br><span class="line">&#125;</span><br><span class="line">$pdo-&gt;exec(<span class="string">"set names utf8"</span>);</span><br><span class="line"></span><br><span class="line">$id      = <span class="number">1</span>;</span><br><span class="line">$prepare = $pdo-&gt;prepare(<span class="string">"SELECT * FROM article WHERE id = ?"</span>);</span><br><span class="line">$prepare-&gt;execute(<span class="keyword">array</span>($id));</span><br><span class="line"><span class="keyword">while</span> ($row = $prepare-&gt;fetch()) &#123;</span><br><span class="line">    var_dump($row);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>不过实际开发中，大家都是使用一些封装好的类和方法，比如laravel框架里面称之为查询构造器，我们可以使用这样方法去查询数据库：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$users = DB::table(<span class="string">'users'</span>)-&gt;get();</span><br><span class="line"></span><br><span class="line">$price = DB::table(<span class="string">'orders'</span>)-&gt;where(<span class="string">'finalized'</span>, <span class="number">1</span>)-&gt;avg(<span class="string">'price'</span>);</span><br><span class="line"></span><br><span class="line">$users = DB::table(<span class="string">'users'</span>)</span><br><span class="line">            -&gt;join(<span class="string">'contacts'</span>, <span class="string">'users.id'</span>, <span class="string">'='</span>, <span class="string">'contacts.user_id'</span>)</span><br><span class="line">            -&gt;join(<span class="string">'orders'</span>, <span class="string">'users.id'</span>, <span class="string">'='</span>, <span class="string">'orders.user_id'</span>)</span><br><span class="line">            -&gt;select(<span class="string">'users.*'</span>, <span class="string">'contacts.phone'</span>, <span class="string">'orders.price'</span>)</span><br><span class="line">            -&gt;get();</span><br><span class="line"></span><br><span class="line">$orders = DB::table(<span class="string">'orders'</span>)</span><br><span class="line">                -&gt;select(<span class="string">'department'</span>, DB::raw(<span class="string">'SUM(price) as total_sales'</span>))</span><br><span class="line">                -&gt;groupBy(<span class="string">'department'</span>)</span><br><span class="line">                -&gt;havingRaw(<span class="string">'SUM(price) &gt; 2500'</span>)</span><br><span class="line">                -&gt;get();</span><br></pre></td></tr></table></figure>
+<p>还有比如说TP框架里面M方法，这些类和方法大大简化了查询操作，但本质上还是拼SQL，只不过调用的时候看起来更像面向对象，方便很多。</p>
+<p>但是这些并不是真正意义上的ORM，最多只算得上是O(object)，它只是把数据库查询操作对象化了，但是没有解决对象之间的关系问题！</p>
+<hr>
+<h3 id="2-Doctrine"><a href="#2-Doctrine" class="headerlink" title="2.Doctrine"></a>2.Doctrine</h3><p>doctrine是symfony框架默认ORM，下面我就简单介绍一下，官网连接: <a href="https://www.doctrine-project.org/" target="_blank" rel="noopener">https://www.doctrine-project.org/</a> </p>
+<h4 id="一-安装"><a href="#一-安装" class="headerlink" title="一.安装"></a>一.安装</h4><p>按照官方的教程，最好的方式是使用composer:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"require"</span>: &#123;</span><br><span class="line">        <span class="attr">"doctrine/orm"</span>: <span class="string">"^2.6.2"</span>,</span><br><span class="line">        <span class="attr">"symfony/yaml"</span>: <span class="string">"2.*"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="二-在项目根目录创建一个bootstrap-php文件："><a href="#二-在项目根目录创建一个bootstrap-php文件：" class="headerlink" title="二.在项目根目录创建一个bootstrap.php文件："></a>二.在项目根目录创建一个bootstrap.php文件：</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// bootstrap.php</span></span><br><span class="line"><span class="keyword">use</span> <span class="title">Doctrine</span>\<span class="title">ORM</span>\<span class="title">Tools</span>\<span class="title">Setup</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Doctrine</span>\<span class="title">ORM</span>\<span class="title">EntityManager</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">require_once</span> <span class="string">"vendor/autoload.php"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Create a simple "default" Doctrine ORM configuration for Annotations</span></span><br><span class="line">$isDevMode = <span class="keyword">true</span>;</span><br><span class="line">$config = Setup::createAnnotationMetadataConfiguration(<span class="keyword">array</span>(<span class="keyword">__DIR__</span>.<span class="string">"/src"</span>), $isDevMode);</span><br><span class="line"><span class="comment">// or if you prefer yaml or XML</span></span><br><span class="line"><span class="comment">//$config = Setup::createXMLMetadataConfiguration(array(__DIR__."/config/xml"), $isDevMode);</span></span><br><span class="line"><span class="comment">//$config = Setup::createYAMLMetadataConfiguration(array(__DIR__."/config/yaml"), $isDevMode);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// database configuration parameters</span></span><br><span class="line">$conn = <span class="keyword">array</span>(</span><br><span class="line">    <span class="string">'dbname'</span> =&gt; <span class="string">'blog'</span>,</span><br><span class="line">    <span class="string">'user'</span> =&gt; <span class="string">'root'</span>,</span><br><span class="line">    <span class="string">'password'</span> =&gt; <span class="string">'123456'</span>,</span><br><span class="line">    <span class="string">'host'</span> =&gt; <span class="string">'localhost'</span>,</span><br><span class="line">    <span class="string">'driver'</span> =&gt; <span class="string">'pdo_mysql'</span>,</span><br><span class="line">    <span class="string">'charset'</span> =&gt; <span class="string">'utf8'</span>,</span><br><span class="line">);</span><br><span class="line"><span class="comment">// obtaining the entity manager</span></span><br><span class="line">$entityManager = EntityManager::create($conn, $config);</span><br></pre></td></tr></table></figure>
+<p>这里面有一些需要注意的地方，$idDevMode是配置是否开发模式.</p>
+<p>$config按照官方说法现在推荐使用 Annotation 也就说注解的方式配置，还支持xml和yaml，但是yaml这种方式已经被deprecated了，还有需要把src替换成你自己项目的目录，在本例中，是app。</p>
+<p>下面还有数据库连接配置，官方给的案例是使用了sqlite，这里我改成了MySQL。</p>
+<h4 id="三-配置命令行工具"><a href="#三-配置命令行工具" class="headerlink" title="三.配置命令行工具"></a>三.配置命令行工具</h4><p>同样在项目根目录新建一个 cli-config.php 文件：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// cli-config.php</span></span><br><span class="line"><span class="keyword">require_once</span> <span class="string">"bootstrap.php"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> \Doctrine\ORM\Tools\Console\ConsoleRunner::createHelperSet($entityManager);</span><br></pre></td></tr></table></figure>
+<p>这样就可以使用命令行工具执行一些操作，比如说生成数据表，更新数据表</p>
+<h4 id="四-定义数据库实体，创建数据表"><a href="#四-定义数据库实体，创建数据表" class="headerlink" title="四.定义数据库实体，创建数据表"></a>四.定义数据库实体，创建数据表</h4><p>先来一个简单的，在app目录下创建一个 Product.php 文件，这个文件其实可以理解为是model，即数据库模型文件！内容如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Entity</span> <span class="doctag">@Table</span>(name="products",options=&#123;"collate"="utf8mb4_unicode_ci", "charset"="utf8mb4"&#125;)</span></span><br><span class="line"><span class="comment"> * Class Product</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@package</span> App</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Product</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@ID</span> <span class="doctag">@Column</span>(type="integer") <span class="doctag">@GenerateDValue</span></span></span><br><span class="line"><span class="comment">     * <span class="doctag">@var</span> int</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">protected</span> $id;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Column</span>(type="string")</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@var</span> string</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">protected</span> $name;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> int</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    ......more code</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>后面的setter和getter这里省略了，如果有人对 <strong>annotation</strong> 这种注解方法比较熟悉的话应该可以看懂上面那些注释的意思。</p>
+<p>首先在类的注释上，使用了@Entity表明这是一个数据库实体。@Table指定了表名，@ID表明的是主键，@Column表明是数据表字段，使用type声明了类型！</p>
+<p>然后使用命令<code>vendor/bin/doctrine orm:schema-tool:update --force --dump-sql</code>就可以生成数据表：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">The following SQL statements will be executed:</span><br><span class="line"></span><br><span class="line">    CREATE TABLE products (id INT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB;</span><br><span class="line"></span><br><span class="line">Updating database schema...</span><br><span class="line"></span><br><span class="line">    1 query was executed</span><br><span class="line">                                                                                                     </span><br><span class="line">[OK] Database schema updated successfully!</span><br></pre></td></tr></table></figure>
+<p>使用这种方式建表不用去写SQL语句，无论是mysql还是sql server，或者oracle，都没问题，一键迁移，ORM抹平了数据库之间的差异！</p>
+<h4 id="五-持久化数据到数据表"><a href="#五-持久化数据到数据表" class="headerlink" title="五.持久化数据到数据表"></a>五.持久化数据到数据表</h4><p>上面的步骤搞定了数据表创建的问题，下面来介绍一下如何插入数据到数据表，为了方便，这里我直接写在index.php里面：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">require</span> <span class="string">"vendor/autoload.php"</span>;</span><br><span class="line"><span class="keyword">require</span> <span class="string">"bootstrap.php"</span>;</span><br><span class="line"></span><br><span class="line">$product = <span class="keyword">new</span> \App\Product();</span><br><span class="line">$product-&gt;setName(<span class="string">"ORM的应用"</span>);</span><br><span class="line"></span><br><span class="line">$entityManager-&gt;persist($product);</span><br><span class="line">$entityManager-&gt;flush();</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"Created Product Success with ID: "</span>.$product-&gt;getId();</span><br><span class="line">var_dump($product);</span><br></pre></td></tr></table></figure>
+<p>可以看出来这是一个完全OOP的写法，是先实例化一个数据表实体，然后通过setter去设置去属性，最后调用persist和flush持久化数据库里面。</p>
+<h4 id="六-查询数据"><a href="#六-查询数据" class="headerlink" title="六.查询数据"></a>六.查询数据</h4><p>使用ORM查询数据也很简单,：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">//查询所有</span></span><br><span class="line">$productRepository = $entityManager-&gt;getRepository(<span class="string">'\App\Product'</span>);</span><br><span class="line">$products = $productRepository-&gt;findAll();</span><br><span class="line"></span><br><span class="line"><span class="keyword">foreach</span> ($products <span class="keyword">as</span> $product) &#123;</span><br><span class="line">    var_dump($product);</span><br><span class="line">    var_dump($product-&gt;getName());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//查询单个</span></span><br><span class="line">$id = <span class="number">3</span>;</span><br><span class="line">$product = $entityManager-&gt;find(<span class="string">'Product'</span>, $id);</span><br><span class="line"><span class="keyword">if</span> ($product === <span class="keyword">null</span>) &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"No product found.\n"</span>;</span><br><span class="line">    <span class="keyword">exit</span>(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line">var_dump($product);</span><br></pre></td></tr></table></figure>
+<p>如果想对数据进行修改也很简单，比如在上面的例子里面，我们查询出id为3的数据，现在我们想修改这条数据:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$product-&gt;setName(<span class="string">"ORM更新数据"</span>);</span><br><span class="line">$entityManager-&gt;flush();</span><br></pre></td></tr></table></figure>
+<p>我们只需调用这个对象的setter方法，然后flush即可！</p>
+<h4 id="七-表与表之间的关系"><a href="#七-表与表之间的关系" class="headerlink" title="七.表与表之间的关系"></a>七.表与表之间的关系</h4><p>数据表和数据表之间的关系总体来说可以分为下面几种：1对1，1对多，多对多，在doctrine里面有细分为下面几种：</p>
+<p><img src="http://ww1.sinaimg.cn/large/5f6e3e27ly1fx6n9nprvzj208n09raab.jpg" alt=""></p>
+<p>划分的有点复杂和难理解，这里我就简单介绍其中一种：oneToMany，即1对多关系，这个其实很常见，比如说一个产品可以有多个评论。</p>
+<p>从面向对象的思维来说，2个表之间的关系就是2个对象之间的关系，所谓1对多，其实1个对象包含（hasMany）多个其它对象, 在实际数据表设计，为了表达这种关系，也有好几种设计方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">第一种: 在 product 表新增一个字段 comment_ids，用于存放所有评论ID，这种方式查询评论的时候简单，但是一旦要修改数据就头疼了，很少使用。</span><br><span class="line"></span><br><span class="line">第二种: 在 comment 表新增一个product_id，用于表明当前评论所属的product，查询的时候稍微复杂点，但是便于修改数据。</span><br><span class="line"></span><br><span class="line">第三种: 新建一个中间表，用来维护2个表之间的关系，中间表一般用来维护多对多的关系，但是也可以用于1对多的关系，这时候查询和修改都比较复杂，好处就是很容易扩展成多对多关系！</span><br></pre></td></tr></table></figure>
+<p>实际开发中，大部分时候都是使用第二种方式来表示1对多的关系。在doctrine里面，对于1对多，有3种形式：</p>
+<p>1.双向（bidirectional），这个其实就是对应上面第二种的方式</p>
+<p>2.单向结合中间表（Unidirectional with Join Table），这个就是对应上面所说的第三种的方式</p>
+<p>3.自引用（Self-referencing)，这个所谓的自引用，其实就是指类似在无限级分类表设计，有一个parent_id字段指向表本身的记录！</p>
+<p>这里我就演示一下第二种方式，通过在 comment 表新建 product_id 字段这种方式。</p>
+<p>首先，先定义一下评论实体comment, 基本结构和product差不多：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Entity</span> <span class="doctag">@Table</span>(name="comments",options=&#123;"collate"="utf8mb4_unicode_ci", "charset"="utf8mb4"&#125;)</span></span><br><span class="line"><span class="comment"> * Class Product</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@package</span> App</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Comment</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 这里通过注释设置了需要映射的实体和对应的字段</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@ManyToOne</span>(targetEntity="Product", inversedBy="comments")</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@JoinColumn</span>(name="product_id", referenceColumnName="id")</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@var</span> Product</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">protected</span> $product;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> Product</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getProduct</span><span class="params">()</span>: <span class="title">Product</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;product;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> Product $product</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> self</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setProduct</span><span class="params">(Product $product)</span>: <span class="title">self</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;product = $product;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@ID</span> <span class="doctag">@Column</span>(type="integer") <span class="doctag">@GenerateDValue</span></span></span><br><span class="line"><span class="comment">     * <span class="doctag">@var</span> int</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">protected</span> $id;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Column</span>(type="string")</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@var</span> string</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">protected</span> $content;</span><br><span class="line">    </span><br><span class="line">    .......more code</span><br><span class="line">&#125;</span><br><span class="line">``` </span><br><span class="line">但是多了一个属性 product, 因为这种<span class="number">1</span>对多的关系对评论来说就是一个评论拥有一个产品，但是一个产品可以拥有多个评论。</span><br><span class="line"></span><br><span class="line">同理，我们就需要对 product 实体做一些改动，加入了一个comments属性和一些注解！</span><br><span class="line"></span><br><span class="line">```php</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@oneToMany</span>(targetEntity="Comment", mappedBy="product")</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@var</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">protected</span> $comments;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;comments = <span class="keyword">new</span> ArrayCollection();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    ....more code</span><br></pre></td></tr></table></figure>
+<p>执行 <code>vendor/bin/doctrine orm:schema-tool:update --force --dump-sql</code>更新数据库, 执行之后你会发现comments表会多一个product_id字段, 同时还会多出一个外键索引！</p>
+<p>经过改造之后，现在如果我们需要给一个产品增加一条评论改怎么操作呢？举个例子，我们现在需要给id为3的这个产品增加一条评论，操作如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$id = <span class="number">3</span>;</span><br><span class="line">$product = $entityManager-&gt;find(<span class="string">'\App\Product'</span>, $id);</span><br><span class="line"></span><br><span class="line">$comment = <span class="keyword">new</span> \App\Comment();</span><br><span class="line">$comment-&gt;setContent(<span class="string">"这是一条评论！"</span>);</span><br><span class="line">$comment-&gt;setProduct($product);</span><br><span class="line"></span><br><span class="line">$entityManager-&gt;persist($comment);</span><br><span class="line">$entityManager-&gt;flush();</span><br></pre></td></tr></table></figure>
+<p>执行以上代码，查看数据表你会发现comments表会自动增加一条记录，其product_id为3，在代码里面我们并没有手动去设置product_id，ORM替我们自动完成了这些操作！</p>
+<p>下面再看查询一个产品的所有评论，操作也是相当简单的：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$id = <span class="number">3</span>;</span><br><span class="line">$product = $entityManager-&gt;find(<span class="string">'\App\Product'</span>, $id);</span><br><span class="line">$comments = $product-&gt;getComments()-&gt;toArray();</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="3-总结"><a href="#3-总结" class="headerlink" title="3.总结"></a>3.总结</h3><p>ORM试图把数据表之间的关系抽象成数据模型对象之间的关系，让开发人员少拼SQL，以更面向对象的方式开发，更加专注业务模型，有好处但是也有很多问题！</p>
+<p>1.在doctrine这个ORM里面，表与表之间的关系是有物理外键索引的，这对于web项目来说并不是优势，虽然外键有利于保证数据安全和完整，但是大大影响了数据库插入速度！而现在大多数web项目都强调高并发，数据库往往都是瓶颈，<br>物理外键只适合一些对数据安全性和完整性要求非常高的项目，比如OA，企业SasS，或金融相关！但是在 Eloquent ORM 里面，数据表是没有物理外键的，表与表的之间关系是在模型层维护的。</p>
+<p>2.比较占内存，ORM为了实现这些功能，在内存里面维护了很多对象，有很多额外处理逻辑，查询速度相比你直接运行原生sql慢一点</p>
+<p>3.不利于优化SQL语句，虽然ORM最终也是生成sql去执行，但是其sql语句很多时候是不可控的，如果需要优化起来就很麻烦，无法针对每一条sql做优化！如果模型关系非常复杂的话就更难优化了！</p>
+<p>以前参与了一个基于symfony框架的云采购系统的开发，symfony本身就是一个非常重量级的PHP框架，有人戏称用起来和某些Java框架一样，虽然其很多理念非常不错，但是PHP毕竟是脚本语言，并没有jvm的buff加持，导致项目做大了以后，速度非常慢（一个页面大概要1s多），也很占内存（最低2G内存），不过作为一个2b（面向企业）的系统来说，这点还可以接受，毕竟用户不多。</p>
+<p>对于很多用户量巨大的web项目来说，数据库可能还有分库分表、读写分离等操作，使用ORM就可能会有很多问题要去解决了，直接拼SQL虽然难看了点，麻烦了点，但是可控性比较高！大家怎么看呢？</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/PHP/" rel="tag"># PHP</a>
+          
+            <a href="/tags/ORM/" rel="tag"># ORM</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/05/php-di-symfony/" rel="next" title="三、Symfony服务容器介绍">
+                <i class="fa fa-chevron-left"></i> 三、Symfony服务容器介绍
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/05/php-priority-queue/" rel="prev" title="PHP优先队列">
+                PHP优先队列 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Ben Jun" />
+          <p class="site-author-name" itemprop="name">Ben Jun</p>
+           
+              <p class="site-description motion-element" itemprop="description">PHP、Golang、Linux、Web开发</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-什么是ORM？"><span class="nav-number">1.</span> <span class="nav-text">1.什么是ORM？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Doctrine"><span class="nav-number">2.</span> <span class="nav-text">2.Doctrine</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一-安装"><span class="nav-number">2.1.</span> <span class="nav-text">一.安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二-在项目根目录创建一个bootstrap-php文件："><span class="nav-number">2.2.</span> <span class="nav-text">二.在项目根目录创建一个bootstrap.php文件：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三-配置命令行工具"><span class="nav-number">2.3.</span> <span class="nav-text">三.配置命令行工具</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四-定义数据库实体，创建数据表"><span class="nav-number">2.4.</span> <span class="nav-text">四.定义数据库实体，创建数据表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#五-持久化数据到数据表"><span class="nav-number">2.5.</span> <span class="nav-text">五.持久化数据到数据表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#六-查询数据"><span class="nav-number">2.6.</span> <span class="nav-text">六.查询数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#七-表与表之间的关系"><span class="nav-number">2.7.</span> <span class="nav-text">七.表与表之间的关系</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-总结"><span class="nav-number">3.</span> <span class="nav-text">3.总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ben Jun</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

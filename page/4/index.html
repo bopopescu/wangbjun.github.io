@@ -429,7 +429,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2018/04/05/php/php-socket-programing/">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2018/04/05/php-closure-function/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben Jun">
@@ -448,155 +448,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/04/05/php/php-socket-programing/" itemprop="url">PHP Socket 网络编程</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-05T19:00:03+08:00">
-                2018-04-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" itemprop="url" rel="index">
-                    <span itemprop="name">编程开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在做PHP开发的过程中，大部分我们都在和http协议打交道，在ISO模型里面，http属于应用层协议，它底层会用到TCP协议。http协议非常简单，它是一个文本协议，一个请求对应一个响应，客户端发起一个请求，服务端响应这个请求。http是一个一问一答的对话，每次请求都得重新建立对话（这里暂不讨论Keep-Alive），如果你想通过一个请求进行多次对话，那就是长连接通信，必须使用TCP或者UDP协议。</p>
-<p>互联网运行的基石是建立在一些协议上的，目前而言主要是TCP/IP协议族，大部分协议都是公开开放的，计算机遵循这些协议我们才能通信，当然也有一些私有协议，私有协议只有自己知道如何去解析，相当来说更安全，比如QQ所用的协议就是自己定义的。在ISO模型里面，咱们常用的有http、ftp、ssh、dns等，但是不常用的数不胜数，发明一个协议不难，难的是如何设计的更好用，而且大家都喜欢用。</p>
-<h2 id="Socket"><a href="#Socket" class="headerlink" title="Socket"></a>Socket</h2><p>Socket并不是一个协议，本质上说Socket是对 TCP/IP 协议的封装，它是一组接口，在设计模式中，Socket 其实就是一个门面（facade）模式，它把复杂的 TCP/IP 协议族隐藏在 Socket 接口后面，对用户来说，一组简单的接口就是全部，让 Socket 去组织数据，以符合指定的协议。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/05/php/php-socket-programing/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2018/04/05/php/php-closure-function/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ben Jun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JWang的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/05/php/php-closure-function/" itemprop="url">PHP匿名函数和闭包</a></h1>
+                <a class="post-title-link" href="/2018/04/05/php-closure-function/" itemprop="url">PHP匿名函数和闭包</a></h1>
         
 
         <div class="post-meta">
@@ -680,7 +532,155 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">class Closure#1 (0) &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/04/05/php/php-closure-function/#more" rel="contents">
+            <a class="btn" href="/2018/04/05/php-closure-function/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2018/04/05/php-socket-programing/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben Jun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JWang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/05/php-socket-programing/" itemprop="url">PHP Socket 网络编程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-05T19:00:03+08:00">
+                2018-04-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" itemprop="url" rel="index">
+                    <span itemprop="name">编程开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在做PHP开发的过程中，大部分我们都在和http协议打交道，在ISO模型里面，http属于应用层协议，它底层会用到TCP协议。http协议非常简单，它是一个文本协议，一个请求对应一个响应，客户端发起一个请求，服务端响应这个请求。http是一个一问一答的对话，每次请求都得重新建立对话（这里暂不讨论Keep-Alive），如果你想通过一个请求进行多次对话，那就是长连接通信，必须使用TCP或者UDP协议。</p>
+<p>互联网运行的基石是建立在一些协议上的，目前而言主要是TCP/IP协议族，大部分协议都是公开开放的，计算机遵循这些协议我们才能通信，当然也有一些私有协议，私有协议只有自己知道如何去解析，相当来说更安全，比如QQ所用的协议就是自己定义的。在ISO模型里面，咱们常用的有http、ftp、ssh、dns等，但是不常用的数不胜数，发明一个协议不难，难的是如何设计的更好用，而且大家都喜欢用。</p>
+<h2 id="Socket"><a href="#Socket" class="headerlink" title="Socket"></a>Socket</h2><p>Socket并不是一个协议，本质上说Socket是对 TCP/IP 协议的封装，它是一组接口，在设计模式中，Socket 其实就是一个门面（facade）模式，它把复杂的 TCP/IP 协议族隐藏在 Socket 接口后面，对用户来说，一组简单的接口就是全部，让 Socket 去组织数据，以符合指定的协议。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/05/php-socket-programing/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1024,7 +1024,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2018/02/03/linux/nginx-log-parse/">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2018/02/03/nginx-log-parse/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben Jun">
@@ -1043,7 +1043,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/03/linux/nginx-log-parse/" itemprop="url">Nginx Log日志统计分析常用命令</a></h1>
+                <a class="post-title-link" href="/2018/02/03/nginx-log-parse/" itemprop="url">Nginx Log日志统计分析常用命令</a></h1>
         
 
         <div class="post-meta">
@@ -1127,7 +1127,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk &#39;&#123;print $1&#125;&#39; access.log | sort -n |uniq -c |awk &#39;&#123;if($1 &gt;100) print $0&#125;&#39;|sort -rn</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/02/03/linux/nginx-log-parse/#more" rel="contents">
+            <a class="btn" href="/2018/02/03/nginx-log-parse/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1328,7 +1328,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2017/09/05/php/php-form-pass-method/">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2017/09/05/php-form-pass-method/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben Jun">
@@ -1347,7 +1347,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/09/05/php/php-form-pass-method/" itemprop="url">浅谈PHP前后端传参常见的几种方式</a></h1>
+                <a class="post-title-link" href="/2017/09/05/php-form-pass-method/" itemprop="url">浅谈PHP前后端传参常见的几种方式</a></h1>
         
 
         <div class="post-meta">
@@ -1425,7 +1425,7 @@
 <h5 id="前端代码："><a href="#前端代码：" class="headerlink" title="前端代码："></a>前端代码：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;form action&#x3D;&quot;backend.php&quot; method&#x3D;&quot;post&quot;&gt;</span><br><span class="line">        &lt;label for&#x3D;&quot;name&quot;&gt;姓名:&lt;&#x2F;label&gt;</span><br><span class="line">        &lt;input type&#x3D;&quot;text&quot; id&#x3D;&quot;name&quot; name&#x3D;&quot;name&quot;&gt;</span><br><span class="line">        &lt;label for&#x3D;&quot;name&quot;&gt;年龄:&lt;&#x2F;label&gt;</span><br><span class="line">        &lt;input type&#x3D;&quot;text&quot; id&#x3D;&quot;age&quot; name&#x3D;&quot;age&quot;&gt;</span><br><span class="line">        &lt;input type&#x3D;&quot;submit&quot; value&#x3D;&quot;提交&quot;&gt;</span><br><span class="line">    &lt;&#x2F;form&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/09/05/php/php-form-pass-method/#more" rel="contents">
+            <a class="btn" href="/2017/09/05/php-form-pass-method/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1476,7 +1476,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2017/06/09/php/php-multi-process/">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2017/06/09/php-multi-process/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben Jun">
@@ -1495,7 +1495,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/06/09/php/php-multi-process/" itemprop="url">PHP多进程编程应用</a></h1>
+                <a class="post-title-link" href="/2017/06/09/php-multi-process/" itemprop="url">PHP多进程编程应用</a></h1>
         
 
         <div class="post-meta">
@@ -1574,7 +1574,7 @@
 <p>但是这种方式依赖外部工具，不够灵活！其实我们也可以采用多进程|多线程的方式</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/06/09/php/php-multi-process/#more" rel="contents">
+            <a class="btn" href="/2017/06/09/php-multi-process/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1625,7 +1625,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2017/06/05/php/php-priority-queue/">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2017/06/05/php-priority-queue/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben Jun">
@@ -1644,7 +1644,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/06/05/php/php-priority-queue/" itemprop="url">PHP优先队列</a></h1>
+                <a class="post-title-link" href="/2017/06/05/php-priority-queue/" itemprop="url">PHP优先队列</a></h1>
         
 
         <div class="post-meta">
@@ -1722,7 +1722,7 @@
 <p>优先队列（Priprity Queue），顾名思义，就是带有优先级的队列，也就是说不是按请求的顺序排序，而且根据某一些规则属性。举个例子：有一些12306的刷票软件，花钱买了加速包抢到票的几率更高。这里所谓几率更高换个说法就是优先级更高，如果只有10张票，肯定是先让那些花了钱的先抢到票，没花钱的话排后面。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/06/05/php/php-priority-queue/#more" rel="contents">
+            <a class="btn" href="/2017/06/05/php-priority-queue/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>

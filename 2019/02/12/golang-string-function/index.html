@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Golang," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="很多从PHP转Go的小伙伴经常会怀恋PHP丰富的字符串函数，Go的标准库针对字符串的操作函数虽然不少但是还是不够丰富，很多时候还得自己造，下面我就结合PHP里面字符串的操作函数来说说Go里面怎么实现。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Golang字符串处理函数浅析">
+<meta property="og:url" content="https://wangbjun.github.io/2019/02/12/golang-string-function/index.html">
+<meta property="og:site_name" content="JWang的博客">
+<meta property="og:description" content="很多从PHP转Go的小伙伴经常会怀恋PHP丰富的字符串函数，Go的标准库针对字符串的操作函数虽然不少但是还是不够丰富，很多时候还得自己造，下面我就结合PHP里面字符串的操作函数来说说Go里面怎么实现。">
+<meta property="og:image" content="https://show-file.che001.com/fileserver/img?id=3031e623-10bd-11ea-85f9-0242ac144108">
+<meta property="article:published_time" content="2019-02-12T12:15:43.000Z">
+<meta property="article:modified_time" content="2020-01-08T17:38:32.729Z">
+<meta property="article:author" content="Ben Jun">
+<meta property="article:tag" content="Golang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://show-file.che001.com/fileserver/img?id=3031e623-10bd-11ea-85f9-0242ac144108">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://wangbjun.github.io/2019/02/12/golang-string-function/"/>
+
+
+
+
+
+  <title>Golang字符串处理函数浅析 | JWang的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">JWang的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2019/02/12/golang-string-function/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben Jun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JWang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Golang字符串处理函数浅析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-12T20:15:43+08:00">
+                2019-02-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" itemprop="url" rel="index">
+                    <span itemprop="name">编程开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>很多从PHP转Go的小伙伴经常会怀恋PHP丰富的字符串函数，Go的标准库针对字符串的操作函数虽然不少但是还是不够丰富，很多时候还得自己造，下面我就结合PHP里面字符串的操作函数来说说Go里面怎么实现。</p>
+<a id="more"></a>
+
+<h2 id="String"><a href="#String" class="headerlink" title="String"></a>String</h2><p>Go是强类型语言，有一个单独的字符串类型 string，如果熟悉Go语言的人应该了解string底层是切片，切片底层是数组，所以字符串也叫字符数组。</p>
+<p>举个最简单的例子，有一个字符串 12ab34cd56, 我们要获取其第3到第5个字符之间的元素怎么做呢？</p>
+<p>熟悉PHP的童鞋可以会想到PHP里面有一个 substr的函数可以做到，但是Go里面呢？</p>
+<p>我们打开IDE看一下，其实标准库里面的 strings 包已经有非常多的函数了，大约有20多个，包含常见的trim、index、replace、contain等功能，但是没有找到我们想要的？</p>
+<p><img src="https://show-file.che001.com/fileserver/img?id=3031e623-10bd-11ea-85f9-0242ac144108" alt=""></p>
+<p>其实很简单，因为string本质上是切片，所以我们可以直接使用切片来分割字符串：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	str := <span class="string">"12ab34cd56"</span></span><br><span class="line"></span><br><span class="line">	fmt.Printf(<span class="string">"%s\n"</span>, str[<span class="number">2</span>:<span class="number">4</span>]) <span class="comment">//ab</span></span><br><span class="line"></span><br><span class="line">	fmt.Printf(<span class="string">"%s\n"</span>, str[<span class="number">3</span>:]) <span class="comment">//b34cd56</span></span><br><span class="line"></span><br><span class="line">	fmt.Printf(<span class="string">"%s\n"</span>, str[:<span class="number">3</span>]) <span class="comment">//12a</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>切片的切割用法就不多说了，从0角标开始，包含开始，不包含结束。</p>
+<p>不过这种写法是有bug的，它只可以针对单字节字符，针对中文这种多字节字符串就不可以了，PHP里面也一样，PHP里面针对多字节字符有一个 mbstring 扩展，也有 mb_substr 这样的函数专门处理多字节字符。</p>
+<h2 id="Rune"><a href="#Rune" class="headerlink" title="Rune"></a>Rune</h2><p>在国内编程，大部分时候不可避免的要处理中文字符串，所以像计算长度、切割一定要处理好多字节的问题，Go里面针对多字节的字符有一个rune类型，针对上面的这个问题，我们这样做：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	str := <span class="string">"我爱学习Go语言"</span></span><br><span class="line"></span><br><span class="line">	rStr := []<span class="keyword">rune</span>(str)</span><br><span class="line"></span><br><span class="line">	fmt.Printf(<span class="string">"%s\n"</span>, <span class="keyword">string</span>(rStr[<span class="number">2</span>:<span class="number">4</span>])) <span class="comment">//学习</span></span><br><span class="line"></span><br><span class="line">	fmt.Printf(<span class="string">"%s\n"</span>, <span class="keyword">string</span>(rStr[<span class="number">3</span>:])) <span class="comment">//习Go语言</span></span><br><span class="line"></span><br><span class="line">	fmt.Printf(<span class="string">"%s\n"</span>, <span class="keyword">string</span>(rStr[:<span class="number">3</span>])) <span class="comment">//我爱学</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这种方式完全没问题，如果说问题可能就在于多了一次内存分配，那rune到底是什么呢？</p>
+<p>rune类型在Go里面实际上是int32的别名：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// byte is an alias for uint8 and is equivalent to uint8 in all ways. It is</span></span><br><span class="line"><span class="comment">// used, by convention, to distinguish byte values from 8-bit unsigned</span></span><br><span class="line"><span class="comment">// integer values.</span></span><br><span class="line"><span class="keyword">type</span> <span class="keyword">byte</span> = <span class="keyword">uint8</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// rune is an alias for int32 and is equivalent to int32 in all ways. It is</span></span><br><span class="line"><span class="comment">// used, by convention, to distinguish character values from integer values.</span></span><br><span class="line"><span class="keyword">type</span> <span class="keyword">rune</span> = <span class="keyword">int32</span></span><br></pre></td></tr></table></figure>
+<p>byte是8位，可以表示-128-127之间的数，用来存储单字节字符刚好，但是中文一般使用2-3个字节表示，byte就无能为力了，但是int32用来表示世界上所有字符也绰绰有余。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">r := <span class="string">"我爱学习Go语言"</span></span><br><span class="line"></span><br><span class="line">fmt.Printf(<span class="string">"%s\n"</span>, r)</span><br><span class="line">fmt.Printf(<span class="string">"%v\n"</span>, []<span class="keyword">byte</span>(r))</span><br><span class="line">fmt.Printf(<span class="string">"%v\n"</span>, []<span class="keyword">rune</span>(r))</span><br><span class="line"></span><br><span class="line"><span class="comment">//运行结果如下：</span></span><br><span class="line">我爱学习Go语言</span><br><span class="line">[<span class="number">230</span> <span class="number">136</span> <span class="number">145</span> <span class="number">231</span> <span class="number">136</span> <span class="number">177</span> <span class="number">229</span> <span class="number">173</span> <span class="number">166</span> <span class="number">228</span> <span class="number">185</span> <span class="number">160</span> <span class="number">71</span> <span class="number">111</span> <span class="number">232</span> <span class="number">175</span> <span class="number">173</span> <span class="number">232</span> <span class="number">168</span> <span class="number">128</span>]</span><br><span class="line">[<span class="number">25105</span> <span class="number">29233</span> <span class="number">23398</span> <span class="number">20064</span> <span class="number">71</span> <span class="number">111</span> <span class="number">35821</span> <span class="number">35328</span>]</span><br></pre></td></tr></table></figure>
+
+<p>从上面的例子也可以说明，中文“我”实际上是以230 136 145 3个字节表示的，但是在rune类型里面是以25105表示的，这个数是Unicode编码的10进制表现形式。</p>
+<p>所以，我们可以把一个字符串先转成rune数组，然后再使用切片切割。</p>
+<h2 id="for…range"><a href="#for…range" class="headerlink" title="for…range"></a>for…range</h2><p>字符串本质上是字符数组，所以有也可以使用range遍历，而且range在迭代字符串的时候也是按字符遍历的，我们也可以利用这点分割字符串：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">SubString</span><span class="params">(str <span class="keyword">string</span>, start, end <span class="keyword">int</span>)</span> <span class="title">string</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> n, i, k <span class="keyword">int</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> k = <span class="keyword">range</span> str &#123;</span><br><span class="line">		<span class="keyword">if</span> n == start &#123;</span><br><span class="line">			i = k</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> n == end &#123;</span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line">		&#125;</span><br><span class="line">		n++</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> str[i:k]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="reverse"><a href="#reverse" class="headerlink" title="reverse"></a>reverse</h2><p>再看一个比较常见的PHP函数，反转字符串，在Go标准库里面也没有相应的实现</p>
+<p>如果只考虑单字节我们可以很容易写出下面的代码：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">ReverseString</span><span class="params">(str <span class="keyword">string</span>)</span> <span class="title">string</span></span> &#123;</span><br><span class="line">	b := []<span class="keyword">byte</span>(str)</span><br><span class="line">	<span class="keyword">for</span> i, j := <span class="number">0</span>, <span class="built_in">len</span>(b)<span class="number">-1</span>; i &lt; <span class="built_in">len</span>(b)/<span class="number">2</span>; i, j = i+<span class="number">1</span>, j<span class="number">-1</span> &#123;</span><br><span class="line">		b[i], b[j] = b[j], b[i]</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">string</span>(b)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果考虑到中文等多字节字符可以参考下面这种方式：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">ReverseRuneString</span><span class="params">(s <span class="keyword">string</span>)</span> <span class="title">string</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> start, size, end <span class="keyword">int</span></span><br><span class="line">	buf := <span class="built_in">make</span>([]<span class="keyword">byte</span>, <span class="built_in">len</span>(s))</span><br><span class="line">	<span class="keyword">for</span> end &lt; <span class="built_in">len</span>(s) &#123;</span><br><span class="line">		_, size = utf8.DecodeRuneInString(s[start:])</span><br><span class="line">		end = start + size</span><br><span class="line">		<span class="built_in">copy</span>(buf[<span class="built_in">len</span>(buf)-end:], s[start:end])</span><br><span class="line">		start = end</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">string</span>(buf)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="推荐"><a href="#推荐" class="headerlink" title="推荐"></a>推荐</h2><p>除了字符串之外，PHP的数组功能也很强大，如果你不想自己造轮子，可以使用现成的第三方库，下面简单介绍一下几个项目：</p>
+<h3 id="1-https-github-com-syyongx-php2go"><a href="#1-https-github-com-syyongx-php2go" class="headerlink" title="1.https://github.com/syyongx/php2go"></a>1.<a href="https://github.com/syyongx/php2go" target="_blank" rel="noopener">https://github.com/syyongx/php2go</a></h3><p>这个项目是使用Go实现PHP内置的函数库，东西比较多，不过这个库里面并没有特殊处理多字节字符串，需要注意一下。</p>
+<h3 id="2-https-github-com-thinkeridea-go-extend"><a href="#2-https-github-com-thinkeridea-go-extend" class="headerlink" title="2.https://github.com/thinkeridea/go-extend"></a>2.<a href="https://github.com/thinkeridea/go-extend" target="_blank" rel="noopener">https://github.com/thinkeridea/go-extend</a></h3><p>这个项目收集了一些常用的操作函数，辅助更快的完成开发工作，并减少重复代码，都是一些比较实用的函数，虽然没有第一个那么全。</p>
+<h3 id="3-https-github-com-jianfengye-collection"><a href="#3-https-github-com-jianfengye-collection" class="headerlink" title="3.https://github.com/jianfengye/collection"></a>3.<a href="https://github.com/jianfengye/collection" target="_blank" rel="noopener">https://github.com/jianfengye/collection</a></h3><p>Collection包目标是用于替换golang原生的Slice，使用场景是在大量不追求极致性能，追求业务开发效能的场景。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Golang/" rel="tag"># Golang</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/01/web-cache-usage/" rel="next" title="Web开发中用到的Cache">
+                <i class="fa fa-chevron-left"></i> Web开发中用到的Cache
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/12/designpattern-middleware/" rel="prev" title="详解中间件设计模式">
+                详解中间件设计模式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Ben Jun" />
+          <p class="site-author-name" itemprop="name">Ben Jun</p>
+           
+              <p class="site-description motion-element" itemprop="description">PHP、Golang、Linux、Web开发</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#String"><span class="nav-number">1.</span> <span class="nav-text">String</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Rune"><span class="nav-number">2.</span> <span class="nav-text">Rune</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#for…range"><span class="nav-number">3.</span> <span class="nav-text">for…range</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reverse"><span class="nav-number">4.</span> <span class="nav-text">reverse</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#推荐"><span class="nav-number">5.</span> <span class="nav-text">推荐</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-https-github-com-syyongx-php2go"><span class="nav-number">5.1.</span> <span class="nav-text">1.https:&#x2F;&#x2F;github.com&#x2F;syyongx&#x2F;php2go</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-https-github-com-thinkeridea-go-extend"><span class="nav-number">5.2.</span> <span class="nav-text">2.https:&#x2F;&#x2F;github.com&#x2F;thinkeridea&#x2F;go-extend</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-https-github-com-jianfengye-collection"><span class="nav-number">5.3.</span> <span class="nav-text">3.https:&#x2F;&#x2F;github.com&#x2F;jianfengye&#x2F;collection</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ben Jun</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

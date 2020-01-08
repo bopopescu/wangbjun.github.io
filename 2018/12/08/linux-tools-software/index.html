@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Linux," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="前言作为一个编程开发人员，Linux操作系统的诞生就是一个传奇故事，如今Linux内核系统更是遍布在咱们日常生活中各种电子设备，比如智能路由器（openWrt）、安卓手机（Android）、服务器。。。而Linux桌面系统的使用率其实也不低，尤其在国外，毕竟Linux开源免费，而国内由于Windows盗版横行，用Linux的相对来说少一点！ 本人使用了一年多的Ubuntu和Mint桌面发行版，主要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="闲谈Linux桌面系统下常用工具">
+<meta property="og:url" content="https://wangbjun.github.io/2018/12/08/linux-tools-software/index.html">
+<meta property="og:site_name" content="JWang的博客">
+<meta property="og:description" content="前言作为一个编程开发人员，Linux操作系统的诞生就是一个传奇故事，如今Linux内核系统更是遍布在咱们日常生活中各种电子设备，比如智能路由器（openWrt）、安卓手机（Android）、服务器。。。而Linux桌面系统的使用率其实也不低，尤其在国外，毕竟Linux开源免费，而国内由于Windows盗版横行，用Linux的相对来说少一点！ 本人使用了一年多的Ubuntu和Mint桌面发行版，主要">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3571187-2dd1696efe7b0182.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="article:published_time" content="2018-12-08T02:03:09.000Z">
+<meta property="article:modified_time" content="2020-01-08T17:44:37.419Z">
+<meta property="article:author" content="Ben Jun">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/3571187-2dd1696efe7b0182.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://wangbjun.github.io/2018/12/08/linux-tools-software/"/>
+
+
+
+
+
+  <title>闲谈Linux桌面系统下常用工具 | JWang的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">JWang的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2018/12/08/linux-tools-software/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben Jun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JWang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">闲谈Linux桌面系统下常用工具</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-08T10:03:09+08:00">
+                2018-12-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>作为一个编程开发人员，Linux操作系统的诞生就是一个传奇故事，如今Linux内核系统更是遍布在咱们日常生活中各种电子设备，比如智能路由器（openWrt）、安卓手机（Android）、服务器。。。而Linux桌面系统的使用率其实也不低，尤其在国外，毕竟Linux开源免费，而国内由于Windows盗版横行，用Linux的相对来说少一点！</p>
+<p>本人使用了一年多的Ubuntu和Mint桌面发行版，主要做PHP开发，今天来谈谈自己经常用的工具，欢迎大家点评！</p>
+<a id="more"></a>
+
+<h3 id="一、开发工具篇"><a href="#一、开发工具篇" class="headerlink" title="一、开发工具篇"></a>一、开发工具篇</h3><p>这估计是大家最关心的，毕竟用Linux的大多还是搞编程的程序员，一般人我还真不建议使用Linux，而这方面Linux绝对够用！由于不同语言使用的IDE不同，我说说我自己使用过的。</p>
+<p>####　1.JetBrains 全家桶</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3571187-2dd1696efe7b0182.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2017_08_15_10:08:40.png"></p>
+<p>有人说，此工具一出，此篇终结，没啥说的了。。。因为这个全家桶支持很多语言，C/C++、Java、Ruby、Python、Php、JavaScript、Go、Mysql、.Net 差不多囊括了常见的编程语言了吧？JetBrains系列都是基于JRE，也就是跨平台的，功能十分丰富，还可以安装插件，缺点就是运行速度相对比较慢（毕竟是Java虚拟机），大家可以去其官网看看，如果有钱可以买正版支持一下！</p>
+<p>####　2.Atom/Sublime Text<br>轻量级的文本编辑器，适合各种编程语言，速度快，安装插件之后功能也非常丰富，然而Sublime的Linux版本有致命缺陷，无法输入中文（搜狗输入法），民间有解决方案。Atom是完全开源免费的，功能也很多丰富，关键是可以完美输入中文！</p>
+<p>####　3.数据库管理<br>我经常用的有Navicat，Windows下面的估计大家都用过，Linux下的是Wine版本，基本功能都有，挺方便。还有一个MySQL Workbench也不错，也有很多人喜欢用phpmyadmin。</p>
+<p>####　4.Remarkable<br>一款MarkDown编辑器，经常写MarkDown可以试试。</p>
+<p>####　５.Vi/Vim<br>这个难度有点高，我也就是偶尔原来修改个配置啥滴，想把vim玩溜那得花不少功夫，据说还有一个上古神器Emacs，从来没有见过身边有人用过。。。不过只要你肯折腾，配置好用起来也就很溜的哦。</p>
+<p>####　6.Visual Studio Code<br>最近才发现的一个编辑器，界面看上去和Atom有点像，功能非常强大，微软出品，适合写C/C++</p>
+<h3 id="二、日常生活篇"><a href="#二、日常生活篇" class="headerlink" title="二、日常生活篇"></a>二、日常生活篇</h3><p>####　1.浏览器<br>首推 Google Chrome、其次Firefox，不解释，一定要注册/登录Google账号哦。</p>
+<p>####　2.聊天<br>QQ是个Bug，网上有wine版本，功能很残缺，建议大家不要折腾了，实在需要就用Windows虚拟机吧！而微信则可以登录网页版，发送图片文件都没问题。</p>
+<p>这里更正一下，QQ有一个wine版本非常不错，功能堪称完美，据说是提取自国产深度Linux系统，其本质上是用了一个收费的wine工具crossover。微信也有客户端版本，是一个第三方的开源项目，名字叫electronic，可以去github看看。—2017-10-14</p>
+<p>####　3.虚拟机<br>VMware 和 Virtualbox, 一个收费，一个开源免费，功能上来说基本差不多，虚拟一个Windows系统有时候还是有点用的。</p>
+<p>####　4.下载<br>Linux下的BT客户端其实很多，比如Transmission、qBitTorrent。。。然而国内这网络状况，基本上下载不动，还是迅雷好使点，我一般是在虚拟机里面用迅雷下载。</p>
+<p>####　5.同步网盘<br>国内有个叫坚果云Nutstore挺好使，每月有免费流量，同步一些小文件没问题，文件多了就要花钱买流量了。</p>
+<p>####　6.音乐<br>网易云音乐，不解释。</p>
+<p>####　7.视频<br>除了系统自带的播放器，我一般用vlc播放器，感觉效果好点。</p>
+<p>####　8.文档<br>WPS当之无愧，而且还没广告，良心之作，卸载掉自带的LibreOffice吧。</p>
+<p>####　9.输入法<br>搜狗输入法也算是良心之作，没广告，自动更新词库，还能换皮肤，不过偶尔会出问题，删除用户配置文件就能解决。</p>
+<p>####　10.截图<br>系统自带截图，PrtSc键全屏截图，shift+PrtSc局部截图，也可以安装一个第三方截图软件Shutter。</p>
+<p>使用Linux系统至今，未发现有什么没法解决的问题，Windows能干的事情，Linux也能干，实在干不了的事情虚拟机干，随着Qt的流行，以后跨平台的软件应该会越来越多，相信Linux系统也会变的越来越流行！</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/02/linux-ntfs-samba/" rel="next" title="Linux下挂载NTFS硬盘和Samba共享">
+                <i class="fa fa-chevron-left"></i> Linux下挂载NTFS硬盘和Samba共享
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/09/custom-google-tz/" rel="prev" title="自建梯子访问Google等学术网站">
+                自建梯子访问Google等学术网站 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Ben Jun" />
+          <p class="site-author-name" itemprop="name">Ben Jun</p>
+           
+              <p class="site-description motion-element" itemprop="description">PHP、Golang、Linux、Web开发</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一、开发工具篇"><span class="nav-number">2.</span> <span class="nav-text">一、开发工具篇</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、日常生活篇"><span class="nav-number">3.</span> <span class="nav-text">二、日常生活篇</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ben Jun</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

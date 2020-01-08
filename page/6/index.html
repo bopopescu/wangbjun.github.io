@@ -282,7 +282,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2016/02/05/php/php-array/">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2016/02/05/php-array/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben Jun">
@@ -301,7 +301,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/02/05/php/php-array/" itemprop="url">PHP数组解析和常见操作</a></h1>
+                <a class="post-title-link" href="/2016/02/05/php-array/" itemprop="url">PHP数组解析和常见操作</a></h1>
         
 
         <div class="post-meta">
@@ -379,7 +379,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;Bucket：散列表中存储</span><br><span class="line">typedef struct _Bucket &#123;</span><br><span class="line">	zval              val;  &#x2F;&#x2F;存储的具体value，这里嵌入了一个zval，而不是一个指针</span><br><span class="line">	zend_ulong        h;    &#x2F;&#x2F;key根据times 33计算得到的哈希值，或者是数值索引编号</span><br><span class="line">	zend_string      *key;  &#x2F;&#x2F;存储元素的key</span><br><span class="line">&#125; Bucket;</span><br><span class="line"> </span><br><span class="line">&#x2F;&#x2F;HashTable结构</span><br><span class="line">typedef struct _zend_array HashTable;</span><br><span class="line"> </span><br><span class="line">struct _zend_array &#123;</span><br><span class="line">	zend_refcounted_h gc;</span><br><span class="line">	union &#123;</span><br><span class="line">		struct &#123;</span><br><span class="line">			ZEND_ENDIAN_LOHI_4(</span><br><span class="line">				zend_uchar    flags,</span><br><span class="line">				zend_uchar    nApplyCount,</span><br><span class="line">				zend_uchar    nIteratorsCount,</span><br><span class="line">				zend_uchar    reserve)</span><br><span class="line">		&#125; v;</span><br><span class="line">		uint32_t flags;</span><br><span class="line">	&#125; u;</span><br><span class="line">	uint32_t          nTableMask;      &#x2F;&#x2F;哈希值计算掩码，等于nTableSize的负值(nTableMask &#x3D; -nTableSize)</span><br><span class="line">	Bucket            *arData;         &#x2F;&#x2F;存储元素数组，指向第一个Bucket</span><br><span class="line">	uint32_t          nNumUsed;        &#x2F;&#x2F;已用Bucket数</span><br><span class="line">	uint32_t          nNumOfElements;  &#x2F;&#x2F;哈希表有效元素数</span><br><span class="line">	uint32_t          nTableSize;      &#x2F;&#x2F;哈希表总大小，为2的n次方</span><br><span class="line">	uint32_t          nInternalPointer;</span><br><span class="line">	zend_long         nNextFreeElement;  &#x2F;&#x2F;&#x2F;&#x2F;下一个可用的数值索引,如:arr[] &#x3D; 1;arr[&quot;a&quot;] &#x3D; 2;arr[] &#x3D; 3;则nNextFreeElement &#x3D; 2;</span><br><span class="line">	dtor_func_t       pDestructor;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/02/05/php/php-array/#more" rel="contents">
+            <a class="btn" href="/2016/02/05/php-array/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -580,7 +580,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2016/01/05/php/php-btree/">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2016/01/05/php-btree/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben Jun">
@@ -599,7 +599,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/01/05/php/php-btree/" itemprop="url">PHP平衡二叉树</a></h1>
+                <a class="post-title-link" href="/2016/01/05/php-btree/" itemprop="url">PHP平衡二叉树</a></h1>
         
 
         <div class="post-meta">
@@ -677,7 +677,7 @@
 <p>为什么要平衡呢？还是为了提高查找速度，举个例子有一个数组 [3,2,1,4,5,6,7,10,9,8]，如果按照二叉排序树的算法生成之后应该是图1的结果，这样其实对于查找是不利的，举个例子，如果你要找节点8,<br>你得找7次，但是如果是图2这种结构，则只需要3次。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/01/05/php/php-btree/#more" rel="contents">
+            <a class="btn" href="/2016/01/05/php-btree/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -728,7 +728,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2016/01/05/php/php-autoload/">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2016/01/05/php-autoload/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben Jun">
@@ -747,7 +747,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/01/05/php/php-autoload/" itemprop="url">PHP类的自动加载机制</a></h1>
+                <a class="post-title-link" href="/2016/01/05/php-autoload/" itemprop="url">PHP类的自动加载机制</a></h1>
         
 
         <div class="post-meta">
@@ -826,7 +826,7 @@
 <p>举个例子，现在在同一个文件夹里面有2个类文件 ClassA.php、ClassB.php，还有一个index.php:</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/01/05/php/php-autoload/#more" rel="contents">
+            <a class="btn" href="/2016/01/05/php-autoload/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -877,7 +877,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2015/12/04/php/php-datastruct-btree/">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2015/12/04/php-datastruct-btree/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben Jun">
@@ -896,7 +896,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/12/04/php/php-datastruct-btree/" itemprop="url">PHP数据结构之二叉树</a></h1>
+                <a class="post-title-link" href="/2015/12/04/php-datastruct-btree/" itemprop="url">PHP数据结构之二叉树</a></h1>
         
 
         <div class="post-meta">
@@ -975,7 +975,7 @@
 <p><img src="http://ww1.sinaimg.cn/large/5f6e3e27ly1fv8v3f7a7pj20do0asgn6.jpg" alt=""></p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2015/12/04/php/php-datastruct-btree/#more" rel="contents">
+            <a class="btn" href="/2015/12/04/php-datastruct-btree/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1026,7 +1026,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2015/12/01/php/php-double-linklist/">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2015/12/01/php-double-linklist/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben Jun">
@@ -1045,7 +1045,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/12/01/php/php-double-linklist/" itemprop="url">PHP数据结构之双向链表</a></h1>
+                <a class="post-title-link" href="/2015/12/01/php-double-linklist/" itemprop="url">PHP数据结构之双向链表</a></h1>
         
 
         <div class="post-meta">
@@ -1123,7 +1123,7 @@
 <p>按顺序来，先讲一下这个双向链表(double link list)，数据结构讲的是思想，不分编程语言，所以先回顾一下基本概念吧。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2015/12/01/php/php-double-linklist/#more" rel="contents">
+            <a class="btn" href="/2015/12/01/php-double-linklist/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1174,7 +1174,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2015/11/01/linux/kali-wifi-password/">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2015/11/01/kali-wifi-password/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben Jun">
@@ -1193,7 +1193,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/11/01/linux/kali-wifi-password/" itemprop="url">Kali系统下WiFi密码破解</a></h1>
+                <a class="post-title-link" href="/2015/11/01/kali-wifi-password/" itemprop="url">Kali系统下WiFi密码破解</a></h1>
         
 
         <div class="post-meta">
@@ -1270,7 +1270,7 @@
 <p>手机上有很多类似360免费WIFI和WIFI万能钥匙的软件,可以”破解”WIFI密码,实际上这类软件不是”破解”而是”偷”密码,这类软件在安装的时候会自动上传你家的WIFI密码,也有可能是你一不小心分享出去的!分享之后别人使用软件就能连上你家的WIFI了,一般来说,商家WIFI比较多。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2015/11/01/linux/kali-wifi-password/#more" rel="contents">
+            <a class="btn" href="/2015/11/01/kali-wifi-password/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1321,7 +1321,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2015/10/05/linux/linux-custom-shell/">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2015/10/05/linux-custom-shell/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben Jun">
@@ -1340,7 +1340,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/10/05/linux/linux-custom-shell/" itemprop="url">Linux系统自定义Shell命令</a></h1>
+                <a class="post-title-link" href="/2015/10/05/linux-custom-shell/" itemprop="url">Linux系统自定义Shell命令</a></h1>
         
 
         <div class="post-meta">
@@ -1418,7 +1418,7 @@
 <p>通常情况下，我是一条接着一条敲，虽然看着命令行滚动很过瘾，但是时间长，感觉也没意思了，能不能用一条命令代替上面这些命令呢？<br>有人说，可以，你只要把这些命令行存起来，以后复制一下就搞定了…</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2015/10/05/linux/linux-custom-shell/#more" rel="contents">
+            <a class="btn" href="/2015/10/05/linux-custom-shell/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1469,7 +1469,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2015/08/05/linux/kali-metasploit/">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2015/08/05/kali-metasploit/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben Jun">
@@ -1488,7 +1488,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/08/05/linux/kali-metasploit/" itemprop="url">Kali-Metasploit制作简易木马</a></h1>
+                <a class="post-title-link" href="/2015/08/05/kali-metasploit/" itemprop="url">Kali-Metasploit制作简易木马</a></h1>
         
 
         <div class="post-meta">
@@ -1567,7 +1567,7 @@
 <p>主要工具:metasploit framework</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2015/08/05/linux/kali-metasploit/#more" rel="contents">
+            <a class="btn" href="/2015/08/05/kali-metasploit/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1618,7 +1618,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2015/03/25/php/php-radio/">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.github.io/2015/03/25/php-radio/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben Jun">
@@ -1637,7 +1637,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/03/25/php/php-radio/" itemprop="url">PHP实现语音播报</a></h1>
+                <a class="post-title-link" href="/2015/03/25/php-radio/" itemprop="url">PHP实现语音播报</a></h1>
         
 
         <div class="post-meta">
@@ -1716,7 +1716,7 @@
 <p><img src="http://upload-images.jianshu.io/upload_images/3571187-e38927d3c3b1ea69?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="PHP实现智能语音播报天气"></p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2015/03/25/php/php-radio/#more" rel="contents">
+            <a class="btn" href="/2015/03/25/php-radio/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
