@@ -1054,7 +1054,7 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-01-09T12:58:49+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2020-01-09T15:39:30+08:00">
                 2020-01-09
               </time>
             
@@ -1132,7 +1132,13 @@
 
       
         
-          <p>很多从PHP转Go的小伙伴经常会怀恋PHP丰富的字符串函数，Go的标准库针对字符串的操作函数虽然不少但是还是不够丰富，很多时候还得自己造，下面我就结合PHP里面字符串的操作函数来说说Go里面怎么实现。</p>
+          
+          很多从PHP转Go的小伙伴经常会怀恋PHP丰富的字符串函数，Go的标准库针对字符串的操作函数虽然不少但是还是不够丰富，很多时候还得自己造，下面我就结合PHP里面字符串的操作函数来说说Go里面怎么实现。
+StringGo是强类型语言，有一个单独的字符串类型 string，如果熟悉Go语言的人应该了解string底层是切片，切片底层是数组，所以字符串也叫字符数组。
+举个最简单的例子，有一个字符串 12ab34cd56, 我们要获取其第3到第5个字符之间的元素怎么做呢？
+熟悉PHP的童鞋可以会想到PHP里面有一个 substr的函数可以做到，但是Go里面呢？
+我们打开IDE看一下，其实标准库里面的 
+          ...
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/02/12/golang-string-function/" rel="contents">
