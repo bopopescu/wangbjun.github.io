@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="zh-Hans">
+<html class="theme-next gemini use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -100,14 +100,11 @@
 <meta property="og:url" content="https://wangbjun.github.io/2019/10/22/golang-protobuf/index.html">
 <meta property="og:site_name" content="JWang的博客">
 <meta property="og:description" content="1.简介Protobuf（Google Protocol Buffer）是 Google公司内部的混合语言数据标准，目前已经开源，支持多种语言（C++、C#、Go、JS、Java、Python、PHP），它是一种轻便高效的结构化数据存储格式，可以用于结构化数据串行化，或者说序列化。它很适合做数据存储或 RPC 数据交换格式。可用于通讯协议、数据存储等领域的语言无关、平台无关、可扩展的序列化结构数据">
-<meta property="og:image" content="https://show-file.che001.com/fileserver/view?id=b94d3047-ec05-11e9-bdac-0242ac142204">
-<meta property="og:image" content="https://show-file.che001.com/fileserver/view?id=cdca0865-ec05-11e9-a63f-0242ac143004">
 <meta property="article:published_time" content="2019-10-22T09:15:43.000Z">
-<meta property="article:modified_time" content="2020-01-08T17:38:16.621Z">
+<meta property="article:modified_time" content="2020-01-09T04:58:49.507Z">
 <meta property="article:author" content="Ben Jun">
 <meta property="article:tag" content="Golang">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://show-file.che001.com/fileserver/view?id=b94d3047-ec05-11e9-bdac-0242ac142204">
 
 
 
@@ -115,7 +112,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Gemini',
     sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
@@ -183,7 +180,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">博客</p>
+        <h1 class="site-subtitle" itemprop="description">一点记录和想法，分享并成长</h1>
       
   </div>
 
@@ -302,7 +299,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Protobuf入门和实战</h1>
+          <h2 class="post-title" itemprop="name headline">Protobuf入门和实战</h2>
         
 
         <div class="post-meta">
@@ -320,7 +317,19 @@
             
 
             
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-01-09T12:58:49+08:00">
+                2020-01-09
+              </time>
             
           </span>
 
@@ -356,7 +365,43 @@
           
 
           
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o">浏览数</i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
 
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  2.2k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  9
+                </span>
+              
+            </div>
           
 
           
@@ -397,7 +442,6 @@
 <p>然后还需要安装不同语言的运行环境，具体可以参考<a href="https://github.com/protocolbuffers/Protobuf" target="_blank" rel="noopener">github.com/protocolbuffers/Protobuf</a></p>
 <h2 id="3-编写proto文件"><a href="#3-编写proto文件" class="headerlink" title="3.编写proto文件"></a>3.编写proto文件</h2><p>proto其实是一种DSL语法，这个proto文件最终会使用protoc编译成不同语言的文件，然后在程序里面调用，这也是Protobuf跨平台的关键。关于proto文件的语法这里不详细介绍，建议大家参考<a href="https://developers.google.com/protocol-buffers/docs/proto3" target="_blank" rel="noopener">官方文档</a>，东西很多，也很详细。</p>
 <p>我这里拿一个简单实际的例子（person.proto）来说明一下，建议大家使用Goland安装一个插件，这样有颜色还可以检查语法：</p>
-<p><img src="https://show-file.che001.com/fileserver/view?id=b94d3047-ec05-11e9-bdac-0242ac142204" alt=""></p>
 <ul>
 <li>第一行syntax是声明proto语法版本，如果不声明默认是2，建议使用3版本</li>
 <li>然后是package也就包，这个影响到最后生成的go文件的包</li>
@@ -422,7 +466,7 @@
 <p>分别测试有1,10,100个对象的时候对比情况，测试代码如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">func BenchmarkProto(b *testing.B) &#123;</span><br><span class="line">	g :&#x3D; &amp;Group&#123;&#125;</span><br><span class="line">	for i :&#x3D; 0; i &lt; 100; i++ &#123;</span><br><span class="line">		p :&#x3D; &amp;Person&#123;</span><br><span class="line">			Id:    int32(i),</span><br><span class="line">			Name:  &quot;测试名称&quot;,</span><br><span class="line">			Age:   int32(25 * i),</span><br><span class="line">			Money: 240000.5,</span><br><span class="line">			Car:   []string&#123;&quot;car1&quot;, &quot;car2&quot;, &quot;car3&quot;, &quot;car4&quot;, &quot;car5&quot;, &quot;car7&quot;, &quot;car6&quot;, &quot;car21&quot;, &quot;car22&quot;,&#125;,</span><br><span class="line">			Phone: &amp;Person_Phone&#123;Number: &quot;0551-12323232&quot;, Type: &quot;1&quot;&#125;,</span><br><span class="line">			Sex:   Person_female,</span><br><span class="line">		&#125;</span><br><span class="line">		g.Person &#x3D; append(g.Person, p)</span><br><span class="line">	&#125;</span><br><span class="line">	b.ResetTimer()</span><br><span class="line">        b.N &#x3D; 1000</span><br><span class="line">	for i :&#x3D; 0; i &lt; b.N; i++ &#123;</span><br><span class="line">		out, err :&#x3D; proto.Marshal(g)</span><br><span class="line">		if err !&#x3D; nil &#123;</span><br><span class="line">			panic(err)</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		g1 :&#x3D; &amp;Group&#123;&#125;</span><br><span class="line">		err &#x3D; proto.Unmarshal(out, g1)</span><br><span class="line">		if err !&#x3D; nil &#123;</span><br><span class="line">			panic(err)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func BenchmarkJson(b *testing.B) &#123;</span><br><span class="line">	g :&#x3D; &amp;Group&#123;&#125;</span><br><span class="line">	for i :&#x3D; 0; i &lt; 100; i++ &#123;</span><br><span class="line">		p :&#x3D; &amp;Person&#123;</span><br><span class="line">			Id:    int32(i),</span><br><span class="line">			Name:  &quot;测试名称&quot;,</span><br><span class="line">			Age:   int32(25 * i),</span><br><span class="line">			Money: 240000.5,</span><br><span class="line">			Car:   []string&#123;&quot;car1&quot;, &quot;car2&quot;, &quot;car3&quot;, &quot;car4&quot;, &quot;car5&quot;, &quot;car7&quot;, &quot;car6&quot;, &quot;car21&quot;, &quot;car22&quot;,&#125;,</span><br><span class="line">			Phone: &amp;Person_Phone&#123;Number: &quot;0551-12323232&quot;, Type: &quot;1&quot;&#125;,</span><br><span class="line">			Sex:   Person_female,</span><br><span class="line">		&#125;</span><br><span class="line">		g.Person &#x3D; append(g.Person, p)</span><br><span class="line">	&#125;</span><br><span class="line">	b.ResetTimer()</span><br><span class="line">        b.N &#x3D; 1000</span><br><span class="line">	for i :&#x3D; 0; i &lt; b.N; i++ &#123;</span><br><span class="line">		out, err :&#x3D; json.Marshal(g)</span><br><span class="line">		if err !&#x3D; nil &#123;</span><br><span class="line">			panic(err)</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		g1 :&#x3D; &amp;Group&#123;&#125;</span><br><span class="line">		err &#x3D; json.Unmarshal(out, g1)</span><br><span class="line">		if err !&#x3D; nil &#123;</span><br><span class="line">			panic(err)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>为了方便对比，指定了测试次数为1000次，测试结果如下：</p>
-<p>在1个person的级别：<br><img src="https://show-file.che001.com/fileserver/view?id=cdca0865-ec05-11e9-a63f-0242ac143004" alt=""></p>
+<p>在1个person的级别：</p>
 <p>可以看出，理论上proto明显比json要快不少，每次操作大概是4-5倍差距。后面在10，100个person的级别的测试中，基本上都是保持在4-5倍性能的差距，这个结果也和网上大部分测试结果一致。</p>
 <p>关于生成的数据大小，这里也简单测试了一遍，还是上面的例子，我使用了10个person，Protobuf生成的文件大小是1030个byte,json生成的文件大小是1842个byte。</p>
 <p>需要注意一点，虽然在大小上Protobuf也领先很多，但是据网上文章介绍，在经过nginx的gzip压缩之后，这2者大小基本上差不多。</p>
@@ -538,8 +582,8 @@
                alt="Ben Jun" />
           <p class="site-author-name" itemprop="name">Ben Jun</p>
            
-              <p class="site-description motion-element" itemprop="description">PHP、Golang、Linux、Web开发</p>
-          
+              <p class="site-description motion-element" itemprop="description"></p>
+           
         </div>
         <nav class="site-state motion-element">
 
@@ -603,7 +647,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-简介"><span class="nav-number">1.</span> <span class="nav-text">1.简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-安装环境"><span class="nav-number">2.</span> <span class="nav-text">2.安装环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-编写proto文件"><span class="nav-number">3.</span> <span class="nav-text">3.编写proto文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-编译proto文件"><span class="nav-number">4.</span> <span class="nav-text">4.编译proto文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-使用"><span class="nav-number">5.</span> <span class="nav-text">5.使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-与JSON对比"><span class="nav-number">6.</span> <span class="nav-text">6.与JSON对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-总结"><span class="nav-number">7.</span> <span class="nav-text">7.总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-简介"><span class="nav-text">1.简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-安装环境"><span class="nav-text">2.安装环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-编写proto文件"><span class="nav-text">3.编写proto文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-编译proto文件"><span class="nav-text">4.编译proto文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-使用"><span class="nav-text">5.使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-与JSON对比"><span class="nav-text">6.与JSON对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-总结"><span class="nav-text">7.总结</span></a></li></ol></div>
             
 
           </div>
@@ -641,12 +685,32 @@
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
-    NexT.Muse
+    NexT.Gemini
   </a>
 </div>
 
 
         
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user">UV</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye">PV</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
 
         
       </div>
@@ -720,6 +784,13 @@
 
   
   
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
 
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
