@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="JWT," />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="JWang的博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="1.Token的用途在很多计算机系统里面都少不了用户认证这一步骤,最常见的认证就是账号密码认证,也就是注册、登录这一流程。 在现实生活中,人也需要认证,大家应该都有个 身份证,回想一下这个身份证是从哪里来的呢?办过身份证的应该都知道,一般情况下,身份证需要本人带着 户口本 去 公安局 (不知道现在改了木有?)办理,工作人员在核对了相关信息,确认无误的情况下会给你颁发一个身份证, 有效期 一般是10">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Token 和 JWT Token">
+<meta property="og:url" content="https://wangbjun.site/2019/coding/jwt-token-info.html">
+<meta property="og:site_name" content="JWang的博客">
+<meta property="og:description" content="1.Token的用途在很多计算机系统里面都少不了用户认证这一步骤,最常见的认证就是账号密码认证,也就是注册、登录这一流程。 在现实生活中,人也需要认证,大家应该都有个 身份证,回想一下这个身份证是从哪里来的呢?办过身份证的应该都知道,一般情况下,身份证需要本人带着 户口本 去 公安局 (不知道现在改了木有?)办理,工作人员在核对了相关信息,确认无误的情况下会给你颁发一个身份证, 有效期 一般是10">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/5f6e3e27ly1fz041egnonj20ci08sgmf.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/5f6e3e27ly1fz04jhi9wij20lr03v74q.jpg">
+<meta property="article:published_time" content="2019-01-03T13:05:45.000Z">
+<meta property="article:modified_time" content="2020-01-08T09:23:39.945Z">
+<meta property="article:author" content="Ben Jun">
+<meta property="article:tag" content="JWT">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/5f6e3e27ly1fz041egnonj20ci08sgmf.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://wangbjun.site/2019/coding/jwt-token-info.html"/>
+
+
+
+
+
+  <title>Token 和 JWT Token | JWang的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">JWang的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">一点记录和想法，分享并成长</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.site/2019/coding/jwt-token-info.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben Jun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JWang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Token 和 JWT Token</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-03T21:05:45+08:00">
+                2019-01-03
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-01-08T17:23:39+08:00">
+                2020-01-08
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" itemprop="url" rel="index">
+                    <span itemprop="name">编程开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><span class="post-meta-item-icon"><i class="fa fa-eye"></i></span><span class="post-meta-item-text"> 浏览数</span>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  1.9k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1-Token的用途"><a href="#1-Token的用途" class="headerlink" title="1.Token的用途"></a>1.Token的用途</h2><p>在很多计算机系统里面都少不了用户认证这一步骤,最常见的认证就是账号密码认证,也就是注册、登录这一流程。</p>
+<p>在现实生活中,人也需要认证,大家应该都有个 <strong>身份证</strong>,回想一下这个身份证是从哪里来的呢?<br>办过身份证的应该都知道,一般情况下,身份证需要本人带着 <strong>户口本</strong> 去 <strong>公安局</strong> (不知道现在改了木有?)办理,工作人员在核对了相关信息,确认无误的情况下会给你颁发一个身份证, <strong>有效期</strong> 一般是10-20年,在一些需要认证的时候,你就可以拿出身份证 <strong>校验</strong> 核对身份,比如买火车票,出国,或者办理其它证件.</p>
+<a id="more"></a>
+
+<p>很多Web系统里面token就类似于身份证,账号密码就相当于咱的户口本和本人,需要核对账号密码后获取,拿到token之后就可以使用一些需要认证的服务,而且token也有有效期，和身份证一样,理论上token必须是唯一。</p>
+<h2 id="2-常见的Web认证方式"><a href="#2-常见的Web认证方式" class="headerlink" title="2.常见的Web认证方式"></a>2.常见的Web认证方式</h2><h3 id="1-HTTP-Basic-Auth"><a href="#1-HTTP-Basic-Auth" class="headerlink" title="1.HTTP Basic Auth"></a>1.HTTP Basic Auth</h3><p>这种方式在早期一些Web系统比较常见，就是那种在浏览器弹出一个框让你输账号密码那种，简单易用，但是缺点一个不安全，其账号密码其实是明文（base64encode）传输的，而且每次都得带上。另外就是太丑了。。。</p>
+<p><img src="http://ww1.sinaimg.cn/large/5f6e3e27ly1fz041egnonj20ci08sgmf.jpg" alt=""></p>
+<h3 id="2-Cookies-Session"><a href="#2-Cookies-Session" class="headerlink" title="2.Cookies\Session"></a>2.Cookies\Session</h3><p>这种认证方式其实就是类似我们最开始说的身份证这种，只需要输入一次账号密码，认证成功后，系统会将用户信息存入<strong>session</strong>，session是服务器的本地存储功能，然后系统根据session生成一个唯一的 <strong>sessionid</strong> 以cookies的形式发送给浏览器。</p>
+<p><strong>cookies</strong>是浏览器本地存储，在这套机制里面的作用是用来存储sessionid，你也可以不使用cookies存储，早期有些网站在一些不支持cookies的浏览器上面会把sessionid追加到url上面。</p>
+<p>cookies里面存储的sessionid其实就是相当于身份证编号，每次访问网站里面我们带着这个编号，服务器拿着编号就可以找到对应的session里面存储的信息，一般情况下里面会存储一些用户信息，比如uid。</p>
+<p><img src="http://ww1.sinaimg.cn/large/5f6e3e27ly1fz04jhi9wij20lr03v74q.jpg" alt=""></p>
+<p>讲道理这套机制其实问题并不大，大部分时候都管用，但是cookies有一个毛病就是无法跨域，很多大公司有很多网站，这些网站域名可能还不一样。而且cookies对现在的手机APP支持不好，原生并不支持cookies。最后，就是服务器存储session也需要一些开销，特别是用户特别多的情况下。还有其它缺点这里就不列出来了，很多文章都有写到。</p>
+<p>但是其实我想说这套机制大部分情况下是够用的，特别是对于一些中小型网站来说，简单易用，快速开发。</p>
+<h3 id="3-JWT"><a href="#3-JWT" class="headerlink" title="3.JWT"></a>3.JWT</h3><p>一般说到JWT都会提到token，在我的理解里面token其实就是一个字符串，它可以是jwt token，也可以是sessionid token，token就是是一个携带认证信息的字符串。</p>
+<p>网上关于介绍JWT的文章特别多，大同小异，我们这里也懒的再说一遍了，贴一个大神的教程，我觉得讲的挺清晰了，<a href="http://www.ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html" target="_blank" rel="noopener">JSON Web Token 入门教程</a>。</p>
+<p>简单的说，JWT本质上是一种解决方案标准，该方案下一个token应该有3部分组成: <strong>Header、Payload、Signature</strong>, 其中前2部分差不多就是明文的，都是<strong>json</strong> 对象，里面存了一些信息，使用 <strong>base64urlencode</strong> 编码成一个字符串。最后的 <strong>Signature</strong> 是前面2个元素和<strong>secret</strong>一起加密之后的结果,加密算法默认是 <strong>SHA256</strong>, 这个<strong>secret</strong>应该只有服务器知道，解密的时候需要用到。</p>
+<p>最后生成的token是一个比较长的字符串，当用户登录成功之后可以把这个串返回给浏览器，浏览器下次请求的时候带着这个串就行了，问题来了，怎么带？很多文章说放到cookies里面，讲道理放到cookies里面那和sessionid有啥区别？ 标准做法是放到HTTP请求的头信息Authorization字段里面。</p>
+<p>服务器拿到这个串，首先把前面2段的Header和Payload使用 <strong>base64urldecode</strong> 解码出来，然后使用刚才使用的加密算法和secret校验一下是否和第3段的signature一样，如果不一样，则说明这个Token是伪造的，如果一样，就可以相信Payload里面的信息了，一般Payload里面会存放一些用户信息，比如uid，如果Payload里面需要存放一些敏感信息，比如手机号，建议先加密Payload。</p>
+<h3 id="PHP实战"><a href="#PHP实战" class="headerlink" title="PHP实战"></a>PHP实战</h3><p>下面我将使用PHP构建一个简单的例子：</p>
+<h4 id="JWT类："><a href="#JWT类：" class="headerlink" title="JWT类："></a>JWT类：</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Jwt</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $alg = <span class="string">'sha256'</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> $secret = <span class="string">"123456"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * alg属性表示签名的算法（algorithm），默认是 HMAC SHA256（写成 HS256）；typ属性表示这个令牌（token）的类型（type），JWT 令牌统一写为JWT</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getHeader</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        $header = [</span><br><span class="line">            <span class="string">'alg'</span> =&gt; <span class="keyword">$this</span>-&gt;alg,</span><br><span class="line">            <span class="string">'typ'</span> =&gt; <span class="string">'JWT'</span></span><br><span class="line">        ];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;base64urlEncode(json_encode($header, JSON_UNESCAPED_UNICODE));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Payload 部分也是一个 JSON 对象，用来存放实际需要传递的数据。JWT 规定了7个官方字段，供选用，这里可以存放私有信息，比如uid</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> $uid int 用户id</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> mixed</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getPayload</span><span class="params">($uid)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        $payload = [</span><br><span class="line">            <span class="string">'iss'</span> =&gt; <span class="string">'admin'</span>, <span class="comment">//签发人</span></span><br><span class="line">            <span class="string">'exp'</span> =&gt; time() + <span class="number">600</span>, <span class="comment">//过期时间</span></span><br><span class="line">            <span class="string">'sub'</span> =&gt; <span class="string">'test'</span>, <span class="comment">//主题</span></span><br><span class="line">            <span class="string">'aud'</span> =&gt; <span class="string">'every'</span>, <span class="comment">//受众</span></span><br><span class="line">            <span class="string">'nbf'</span> =&gt; time(), <span class="comment">//生效时间</span></span><br><span class="line">            <span class="string">'iat'</span> =&gt; time(), <span class="comment">//签发时间</span></span><br><span class="line">            <span class="string">'jti'</span> =&gt; <span class="number">10001</span>, <span class="comment">//编号</span></span><br><span class="line">            <span class="string">'uid'</span> =&gt; $uid, <span class="comment">//私有信息，uid</span></span><br><span class="line">        ];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;base64urlEncode(json_encode($payload, JSON_UNESCAPED_UNICODE));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 生成token,假设现在payload里面只存一个uid</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> $uid int</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> string</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">genToken</span><span class="params">($uid)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        $header  = <span class="keyword">$this</span>-&gt;getHeader();</span><br><span class="line">        $payload = <span class="keyword">$this</span>-&gt;getPayload($uid);</span><br><span class="line"></span><br><span class="line">        $raw   = $header . <span class="string">'.'</span> . $payload;</span><br><span class="line">        $token = $raw . <span class="string">'.'</span> . hash_hmac(<span class="keyword">$this</span>-&gt;alg, $raw, <span class="keyword">$this</span>-&gt;secret);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> $token;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 解密校验token,成功的话返回uid</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> $token</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> mixed</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">verifyToken</span><span class="params">($token)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!$token) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        $tokenArr = explode(<span class="string">'.'</span>, $token);</span><br><span class="line">        <span class="keyword">if</span> (count($tokenArr) != <span class="number">3</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        $header    = $tokenArr[<span class="number">0</span>];</span><br><span class="line">        $payload   = $tokenArr[<span class="number">1</span>];</span><br><span class="line">        $signature = $tokenArr[<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line">        $payloadArr = json_decode(<span class="keyword">$this</span>-&gt;base64urlDecode($payload), <span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (!$payloadArr) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//已过期</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">isset</span>($payloadArr[<span class="string">'exp'</span>]) &amp;&amp; $payloadArr[<span class="string">'exp'</span>] &lt; time()) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        $expected = hash_hmac(<span class="keyword">$this</span>-&gt;alg, $header . <span class="string">'.'</span> . $payload, <span class="keyword">$this</span>-&gt;secret);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//签名不对</span></span><br><span class="line">        <span class="keyword">if</span> ($expected !== $signature) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> $payloadArr[<span class="string">'uid'</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 安全的base64 url编码</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> $data</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> string</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">base64urlEncode</span><span class="params">($data)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> rtrim(strtr(base64_encode($data), <span class="string">'+/'</span>, <span class="string">'-_'</span>), <span class="string">'='</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 安全的base64 url解码</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> $data</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> bool|string</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">base64urlDecode</span><span class="params">($data)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> base64_decode(str_pad(strtr($data, <span class="string">'-_'</span>, <span class="string">'+/'</span>), strlen($data) % <span class="number">4</span>, <span class="string">'='</span>, STR_PAD_RIGHT));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="测试："><a href="#测试：" class="headerlink" title="测试："></a>测试：</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$jwt = <span class="keyword">new</span> \App\Jwt();</span><br><span class="line"></span><br><span class="line"><span class="comment">//获取token</span></span><br><span class="line">$token = $jwt-&gt;genToken(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//解密token</span></span><br><span class="line">$uid = $jwt-&gt;verifyToken($token);</span><br><span class="line"></span><br><span class="line">var_dump($uid);</span><br></pre></td></tr></table></figure>
+<p>以上代码仅供参考，实际应用的话最好找个现成的库，不推荐重复造轮子，jwt的思想是通用的，不分语言，github上面有很多。。。这里贴一个PHP的库: <a href="https://github.com/firebase/php-jwt" target="_blank" rel="noopener">firebase/php-jwt</a>。</p>
+<p>最后再说说session和jwt的选择问题，网上随便搜搜就可以看到很多文章比较这2者优劣，总结就是各有利弊，实际上很多公司既不是session，也不是jwt，可能就是自己搞的类似jwt token这样的一个字符串，然后放在cookies里面，只要这个串能够代表一个用户都可以。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JWT/" rel="tag"># JWT</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/coding/golang/goroutine.html" rel="next" title="浅谈Golang协程">
+                <i class="fa fa-chevron-left"></i> 浅谈Golang协程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/coding/jwt-token-usage.html" rel="prev" title="JWT Token的刷新和作废">
+                JWT Token的刷新和作废 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80ODIxNi8yNDcxMg"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Ben Jun" />
+          <p class="site-author-name" itemprop="name">Ben Jun</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">66</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Token的用途"><span class="nav-text">1.Token的用途</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-常见的Web认证方式"><span class="nav-text">2.常见的Web认证方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-HTTP-Basic-Auth"><span class="nav-text">1.HTTP Basic Auth</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Cookies-Session"><span class="nav-text">2.Cookies\Session</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-JWT"><span class="nav-text">3.JWT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PHP实战"><span class="nav-text">PHP实战</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JWT类："><span class="nav-text">JWT类：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试："><span class="nav-text">测试：</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ben Jun</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Gemini
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user">UV</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye">PV</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

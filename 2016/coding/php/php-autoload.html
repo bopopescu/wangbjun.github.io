@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="PHP," />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="JWang的博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="1.手动加载？首先，咱们先想一个问题，为什么需要加载机制？ 理论上讲，你可以把所有PHP代码都写在一个文件里面，早期PHP确实有很多这样的代码，因为那时候还没有面向对象的概念，没有代码分层，一个PHP文件里面一大堆函数，一个功能一个函数这么写就行了。 后来，大家都发现这样写起来太乱，不利于维护和扩展，更重要的是有了面向对象的概念，我们可以把属性和方法封装到类里面，然后需要用到的时候就实例化这个类，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP类的自动加载机制">
+<meta property="og:url" content="https://wangbjun.site/2016/coding/php/php-autoload.html">
+<meta property="og:site_name" content="JWang的博客">
+<meta property="og:description" content="1.手动加载？首先，咱们先想一个问题，为什么需要加载机制？ 理论上讲，你可以把所有PHP代码都写在一个文件里面，早期PHP确实有很多这样的代码，因为那时候还没有面向对象的概念，没有代码分层，一个PHP文件里面一大堆函数，一个功能一个函数这么写就行了。 后来，大家都发现这样写起来太乱，不利于维护和扩展，更重要的是有了面向对象的概念，我们可以把属性和方法封装到类里面，然后需要用到的时候就实例化这个类，">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/5f6e3e27ly1fx1uzv0zpuj208n0723yl.jpg">
+<meta property="article:published_time" content="2016-01-05T04:00:00.000Z">
+<meta property="article:modified_time" content="2020-02-09T05:31:56.481Z">
+<meta property="article:author" content="Ben Jun">
+<meta property="article:tag" content="PHP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/5f6e3e27ly1fx1uzv0zpuj208n0723yl.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://wangbjun.site/2016/coding/php/php-autoload.html"/>
+
+
+
+
+
+  <title>PHP类的自动加载机制 | JWang的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">JWang的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">一点记录和想法，分享并成长</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.site/2016/coding/php/php-autoload.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben Jun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JWang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">PHP类的自动加载机制</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-05T12:00:00+08:00">
+                2016-01-05
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-02-09T13:31:56+08:00">
+                2020-02-09
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" itemprop="url" rel="index">
+                    <span itemprop="name">编程开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><span class="post-meta-item-icon"><i class="fa fa-eye"></i></span><span class="post-meta-item-text"> 浏览数</span>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  2.1k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="1-手动加载？"><a href="#1-手动加载？" class="headerlink" title="1.手动加载？"></a>1.手动加载？</h3><p>首先，咱们先想一个问题，为什么需要加载机制？</p>
+<p>理论上讲，你可以把所有PHP代码都写在一个文件里面，早期PHP确实有很多这样的代码，因为那时候还没有面向对象的概念，没有代码分层，一个PHP文件里面一大堆函数，一个功能一个函数这么写就行了。</p>
+<p>后来，大家都发现这样写起来太乱，不利于维护和扩展，更重要的是有了面向对象的概念，我们可以把属性和方法封装到类里面，然后需要用到的时候就实例化这个类，这从面向过程转向面向对象。</p>
+<p>举个例子，现在在同一个文件夹里面有2个类文件 ClassA.php、ClassB.php，还有一个index.php:</p>
+<a id="more"></a>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">$value = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ClassA</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ClassB</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$a = <span class="keyword">new</span> ClassA();</span><br><span class="line"></span><br><span class="line">var_dump($a);</span><br></pre></td></tr></table></figure>
+<p>当你在index.php里面new ClassA 的时候没问题，至少这样写是没有语法错误的，现在IDE都很智能，可以自动提示。但是当你运行index.php的时候就会报错：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PHP Fatal error:  Uncaught Error: Class 'ClassA' not found in /home/jwang/Documents/Work/MyBlog/PHP/Code/index.php:2</span><br></pre></td></tr></table></figure>
+<p>有些初学者就会很懵逼，明明这个类就在同一个文件夹下啊，为什么会找不到？</p>
+<p>错误提示翻译过来就是: 在index.php 文件里面没有找到 ClassA！ 其实仔细想想，这个文件里面确实没有ClassA。</p>
+<p>解决这个问题的方式就是使用 require 、include 关键字加载所需的类，其实PHP解释器在执行这个文件的时候遇到require或者include处理很简单，它就相当于下面这种写法：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ClassA</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$a = <span class="keyword">new</span> ClassA();</span><br><span class="line"></span><br><span class="line">var_dump($a);</span><br></pre></td></tr></table></figure>
+<p>这时候当然不会报错，其实在MVC的框架里面，PHP执行的自始至终都是index.php这一个文件，只不过框架可以根据路由去加载不同的文件！所谓的加载，其实就是替换，如果没有这种加载机制，那如果你在不同的地方用到同一个类，是不是用到的地方就得copy一份类的代码…</p>
+<p>有一点需要注意一下，require或include 不仅仅可以加载文件里面的类，也可以加载文件里面的变量，比如说 ClassA.php 这个文件里面还定义了一个<code>$value = 100</code>, 这时候你就可以在index.php里面直接使用$value了，它的值就是100；</p>
+<p>假如说，这时候你在index.php里面也定义了一个$value, 而且值不一样，那就看你在哪里require的，假如你在require之前定义了$value，那就以require文件里面的为准，这就相当于重新赋值了。假如是之后，则以最新当前文件的定义为准！记住PHP代码是顺序执行的就行了</p>
+<hr>
+<h3 id="2-自动加载"><a href="#2-自动加载" class="headerlink" title="2.自动加载"></a>2.自动加载</h3><p>虽然可以使用require，include去加载不同地方的类，但是还是太麻烦了，用到一个就得写一个，忘了就麻烦了，这时候就需要自动加载机制！</p>
+<p>早期的时候可以使用 <strong>__autoload()</strong> 这个魔术方法去实现自动加载，但是现在一般都是建议使用 <strong>spl_autoload_register</strong>，当PHP脚本找不到所需的类时候就会自动调用这个函数！</p>
+<p>比如说在上面index.php里面，由于我并没有定义这2个方法的任何一个，所以会报错, 修改一下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">spl_autoload_register(<span class="function"><span class="keyword">function</span> <span class="params">($class)</span> </span>&#123;</span><br><span class="line">   <span class="keyword">require</span> $class.<span class="string">".php"</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$a = <span class="keyword">new</span> ClassA();</span><br><span class="line"></span><br><span class="line">var_dump($a);</span><br></pre></td></tr></table></figure>
+<p>可以定义多个spl_autoload_register 从不同的地方加载，而__autoload函数则不能重复定义。</p>
+<p>需要注意的是，因为PHP是顺序执行的，这个函数必须在new之前定义，函数参数是一个函数，你也可以传一个匿名函数，只有一个参数，是需要加载的类的名称，由于这里并没有使用命名空间（后面再讲），所以在这里这个 $class 的值就是 ClassA。既然我们都知道类的名称了，我们就可以在这里去require或include所需的文件类。</p>
+<blockquote>
+<p>有一点需要说明一下，按标准来说，一个文件一个类，而且类的名字必须和文件名字一样（至少是有规律的），你要是不按这套路来，那可就没辙了！</p>
+</blockquote>
+<hr>
+<h3 id="3-命名空间"><a href="#3-命名空间" class="headerlink" title="3.命名空间"></a>3.命名空间</h3><p>上面的例子里面，虽然解决了自动加载问题，但是依然有一个问题，假如现在多了一个文件夹App，我们把 ClassB 放到 App 文件夹里面，再运行代码，你会发现还是找不到ClassB，require会报错。</p>
+<p>有好几种解决方法，你可以在require的时候判断文件是否存在，先在当前文件夹下找，如果不存在就去App文件找，把可能存在的地方都找一遍，如果都找不到就报错！</p>
+<p>但是这种方法效率很低，有一些框架会采用文件命名带上文件夹名的方式解决这些问题，比如说把ClassB.php 改成 App_ClassB.php，这样就可以根据文件名找到文件，带来的后果就是文件夹名字超级长…不是太优雅！</p>
+<p>默认情况下，如果你没有使用命名空间，所有文件都在同一个命名空间下全局(), 使用命名空间来改造上面的代码：</p>
+<p>ClassA.php:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ClassA</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ClassB.php:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ClassB</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这时候如果想在index.php里面使用ClassB，有两种选择，一种是写上命名空间<code>$a = new \App\ClassB()</code>,另一种则是使用user关键字:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">ClassA</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">ClassB</span>;</span><br><span class="line"></span><br><span class="line">spl_autoload_register(<span class="function"><span class="keyword">function</span> <span class="params">($class)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">require</span> $class.<span class="string">".php"</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$a = <span class="keyword">new</span> ClassA();</span><br><span class="line"></span><br><span class="line">$b = <span class="keyword">new</span> ClassB();</span><br><span class="line"></span><br><span class="line">var_dump($a);</span><br></pre></td></tr></table></figure>
+<p>但是这时候依然无法正常加载，因为这时候$class的值是 <strong>App\ClassB</strong>, 带上了命名空间，为了能正常加载我们需要改造一下自动加载函数：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">define(<span class="string">"APP_PATH"</span>, <span class="keyword">__DIR__</span>);</span><br><span class="line"></span><br><span class="line">spl_autoload_register(<span class="function"><span class="keyword">function</span> <span class="params">($file)</span> </span>&#123;</span><br><span class="line">    $file = str_replace(<span class="string">'\\'</span>, <span class="string">'/'</span>, trim($file, <span class="string">'App'</span>));</span><br><span class="line">    <span class="keyword">include</span> APP_PATH.<span class="string">'/app'</span>.$file.<span class="string">".php"</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>简单的说，只是处理一下目录分隔符和路径！命名空间并不是为了解决自动加载问题，命名空间主要是为了解决类名重复问题，但是有命名空间我们就可以更容易的实现自动加载！</p>
+<hr>
+<h3 id="4-composer自动加载"><a href="#4-composer自动加载" class="headerlink" title="4.composer自动加载"></a>4.composer自动加载</h3><p>现在很多框架更多的是使用composer实现自动加载，使用一些第三方的类库也更方便，即使我们不使用第三方类库，composer也很好用！基本步骤如下：</p>
+<p>第一步，安装composer，这个我就不多说了，如果在Ubuntu下面，可以执行 <code>sudo apt install composer</code></p>
+<p>第二步，在项目根目录执行 <code>composer init</code> 进行初始化操作，当然你可以自己新建一个composer.json 文件,如下：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"name"</span>: <span class="string">"root/auto-load"</span>,</span><br><span class="line">    <span class="attr">"authors"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"name"</span>: <span class="string">"wangbenjun"</span>,</span><br><span class="line">            <span class="attr">"email"</span>: <span class="string">"wangbenjun@gmail.com"</span></span><br><span class="line">        &#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">"require"</span>: &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第三步，配置自动加载选项，composer主要有一下2个配置选项用于配置自动加载, 其中dev是用于开发环境：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">"autoload": &#123;</span><br><span class="line">       "classmap": [</span><br><span class="line">           <span class="string">"lib"</span></span><br><span class="line">       ],</span><br><span class="line">       "psr-4": &#123;</span><br><span class="line">           "App\\": "app/"</span><br><span class="line">       &#125;</span><br><span class="line"> &#125;,</span><br><span class="line">"autoload-dev": &#123;</span><br><span class="line">       "psr-4": &#123;</span><br><span class="line">           "Tests\\": "tests/"</span><br><span class="line">       &#125;</span><br><span class="line"> &#125;,</span><br></pre></td></tr></table></figure>
+<p>classmap 是类映射, 用于处理那些没有使用命名空间的类库文件夹，composer使用了一个关联数组给里面所有的文件做了一个映射，便于快速找到所需的类。psr-4 则是处理使用了命名空间的文件夹</p>
+<p>修改完了之后执行 <code>composer dumpautoload</code> 就可以生成自动加载文件，可以看到多出一个vendor文件夹，在index.php里面require里面的autoload.php就可以实现自动加载了。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">require</span> <span class="string">"vendor/autoload.php"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">ClassA</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">ClassB</span>;</span><br><span class="line"></span><br><span class="line">$a = <span class="keyword">new</span> ClassA();</span><br><span class="line"></span><br><span class="line">$b = <span class="keyword">new</span> ClassB();</span><br><span class="line"></span><br><span class="line">$c = <span class="keyword">new</span> SomeClass();</span><br><span class="line"></span><br><span class="line">var_dump($a);</span><br><span class="line">var_dump($b);</span><br><span class="line">var_dump($c);</span><br></pre></td></tr></table></figure>
+
+<p>最终目录结构如下图：</p>
+<p><img src="http://ww1.sinaimg.cn/large/5f6e3e27ly1fx1uzv0zpuj208n0723yl.jpg" alt=""></p>
+<p>现在大多数Web框架都是采用MVC模式，一般都有一个统一的入口文件，比如index.php, 通常会在这个入口文件定义自动加载机制，使用composer的话只需要include一个autoload.php文件即可！</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/PHP/" rel="tag"># PHP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/coding/php/php-datastruct-btree.html" rel="next" title="PHP数据结构之二叉树">
+                <i class="fa fa-chevron-left"></i> PHP数据结构之二叉树
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/coding/php/php-btree.html" rel="prev" title="PHP平衡二叉树">
+                PHP平衡二叉树 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80ODIxNi8yNDcxMg"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Ben Jun" />
+          <p class="site-author-name" itemprop="name">Ben Jun</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">66</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-手动加载？"><span class="nav-text">1.手动加载？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-自动加载"><span class="nav-text">2.自动加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-命名空间"><span class="nav-text">3.命名空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-composer自动加载"><span class="nav-text">4.composer自动加载</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ben Jun</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Gemini
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user">UV</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye">PV</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
