@@ -104,8 +104,8 @@
 <meta property="og:url" content="https://wangbjun.site/2020/coding/golang/unit-and-functional-test.html">
 <meta property="og:site_name" content="JWang的博客">
 <meta property="og:description" content="如果你看过很多开源库的源码，你会发现大部分项目都有很多详细的测试代码，一般来说测试覆盖率越高说明这个项目的质量越高，所以好的项目测试是少不了的。很多公司对代码测试覆盖率也有要求，不为别的，只为更好的代码质量。 1.分类虽然业界有一直开发模式叫做测试驱动开发（TDD），但是了解的人都知道TDD对开发要求太高了，它要求你先写测试用例然后再写代码，需要你写代码之前思考很多，需要大量时间，我实际开发中并没">
-<meta property="article:published_time" content="2020-02-10T04:15:00.000Z">
-<meta property="article:modified_time" content="2020-02-10T12:20:18.216Z">
+<meta property="article:published_time" content="2020-02-10T10:15:00.000Z">
+<meta property="article:modified_time" content="2020-02-10T12:23:24.364Z">
 <meta property="article:author" content="Ben Jun">
 <meta property="article:tag" content="golang">
 <meta property="article:tag" content="单元测试，功能测试">
@@ -316,7 +316,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-10T12:15:00+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-10T18:15:00+08:00">
                 2020-02-10
               </time>
             
@@ -332,7 +332,7 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-02-10T20:20:18+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2020-02-10T20:23:24+08:00">
                 2020-02-10
               </time>
             
@@ -418,12 +418,14 @@
 <h2 id="1-分类"><a href="#1-分类" class="headerlink" title="1.分类"></a>1.分类</h2><p>虽然业界有一直开发模式叫做测试驱动开发（TDD），但是了解的人都知道<code>TDD</code>对开发要求太高了，它要求你先写测试用例然后再写代码，需要你写代码之前思考很多，需要大量时间，我实际开发中并没有采用过这种模式，估计国内都应该很少。</p>
 <p>我们可以粗略的把测试用例简单划分为2种类型，一种是<code>单元测试</code>，它是针对某个模块、函数、方法的测试，另一种是<code>功能测试（集成测试）</code>，它是针对整个项目功能是否可用的测试。举个例子，你写个了Web服务接口，单元测试可能是针对这个接口里面调用的一个函数测试，而功能测试就是测试这个接口是否可用，因为一个接口可能调用了多个函数。</p>
 <h2 id="2-单元测试"><a href="#2-单元测试" class="headerlink" title="2.单元测试"></a>2.单元测试</h2><p>Golang里面的测试和其它大部分语言的测试不多，只不过表示形式略有不同，比如Go的单元测试通常情况下是和被测试的代码放在一起的，以<code>xxx_test.go</code>命名并且测试的函数名必须以<code>Test</code>开头。</p>
+<a id="more"></a>
+
 <p>例如：<br>math.go 有以下2个函数</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"errors"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Div</span><span class="params">(a, b <span class="keyword">int</span>)</span> <span class="params">(<span class="keyword">int</span>, error)</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> b == <span class="number">0</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>, errors.New(<span class="string">"division by zero"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> a / b, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>如果想测试这个文件，那么测试文件名字就应该叫 math_test.go</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"testing"</span></span><br><span class="line">)</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestDiv</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">	i, err := Div(<span class="number">4</span>, <span class="number">2</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		t.Fail()</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> i != <span class="number">2</span> &#123;</span><br><span class="line">		t.Fail()</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>切换到工作目录下执行 <code>go test</code>即可，这个命令有很多附加参数，比如说<code>-v</code>可以查看详细情况，<code>-coverprofile</code>可以看测试覆盖率。</p>
-<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">jwang@jun:~/Documents/Work/test$ go test -v -coverprofile=c.out</span><br><span class="line">=== RUN   TestDiv</span><br><span class="line">--- PASS: TestDiv (0.00s)</span><br><span class="line">PASS</span><br><span class="line">coverage: 66.7% of statements</span><br><span class="line">ok      _/home/jwang/Documents/Work/test       0.001s</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">jwang@jun:~&#x2F;Documents&#x2F;Work&#x2F;test$ go test -v -coverprofile&#x3D;c.out</span><br><span class="line">&#x3D;&#x3D;&#x3D; RUN   TestDiv</span><br><span class="line">--- PASS: TestDiv (0.00s)</span><br><span class="line">PASS</span><br><span class="line">coverage: 66.7% of statements</span><br><span class="line">ok      _&#x2F;home&#x2F;jwang&#x2F;Documents&#x2F;Work&#x2F;test       0.001s</span><br></pre></td></tr></table></figure>
 
 <p>根据测试函数参数类型的不同，Go里面把测试又细分为<code>*testing.T和*testing.B</code>，其实B是性能基准测试，通常用来测试算法性能，这里就不多说了。</p>
 <p>单元测试的目的就是尽可能的覆盖到所有情况，说白了，就是枚举各种情况，根据输入的参数人工推导正确的结果，然后和实际得出的结果做比对，如果失败则说明程序有bug，比如上面的例子明显没有覆盖到所有情况，只达到了66.7%。</p>
