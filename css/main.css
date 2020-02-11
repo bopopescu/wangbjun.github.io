@@ -482,7 +482,7 @@ pre,
 }
 pre,
 code {
-  font-family: consolas, Menlo, "Helvetica", "Arial", "PingFang SC", "Noto Sans", "Roboto", "Microsoft Yahei", "WenQuanYi Micro Hei", monospace;
+  font-family: 'monospace', consolas, Menlo, "Helvetica", "Arial", "PingFang SC", "Noto Sans", "Roboto", "Microsoft Yahei", "WenQuanYi Micro Hei", monospace;
 }
 code {
   padding: 2px 4px;
@@ -1811,7 +1811,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #75fff7;
+  background: #ff7d7d;
 }
 .links-of-blogroll {
   font-size: 13px;
