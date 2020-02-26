@@ -279,6 +279,189 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.site/2016/coding/scrapy-param-pass.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben Jun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JWang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/coding/scrapy-param-pass.html" itemprop="url">关于Scrapy爬虫数据传递问题</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-07T12:08:45+08:00">
+                2016-01-07
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-01-09T12:37:32+08:00">
+                2020-01-09
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" itemprop="url" rel="index">
+                    <span itemprop="name">编程开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  695
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h2><p>这两天研究爬虫掉进一个大坑，爬了好久才爬出去，这里说几句，我写的爬图片的爬虫很简单，从一个图片列表进二级图片详情页，然后爬取二级详情页的所有图片，但是有个需求就是需要以二级详情页的标题为目录分类存放图片！思路很简单，就是在item里面增加一个字段title存放标题：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class PicscrapyItem(scrapy.Item):</span><br><span class="line">    image_urls &#x3D; scrapy.Field() # 图片地址</span><br><span class="line">    images &#x3D; scrapy.Field()</span><br><span class="line">    title &#x3D; scrapy.Field() # 图片标题（目录）</span><br></pre></td></tr></table></figure>
+<p>然后在pipelines里面获取item里面数据，保存的时候做一下处理：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class PicscrapyPipeline(ImagesPipeline):</span><br><span class="line">    item &#x3D; []</span><br><span class="line">    def get_media_requests(self, item, info):</span><br><span class="line">        self.item &#x3D; item</span><br><span class="line">        return [Request(x) for x in item.get(self.images_urls_field, [])]</span><br><span class="line"></span><br><span class="line">    # 重写函数，修改了下载图片名称的生成规则</span><br><span class="line">    def file_path(self, request, response&#x3D;None, info&#x3D;None):</span><br><span class="line">        if not isinstance(request, Request):</span><br><span class="line">            url &#x3D; request</span><br><span class="line">        else:</span><br><span class="line">            url &#x3D; request.url</span><br><span class="line">        url &#x3D; urlparse(url)</span><br><span class="line">        img_name &#x3D; url.path.split(&#39;&#x2F;&#39;)[5].split(&#39;.&#39;)[0]</span><br><span class="line">        return self.item[&#39;title&#39;] + &#39;&#x2F;%s.jpg&#39; % img_name</span><br></pre></td></tr></table></figure>
+<p>上面的代码看上去没毛病，重写了Scrapy框架ImagesPipeline的方法,根据title字段分目录存放，但是当我跑起来的时候看上去也没毛病，但是查看数据的时候却不对了，目录是出来了，但是牛头不对马嘴！</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/coding/scrapy-param-pass.html" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://wangbjun.site/2016/coding/php/php-btree.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1947,7 +2130,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">69</span>
+                <span class="site-state-item-count">70</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
