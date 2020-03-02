@@ -2,10 +2,8 @@
 
 
 
-  
 
-
-<html class="theme-next gemini use-motion" lang="zh-Hans">
+<html class="theme-next gemini" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -108,10 +106,10 @@
   var CONFIG = {
     root: '/',
     scheme: 'Gemini',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
-    motion: true,
+    motion: false,
     duoshuo: {
       userId: '0',
       author: '博主'
@@ -248,9 +246,43 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
   
 </nav>
 
@@ -279,7 +311,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wangbjun.site/2019/coding/golang/golang-tcp-package.html">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.site/2016/coding/php/php-array.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben Jun">
@@ -298,7 +330,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/coding/golang/golang-tcp-package.html" itemprop="url">Golang处理TCP“粘包”问题</a></h2>
+                <a class="post-title-link" href="/2016/coding/php/php-array.html" itemprop="url">PHP数组解析和常见操作</a></h2>
         
 
         <div class="post-meta">
@@ -310,8 +342,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-10T12:05:45+08:00">
-                2019-05-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-02-05T19:00:03+08:00">
+                2016-02-05
               </time>
             
 
@@ -378,7 +410,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  2.2k
+                  1.4k
                 </span>
               
 
@@ -404,16 +436,12 @@
 
       
         
-          <h2 id="1-什么是粘包？"><a href="#1-什么是粘包？" class="headerlink" title="1.什么是粘包？"></a>1.什么是粘包？</h2><p>“粘包”这个说法已经被诟病很久了，既然坊间流传这个说法咱们就沿用吧，关于这个问题比较准确的解释可以参考下面几点：</p>
-<ol>
-<li>TCP是流传输协议,是一种面向连接的、可靠的、基于字节流的传输层通信协议</li>
-<li>TCP没有包的概念，它只负责传输字节序列，UDP是面向数据报的协议，所以不存在拆包粘包问题</li>
-<li>应该由应用层来维护消息和消息的边界，即需要一个应用层协议，比如HTTP</li>
-</ol>
-<p>所以，本质上这是一个没有正确使用TCP协议的而产生的问题，有网友说了一句非常形象的话：“打开家里的水龙头， 看着自来水往下流， 然后你告诉我， 看， 自来水粘在一起了， 不是有病？”</p>
+          <p>在PHP里面使用最多的数据结构恐怕就是数组了，不过PHP的数组和我们传统意义上的数组区别很大，PHP的数组功能上相当于其它语言里面array+list+map数据结构的集合体，这就是动态语言的强大之处。在PHP里面有2种数组，一种是传统的索引数组，另一种是关联数组，其实就是其它语言里面map数据结构。</p>
+<h2 id="底层实现"><a href="#底层实现" class="headerlink" title="底层实现"></a>底层实现</h2><p>PHP的数组底层是使用HashTable实现，说到哈希表估计很多人都了解过，PHP数组通过一个映射函数把key映射到对于的value值上面，所以查找起来非常快，时间复杂度是O(1),哈希表都会遇到冲突问题，在PHP里面是通过链表的方式解决的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;Bucket：散列表中存储</span><br><span class="line">typedef struct _Bucket &#123;</span><br><span class="line">	zval              val;  &#x2F;&#x2F;存储的具体value，这里嵌入了一个zval，而不是一个指针</span><br><span class="line">	zend_ulong        h;    &#x2F;&#x2F;key根据times 33计算得到的哈希值，或者是数值索引编号</span><br><span class="line">	zend_string      *key;  &#x2F;&#x2F;存储元素的key</span><br><span class="line">&#125; Bucket;</span><br><span class="line"> </span><br><span class="line">&#x2F;&#x2F;HashTable结构</span><br><span class="line">typedef struct _zend_array HashTable;</span><br><span class="line"> </span><br><span class="line">struct _zend_array &#123;</span><br><span class="line">	zend_refcounted_h gc;</span><br><span class="line">	union &#123;</span><br><span class="line">		struct &#123;</span><br><span class="line">			ZEND_ENDIAN_LOHI_4(</span><br><span class="line">				zend_uchar    flags,</span><br><span class="line">				zend_uchar    nApplyCount,</span><br><span class="line">				zend_uchar    nIteratorsCount,</span><br><span class="line">				zend_uchar    reserve)</span><br><span class="line">		&#125; v;</span><br><span class="line">		uint32_t flags;</span><br><span class="line">	&#125; u;</span><br><span class="line">	uint32_t          nTableMask;      &#x2F;&#x2F;哈希值计算掩码，等于nTableSize的负值(nTableMask &#x3D; -nTableSize)</span><br><span class="line">	Bucket            *arData;         &#x2F;&#x2F;存储元素数组，指向第一个Bucket</span><br><span class="line">	uint32_t          nNumUsed;        &#x2F;&#x2F;已用Bucket数</span><br><span class="line">	uint32_t          nNumOfElements;  &#x2F;&#x2F;哈希表有效元素数</span><br><span class="line">	uint32_t          nTableSize;      &#x2F;&#x2F;哈希表总大小，为2的n次方</span><br><span class="line">	uint32_t          nInternalPointer;</span><br><span class="line">	zend_long         nNextFreeElement;  &#x2F;&#x2F;&#x2F;&#x2F;下一个可用的数值索引,如:arr[] &#x3D; 1;arr[&quot;a&quot;] &#x3D; 2;arr[] &#x3D; 3;则nNextFreeElement &#x3D; 2;</span><br><span class="line">	dtor_func_t       pDestructor;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/coding/golang/golang-tcp-package.html" rel="contents">
+            <a class="btn" href="/2016/coding/php/php-array.html" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -464,7 +492,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wangbjun.site/2019/linux/ubuntu-4k-scale.html">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.site/2016/coding/scrapy-param-pass.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben Jun">
@@ -483,7 +511,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/linux/ubuntu-4k-scale.html" itemprop="url">Ubuntu 4K显示器缩放设置</a></h2>
+                <a class="post-title-link" href="/2016/coding/scrapy-param-pass.html" itemprop="url">关于Scrapy爬虫数据传递问题</a></h2>
         
 
         <div class="post-meta">
@@ -495,8 +523,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-03T12:21:06+08:00">
-                2019-05-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-07T12:08:45+08:00">
+                2016-01-07
               </time>
             
 
@@ -511,8 +539,1278 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-02-20T12:36:28+08:00">
-                2020-02-20
+              <time title="更新于" itemprop="dateModified" datetime="2020-01-09T12:37:32+08:00">
+                2020-01-09
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" itemprop="url" rel="index">
+                    <span itemprop="name">编程开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  695
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h2><p>这两天研究爬虫掉进一个大坑，爬了好久才爬出去，这里说几句，我写的爬图片的爬虫很简单，从一个图片列表进二级图片详情页，然后爬取二级详情页的所有图片，但是有个需求就是需要以二级详情页的标题为目录分类存放图片！思路很简单，就是在item里面增加一个字段title存放标题：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class PicscrapyItem(scrapy.Item):</span><br><span class="line">    image_urls &#x3D; scrapy.Field() # 图片地址</span><br><span class="line">    images &#x3D; scrapy.Field()</span><br><span class="line">    title &#x3D; scrapy.Field() # 图片标题（目录）</span><br></pre></td></tr></table></figure>
+<p>然后在pipelines里面获取item里面数据，保存的时候做一下处理：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class PicscrapyPipeline(ImagesPipeline):</span><br><span class="line">    item &#x3D; []</span><br><span class="line">    def get_media_requests(self, item, info):</span><br><span class="line">        self.item &#x3D; item</span><br><span class="line">        return [Request(x) for x in item.get(self.images_urls_field, [])]</span><br><span class="line"></span><br><span class="line">    # 重写函数，修改了下载图片名称的生成规则</span><br><span class="line">    def file_path(self, request, response&#x3D;None, info&#x3D;None):</span><br><span class="line">        if not isinstance(request, Request):</span><br><span class="line">            url &#x3D; request</span><br><span class="line">        else:</span><br><span class="line">            url &#x3D; request.url</span><br><span class="line">        url &#x3D; urlparse(url)</span><br><span class="line">        img_name &#x3D; url.path.split(&#39;&#x2F;&#39;)[5].split(&#39;.&#39;)[0]</span><br><span class="line">        return self.item[&#39;title&#39;] + &#39;&#x2F;%s.jpg&#39; % img_name</span><br></pre></td></tr></table></figure>
+<p>上面的代码看上去没毛病，重写了Scrapy框架ImagesPipeline的方法,根据title字段分目录存放，但是当我跑起来的时候看上去也没毛病，但是查看数据的时候却不对了，目录是出来了，但是牛头不对马嘴！</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/coding/scrapy-param-pass.html" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.site/2016/coding/php/php-btree.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben Jun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JWang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/coding/php/php-btree.html" itemprop="url">PHP平衡二叉树</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-05T19:00:03+08:00">
+                2016-01-05
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-02-09T13:31:56+08:00">
+                2020-02-09
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" itemprop="url" rel="index">
+                    <span itemprop="name">编程开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  845
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="平衡二叉树"><a href="#平衡二叉树" class="headerlink" title="平衡二叉树"></a>平衡二叉树</h2><p>之前讲过树，二叉树，二叉排序树，现在说说这个平衡二叉树，平衡二叉树是一个平衡的二叉排序树，关键在于平衡，它的意思是其中每一个节点的左子树和右子树的高度差不多都是1。</p>
+<p><img src="http://ww1.sinaimg.cn/large/5f6e3e27ly1fvg1sihqxcj20p80es0wr.jpg" alt=""></p>
+<p>为什么要平衡呢？还是为了提高查找速度，举个例子有一个数组 [3,2,1,4,5,6,7,10,9,8]，如果按照二叉排序树的算法生成之后应该是图1的结果，这样其实对于查找是不利的，举个例子，如果你要找节点8,<br>你得找7次，但是如果是图2这种结构，则只需要3次。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/coding/php/php-btree.html" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.site/2016/coding/php/php-autoload.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben Jun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JWang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/coding/php/php-autoload.html" itemprop="url">PHP类的自动加载机制</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-05T12:00:00+08:00">
+                2016-01-05
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-02-09T13:31:56+08:00">
+                2020-02-09
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" itemprop="url" rel="index">
+                    <span itemprop="name">编程开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  2.1k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="1-手动加载？"><a href="#1-手动加载？" class="headerlink" title="1.手动加载？"></a>1.手动加载？</h3><p>首先，咱们先想一个问题，为什么需要加载机制？</p>
+<p>理论上讲，你可以把所有PHP代码都写在一个文件里面，早期PHP确实有很多这样的代码，因为那时候还没有面向对象的概念，没有代码分层，一个PHP文件里面一大堆函数，一个功能一个函数这么写就行了。</p>
+<p>后来，大家都发现这样写起来太乱，不利于维护和扩展，更重要的是有了面向对象的概念，我们可以把属性和方法封装到类里面，然后需要用到的时候就实例化这个类，这从面向过程转向面向对象。</p>
+<p>举个例子，现在在同一个文件夹里面有2个类文件 ClassA.php、ClassB.php，还有一个index.php:</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/coding/php/php-autoload.html" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.site/2015/coding/php/php-datastruct-btree.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben Jun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JWang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/coding/php/php-datastruct-btree.html" itemprop="url">PHP数据结构之二叉树</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-04T15:35:03+08:00">
+                2015-12-04
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-02-09T13:31:56+08:00">
+                2020-02-09
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" itemprop="url" rel="index">
+                    <span itemprop="name">编程开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  1.1k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>有一点需要说明，一般讲算法是不会用PHP来实现的，而且实际应用中用PHP来实现也木有多大意思，所以这里用PHP实现的意思在于方便大家熟悉，了解其中概念。</p>
+<p>如果要讲二叉树，肯定得先讲讲树，这里也不讲了，只讲一点，二叉树是一种特殊的树，这里为什么说是二叉树而不是三叉树呢？看图</p>
+<p>这是典型的树结构图：</p>
+<p><img src="http://ww1.sinaimg.cn/large/5f6e3e27ly1fv8v3f7a7pj20do0asgn6.jpg" alt=""></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/coding/php/php-datastruct-btree.html" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.site/2015/coding/php/php-double-linklist.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben Jun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JWang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/coding/php/php-double-linklist.html" itemprop="url">PHP数据结构之双向链表</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-01T11:01:13+08:00">
+                2015-12-01
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-02-09T13:31:56+08:00">
+                2020-02-09
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" itemprop="url" rel="index">
+                    <span itemprop="name">编程开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  1.2k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>其实这些都是PHP SPL 标准库里面的东西, SPL是用于解决典型问题(standard problems)的一组接口与类的集合。说白了，这是PHP官方实现的一些数据结构,<br>印象中Java的标准库就很强大，不要慌，PHP也有。</p>
+<p><img src="http://ww1.sinaimg.cn/large/5f6e3e27ly1fv0rjzmm26j20hz0himyz.jpg" alt=""></p>
+<p>按顺序来，先讲一下这个双向链表(double link list)，数据结构讲的是思想，不分编程语言，所以先回顾一下基本概念吧。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/coding/php/php-double-linklist.html" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.site/2015/linux/kali-wifi-password.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben Jun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JWang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/linux/kali-wifi-password.html" itemprop="url">Kali系统下WiFi密码破解</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-11-01T11:01:00+08:00">
+                2015-11-01
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-02-09T13:11:46+08:00">
+                2020-02-09
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  901
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>在网络渗透中,能够接入被攻击者的网络至关重要,只要黑客接入你的网络,利用DNS欺骗,arp攻击等各种钓鱼技术,基本上就能获取一切信息,WIFI网络的安全性重要性不言而喻!</p>
+<p>手机上有很多类似360免费WIFI和WIFI万能钥匙的软件,可以”破解”WIFI密码,实际上这类软件不是”破解”而是”偷”密码,这类软件在安装的时候会自动上传你家的WIFI密码,也有可能是你一不小心分享出去的!分享之后别人使用软件就能连上你家的WIFI了,一般来说,商家WIFI比较多。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/linux/kali-wifi-password.html" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.site/2015/linux/linux-custom-shell.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben Jun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JWang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/linux/linux-custom-shell.html" itemprop="url">Linux系统自定义Shell命令</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-10-05T11:05:00+08:00">
+                2015-10-05
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-01-09T01:44:37+08:00">
+                2020-01-09
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  1.2k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="一-应用场景"><a href="#一-应用场景" class="headerlink" title="一.应用场景"></a>一.应用场景</h3><p>由于长期使用Ubuntu系统开发和日常生活，每天开机第一件事情就是更新系统，在Ubuntu系统下面更新往往需要好敲好几个命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update		           #更新源</span><br><span class="line">sudo apt-get upgrade		           #更新普通软件包</span><br><span class="line">sudo apt-get dist-upgrade		   #更新系统软件包</span><br><span class="line">sudo apt-get autoremove 		   #卸载无用的软件包</span><br><span class="line">sudo apt-get autoclean			   #清除软件包缓存</span><br></pre></td></tr></table></figure>
+<p>通常情况下，我是一条接着一条敲，虽然看着命令行滚动很过瘾，但是时间长，感觉也没意思了，能不能用一条命令代替上面这些命令呢？<br>有人说，可以，你只要把这些命令行存起来，以后复制一下就搞定了…</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/linux/linux-custom-shell.html" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.site/2015/linux/kali-metasploit.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben Jun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JWang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/linux/kali-metasploit.html" itemprop="url">Kali-Metasploit制作简易木马</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-08-05T12:01:00+08:00">
+                2015-08-05
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-02-09T13:11:46+08:00">
+                2020-02-09
               </time>
             
           </span>
@@ -589,11 +1887,13 @@
 
       
         
-          <p><img src="https://wangbjun.github.io/images/16d0f0f03263cb7b.jpg" alt=""></p>
-<p>开头一张图介绍一下我现在日常生活和开发使用的电脑配置：Ubuntu 16.04 + i7-8700k + 1060 + nvme ssd + 32G RAM + 4k显示器，这个配置倒不算很高端，但是开发用体验很高，系统的流畅程度非常高</p>
+          <p>相信很多人都有这种感觉,觉得那些会做木马病毒的人非常牛逼,当然会自己完全写出来木马病毒的肯定非常牛逼,但是实际上,大部分人都是在前人的基础上修改,很多则是用工具生成,出于兴趣,研究了一段时间”黑”科技,也实践了一下!</p>
+<p>总结了几点简单的工具用法,如果你会用这些工具,你会发现也许一个木马没有你像现在那么难做出来!本文是本着研究的精神,所有攻击行为都是测试,请勿用于非法用途!</p>
+<p>测试环境:kali linux windows7 windows 10 Android等操作系统</p>
+<p>主要工具:metasploit framework</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/linux/ubuntu-4k-scale.html" rel="contents">
+            <a class="btn" href="/2015/linux/kali-metasploit.html" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -644,7 +1944,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wangbjun.site/2019/coding/golang/golang-oop.html">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.site/2015/coding/php/php-radio.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben Jun">
@@ -663,7 +1963,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/coding/golang/golang-oop.html" itemprop="url">Go面向对象写法</a></h2>
+                <a class="post-title-link" href="/2015/coding/php/php-radio.html" itemprop="url">PHP实现语音播报</a></h2>
         
 
         <div class="post-meta">
@@ -675,8 +1975,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-19T22:05:43+08:00">
-                2019-04-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-03-25T09:00:01+08:00">
+                2015-03-25
               </time>
             
 
@@ -743,7 +2043,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  914
+                  995
                 </span>
               
 
@@ -769,12 +2069,13 @@
 
       
         
-          <p>Go并不是一个类似于Java、C++，或PHP这样内置面向对象语法的操作的语言，在Go里面名义上是没有类（class）这个概念的，但是这并不代表Go不能面向对象，毕竟面向对象只是一种设计思想！</p>
-<p>为什么Go并不原生支持面向对象呢？这是一个问题</p>
-<p>接下来，我会从面向对象的三大特性封装、继承、多态这个几个方面来讲讲Go是怎么实现的OOP的。</p>
+          <p>大家估计都知道现在很多AI音响能够给你播报天气，叫你起床…甚至能够接受语音指令！所谓的人工智能音响，听起来很高大上，都说PHP是最好的编程语言，今天我就带大家来实现一个语音播报功能，写个美女叫你早上起床！<br>先大体说一个思路，PHP怎么实现语音播报呢？其实就是调个API（接口）的事情，这个就尴尬了。实际上，现在很多AI平台都提供一些成熟的接口供你使用，比如语音转文字，文字转语音，语音唤醒等等，<br>这里我使用的是百度的语音合成<a href="https://ai.baidu.com/tech/speech/tts" target="_blank" rel="noopener">接口,点击查看</a>, 思路就是使用PHP获取当前的时间和天气状况，然后调用接口转换成甜美的妹子语音播放出来。。。你没看错，就是这么简单！</p>
+<p>第一步：获取时间信息</p>
+<p>举个例子，文字内容可能是这样：“主人，早上好，今天是2017年12月18号上午8点整，星期一”，这样的内容用PHP自带的几个时间函数就能搞定，然后拼接成字符文字！下面是一些简单实例代码：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3571187-e38927d3c3b1ea69?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="PHP实现智能语音播报天气"></p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/coding/golang/golang-oop.html" rel="contents">
+            <a class="btn" href="/2015/coding/php/php-radio.html" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -825,7 +2126,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wangbjun.site/2019/coding/designpattern-middleware.html">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.site/2015/linux/ubuntu-music.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben Jun">
@@ -844,7 +2145,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/coding/designpattern-middleware.html" itemprop="url">详解中间件设计模式</a></h2>
+                <a class="post-title-link" href="/2015/linux/ubuntu-music.html" itemprop="url">Ubuntu命令行下打造一个音乐闹钟</a></h2>
         
 
         <div class="post-meta">
@@ -856,8 +2157,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-12T10:02:46+08:00">
-                2019-03-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-03-07T19:01:09+08:00">
+                2015-03-07
               </time>
             
 
@@ -872,1102 +2173,7 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-01-08T17:49:48+08:00">
-                2020-01-08
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" itemprop="url" rel="index">
-                    <span itemprop="name">编程开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                  <span class="post-meta-divider">|</span>
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  1.3k
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>说到中间件（middleware），很多人应该都听说过，但是大体有2种意思，一种是一些衔接不同软件活系统的中间软件，比如说数据库中间件、消息中间件。另一种是在Web软件开发中代码层面的一种设计模式，比如说用户认证中间件、日志中间件，这些中间件的主要作用就是以一种集中统一、几乎无侵入的的方式去处理用户请求,而今天我们要讲的就是中间件设计模式。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/coding/designpattern-middleware.html" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wangbjun.site/2019/coding/golang/golang-string-function.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ben Jun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JWang的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/coding/golang/golang-string-function.html" itemprop="url">Golang字符串处理函数浅析</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-12T20:15:43+08:00">
-                2019-02-12
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2020-02-09T13:31:56+08:00">
-                2020-02-09
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" itemprop="url" rel="index">
-                    <span itemprop="name">编程开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                  <span class="post-meta-divider">|</span>
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  1.3k
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          很多从PHP转Go的小伙伴经常会怀恋PHP丰富的字符串函数，Go的标准库针对字符串的操作函数虽然不少但是还是不够丰富，很多时候还得自己造，下面我就结合PHP里面字符串的操作函数来说说Go里面怎么实现。
-StringGo是强类型语言，有一个单独的字符串类型 string，如果熟悉Go语言的人应该了解string底层是切片，切片底层是数组，所以字符串也叫字符数组。
-举个最简单的例子，有一个字符串 12ab34cd56, 我们要获取其第3到第5个字符之间的元素怎么做呢？
-熟悉PHP的童鞋可以会想到PHP里面有一个 substr的函数可以做到，但是Go里面呢？
-我们打开IDE看一下，其实标准库里面的 
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/coding/golang/golang-string-function.html" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wangbjun.site/2019/coding/web-cache-usage.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ben Jun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JWang的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/coding/web-cache-usage.html" itemprop="url">Web开发中用到的Cache</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-01T12:02:46+08:00">
-                2019-02-01
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2020-01-08T17:49:09+08:00">
-                2020-01-08
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" itemprop="url" rel="index">
-                    <span itemprop="name">编程开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                  <span class="post-meta-divider">|</span>
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  2.2k
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="1-什么是Cache？"><a href="#1-什么是Cache？" class="headerlink" title="1.什么是Cache？"></a>1.什么是Cache？</h2><p>Cache(音: 侃屎),中文称为缓存，缓存可以说是计算机系统里面一味良药，在很多地方的设计都用到了Cache，比如在CPU里面的一级缓存，二级缓存，好的CPU还有三级缓存。硬盘也有缓存，比如一般1T的机械硬盘会有64M的闪存缓存。</p>
-<p><img src="http://ww1.sinaimg.cn/large/5f6e3e27ly1fymbinhu4uj20di0avtel.jpg" alt=""></p>
-<p>在软件系统里面，缓存更是无处不在，比如浏览器本地缓存、网络缓存、CDN缓存、代理缓存…</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/coding/web-cache-usage.html" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wangbjun.site/2019/coding/jwt-token-usage.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ben Jun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JWang的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/coding/jwt-token-usage.html" itemprop="url">JWT Token的刷新和作废</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-21T15:05:45+08:00">
-                2019-01-21
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2020-01-09T16:10:29+08:00">
-                2020-01-09
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" itemprop="url" rel="index">
-                    <span itemprop="name">编程开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                  <span class="post-meta-divider">|</span>
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  1.6k
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>之前一篇简单介绍了下JWT的用法,涉及到token的签发和验证。有人说JWT不适合用于替换传统的 <strong>session+cookies</strong> 机制用于Web应用的用户登录状态维护，很大原因就是这块问题。</p>
-<p>虽然之前的案例里面，我们可以成功在登录后获取一个Token，然后访问服务器的时候带着这个Token，服务器就可以知道当前访问的用户Uid了，假设现在有一下需求：</p>
-<ul>
-<li><p>登录后7天不用重复登录</p>
-</li>
-<li><p>超过30天没有访问网站则需重新登录，否则一直有效</p>
-</li>
-<li><p>修改密码功能</p>
-</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/coding/jwt-token-usage.html" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wangbjun.site/2019/coding/jwt-token-info.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ben Jun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JWang的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/coding/jwt-token-info.html" itemprop="url">Token 和 JWT Token</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-03T21:05:45+08:00">
-                2019-01-03
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2020-01-08T17:23:39+08:00">
-                2020-01-08
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" itemprop="url" rel="index">
-                    <span itemprop="name">编程开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                  <span class="post-meta-divider">|</span>
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  1.9k
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="1-Token的用途"><a href="#1-Token的用途" class="headerlink" title="1.Token的用途"></a>1.Token的用途</h2><p>在很多计算机系统里面都少不了用户认证这一步骤,最常见的认证就是账号密码认证,也就是注册、登录这一流程。</p>
-<p>在现实生活中,人也需要认证,大家应该都有个 <strong>身份证</strong>,回想一下这个身份证是从哪里来的呢?<br>办过身份证的应该都知道,一般情况下,身份证需要本人带着 <strong>户口本</strong> 去 <strong>公安局</strong> (不知道现在改了木有?)办理,工作人员在核对了相关信息,确认无误的情况下会给你颁发一个身份证, <strong>有效期</strong> 一般是10-20年,在一些需要认证的时候,你就可以拿出身份证 <strong>校验</strong> 核对身份,比如买火车票,出国,或者办理其它证件.</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/coding/jwt-token-info.html" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wangbjun.site/2018/coding/golang/goroutine.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ben Jun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JWang的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/coding/golang/goroutine.html" itemprop="url">浅谈Golang协程</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-10T12:05:45+08:00">
-                2018-12-10
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2020-02-09T13:31:56+08:00">
-                2020-02-09
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" itemprop="url" rel="index">
-                    <span itemprop="name">编程开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                  <span class="post-meta-divider">|</span>
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  3.4k
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>学习和使用golang也有一段时间了，golang最近2年在国内很火，提起golang和其它语言最大区别莫过于协程，不过咱今天先不说协程，我先说一下自己的一些理解。</p>
-<p>对c熟悉的人应该对go不陌生，它们都属于强类型静态编译型语言，在语法上和PHP这种弱类型动态解释型语言不一样，虽然差异很大，但是基本语法都是差不多，掌握一种语言之后再去学其它语言语法不是什么大问题。</p>
-<p>在IT行业，编程语言之争一直是个很热闹的话题，编程语言之间的区别不仅仅在于语法和特性，语法只是表达编程思想的方式，一个编程语言的背后往往是其强大的生态圈，比如c语言之所以经久不衰，那是因为它几乎可以认为是创世纪语言，是当代编程的起点，而PHP则以快速处理文本，快速搭建web网站出名，JS则是浏览器编程的唯一选择，Python拥有的科学计算库是其它语言没有的。</p>
-<p>说到go的优点，一般都集中在静态编译、毫秒级GC、简洁、并发并行等特性上面，go是2008年诞生的，由C语言之父设计，相对其它语言来说比较年轻，可以说在设计之初吸收了各大语言的优点。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/coding/golang/goroutine.html" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wangbjun.site/2018/linux/custom-google-tz.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ben Jun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JWang的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/linux/custom-google-tz.html" itemprop="url">自建梯子访问Google等学术网站</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-09T08:01:02+08:00">
-                2018-12-09
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2020-01-09T16:01:26+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2020-01-09T01:44:37+08:00">
                 2020-01-09
               </time>
             
@@ -2019,7 +2225,7 @@ StringGo是强类型语言，有一个单独的字符串类型 string，如果�
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1.6k
+                  808
                 </span>
               
 
@@ -2045,10 +2251,11 @@ StringGo是强类型语言，有一个单独的字符串类型 string，如果�
 
       
         
-          <p>这个话题有点敏感，但是我首先说明一下，此处只做一个记录，网上类似的文章超级多，而且我纯粹是拿来上Google学习用，搞web开发的应该没几个不用Chrome的，Chrome配上Google账号同步简直完美。</p>
+          <h3 id="一-命令行播放音乐"><a href="#一-命令行播放音乐" class="headerlink" title="一.命令行播放音乐"></a>一.命令行播放音乐</h3><p>第一次听说Linux命令行能播放歌曲我是怀疑的…一直觉得命令行干这个事情应该非常复杂，其实想想图形界面本质上只是一种交互方式，可能大家平时用的音乐播放器都有一个非常漂亮的界面,点一下就能播放音乐，但是其本质上还是调用系统API操控音响或者耳机等设备来发出声音！</p>
+<p>言归正传，在Linux命令行下播放音乐只需要一行命令搞定：</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/linux/custom-google-tz.html" rel="contents">
+            <a class="btn" href="/2015/linux/ubuntu-music.html" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -2090,7 +2297,7 @@ StringGo是强类型语言，有一个单独的字符串类型 string，如果�
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/">Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/4/">Next</a>
+    <a class="extend prev" rel="prev" href="/page/2/">Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
   </nav>
 
 
@@ -2257,6 +2464,8 @@ StringGo是强类型语言，有一个单独的字符串类型 string，如果�
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
         
+          <span id="scrollpercent"><span>0</span>%</span>
+        
       </div>
     
 
@@ -2370,6 +2579,323 @@ StringGo是强类型语言，有一个单独的字符串类型 string，如果�
 
 
   
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
 
 
 
