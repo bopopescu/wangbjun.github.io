@@ -1,6 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>如何高效的学习编程？</title>
+    <url>/2020/life/how-to-learn.html</url>
+    <content><![CDATA[<p>今天想聊一聊学习这个话题，理想情况下，每个人都应该有适合自己的一套学习方法和节奏，主要因为不同人对知识的理解和吸收速度不一样，举个非常简单的例子，在网上看视频或者电影，有些人觉得2倍速播放刚刚好，而有些人甚至还要降速才能看明白，才能Get到点。即便如此，我觉得有些学习的经验和方法是可以共享的，虽然它不一定适合所有人。</p>
+<p>人一生都在学习，学习不一定是在课堂上，特别是在互联网时代，我们可以随时随地打开手机观看各种课程，尤其是在编程行业，更需要不断持续的学习才能保持竞争力。我也是自学入行编程，期间也看过很多网上的视频教程，平时学习的时候也经常看一些博客教程，可以说现在也基本上是靠自学成长，颇有感触。</p>
+<p>在学生时代，我也算是班级里面名列前茅的选手，在别人眼里我很厉害，每次考试都能考一个非常高的分数，但是我自己却感觉很轻松，我每天和其它同学一样，一起上课学习、按时完成老师安排的作业，没有什么额外的事情。而我周围的也有些同学非常努力，早起晚睡，周末还会上家教，但成绩却一般般。举一个不太恰当的例子，10万块钱在你眼里可能是巨款，但是在有钱人的眼里那只是零花钱。所以在一些牛人的眼里有些问题太简单了，他们可以分分钟钟给你手写一个翻转二叉树算法，这真的不是他们很努力，有些只不过是天分而已，而你刷了几百遍leetcode依然达不到人家的水平。</p>
+<p>正视智商上的差距并不意味着努力没用，因为在大部分时候，我们远远没有达到需要拼智商的地步，努力能够弥补很多差距，即使智商很高的人也需要努力，不然也就是当代“伤仲永”而已。</p>
+<h1 id="方法论"><a href="#方法论" class="headerlink" title="方法论"></a>方法论</h1><p>在我很早学习Java的时候，我在网上看过一个叫韩顺平的人的视频教程，他在开课之前有一小节专门讲了如何高效的学习编程这个话题，他总结了几个点，我觉得非常有道理，后来得知，他不仅仅教Java，也教PHP、Linux、Go，但是每次开课的时候都会讲一下这几点学习方法，个人感觉这几点讲的非常好，这里和大家分享一下：</p>
+<img src="/images/2020-03-03-1.png" width=70% /> 
+
+<ul>
+<li><p>高效而愉快的学习</p>
+</li>
+<li><p>先建立一个整体的框架，然后细节</p>
+</li>
+<li><p>在实际工作中，要培养用到什么，能够快速学习的能力</p>
+</li>
+<li><p>先know how，再know why</p>
+</li>
+<li><p>软件编程是一门“做中学”的学科，不是会了再做，而是做了才会</p>
+</li>
+<li><p>适当的囫囵吞枣</p>
+</li>
+<li><p>学习软件编程是在琢磨别人怎么做，而不是我认为应该怎么做的过程</p>
+</li>
+</ul>
+<blockquote>
+<p>韩顺平是清华大学毕业，之前一直在某智任教，后来听说自己开设了一个培训班，但是经营不善倒闭了，现在又重返课堂了。</p>
+</blockquote>
+<p>仔细想一下，这些点讲的非常有道理，很多人在学习的时候往往忽视了整体，盯着一个点在那死磕，有点盲人摸象的感觉，比如你要学习使用一门语言，你首先应该知道这门语言适合干啥，然后再去了解大体有哪些特点，再去写一个最简单的例子，学习基本语法，具体的细节等以后渐渐熟悉了再去学习。</p>
+<p>我们不能要求自己一上来就把所有的功能都学会了再做事情，编程行业发展到现在每一个细分领域只要你想去研究学习都有一大堆东西，需要大量时间，很多东西都是发展了很多年不断迭代的结果。你不能要求自己一上来就写一个没有bug、面面俱到的代码，但是你可以去不停改进优化你的代码。</p>
+<p>What？Why？How？是什么？为什么？怎么用？这一条几乎可以适用于各行各业,我见过很多人，一上来就对着教程照葫芦画瓢，完全没有理解，效率自然不高。</p>
+<h1 id="类比"><a href="#类比" class="headerlink" title="类比"></a>类比</h1><p>学习最快的方法就是用一个已知的东西去理解一个未知的东西，这个方法大部分情况下都是可用的，比如说你学习完了PHP再去学习Java或者Go，你会发现基本语法差不多，所以上手很快。</p>
+<p>在编程行业，很多经验都是相互借鉴的，比如说PHP的composer和Node的npm它们都是一个包管理工具，是用来解决包依赖问题，一样功能的还有Linux操作系统里面apt和yum。编程里面常常提到的设计模式就是一种共同性的思想，虽然不同语言的具体实现可能有所差异。</p>
+<p>即使不是同一个行业，也有些思想可以借鉴，比如，有人在讲述buffer和cache的区别的时候举了一个这样的例子，cache就相当于京东在每个城市周边的仓库，它可以快速的把你买的东西寄到你手上而不用从厂家发货。</p>
+<p>但IT行业是一个非常喜欢吹牛逼的行业，经常会发明一些新鲜的词汇来唬人，比如云计算、云原生、5G云、大数据、人工智能等等。可能这个和风投资本有关，创业的人需要拿出一些看起来很厉害的东西唬住投资人，如果你仔细了解过这些“高大上”的词汇背后，你会发现其实还是熟悉的东西。</p>
+<h1 id="网课"><a href="#网课" class="headerlink" title="网课"></a>网课</h1><p>现在知识付费非常火，卖课的广告到处都是，很多技术公众号天天也在贩卖焦虑，然后卖课。卖网课几乎是一个一本万利的生意，你只要录制一次就可以卖给N人，相对于书本来说，连印刷的成本都省了。</p>
+<p>在早期我也看过很多视频教程，很多确实非常有用。但我现在看来，视频这种形式比较适合入门初学者，它可以快速的帮助你了解学习一门知识，特别是你啥也不会的时候，跟着视频学会快很多。</p>
+<p>但是当你进入一个行业几年之后，视频课程基本上不是一个很好的选择了，大部分课程讲的东西都比较宽泛和全面，实际上你不一定用得到，很多人就听了一些公众号的忽悠，买了很多课，有些根本没时间看，有些看完时间一久就忘了。所以我建议还是得结合实际应用有针对性的去学习，很多优秀的开源项目的官方文档已经写的非常清楚了，有些怕你不会用连demo都给你写好了。</p>
+<h1 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h1><p>记笔记是个好习惯，我记得以前上学的时候很多同学记笔记记的非常认真，老师在黑板上写，同学都在下面抄，一字不漏。老师经常说让大家不要照抄，不要把时间浪费在抄笔记上面，要多注意老师讲的东西。毕竟那会教育条件很差，现在估计学校里面应该都是直接投影仪放PPT了，学生也不用抄笔记了，直接拷贝就行了。</p>
+<p>不过我还是建议大家有时间可以写点总结性的笔记，也可以叫作博客，不一定要写出多么有深度，你只需要记录自己学到一些东西或者自己的一些想法即可，因为有时候很多东西你感觉你自己学到了，但是让你写出来就会不一样了，写作的过程通常也是一个思考的过程，有助于查漏补缺。</p>
+<p>所以如果有时间，建议抽出时间不妨就某一个技术点写出你自己的理解，写得好还是可以帮助别人，何乐不为呢？</p>
+]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>谈一谈阿里外包工作</title>
     <url>/2020/life/2019-4.html</url>
     <content><![CDATA[<p>之前写过几篇文章名字叫<a href="https://wangbjun.site/2020/life/2019-1.html">《一个野生程序员的北漂之路》</a>，这篇文章应该算是后续吧，聊聊我如何进阿里外包，主要是结合我的经历和我所了解的一些事实谈谈我的感受和看法，仅供其他朋友参考。</p>
@@ -589,10 +639,14 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">├── app.ini</span><br><span class="line">├── config</span><br><span class="line">│   ├── Config.go</span><br><span class="line">│   └── DataBase.go</span><br><span class="line">├── controller</span><br><span class="line">│   ├── BaseController.go</span><br><span class="line">├── lib</span><br><span class="line">│   ├── function</span><br><span class="line">│   │   ├── Aes.go</span><br><span class="line">│   │   ├── Rsa.go</span><br><span class="line">│   │   ├── Rsa_test.go</span><br><span class="line">│   │   └── Uuid.go</span><br><span class="line">│   ├── httpLogger</span><br><span class="line">│   │   └── HttpLogger.go</span><br><span class="line">│   └── zlog</span><br><span class="line">│       ├── SqlLog.go</span><br><span class="line">│       └── ZapLogger.go</span><br><span class="line">├── main.go</span><br></pre></td></tr></table></figure>
 <p>所以在测试文件的目录下肯定是找不到app.ini的，咋办呢？解决方法有很多</p>
 <ul>
-<li>copy一个配置到测试文件。这种方法最简单粗暴，但是太不灵活，测试用例可能在任何目录里面，这样搞有点难受</li>
-<li>配置文件路径写成绝对路径。这种方法也不灵活，毕竟每个人的项目目录位置不一样，以后线上部署也麻烦</li>
-<li>采用依赖注入的高级写法，测试的时候使用mock的方式注入配置。这种方法可以，也是比较好的方式，但是需要引入依赖注入组件，整个项目的架构需要更改，不推荐使用依赖注入把简单的问题复杂化。</li>
-<li>跑测试的时候传入外部参数，依然不够灵活，而且麻烦</li>
+<li><p>copy一个配置到测试文件。这种方法最简单粗暴，但是太不灵活，测试用例可能在任何目录里面，这样搞有点难受</p>
+</li>
+<li><p>配置文件路径写成绝对路径。这种方法也不灵活，毕竟每个人的项目目录位置不一样，以后线上部署也麻烦</p>
+</li>
+<li><p>采用依赖注入的高级写法，测试的时候使用mock的方式注入配置。这种方法可以，也是比较好的方式，但是需要引入依赖注入组件，整个项目的架构需要更改，不推荐使用依赖注入把简单的问题复杂化。</p>
+</li>
+<li><p>跑测试的时候传入外部参数，依然不够灵活，而且麻烦</p>
+</li>
 </ul>
 <p>这个问题，我思考了很久，最终想了一个足够简单灵活的方式，代码如下：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">envFile :&#x3D; &quot;app.ini&quot;</span><br><span class="line">&#x2F;&#x2F; 读取配置文件, 解决跑测试的时候找不到配置文件的问题，最多往上找5层目录</span><br><span class="line">for i :&#x3D; 0; i &lt; 5; i++ &#123;</span><br><span class="line">	if _, err :&#x3D; os.Stat(envFile); err &#x3D;&#x3D; nil &#123;</span><br><span class="line">		break</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		envFile &#x3D; &quot;..&#x2F;&quot; + envFile</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">conf, err :&#x3D; ini.Load(envFile)</span><br><span class="line">if err !&#x3D; nil &#123;</span><br><span class="line">	log.Panicf(&quot;parse conf file [%s] failed, err: %s&quot;, envFile, err.Error())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -2023,6 +2077,56 @@
       </tags>
   </entry>
   <entry>
+    <title>PHP匿名函数和闭包</title>
+    <url>/2018/coding/php/php-closure-function.html</url>
+    <content><![CDATA[<h3 id="一-什么是闭包？"><a href="#一-什么是闭包？" class="headerlink" title="一.什么是闭包？"></a>一.什么是闭包？</h3><p>先看看百度百科的介绍：</p>
+<blockquote>
+<p>闭包包含自由（未绑定到特定对象）变量，这些变量不是在这个代码块内或者任何全局上下文中定义的，而是在定义代码块的环境中定义（局部变量）。<br>“闭包” 一词来源于以下两者的结合：要执行的代码块（由于自由变量被包含在代码块中，这些自由变量以及它们引用的对象没有被释放）和为自由变量提供绑定的计算环境（作用域）。<br>在PHP、Scala、Scheme、Common Lisp、Smalltalk、Groovy、JavaScript、Ruby、 Python、Go、Lua、objective c、swift 以及Java（Java8及以上）等语言中都能找到对闭包不同程度的支持。</p>
+</blockquote>
+<p>说实话，这个介绍虽然专业，但是有点僵硬不太容易理解，闭包是一种设计思想，而不是一种语法特性，在PHP语言里面，匿名函数就是闭包的一种实现。</p>
+<h3 id="二-匿名函数"><a href="#二-匿名函数" class="headerlink" title="二.匿名函数"></a>二.匿名函数</h3><p>这个我相信大家都多多少少用过，看一下代码：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$f &#x3D; function () &#123;</span><br><span class="line">    $a &#x3D; 1;</span><br><span class="line">    $b &#x3D; 2;</span><br><span class="line">    return $a + $b;</span><br><span class="line">&#125;;</span><br><span class="line">var_dump($f);</span><br></pre></td></tr></table></figure>
+<p>输出结果是：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Closure#1 (0) &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<p>可见，PHP中匿名函数就是闭包，也可以理解为闭包就是把这个函数赋值给一个变量，这时候这个变量保存的就是这个函数的内存地址。</p>
+<p>如何去调用这个闭包函数呢？很简单，在这个例子里面只要 <strong>$f()</strong> 就可以了</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var_dump($f()); #结果是：3</span><br></pre></td></tr></table></figure>
+
+<p>当然这个匿名函数也是可以传参的，你可以这样写：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$f &#x3D; function ($c) &#123;</span><br><span class="line">    $a &#x3D; 1;</span><br><span class="line">    $b &#x3D; 2;</span><br><span class="line">    return $a + $b + $c;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>这样你在调用的时候就可以传入参数，类似 <strong>$f(3)</strong>, 但是有一点需要注意，如果这时候你想在定义闭包函数的时候使用外部变量，举个例子</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$out &#x3D; 100;</span><br><span class="line">$f &#x3D; function ($c) &#123;</span><br><span class="line">    $a &#x3D; 1;</span><br><span class="line">    $b &#x3D; 2;</span><br><span class="line">    return $out - ($a + $b + $c); #报错，无法引用外部变量out</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>这时候就体现了闭包封闭的特性，但是PHP提供了一个 use 关键字，可以使用下面这个写法：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$out &#x3D; 100;</span><br><span class="line">$f &#x3D; function ($c) use ($out) &#123;</span><br><span class="line">    $a &#x3D; 1;</span><br><span class="line">    $b &#x3D; 2;</span><br><span class="line">    return $out - ($a + $b + $c);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="三-闭包到底有啥用？"><a href="#三-闭包到底有啥用？" class="headerlink" title="三.闭包到底有啥用？"></a>三.闭包到底有啥用？</h3><p>一般来说还是在框架以及一些架构设计里面会用到，这里先举2个小例子：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$arr &#x3D; [1, 2, 3, 4, 5];</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;使用array_reduce求和</span><br><span class="line"></span><br><span class="line">function sum($arr)</span><br><span class="line">&#123;</span><br><span class="line">    return array_reduce($arr, function ($x, $y) &#123;</span><br><span class="line">        return $x + $y;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var_dump(sum($arr));</span><br></pre></td></tr></table></figure>
+<p>代码里面使用了 array_reduce 这个函数求一个数组的和，但是，如果不需要立刻求和，而是在后面的代码中，根据需要再计算怎么办？可以不返回求和的结果，而是返回求和的函数！</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function lazySum($arr)</span><br><span class="line">&#123;</span><br><span class="line">    return function () use ($arr) &#123;</span><br><span class="line">        return array_reduce($arr, function ($x, $y) &#123;</span><br><span class="line">            return $x + $y;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line">$sum &#x3D; lazySum($arr);</span><br><span class="line">var_dump($sum());</span><br></pre></td></tr></table></figure>
+<p>结果是一样的，虽然这种写法有点奇怪</p>
+<hr>
+<p>有一道面试题就涉及到了闭包的特性：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function plus()</span><br><span class="line">&#123;</span><br><span class="line">    $funcArr &#x3D; [];</span><br><span class="line">    for ($i &#x3D; 1; $i &lt;&#x3D; 3; $i++) &#123;</span><br><span class="line">        $funcArr[] &#x3D; function () use (&amp;$i) &#123;</span><br><span class="line">            return $i * $i;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    return $funcArr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$res &#x3D; plus();</span><br><span class="line"></span><br><span class="line">var_dump($res[0]());</span><br><span class="line">var_dump($res[1]());</span><br><span class="line">var_dump($res[2]());</span><br></pre></td></tr></table></figure>
+<p>plus 函数会返回3个闭包函数，然后依次调用这个几个函数, 有人以为结果可能是1,4,9，其实结果都是16，需要注意的是use 那里使用的是引用传递，这就意味着在生成这3个闭包函数的时候i的值并不是循环的时候的1,2,3，而且到最后 $i++ 之后的值也就是 4，这说明闭包函数是调用的时候才会执行。</p>
+<h3 id="四-闭包在PHP框架里面使用"><a href="#四-闭包在PHP框架里面使用" class="headerlink" title="四.闭包在PHP框架里面使用"></a>四.闭包在PHP框架里面使用</h3><p>1.一个是IOC容器</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * 闭包的使用IOC</span><br><span class="line"> * Class Container</span><br><span class="line"> *&#x2F;</span><br><span class="line">class Container</span><br><span class="line">&#123;</span><br><span class="line">    protected static $bindings;</span><br><span class="line"></span><br><span class="line">    public static function bind(string $abstract, Closure $concrete)</span><br><span class="line">    &#123;</span><br><span class="line">        static::$bindings[$abstract] &#x3D; $concrete;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static function make(string $abstract)</span><br><span class="line">    &#123;</span><br><span class="line">        return call_user_func(static::$bindings[$abstract]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class talk</span><br><span class="line">&#123;</span><br><span class="line">    public function greet($target)</span><br><span class="line">    &#123;</span><br><span class="line">        echo &quot;Hello &quot; . $target-&gt;getName();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class say</span><br><span class="line">&#123;</span><br><span class="line">    public function getName()</span><br><span class="line">    &#123;</span><br><span class="line">        return &quot;World\n&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$talk &#x3D; new talk();</span><br><span class="line"></span><br><span class="line">Container::bind(&#39;foo&#39;, function () &#123;</span><br><span class="line">    return new say();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$talk-&gt;greet(Container::make(&#39;foo&#39;));</span><br></pre></td></tr></table></figure>
+<p>接触过laravel框架的应该都见过这种写法，laravel框架称之为服务容器，其设计思想基本上就是这样，也就是在框架初始化的时候注册绑定一堆服务，然后框架里面随时就可以调用这些服务了。</p>
+<p>2.闭包路由</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * 演示闭包的使用,路由</span><br><span class="line"> * Class App</span><br><span class="line"> *&#x2F;</span><br><span class="line">class App</span><br><span class="line">&#123;</span><br><span class="line">    protected $routes &#x3D; [];</span><br><span class="line">    protected $responseStatus &#x3D; &#39;200 OK&#39;;</span><br><span class="line">    protected $responseContentType &#x3D; &#39;text&#x2F;html&#39;;</span><br><span class="line">    protected $responseBody &#x3D; &#39;Hello World&#39;;</span><br><span class="line"></span><br><span class="line">    public function addRoute(string $path, Closure $callback)</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;routes[$path] &#x3D; $callback-&gt;bindTo($this, __CLASS__);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public function dispatch(string $path)</span><br><span class="line">    &#123;</span><br><span class="line">        foreach ($this-&gt;routes as $routePath &#x3D;&gt; $callback) &#123;</span><br><span class="line">            if ($routePath &#x3D;&#x3D;&#x3D; $path) &#123;</span><br><span class="line">                $callback();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        header(&#39;HTTP&#x2F;1.1 &#39; . $this-&gt;responseStatus);</span><br><span class="line">        header(&#39;Content-Type: &#39; . $this-&gt;responseContentType);</span><br><span class="line">        header(&#39;Content-Length: &#39; . mb_strlen($this-&gt;responseBody));</span><br><span class="line">        echo $this-&gt;responseBody;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">require &#39;App.php&#39;;</span><br><span class="line"></span><br><span class="line">$app &#x3D; new App();</span><br><span class="line"></span><br><span class="line">$app-&gt;addRoute(&quot;&#x2F;&quot;, function () &#123;</span><br><span class="line">    $this-&gt;responseBody &#x3D; &quot;Hello Closure!\n&quot;;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$app-&gt;dispatch(&quot;&#x2F;&quot;);</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>编程开发</category>
+      </categories>
+      <tags>
+        <tag>PHP</tag>
+        <tag>Closure</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>PHP Socket 网络编程</title>
     <url>/2018/coding/php/php-socket-programing.html</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在做PHP开发的过程中，大部分我们都在和http协议打交道，在ISO模型里面，http属于应用层协议，它底层会用到TCP协议。http协议非常简单，它是一个文本协议，一个请求对应一个响应，客户端发起一个请求，服务端响应这个请求。http是一个一问一答的对话，每次请求都得重新建立对话（这里暂不讨论Keep-Alive），如果你想通过一个请求进行多次对话，那就是长连接通信，必须使用TCP或者UDP协议。</p>
@@ -2078,56 +2182,6 @@
       <tags>
         <tag>PHP</tag>
         <tag>Socket</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>PHP匿名函数和闭包</title>
-    <url>/2018/coding/php/php-closure-function.html</url>
-    <content><![CDATA[<h3 id="一-什么是闭包？"><a href="#一-什么是闭包？" class="headerlink" title="一.什么是闭包？"></a>一.什么是闭包？</h3><p>先看看百度百科的介绍：</p>
-<blockquote>
-<p>闭包包含自由（未绑定到特定对象）变量，这些变量不是在这个代码块内或者任何全局上下文中定义的，而是在定义代码块的环境中定义（局部变量）。<br>“闭包” 一词来源于以下两者的结合：要执行的代码块（由于自由变量被包含在代码块中，这些自由变量以及它们引用的对象没有被释放）和为自由变量提供绑定的计算环境（作用域）。<br>在PHP、Scala、Scheme、Common Lisp、Smalltalk、Groovy、JavaScript、Ruby、 Python、Go、Lua、objective c、swift 以及Java（Java8及以上）等语言中都能找到对闭包不同程度的支持。</p>
-</blockquote>
-<p>说实话，这个介绍虽然专业，但是有点僵硬不太容易理解，闭包是一种设计思想，而不是一种语法特性，在PHP语言里面，匿名函数就是闭包的一种实现。</p>
-<h3 id="二-匿名函数"><a href="#二-匿名函数" class="headerlink" title="二.匿名函数"></a>二.匿名函数</h3><p>这个我相信大家都多多少少用过，看一下代码：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$f &#x3D; function () &#123;</span><br><span class="line">    $a &#x3D; 1;</span><br><span class="line">    $b &#x3D; 2;</span><br><span class="line">    return $a + $b;</span><br><span class="line">&#125;;</span><br><span class="line">var_dump($f);</span><br></pre></td></tr></table></figure>
-<p>输出结果是：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Closure#1 (0) &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<a id="more"></a>
-
-<p>可见，PHP中匿名函数就是闭包，也可以理解为闭包就是把这个函数赋值给一个变量，这时候这个变量保存的就是这个函数的内存地址。</p>
-<p>如何去调用这个闭包函数呢？很简单，在这个例子里面只要 <strong>$f()</strong> 就可以了</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var_dump($f()); #结果是：3</span><br></pre></td></tr></table></figure>
-
-<p>当然这个匿名函数也是可以传参的，你可以这样写：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$f &#x3D; function ($c) &#123;</span><br><span class="line">    $a &#x3D; 1;</span><br><span class="line">    $b &#x3D; 2;</span><br><span class="line">    return $a + $b + $c;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>这样你在调用的时候就可以传入参数，类似 <strong>$f(3)</strong>, 但是有一点需要注意，如果这时候你想在定义闭包函数的时候使用外部变量，举个例子</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$out &#x3D; 100;</span><br><span class="line">$f &#x3D; function ($c) &#123;</span><br><span class="line">    $a &#x3D; 1;</span><br><span class="line">    $b &#x3D; 2;</span><br><span class="line">    return $out - ($a + $b + $c); #报错，无法引用外部变量out</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>这时候就体现了闭包封闭的特性，但是PHP提供了一个 use 关键字，可以使用下面这个写法：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$out &#x3D; 100;</span><br><span class="line">$f &#x3D; function ($c) use ($out) &#123;</span><br><span class="line">    $a &#x3D; 1;</span><br><span class="line">    $b &#x3D; 2;</span><br><span class="line">    return $out - ($a + $b + $c);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h3 id="三-闭包到底有啥用？"><a href="#三-闭包到底有啥用？" class="headerlink" title="三.闭包到底有啥用？"></a>三.闭包到底有啥用？</h3><p>一般来说还是在框架以及一些架构设计里面会用到，这里先举2个小例子：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$arr &#x3D; [1, 2, 3, 4, 5];</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;使用array_reduce求和</span><br><span class="line"></span><br><span class="line">function sum($arr)</span><br><span class="line">&#123;</span><br><span class="line">    return array_reduce($arr, function ($x, $y) &#123;</span><br><span class="line">        return $x + $y;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var_dump(sum($arr));</span><br></pre></td></tr></table></figure>
-<p>代码里面使用了 array_reduce 这个函数求一个数组的和，但是，如果不需要立刻求和，而是在后面的代码中，根据需要再计算怎么办？可以不返回求和的结果，而是返回求和的函数！</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function lazySum($arr)</span><br><span class="line">&#123;</span><br><span class="line">    return function () use ($arr) &#123;</span><br><span class="line">        return array_reduce($arr, function ($x, $y) &#123;</span><br><span class="line">            return $x + $y;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line">$sum &#x3D; lazySum($arr);</span><br><span class="line">var_dump($sum());</span><br></pre></td></tr></table></figure>
-<p>结果是一样的，虽然这种写法有点奇怪</p>
-<hr>
-<p>有一道面试题就涉及到了闭包的特性：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function plus()</span><br><span class="line">&#123;</span><br><span class="line">    $funcArr &#x3D; [];</span><br><span class="line">    for ($i &#x3D; 1; $i &lt;&#x3D; 3; $i++) &#123;</span><br><span class="line">        $funcArr[] &#x3D; function () use (&amp;$i) &#123;</span><br><span class="line">            return $i * $i;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    return $funcArr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$res &#x3D; plus();</span><br><span class="line"></span><br><span class="line">var_dump($res[0]());</span><br><span class="line">var_dump($res[1]());</span><br><span class="line">var_dump($res[2]());</span><br></pre></td></tr></table></figure>
-<p>plus 函数会返回3个闭包函数，然后依次调用这个几个函数, 有人以为结果可能是1,4,9，其实结果都是16，需要注意的是use 那里使用的是引用传递，这就意味着在生成这3个闭包函数的时候i的值并不是循环的时候的1,2,3，而且到最后 $i++ 之后的值也就是 4，这说明闭包函数是调用的时候才会执行。</p>
-<h3 id="四-闭包在PHP框架里面使用"><a href="#四-闭包在PHP框架里面使用" class="headerlink" title="四.闭包在PHP框架里面使用"></a>四.闭包在PHP框架里面使用</h3><p>1.一个是IOC容器</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * 闭包的使用IOC</span><br><span class="line"> * Class Container</span><br><span class="line"> *&#x2F;</span><br><span class="line">class Container</span><br><span class="line">&#123;</span><br><span class="line">    protected static $bindings;</span><br><span class="line"></span><br><span class="line">    public static function bind(string $abstract, Closure $concrete)</span><br><span class="line">    &#123;</span><br><span class="line">        static::$bindings[$abstract] &#x3D; $concrete;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static function make(string $abstract)</span><br><span class="line">    &#123;</span><br><span class="line">        return call_user_func(static::$bindings[$abstract]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class talk</span><br><span class="line">&#123;</span><br><span class="line">    public function greet($target)</span><br><span class="line">    &#123;</span><br><span class="line">        echo &quot;Hello &quot; . $target-&gt;getName();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class say</span><br><span class="line">&#123;</span><br><span class="line">    public function getName()</span><br><span class="line">    &#123;</span><br><span class="line">        return &quot;World\n&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$talk &#x3D; new talk();</span><br><span class="line"></span><br><span class="line">Container::bind(&#39;foo&#39;, function () &#123;</span><br><span class="line">    return new say();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$talk-&gt;greet(Container::make(&#39;foo&#39;));</span><br></pre></td></tr></table></figure>
-<p>接触过laravel框架的应该都见过这种写法，laravel框架称之为服务容器，其设计思想基本上就是这样，也就是在框架初始化的时候注册绑定一堆服务，然后框架里面随时就可以调用这些服务了。</p>
-<p>2.闭包路由</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * 演示闭包的使用,路由</span><br><span class="line"> * Class App</span><br><span class="line"> *&#x2F;</span><br><span class="line">class App</span><br><span class="line">&#123;</span><br><span class="line">    protected $routes &#x3D; [];</span><br><span class="line">    protected $responseStatus &#x3D; &#39;200 OK&#39;;</span><br><span class="line">    protected $responseContentType &#x3D; &#39;text&#x2F;html&#39;;</span><br><span class="line">    protected $responseBody &#x3D; &#39;Hello World&#39;;</span><br><span class="line"></span><br><span class="line">    public function addRoute(string $path, Closure $callback)</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;routes[$path] &#x3D; $callback-&gt;bindTo($this, __CLASS__);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public function dispatch(string $path)</span><br><span class="line">    &#123;</span><br><span class="line">        foreach ($this-&gt;routes as $routePath &#x3D;&gt; $callback) &#123;</span><br><span class="line">            if ($routePath &#x3D;&#x3D;&#x3D; $path) &#123;</span><br><span class="line">                $callback();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        header(&#39;HTTP&#x2F;1.1 &#39; . $this-&gt;responseStatus);</span><br><span class="line">        header(&#39;Content-Type: &#39; . $this-&gt;responseContentType);</span><br><span class="line">        header(&#39;Content-Length: &#39; . mb_strlen($this-&gt;responseBody));</span><br><span class="line">        echo $this-&gt;responseBody;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">require &#39;App.php&#39;;</span><br><span class="line"></span><br><span class="line">$app &#x3D; new App();</span><br><span class="line"></span><br><span class="line">$app-&gt;addRoute(&quot;&#x2F;&quot;, function () &#123;</span><br><span class="line">    $this-&gt;responseBody &#x3D; &quot;Hello Closure!\n&quot;;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$app-&gt;dispatch(&quot;&#x2F;&quot;);</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>编程开发</category>
-      </categories>
-      <tags>
-        <tag>PHP</tag>
-        <tag>Closure</tag>
       </tags>
   </entry>
   <entry>
