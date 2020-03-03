@@ -1243,7 +1243,7 @@
     <title>Web开发中用到的Cache</title>
     <url>/2019/coding/web-cache-usage.html</url>
     <content><![CDATA[<h2 id="1-什么是Cache？"><a href="#1-什么是Cache？" class="headerlink" title="1.什么是Cache？"></a>1.什么是Cache？</h2><p>Cache(音: 侃屎),中文称为缓存，缓存可以说是计算机系统里面一味良药，在很多地方的设计都用到了Cache，比如在CPU里面的一级缓存，二级缓存，好的CPU还有三级缓存。硬盘也有缓存，比如一般1T的机械硬盘会有64M的闪存缓存。</p>
-<p><img src="https://ww1.sinaimg.cn/large/5f6e3e27ly1fymbinhu4uj20di0avtel.jpg" alt=""></p>
+<p><img src="/images/2020-03-03.jpg" alt=""></p>
 <p>在软件系统里面，缓存更是无处不在，比如浏览器本地缓存、网络缓存、CDN缓存、代理缓存…</p>
 <a id="more"></a>
 

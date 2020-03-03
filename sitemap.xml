@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://wangbjun.site/2019/coding/web-cache-usage.html</loc>
+    
+    <lastmod>2020-03-03T02:57:49.152Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://wangbjun.site/2018/linux/git-base-usage.html</loc>
     
     <lastmod>2020-03-03T02:51:12.458Z</lastmod>
@@ -131,13 +138,6 @@
     <loc>https://wangbjun.site/2016/coding/php/php-autoload.html</loc>
     
     <lastmod>2020-03-03T02:50:13.599Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wangbjun.site/2019/coding/web-cache-usage.html</loc>
-    
-    <lastmod>2020-03-03T02:50:13.595Z</lastmod>
     
   </url>
   
