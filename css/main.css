@@ -186,7 +186,7 @@ th {
 body {
   position: relative;
   font-family: "Georgia", "serif", sans-serif;
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.8;
   color: #000;
   background: #eee;
@@ -203,7 +203,7 @@ body {
 }
 @media (min-width: 1600px) {
   body {
-    font-size: 18px;
+    font-size: 17px;
   }
 }
 h1,
@@ -488,7 +488,7 @@ code {
   padding: 2px 4px;
   word-wrap: break-word;
   color: #555;
-  background: #ffc0cb;
+  background: #eee;
   border-radius: 3px;
   font-size: 13px;
 }
@@ -1231,7 +1231,6 @@ pre .javascript .function {
   display: block !important;
   margin: 0 auto;
   cursor: pointer;
-  cursor: zoom-in;
   cursor: -webkit-zoom-in;
   border-radius: 16px;
 }
@@ -1239,7 +1238,7 @@ pre .javascript .function {
 .post-body .figure .caption {
   margin: 10px auto 15px;
   text-align: center;
-  font-size: 16px;
+  font-size: 15px;
   color: #999;
   font-weight: bold;
   line-height: 1;
@@ -1258,9 +1257,6 @@ pre .javascript .function {
   padding-top: 40px;
 }
 @media (max-width: 767px) {
-  .post-body {
-    font-size: 16px;
-  }
   .post-body pre {
     padding: 10px;
   }
@@ -1321,6 +1317,7 @@ pre .javascript .function {
   margin: auto;
   padding: 3px;
   border: 1px solid #ddd;
+  border-radius: 16px;
 }
 .posts-expand .fancybox img {
   margin: 0 auto;
@@ -1349,7 +1346,6 @@ pre .javascript .function {
   margin-left: -2px;
   width: 4px;
   height: 100%;
-  background: #f5f5d5;
   z-index: -1;
 }
 @media (max-width: 767px) {
@@ -1833,7 +1829,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #4a3c77;
+  background: #ac7721;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2613,7 +2609,7 @@ pre .javascript .function {
   overflow: hidden;
   padding: 0;
   width: 240px;
-  background: #f5f5d5;
+  background: #fff;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12);
   border-radius: initial;
 }
@@ -2635,9 +2631,6 @@ pre .javascript .function {
     width: auto;
     border-radius: initial;
   }
-}
-.main {
-  background-color: #f5f5d5;
 }
 .main:before,
 .main:after {
@@ -2809,14 +2802,11 @@ pre .javascript .function {
 }
 .menu .menu-item a:hover,
 .menu-item-active a {
-  background: #eaeab3;
-  border-bottom-color: #eaeab3;
+  background: #f9f9f9;
+  border-bottom-color: #fff;
 }
 .menu .menu-item br {
   display: none;
-}
-.menu-item-active a {
-  background-color: #eaeab3;
 }
 .menu-item-active a:after {
   content: " ";
@@ -2860,7 +2850,7 @@ pre .javascript .function {
   box-sizing: border-box;
   width: 240px;
   color: #000;
-  background: #f5f5d5;
+  background: #fff;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12), 0 -1px 0.5px 0 rgba(0,0,0,0.09);
   border-radius: initial;
 }
@@ -2993,7 +2983,7 @@ pre .javascript .function {
 }
 .post-block {
   margin-bottom: 12px;
-  background: #f5f5d5;
+  background: #fff;
   padding: 20px;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12);
   border-radius: initial;
@@ -3009,7 +2999,6 @@ pre .javascript .function {
 }
 .footer {
   bottom: auto;
-  background-color: #f5f5d5;
 }
 .post-toc .nav .nav-child {
   display: block;
