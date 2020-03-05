@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://wangbjun.site/2018/linux/linux-tools-software.html</loc>
+    <lastmod>2020-03-05</lastmod>
+  </url>  <url>
     <loc>https://wangbjun.site/2020/life/wuhan-ncp.html</loc>
     <lastmod>2020-03-03</lastmod>
   </url>  <url>
@@ -17,9 +20,6 @@
     <lastmod>2020-03-03</lastmod>
   </url>  <url>
     <loc>https://wangbjun.site/2018/coding/php/php-socket-programing.html</loc>
-    <lastmod>2020-03-03</lastmod>
-  </url>  <url>
-    <loc>https://wangbjun.site/2018/linux/linux-tools-software.html</loc>
     <lastmod>2020-03-03</lastmod>
   </url>  <url>
     <loc>https://wangbjun.site/2018/linux/qt-can-not-find-igl.html</loc>
@@ -121,7 +121,10 @@
     <loc>https://wangbjun.site/2020/linux/do-you-need-linux.html</loc>
     <lastmod>2020-02-10</lastmod>
   </url>  <url>
-    <loc>https://wangbjun.site/2016/coding/php/php-array.html</loc>
+    <loc>https://wangbjun.site/2019/coding/golang/golang-di.html</loc>
+    <lastmod>2020-02-09</lastmod>
+  </url>  <url>
+    <loc>https://wangbjun.site/2017/coding/php/php-multi-process.html</loc>
     <lastmod>2020-02-09</lastmod>
   </url>  <url>
     <loc>https://wangbjun.site/2019/coding/golang/golang-oop.html</loc>
@@ -130,13 +133,16 @@
     <loc>https://wangbjun.site/2018/coding/golang/goroutine.html</loc>
     <lastmod>2020-02-09</lastmod>
   </url>  <url>
-    <loc>https://wangbjun.site/2019/coding/golang/golang-string-function.html</loc>
-    <lastmod>2020-02-09</lastmod>
-  </url>  <url>
     <loc>https://wangbjun.site/2019/coding/golang/golang-recover.html</loc>
     <lastmod>2020-02-09</lastmod>
   </url>  <url>
+    <loc>https://wangbjun.site/2019/coding/golang/golang-string-function.html</loc>
+    <lastmod>2020-02-09</lastmod>
+  </url>  <url>
     <loc>https://wangbjun.site/2019/coding/golang/golang-protobuf.html</loc>
+    <lastmod>2020-02-09</lastmod>
+  </url>  <url>
+    <loc>https://wangbjun.site/2016/coding/php/php-array.html</loc>
     <lastmod>2020-02-09</lastmod>
   </url>  <url>
     <loc>https://wangbjun.site/2017/coding/php/php-priority-queue.html</loc>
@@ -145,25 +151,19 @@
     <loc>https://wangbjun.site/2016/coding/php/php-designpattern-decorator.html</loc>
     <lastmod>2020-02-09</lastmod>
   </url>  <url>
-    <loc>https://wangbjun.site/2018/coding/php/php-closure-function.html</loc>
-    <lastmod>2020-02-09</lastmod>
-  </url>  <url>
     <loc>https://wangbjun.site/2016/coding/php/php-oop-thinking.html</loc>
     <lastmod>2020-02-09</lastmod>
   </url>  <url>
-    <loc>https://wangbjun.site/2016/coding/php/php-designpattern-single.html</loc>
+    <loc>https://wangbjun.site/2018/coding/php/php-closure-function.html</loc>
     <lastmod>2020-02-09</lastmod>
   </url>  <url>
     <loc>https://wangbjun.site/2016/coding/php/php-designpattern-factory.html</loc>
     <lastmod>2020-02-09</lastmod>
   </url>  <url>
+    <loc>https://wangbjun.site/2016/coding/php/php-designpattern-single.html</loc>
+    <lastmod>2020-02-09</lastmod>
+  </url>  <url>
     <loc>https://wangbjun.site/2017/coding/php/php-designpattern-filter.html</loc>
-    <lastmod>2020-02-09</lastmod>
-  </url>  <url>
-    <loc>https://wangbjun.site/2017/coding/php/php-multi-process.html</loc>
-    <lastmod>2020-02-09</lastmod>
-  </url>  <url>
-    <loc>https://wangbjun.site/2019/coding/golang/golang-di.html</loc>
     <lastmod>2020-02-09</lastmod>
   </url>  <url>
     <loc>https://wangbjun.site/2019/coding/golang/golang-tcp-package.html</loc>
