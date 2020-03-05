@@ -91,13 +91,11 @@
 <meta property="og:url" content="https://wangbjun.site/2016/coding/php/php-autoload.html">
 <meta property="og:site_name" content="JWang的博客">
 <meta property="og:description" content="1.手动加载？首先，咱们先想一个问题，为什么需要加载机制？ 理论上讲，你可以把所有PHP代码都写在一个文件里面，早期PHP确实有很多这样的代码，因为那时候还没有面向对象的概念，没有代码分层，一个PHP文件里面一大堆函数，一个功能一个函数这么写就行了。 后来，大家都发现这样写起来太乱，不利于维护和扩展，更重要的是有了面向对象的概念，我们可以把属性和方法封装到类里面，然后需要用到的时候就实例化这个类，">
-<meta property="og:image" content="https://ww1.sinaimg.cn/large/5f6e3e27ly1fx1uzv0zpuj208n0723yl.jpg">
 <meta property="article:published_time" content="2016-01-05T04:00:00.000Z">
-<meta property="article:modified_time" content="2020-03-03T02:50:13.599Z">
+<meta property="article:modified_time" content="2020-03-05T14:32:40.460Z">
 <meta property="article:author" content="Ben Jun">
 <meta property="article:tag" content="PHP">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://ww1.sinaimg.cn/large/5f6e3e27ly1fx1uzv0zpuj208n0723yl.jpg">
 
 
 
@@ -320,8 +318,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-03-03T10:50:13+08:00">
-                2020-03-03
+              <time title="更新于" itemprop="dateModified" datetime="2020-03-05T22:32:40+08:00">
+                2020-03-05
               </time>
             
           </span>
@@ -457,7 +455,8 @@
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">require</span> <span class="string">"vendor/autoload.php"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">ClassA</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">ClassB</span>;</span><br><span class="line"></span><br><span class="line">$a = <span class="keyword">new</span> ClassA();</span><br><span class="line"></span><br><span class="line">$b = <span class="keyword">new</span> ClassB();</span><br><span class="line"></span><br><span class="line">$c = <span class="keyword">new</span> SomeClass();</span><br><span class="line"></span><br><span class="line">var_dump($a);</span><br><span class="line">var_dump($b);</span><br><span class="line">var_dump($c);</span><br></pre></td></tr></table></figure>
 
 <p>最终目录结构如下图：</p>
-<p><img src="https://ww1.sinaimg.cn/large/5f6e3e27ly1fx1uzv0zpuj208n0723yl.jpg" alt=""></p>
+<img src = "5f6e3e27ly1fx1uzv0zpuj208n0723yl.jpg" />
+
 <p>现在大多数Web框架都是采用MVC模式，一般都有一个统一的入口文件，比如index.php, 通常会在这个入口文件定义自动加载机制，使用composer的话只需要include一个autoload.php文件即可！</p>
 
       

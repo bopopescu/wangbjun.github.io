@@ -85,22 +85,19 @@
 
 
 
-<meta name="description" content="其实这些都是PHP SPL 标准库里面的东西, SPL是用于解决典型问题(standard problems)的一组接口与类的集合。说白了，这是PHP官方实现的一些数据结构,印象中Java的标准库就很强大，不要慌，PHP也有。  按顺序来，先讲一下这个双向链表(double link list)，数据结构讲的是思想，不分编程语言，所以先回顾一下基本概念吧。">
+<meta name="description" content="其实这些都是PHP SPL 标准库里面的东西, SPL是用于解决典型问题(standard problems)的一组接口与类的集合。说白了，这是PHP官方实现的一些数据结构,印象中Java的标准库就很强大，不要慌，PHP也有。   按顺序来，先讲一下这个双向链表(double link list)，数据结构讲的是思想，不分编程语言，所以先回顾一下基本概念吧。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PHP数据结构之双向链表">
 <meta property="og:url" content="https://wangbjun.site/2015/coding/php/php-double-linklist.html">
 <meta property="og:site_name" content="JWang的博客">
-<meta property="og:description" content="其实这些都是PHP SPL 标准库里面的东西, SPL是用于解决典型问题(standard problems)的一组接口与类的集合。说白了，这是PHP官方实现的一些数据结构,印象中Java的标准库就很强大，不要慌，PHP也有。  按顺序来，先讲一下这个双向链表(double link list)，数据结构讲的是思想，不分编程语言，所以先回顾一下基本概念吧。">
-<meta property="og:image" content="https://ww1.sinaimg.cn/large/5f6e3e27ly1fv0rjzmm26j20hz0himyz.jpg">
-<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1536298900470&di=bed31d47583655de7d4e623e3c4d2bdf&imgtype=jpg&src=http%253A%252F%252Fimg3.imgtn.bdimg.com%252Fit%252Fu%253D1355954038%252C3984007412%2526fm%253D214%2526gp%253D0.jpg">
-<meta property="og:image" content="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=152820947,1698821981&fm=26&gp=0.jpg">
-<meta property="og:image" content="https://ww1.sinaimg.cn/large/5f6e3e27ly1fv0sjz2p5qj20ke0mzdis.jpg">
+<meta property="og:description" content="其实这些都是PHP SPL 标准库里面的东西, SPL是用于解决典型问题(standard problems)的一组接口与类的集合。说白了，这是PHP官方实现的一些数据结构,印象中Java的标准库就很强大，不要慌，PHP也有。   按顺序来，先讲一下这个双向链表(double link list)，数据结构讲的是思想，不分编程语言，所以先回顾一下基本概念吧。">
+<meta property="og:image" content="https://wangbjun.site/images/5f62e3e2x7ly1fv0rjzmxm26j20hz0him1yz.jpg">
 <meta property="article:published_time" content="2015-12-01T03:01:13.000Z">
-<meta property="article:modified_time" content="2020-03-03T02:50:13.587Z">
+<meta property="article:modified_time" content="2020-03-05T14:35:54.827Z">
 <meta property="article:author" content="Ben Jun">
 <meta property="article:tag" content="PHP">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://ww1.sinaimg.cn/large/5f6e3e27ly1fv0rjzmm26j20hz0himyz.jpg">
+<meta name="twitter:image" content="https://wangbjun.site/images/5f62e3e2x7ly1fv0rjzmxm26j20hz0him1yz.jpg">
 
 
 
@@ -323,8 +320,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-03-03T10:50:13+08:00">
-                2020-03-03
+              <time title="更新于" itemprop="dateModified" datetime="2020-03-05T22:35:54+08:00">
+                2020-03-05
               </time>
             
           </span>
@@ -406,7 +403,8 @@
 
       
         <p>其实这些都是PHP SPL 标准库里面的东西, SPL是用于解决典型问题(standard problems)的一组接口与类的集合。说白了，这是PHP官方实现的一些数据结构,<br>印象中Java的标准库就很强大，不要慌，PHP也有。</p>
-<p><img src="https://ww1.sinaimg.cn/large/5f6e3e27ly1fv0rjzmm26j20hz0himyz.jpg" alt=""></p>
+<img src = "/images/5f6e3e27ly1fv0rjzmm26j20hz0himyz.jpg" />
+
 <p>按顺序来，先讲一下这个双向链表(double link list)，数据结构讲的是思想，不分编程语言，所以先回顾一下基本概念吧。</p>
 <a id="more"></a>
 
@@ -416,11 +414,12 @@
 <p>这是百度百科的介绍，不黑不吹，讲的还是非常准确的。我觉得链表最大的特点就是 非连续和非顺序存储，和其对应的就是数组，大家都知道数组在内存里面是连续存储的,<br>由于是连续存储，操作系统在每次分配内存的时候并不一定刚好有那么大小的一块连续的内存，于是就会产生内存碎片。而且数组还有一点不好，想找一个数得从头开始一个个找,<br>其查找时间是O(n),链表是O(1)。总的来说，链表是为了解决数组的不足。</p>
 <p>有一点需要说一下，PHP的数组并不是传统意义的数组，在C和Go等语言里面，数组是一个固定大小，固定类型的数据集合，但是PHP的数组啥都干,其功能应该是集了数组，切片，链表，map等数据结构的综合体,<br>在很多其它编程语言里面，这些数据结构是分的非常清楚。所以有时候理解这些概念的时候，不要拿PHP的数组对号入座哈。</p>
 <p>借2张图理解一下：</p>
-<p><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1536298900470&di=bed31d47583655de7d4e623e3c4d2bdf&imgtype=jpg&src=http%3A%2F%2Fimg3.imgtn.bdimg.com%2Fit%2Fu%3D1355954038%2C3984007412%26fm%3D214%26gp%3D0.jpg" alt=""></p>
-<p><img src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=152820947,1698821981&fm=26&gp=0.jpg" alt=""></p>
+<img src="/images/5f62e3e2x7ly1fv0rjzmxm26j20hz0him1yz.jpg" >
+
 <p>举个形象的例子，这个链表就有点像链条，每一个链条单元是首尾相接，自行车链条就是环型链表，而数组就是铁轨，直的，虽然跑的快, 但是要求高！</p>
 <p>如果用PHP去实现链表倒是不难，毕竟PHP这么强大，可以用数组模拟，但是性能并不高，这里就看一下官方的实现吧：</p>
-<p><img src="https://ww1.sinaimg.cn/large/5f6e3e27ly1fv0sjz2p5qj20ke0mzdis.jpg" alt=""></p>
+<img src = "/images/5f6e3e27ly1fv0sjz2p5qj20ke0mzdis.jpg" />
+
 <p>可以看到这个类实现了Iterator，arrayAccess等接口，就意味着可以像数组一样访问这个对象，有push,pop,shift,unshift,current等方法。</p>
 <p>举个例子：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$dll = <span class="keyword">new</span> SplDoublyLinkedList();</span><br><span class="line">$dll-&gt;add(<span class="number">0</span>, <span class="string">'a'</span>);</span><br><span class="line">$dll-&gt;add(<span class="number">1</span>, <span class="string">'b'</span>);</span><br><span class="line">$dll-&gt;add(<span class="number">2</span>, <span class="string">'c'</span>);</span><br><span class="line">$dll-&gt;add(<span class="number">3</span>, <span class="string">'d'</span>);</span><br><span class="line">$dll-&gt;add(<span class="number">4</span>, <span class="string">'e'</span>);</span><br><span class="line"></span><br><span class="line">var_dump($dll);</span><br><span class="line">var_dump($dll-&gt;pop()); <span class="comment"># 右边出列</span></span><br><span class="line">var_dump($dll-&gt;shift()); <span class="comment"># 左边出列</span></span><br><span class="line"></span><br><span class="line">var_dump($dll-&gt;bottom()); <span class="comment"># 第一个节点</span></span><br><span class="line">var_dump($dll-&gt;top());    <span class="comment"># 最后一个节点</span></span><br><span class="line"></span><br><span class="line">$dll-&gt;unshift(<span class="string">'b'</span>); <span class="comment"># 左边入列</span></span><br><span class="line">$dll-&gt;push(<span class="string">'d'</span>); <span class="comment"># 右边入列</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//数组遍历</span></span><br><span class="line"><span class="keyword">foreach</span> ($dll <span class="keyword">as</span> $value) &#123;</span><br><span class="line">    var_dump($value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$dll-&gt;push(<span class="string">'f'</span>);</span><br><span class="line"></span><br><span class="line">$dll-&gt;setIteratorMode(SplDoublyLinkedList::IT_MODE_FIFO); <span class="comment"># FIFO first insert first out</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//循环遍历</span></span><br><span class="line"><span class="keyword">for</span> ($dll-&gt;rewind(); $dll-&gt;valid(); $dll-&gt;next()) &#123;</span><br><span class="line">    var_dump($dll-&gt;current()) . <span class="string">"\n"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
