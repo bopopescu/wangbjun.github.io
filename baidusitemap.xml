@@ -1,19 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://wangbjun.site/2017/coding/php/php-form-pass-method.html</loc>
+    <loc>https://wangbjun.site/2020/life/2019-2.html</loc>
     <lastmod>2020-03-05</lastmod>
   </url>  <url>
-    <loc>https://wangbjun.site/2018/coding/where-is-variable-value.html</loc>
-    <lastmod>2020-03-05</lastmod>
-  </url>  <url>
-    <loc>https://wangbjun.site/2018/linux/git-base-usage.html</loc>
-    <lastmod>2020-03-05</lastmod>
-  </url>  <url>
-    <loc>https://wangbjun.site/2015/coding/php/php-double-linklist.html</loc>
+    <loc>https://wangbjun.site/2020/life/2019-1.html</loc>
     <lastmod>2020-03-05</lastmod>
   </url>  <url>
     <loc>https://wangbjun.site/2019/linux/ubuntu-nvidia-dirver.html</loc>
+    <lastmod>2020-03-05</lastmod>
+  </url>  <url>
+    <loc>https://wangbjun.site/2015/coding/php/php-radio.html</loc>
+    <lastmod>2020-03-05</lastmod>
+  </url>  <url>
+    <loc>https://wangbjun.site/2019/linux/sudo-command-not-found.html</loc>
+    <lastmod>2020-03-05</lastmod>
+  </url>  <url>
+    <loc>https://wangbjun.site/2018/linux/deepin-wine-qq-bug.html</loc>
+    <lastmod>2020-03-05</lastmod>
+  </url>  <url>
+    <loc>https://wangbjun.site/2018/coding/mysql-group-orderby.html</loc>
+    <lastmod>2020-03-05</lastmod>
+  </url>  <url>
+    <loc>https://wangbjun.site/2017/coding/php/php-form-pass-method.html</loc>
+    <lastmod>2020-03-05</lastmod>
+  </url>  <url>
+    <loc>https://wangbjun.site/2018/linux/linux-tools-software.html</loc>
+    <lastmod>2020-03-05</lastmod>
+  </url>  <url>
+    <loc>https://wangbjun.site/2019/coding/short-url.html</loc>
+    <lastmod>2020-03-05</lastmod>
+  </url>  <url>
+    <loc>https://wangbjun.site/2019/linux/ubuntu-4k-scale.html</loc>
     <lastmod>2020-03-05</lastmod>
   </url>  <url>
     <loc>https://wangbjun.site/2018/linux/linux-ntfs-samba.html</loc>
@@ -31,10 +49,19 @@
     <loc>https://wangbjun.site/2018/coding/bitmap.html</loc>
     <lastmod>2020-03-05</lastmod>
   </url>  <url>
+    <loc>https://wangbjun.site/2018/coding/where-is-variable-value.html</loc>
+    <lastmod>2020-03-05</lastmod>
+  </url>  <url>
+    <loc>https://wangbjun.site/2015/coding/php/php-datastruct-btree.html</loc>
+    <lastmod>2020-03-05</lastmod>
+  </url>  <url>
     <loc>https://wangbjun.site/2018/coding/di-and-ioc.html</loc>
     <lastmod>2020-03-05</lastmod>
   </url>  <url>
     <loc>https://wangbjun.site/2018/coding/php/php-socket-programing.html</loc>
+    <lastmod>2020-03-05</lastmod>
+  </url>  <url>
+    <loc>https://wangbjun.site/2015/coding/php/php-double-linklist.html</loc>
     <lastmod>2020-03-05</lastmod>
   </url>  <url>
     <loc>https://wangbjun.site/2018/linux/git-branch-usage.html</loc>
@@ -46,6 +73,9 @@
     <loc>https://wangbjun.site/2019/coding/designpattern-middleware.html</loc>
     <lastmod>2020-03-05</lastmod>
   </url>  <url>
+    <loc>https://wangbjun.site/2018/linux/git-base-usage.html</loc>
+    <lastmod>2020-03-05</lastmod>
+  </url>  <url>
     <loc>https://wangbjun.site/2019/coding/web-cache-usage.html</loc>
     <lastmod>2020-03-05</lastmod>
   </url>  <url>
@@ -53,24 +83,6 @@
     <lastmod>2020-03-05</lastmod>
   </url>  <url>
     <loc>https://wangbjun.site/2016/coding/php/php-autoload.html</loc>
-    <lastmod>2020-03-05</lastmod>
-  </url>  <url>
-    <loc>https://wangbjun.site/2015/coding/php/php-datastruct-btree.html</loc>
-    <lastmod>2020-03-05</lastmod>
-  </url>  <url>
-    <loc>https://wangbjun.site/2018/linux/deepin-wine-qq-bug.html</loc>
-    <lastmod>2020-03-05</lastmod>
-  </url>  <url>
-    <loc>https://wangbjun.site/2019/linux/sudo-command-not-found.html</loc>
-    <lastmod>2020-03-05</lastmod>
-  </url>  <url>
-    <loc>https://wangbjun.site/2018/coding/mysql-group-orderby.html</loc>
-    <lastmod>2020-03-05</lastmod>
-  </url>  <url>
-    <loc>https://wangbjun.site/2015/coding/php/php-radio.html</loc>
-    <lastmod>2020-03-05</lastmod>
-  </url>  <url>
-    <loc>https://wangbjun.site/2018/linux/linux-tools-software.html</loc>
     <lastmod>2020-03-05</lastmod>
   </url>  <url>
     <loc>https://wangbjun.site/2020/life/wuhan-ncp.html</loc>
@@ -83,9 +95,6 @@
     <lastmod>2020-03-03</lastmod>
   </url>  <url>
     <loc>https://wangbjun.site/2018/linux/qt-can-not-find-igl.html</loc>
-    <lastmod>2020-03-03</lastmod>
-  </url>  <url>
-    <loc>https://wangbjun.site/2019/coding/short-url.html</loc>
     <lastmod>2020-03-03</lastmod>
   </url>  <url>
     <loc>https://wangbjun.site/2020/linux/hexo-github-blog.html</loc>
@@ -112,9 +121,6 @@
     <loc>https://wangbjun.site/2020/life/walk-on-the-318-road-1.html</loc>
     <lastmod>2020-02-26</lastmod>
   </url>  <url>
-    <loc>https://wangbjun.site/2019/linux/ubuntu-4k-scale.html</loc>
-    <lastmod>2020-02-20</lastmod>
-  </url>  <url>
     <loc>https://wangbjun.site/2020/life/walk-on-the-318-road.html</loc>
     <lastmod>2020-02-13</lastmod>
   </url>  <url>
@@ -127,49 +133,49 @@
     <loc>https://wangbjun.site/2019/coding/golang/golang-protobuf.html</loc>
     <lastmod>2020-02-09</lastmod>
   </url>  <url>
-    <loc>https://wangbjun.site/2017/coding/php/php-priority-queue.html</loc>
+    <loc>https://wangbjun.site/2019/coding/golang/golang-string-function.html</loc>
     <lastmod>2020-02-09</lastmod>
   </url>  <url>
-    <loc>https://wangbjun.site/2019/coding/golang/golang-recover.html</loc>
-    <lastmod>2020-02-09</lastmod>
-  </url>  <url>
-    <loc>https://wangbjun.site/2016/coding/php/php-oop-thinking.html</loc>
-    <lastmod>2020-02-09</lastmod>
-  </url>  <url>
-    <loc>https://wangbjun.site/2018/coding/php/php-closure-function.html</loc>
+    <loc>https://wangbjun.site/2019/coding/golang/golang-oop.html</loc>
     <lastmod>2020-02-09</lastmod>
   </url>  <url>
     <loc>https://wangbjun.site/2016/coding/php/php-array.html</loc>
     <lastmod>2020-02-09</lastmod>
   </url>  <url>
-    <loc>https://wangbjun.site/2017/coding/php/php-multi-process.html</loc>
+    <loc>https://wangbjun.site/2018/coding/php/php-closure-function.html</loc>
     <lastmod>2020-02-09</lastmod>
   </url>  <url>
-    <loc>https://wangbjun.site/2019/coding/golang/golang-string-function.html</loc>
+    <loc>https://wangbjun.site/2017/coding/php/php-priority-queue.html</loc>
     <lastmod>2020-02-09</lastmod>
   </url>  <url>
     <loc>https://wangbjun.site/2016/coding/php/php-designpattern-decorator.html</loc>
     <lastmod>2020-02-09</lastmod>
   </url>  <url>
-    <loc>https://wangbjun.site/2016/coding/php/php-designpattern-factory.html</loc>
-    <lastmod>2020-02-09</lastmod>
-  </url>  <url>
-    <loc>https://wangbjun.site/2018/coding/golang/goroutine.html</loc>
-    <lastmod>2020-02-09</lastmod>
-  </url>  <url>
-    <loc>https://wangbjun.site/2017/coding/php/php-designpattern-filter.html</loc>
+    <loc>https://wangbjun.site/2019/coding/golang/golang-di.html</loc>
     <lastmod>2020-02-09</lastmod>
   </url>  <url>
     <loc>https://wangbjun.site/2016/coding/php/php-designpattern-single.html</loc>
     <lastmod>2020-02-09</lastmod>
   </url>  <url>
+    <loc>https://wangbjun.site/2016/coding/php/php-designpattern-factory.html</loc>
+    <lastmod>2020-02-09</lastmod>
+  </url>  <url>
+    <loc>https://wangbjun.site/2017/coding/php/php-designpattern-filter.html</loc>
+    <lastmod>2020-02-09</lastmod>
+  </url>  <url>
+    <loc>https://wangbjun.site/2017/coding/php/php-multi-process.html</loc>
+    <lastmod>2020-02-09</lastmod>
+  </url>  <url>
+    <loc>https://wangbjun.site/2019/coding/golang/golang-recover.html</loc>
+    <lastmod>2020-02-09</lastmod>
+  </url>  <url>
     <loc>https://wangbjun.site/2019/coding/golang/golang-tcp-package.html</loc>
     <lastmod>2020-02-09</lastmod>
   </url>  <url>
-    <loc>https://wangbjun.site/2019/coding/golang/golang-di.html</loc>
+    <loc>https://wangbjun.site/2018/coding/golang/goroutine.html</loc>
     <lastmod>2020-02-09</lastmod>
   </url>  <url>
-    <loc>https://wangbjun.site/2019/coding/golang/golang-oop.html</loc>
+    <loc>https://wangbjun.site/2016/coding/php/php-oop-thinking.html</loc>
     <lastmod>2020-02-09</lastmod>
   </url>  <url>
     <loc>https://wangbjun.site/2020/life/city-and-county.html</loc>
@@ -191,12 +197,6 @@
     <lastmod>2020-02-09</lastmod>
   </url>  <url>
     <loc>https://wangbjun.site/2020/life/2019-3.html</loc>
-    <lastmod>2020-02-06</lastmod>
-  </url>  <url>
-    <loc>https://wangbjun.site/2020/life/2019-2.html</loc>
-    <lastmod>2020-02-06</lastmod>
-  </url>  <url>
-    <loc>https://wangbjun.site/2020/life/2019-1.html</loc>
     <lastmod>2020-02-06</lastmod>
   </url>  <url>
     <loc>https://wangbjun.site/2019/coding/jwt-token-usage.html</loc>
