@@ -91,14 +91,14 @@
 <meta property="og:url" content="https://wangbjun.site/2018/linux/deepin-wine-qq-bug.html">
 <meta property="og:site_name" content="JWang的博客">
 <meta property="og:description" content="之前写过一篇文章说在Linux下面使用deepin的wine QQ和微信, 虽然这个版本挺好用，但是一直以来有个bug困扰我：QQ和微信的图标都是wine的小图标，一模一样不说，还重叠在一起，当你使用 ctrl+tab 切换应用的时候很头疼，用过的人应该生有感受！">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3571187-9b36a691ddfe0a8b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3571187-65b3cf68d42da7b5.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://wangbjun.site/images/3571187-9b36a691ddfe0a8b.jpg">
+<meta property="og:image" content="https://wangbjun.site/images/3571187-65b3cf68d42da7b5.jpg">
 <meta property="article:published_time" content="2018-12-01T04:11:08.000Z">
-<meta property="article:modified_time" content="2020-03-03T02:51:12.398Z">
+<meta property="article:modified_time" content="2020-03-05T13:11:54.801Z">
 <meta property="article:author" content="Ben Jun">
 <meta property="article:tag" content="Deepin-Wine">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/3571187-9b36a691ddfe0a8b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:image" content="https://wangbjun.site/images/3571187-9b36a691ddfe0a8b.jpg">
 
 
 
@@ -321,8 +321,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-03-03T10:51:12+08:00">
-                2020-03-03
+              <time title="更新于" itemprop="dateModified" datetime="2020-03-05T21:11:54+08:00">
+                2020-03-05
               </time>
             
           </span>
@@ -404,14 +404,16 @@
 
       
         <p>之前写过一篇文章说在Linux下面使用deepin的wine QQ和微信, 虽然这个版本挺好用，但是一直以来有个bug困扰我：QQ和微信的图标都是wine的小图标，一模一样不说，还重叠在一起，当你使用 <strong>ctrl+tab</strong> 切换应用的时候很头疼，用过的人应该生有感受！</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/3571187-9b36a691ddfe0a8b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<img src="/images/3571187-9b36a691ddfe0a8b.jpg" />
+
 <a id="more"></a>
 
 <p>有段时间我网上查了很久都没有找到答案，起初以为是图标问题！在Linux下面桌面图标快捷方式是由一个desktop文件配置，比如微信的内容基本上如下：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env xdg-open</span></span><br><span class="line"></span><br><span class="line">[Desktop Entry]</span><br><span class="line">Encoding=UTF-8</span><br><span class="line">Type=Application</span><br><span class="line">X-Created-By=Deepin WINE Team</span><br><span class="line">Categories=chat;</span><br><span class="line">Icon=deepin.com.wechat</span><br><span class="line">Exec=<span class="string">"/opt/deepinwine/apps/Deepin-WeChat/run.sh"</span> -u %u</span><br><span class="line">Name=WeChat</span><br><span class="line">Name[zh_CN]=微信</span><br><span class="line">Comment=Tencent WeChat Client on Deepin Wine</span><br><span class="line">StartupWMClass=WeChat.exe</span><br><span class="line">MimeType=</span><br></pre></td></tr></table></figure>
 <p>其中有几个比较关键的地方，一个是Icon，一个是Exec，还有Name，有一天我看到这个 <strong>StartupWMClass</strong> 突发奇想，虽然我不懂是啥意思，但是感觉这个有问题。</p>
 <p>于是百度了一下，基本上找不到任何内容，只有一篇文章，点进去居然是404…还好有百度快照！</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/3571187-65b3cf68d42da7b5.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<img src="/images/3571187-65b3cf68d42da7b5.jpg" />
+
 <p>终于找到问题所在了，默认情况下，Linux是根据可执行文件的名称判定是属于哪个desktop文件配置的，大部分desktop文件的Exec配置的可执行文件刚好就是实际执行的文件名，所以很多没有StartupWMClass配置项。</p>
 <p>但是这个配置项很重要，比如说在上面的微信的配置里面这个值是”WeChat.exe“，但是为什么还是不行呢？</p>
 <p>根据文章的说法，可以通过<code>xprop WM_CLASS</code>获取窗口的属性值，在命令行下执行这个命令，鼠标会变成+，然后点击要QQ或微信的窗口：</p>
