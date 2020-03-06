@@ -274,7 +274,7 @@ h6 {
   }
 }
 p {
-  margin: 0 0 20px 0;
+  margin: 20px 0 20px 0;
 }
 a {
   color: #555;
@@ -294,7 +294,7 @@ img {
   display: block;
   margin: auto;
   max-width: 100%;
-  width: auto;
+  width: 85%;
 }
 hr {
   margin: 40px 0;
@@ -1316,7 +1316,6 @@ pre .javascript .function {
   box-sizing: border-box;
   margin: auto;
   padding: 3px;
-  border: 1px solid #ddd;
   border-radius: 16px;
 }
 .posts-expand .fancybox img {
@@ -1829,7 +1828,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #dee7bd;
+  background: #94e3f4;
 }
 .links-of-blogroll {
   font-size: 13px;

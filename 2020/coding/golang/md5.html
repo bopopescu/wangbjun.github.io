@@ -85,14 +85,14 @@
 
 
 
-<meta name="description" content="DI - Dependency Injection，即“依赖注入”，是指组件之间依赖关系由容器在运行期决定，与此同时还有一个叫作IOC的词汇，IOC即控制反转。 理论上讲，这2个概念都是基于OOP编程而产生的思想，在OOP编程里面，我们强调对象之间的依赖关系，比如说对象B依赖对象A的某些功能，我们就说B依赖A。 DI毕竟不是Go语言的专利，它是一种编程思想，在很多语言里面都有体现和实现，相信很多具">
+<meta name="description" content="用过PHP的童鞋知道在PHP里面md5很简单，是一个内置函数，可以直接调用： 12345jwang@jun:~$ php -aInteractive mode enabledphp &gt; echo md5(&quot;12345&quot;);827ccb0eea8a706c4c34a16891f84e7b  纠正一个错误的说法，很多人一直把md5叫作加密算法，实际上md5并不是加密，它既不是对称加密，也不是非对">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Golang的依赖注入简介">
-<meta property="og:url" content="https://wangbjun.site/2019/coding/golang/golang-di.html">
+<meta property="og:title" content="Golang里面MD5的写法和性能">
+<meta property="og:url" content="https://wangbjun.site/2020/coding/golang/md5.html">
 <meta property="og:site_name" content="JWang的博客">
-<meta property="og:description" content="DI - Dependency Injection，即“依赖注入”，是指组件之间依赖关系由容器在运行期决定，与此同时还有一个叫作IOC的词汇，IOC即控制反转。 理论上讲，这2个概念都是基于OOP编程而产生的思想，在OOP编程里面，我们强调对象之间的依赖关系，比如说对象B依赖对象A的某些功能，我们就说B依赖A。 DI毕竟不是Go语言的专利，它是一种编程思想，在很多语言里面都有体现和实现，相信很多具">
-<meta property="article:published_time" content="2019-05-15T13:13:49.000Z">
-<meta property="article:modified_time" content="2020-02-09T05:31:56.481Z">
+<meta property="og:description" content="用过PHP的童鞋知道在PHP里面md5很简单，是一个内置函数，可以直接调用： 12345jwang@jun:~$ php -aInteractive mode enabledphp &gt; echo md5(&quot;12345&quot;);827ccb0eea8a706c4c34a16891f84e7b  纠正一个错误的说法，很多人一直把md5叫作加密算法，实际上md5并不是加密，它既不是对称加密，也不是非对">
+<meta property="article:published_time" content="2020-03-05T13:10:00.000Z">
+<meta property="article:modified_time" content="2020-03-06T14:45:36.604Z">
 <meta property="article:author" content="Ben Jun">
 <meta property="article:tag" content="Golang">
 <meta name="twitter:card" content="summary">
@@ -124,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="https://wangbjun.site/2019/coding/golang/golang-di.html"/>
+  <link rel="canonical" href="https://wangbjun.site/2020/coding/golang/md5.html"/>
 
 
 
 
 
-  <title>Golang的依赖注入简介 | JWang的博客</title>
+  <title>Golang里面MD5的写法和性能 | JWang的博客</title>
   
 
 
@@ -283,7 +283,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wangbjun.site/2019/coding/golang/golang-di.html">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.site/2020/coding/golang/md5.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben Jun">
@@ -300,7 +300,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Golang的依赖注入简介</h2>
+          <h2 class="post-title" itemprop="name headline">Golang里面MD5的写法和性能</h2>
         
 
         <div class="post-meta">
@@ -312,8 +312,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-15T21:13:49+08:00">
-                2019-05-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-05T21:10:00+08:00">
+                2020-03-05
               </time>
             
 
@@ -328,8 +328,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-02-09T13:31:56+08:00">
-                2020-02-09
+              <time title="更新于" itemprop="dateModified" datetime="2020-03-06T22:45:36+08:00">
+                2020-03-06
               </time>
             
           </span>
@@ -385,7 +385,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  782
+                  1.1k
                 </span>
               
 
@@ -410,36 +410,44 @@
       
 
       
-        <p>DI - Dependency Injection，即“依赖注入”，是指组件之间依赖关系由容器在运行期决定，与此同时还有一个叫作IOC的词汇，IOC即控制反转。</p>
-<p>理论上讲，这2个概念都是基于OOP编程而产生的思想，在OOP编程里面，我们强调对象之间的依赖关系，比如说对象B依赖对象A的某些功能，我们就说B依赖A。</p>
-<p>DI毕竟不是Go语言的专利，它是一种编程思想，在很多语言里面都有体现和实现，相信很多具有编程经验的人也有所了解，下面咱们直接开始讲在Go语言里面怎么使用DI。</p>
+        <p>用过PHP的童鞋知道在PHP里面md5很简单，是一个内置函数，可以直接调用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">jwang@jun:~$ php -a</span><br><span class="line">Interactive mode enabled</span><br><span class="line"></span><br><span class="line">php &gt; <span class="built_in">echo</span> md5(<span class="string">"12345"</span>);</span><br><span class="line">827ccb0eea8a706c4c34a16891f84e7b</span><br></pre></td></tr></table></figure>
+
+<p>纠正一个错误的说法，很多人一直把md5叫作加密算法，实际上md5并不是加密，它既不是对称加密，也不是非对称加密，它只是一个摘要函数，一般被用于签名或者校验数据完整性。</p>
+<p>虽然现在有文章说不推荐使用md5了，因为碰撞几率比较大，实际上，这个几率非常非常非常低，大只是相对于其它摘要函数来说，纯自然的情况下基本不可能碰撞，虽然可以用工具构造出来，但非常复杂。如果实在不放心，可以用sha1或者sha256，或者两者集合起来用，不过速度会慢一点，但安全性高一点，总之，md5由于速度快，简单易用，现在用的还是蛮多的。</p>
 <a id="more"></a>
 
-<h2 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h2><p>Golang的DI目前主要有2种方式，一种是使用反射特性实现，代表开源项目有facebook/inject，还有uber/dig。另一种是代码自动生成，代表开源项目有google/wire。</p>
-<p>下面咱们看一个案例：</p>
-<p>由于Go并不是纯OOP语言，所以这里使用struct模拟对象的概念，有3个对象，其中App依赖DB和Redis。</p>
-<p>DB：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> Object</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> DB <span class="keyword">struct</span> &#123;</span><br><span class="line">	config <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(DB)</span> <span class="title">Get</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">"I am DB"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>言归正传，在Go的标准库里面并没有md5这个函数，但是在<strong>crypto</strong>包里面确实有相关实现，需要自己动手组装拼凑一下，但是网上流传的写法有很多种：</p>
+<h2 id="1-第一种"><a href="#1-第一种" class="headerlink" title="1.第一种"></a>1.第一种</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">MD5</span><span class="params">(s <span class="keyword">string</span>)</span> <span class="title">string</span></span> &#123;</span><br><span class="line">	hash := md5.New()</span><br><span class="line">	_, err := hash.Write([]<span class="keyword">byte</span>(s))</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line">	sum := hash.Sum(<span class="literal">nil</span>)</span><br><span class="line">	<span class="keyword">return</span> fmt.Sprintf(<span class="string">"%x\n"</span>, sum)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>平时用到可能只是copy过来，没仔细看，今天来仔细看一下，首先，这个 md5.New() 返回的是一个结构体 digest：</p>
+<img src = "/images/2020-03-06_21-34.png" />
 
-<p>Redis：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> Object</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Redis <span class="keyword">struct</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(Redis)</span> <span class="title">Get</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">"I am Redis"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>App:</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> Object</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> App <span class="keyword">struct</span> &#123;</span><br><span class="line">	r  Redis</span><br><span class="line">	db DB</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p App)</span> <span class="title">Work</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">"I can work"</span>)</span><br><span class="line">	p.db.Get()</span><br><span class="line">	p.r.Get()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>如果不使用依赖注入，我们只能手动解决依赖，代码如下：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"di/Object"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	app := Object.App&#123;</span><br><span class="line">		R:  Object.Redis&#123;&#125;,</span><br><span class="line">		DB: Object.DB&#123;&#125;,</span><br><span class="line">	&#125;</span><br><span class="line">	app.Work()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这种写法并无太大问题，简单安全，不过项目非常大的时候，对象之间依赖关系复杂，手动解决依赖可能非常麻烦，这时候就需要自动注入依赖了。</p>
-<h2 id="facebook-inject"><a href="#facebook-inject" class="headerlink" title="facebook/inject"></a>facebook/inject</h2><p>这是Facebook开源的一个项目，地址：github.com/facebookgo/inject</p>
-<p>它使用struct的tag声明依赖，第一个无值语法是针对关联类型的单例依赖的常见情况。第二个触发器创建关联类型的私有实例。最后一个是要求一个名为 “dev logger” 的依赖关系。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#96;inject:&quot;&quot;&#96;</span><br><span class="line">&#96;inject:&quot;private&quot;&#96;</span><br><span class="line">&#96;inject:&quot;dev logger&quot;&#96;</span><br></pre></td></tr></table></figure>
+<p>这个结构体成员啥意思呢？其实细说起来，这和md5的算法有关了，其实咱也不知道，咱也不敢问！</p>
+<p>但是仔细看一下这个结构体的方法，你会发现有一个叫Write，还有一个叫Sum，如果你英语不错，你可以看懂，Write就是把数据写到刚才这个结构体里面，先甭管它咋写，肯定是有算法规则，感兴趣可以研究研究。Sum稍微有点不一样，但是有一个参数，和一个返回值，这个方法的意思是把参数追加到进去并且返回摘要，由于我们之前已经写进去了，所以参数为nil即可。</p>
+<img src = "/images/2020-03-06_21-39.png" /> 
 
-<p>下面以App为例：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> App <span class="keyword">struct</span> &#123;</span><br><span class="line">	R  Redis <span class="string">`inject:""`</span></span><br><span class="line">	DB DB <span class="string">`inject:""`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>运行：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"di/Object"</span></span><br><span class="line">	<span class="string">"github.com/facebookgo/inject"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> g inject.Graph</span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> app Object.App</span><br><span class="line"></span><br><span class="line">	_ = g.Provide(</span><br><span class="line">		&amp;inject.Object&#123;Value: &amp;Object.DB&#123;&#125;,&#125;,</span><br><span class="line">		&amp;inject.Object&#123;Value: &amp;Object.Redis&#123;&#125;,&#125;,</span><br><span class="line">		&amp;inject.Object&#123;Value: &amp;app,</span><br><span class="line">		&#125;)</span><br><span class="line"></span><br><span class="line">	_ = g.Populate()</span><br><span class="line"></span><br><span class="line">	app.Work()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>给struct tag只是第一步，在程序启动的时候需要先注入依赖。</p>
-<h3 id="性能问题"><a href="#性能问题" class="headerlink" title="性能问题"></a>性能问题</h3><p>一般说到依赖注入必然会用到反射，说到Go的反射，大多数人都会说性能很差。</p>
-<p>这个inject库也是用到了反射原理，性能会不会很差呢？</p>
-<p>其实还是看用法，官方推荐在应用程序启动的时候注入所有依赖，而不是在运行中注入依赖，这样即使慢，也只是程序每次启动的时候慢，并不影响后续的运行情况。</p>
+<p>可见，一个md5方法Go就整了6行代码，老板看你代码写这么多，又可以加薪了，Go确实是好语言。</p>
+<h2 id="2-第二种"><a href="#2-第二种" class="headerlink" title="2.第二种"></a>2.第二种</h2><p>如果你仔细看了这个包里面的 md5.go 文件，你会发现最下面有一个公开的方法Sum，仔细一看，这就是刚才我写的那个简化版：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Sum returns the MD5 checksum of the data.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Sum</span><span class="params">(data []<span class="keyword">byte</span>)</span> [<span class="title">Size</span>]<span class="title">byte</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> d digest</span><br><span class="line">	d.Reset()</span><br><span class="line">	d.Write(data)</span><br><span class="line">	<span class="keyword">return</span> d.checkSum()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>所以我们的方法可以简化为：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">MD5</span><span class="params">(s <span class="keyword">string</span>)</span> <span class="title">string</span></span> &#123;</span><br><span class="line">	sum := md5.Sum([]<span class="keyword">byte</span>(s))</span><br><span class="line">	<span class="keyword">return</span> fmt.Sprintf(<span class="string">"%x\n"</span>, sum)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当然sum变量在这２个方法里面都是多余的，可以简化为一行代码即可。</p>
+<h2 id="3-第三种"><a href="#3-第三种" class="headerlink" title="3.第三种"></a>3.第三种</h2><p>还有一种方式是使用io库的方法往里面写，主要是因为degest实现了<strong>io.Writer</strong>接口</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">MD5</span><span class="params">(s <span class="keyword">string</span>)</span> <span class="title">string</span></span> &#123;</span><br><span class="line">	hash := md5.New()</span><br><span class="line">	_, _ = io.WriteString(hash, s)</span><br><span class="line">	<span class="keyword">return</span> hex.EncodeToString(hash.Sum(<span class="literal">nil</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中，最后Sprintf方法是为了把结果转化成小写十六进制，也可以用<strong>hex.EncodeToString</strong>方法替代。</p>
+<h2 id="4-性能对比"><a href="#4-性能对比" class="headerlink" title="4.性能对比"></a>4.性能对比</h2><p>这几种方式大同小异，理论上讲应该没有什么性能差距，不过既然Go自带Benchmark，我们就测一下吧：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">BenchmarkMD5</span><span class="params">(b *testing.B)</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; b.N; i++ &#123;</span><br><span class="line">		MD5(<span class="string">"12345678901234567890"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">jwang@jun:~/Documents/Work/learnGo/Std/md5$ go <span class="built_in">test</span> -bench=.</span><br><span class="line">goos: linux</span><br><span class="line">goarch: amd64</span><br><span class="line">BenchmarkMD5_1-12       10000000               359 ns/op</span><br><span class="line">BenchmarkMD5_2-12       10000000               356 ns/op</span><br><span class="line">BenchmarkMD5_3-12       10000000               163 ns/op</span><br><span class="line">BenchmarkMD5_4-12       10000000               296 ns/op</span><br><span class="line">PASS</span><br><span class="line">ok      _/home/jwang/Documents/Work/learnGo/Std/md5     11.757s</span><br></pre></td></tr></table></figure>
+<p>不测不知道，一测吓一跳，其实前2个方法差不多很正常，但是第三个方法性能很好，其主要原因是因为Sprintf的性能比较差。而<strong>md5.New()</strong>这种写法也比较慢。</p>
+<h2 id="5-最佳写法"><a href="#5-最佳写法" class="headerlink" title="5.最佳写法"></a>5.最佳写法</h2><p>最终得出结论，性能最高的md5写法是这种，推荐大家使用：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">MD5</span><span class="params">(s <span class="keyword">string</span>)</span> <span class="title">string</span></span>  &#123;</span><br><span class="line">	sum := md5.Sum([]<span class="keyword">byte</span>(s))</span><br><span class="line">	<span class="keyword">return</span> hex.EncodeToString(sum[:])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-Sha1"><a href="#6-Sha1" class="headerlink" title="6.Sha1"></a>6.Sha1</h2><p>最后说个题外话，Go里面Sha1的写法和Md5几乎一致，只需要要把md5改成sha1即可：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Sha1</span><span class="params">(s <span class="keyword">string</span>)</span> <span class="title">string</span></span>  &#123;</span><br><span class="line">	sum := sha1.Sum([]<span class="keyword">byte</span>(s))</span><br><span class="line">	<span class="keyword">return</span> hex.EncodeToString(sum[:])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我也测了一下性能，它们之间的差距很小，md5是163ns/op，sha1是206ns/op，毕竟sha1比md5长一点。。。</p>
 
       
     </div>
@@ -470,8 +478,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/coding/golang/golang-tcp-package.html" rel="next" title="Golang处理TCP“粘包”问题">
-                <i class="fa fa-chevron-left"></i> Golang处理TCP“粘包”问题
+              <a href="/2020/life/how-to-learn.html" rel="next" title="如何高效的学习编程？">
+                <i class="fa fa-chevron-left"></i> 如何高效的学习编程？
               </a>
             
           </div>
@@ -479,10 +487,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/linux/sudo-command-not-found.html" rel="prev" title="解决sudo command not found 报错">
-                解决sudo command not found 报错 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -625,7 +629,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#实现方式"><span class="nav-text">实现方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#facebook-inject"><span class="nav-text">facebook&#x2F;inject</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#性能问题"><span class="nav-text">性能问题</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-第一种"><span class="nav-text">1.第一种</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-第二种"><span class="nav-text">2.第二种</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-第三种"><span class="nav-text">3.第三种</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-性能对比"><span class="nav-text">4.性能对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-最佳写法"><span class="nav-text">5.最佳写法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-Sha1"><span class="nav-text">6.Sha1</span></a></li></ol></div>
             
 
           </div>
