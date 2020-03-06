@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://wangbjun.site/2019/coding/golang/golang-datastruct.html</loc>
+    
+    <lastmod>2020-03-06T17:03:36.689Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://wangbjun.site/2020/coding/golang/md5.html</loc>
     
     <lastmod>2020-03-06T16:57:18.420Z</lastmod>
@@ -110,13 +117,6 @@
     <loc>https://wangbjun.site/2017/coding/php/php-orm.html</loc>
     
     <lastmod>2020-03-05T14:51:07.527Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wangbjun.site/2019/coding/golang/golang-datastruct.html</loc>
-    
-    <lastmod>2020-03-05T14:51:07.523Z</lastmod>
     
   </url>
   
@@ -366,13 +366,6 @@
   </url>
   
   <url>
-    <loc>https://wangbjun.site/2016/coding/php/php-designpattern-factory.html</loc>
-    
-    <lastmod>2020-02-09T05:31:56.481Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://wangbjun.site/2017/coding/php/php-designpattern-filter.html</loc>
     
     <lastmod>2020-02-09T05:31:56.481Z</lastmod>
@@ -387,7 +380,7 @@
   </url>
   
   <url>
-    <loc>https://wangbjun.site/2019/coding/golang/golang-protobuf.html</loc>
+    <loc>https://wangbjun.site/2016/coding/php/php-designpattern-factory.html</loc>
     
     <lastmod>2020-02-09T05:31:56.481Z</lastmod>
     
@@ -401,6 +394,13 @@
   </url>
   
   <url>
+    <loc>https://wangbjun.site/2019/coding/golang/golang-protobuf.html</loc>
+    
+    <lastmod>2020-02-09T05:31:56.481Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://wangbjun.site/2019/coding/golang/golang-di.html</loc>
     
     <lastmod>2020-02-09T05:31:56.481Z</lastmod>
@@ -408,14 +408,14 @@
   </url>
   
   <url>
-    <loc>https://wangbjun.site/2019/coding/golang/golang-recover.html</loc>
+    <loc>https://wangbjun.site/2019/coding/golang/golang-string-function.html</loc>
     
     <lastmod>2020-02-09T05:31:56.481Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://wangbjun.site/2019/coding/golang/golang-string-function.html</loc>
+    <loc>https://wangbjun.site/2019/coding/golang/golang-recover.html</loc>
     
     <lastmod>2020-02-09T05:31:56.481Z</lastmod>
     
