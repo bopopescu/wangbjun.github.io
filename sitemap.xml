@@ -2,6 +2,55 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://wangbjun.site/2018/coding/php/php-closure-function.html</loc>
+    
+    <lastmod>2020-03-06T17:23:14.436Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wangbjun.site/2016/coding/php/php-array.html</loc>
+    
+    <lastmod>2020-03-06T17:23:14.432Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wangbjun.site/2015/coding/php/php-datastruct-btree.html</loc>
+    
+    <lastmod>2020-03-06T17:23:14.428Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wangbjun.site/2016/coding/php/php-btree.html</loc>
+    
+    <lastmod>2020-03-06T17:23:14.420Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wangbjun.site/2016/coding/php/php-oop-thinking.html</loc>
+    
+    <lastmod>2020-03-06T17:23:14.416Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wangbjun.site/2017/coding/php/php-form-pass-method.html</loc>
+    
+    <lastmod>2020-03-06T17:23:14.412Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wangbjun.site/2017/coding/php/php-orm.html</loc>
+    
+    <lastmod>2020-03-06T17:23:14.392Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://wangbjun.site/2018/coding/golang/goroutine.html</loc>
     
     <lastmod>2020-03-06T17:11:51.554Z</lastmod>
@@ -86,13 +135,6 @@
   </url>
   
   <url>
-    <loc>https://wangbjun.site/2016/coding/php/php-btree.html</loc>
-    
-    <lastmod>2020-03-05T15:03:41.867Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://wangbjun.site/2016/coding/php/php-autoload.html</loc>
     
     <lastmod>2020-03-05T15:03:11.107Z</lastmod>
@@ -149,13 +191,6 @@
   </url>
   
   <url>
-    <loc>https://wangbjun.site/2017/coding/php/php-form-pass-method.html</loc>
-    
-    <lastmod>2020-03-05T14:52:58.998Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://wangbjun.site/2018/linux/linux-tools-software.html</loc>
     
     <lastmod>2020-03-05T14:52:58.982Z</lastmod>
@@ -184,13 +219,6 @@
   </url>
   
   <url>
-    <loc>https://wangbjun.site/2017/coding/php/php-orm.html</loc>
-    
-    <lastmod>2020-03-05T14:51:07.527Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://wangbjun.site/2018/coding/bitmap.html</loc>
     
     <lastmod>2020-03-05T14:51:07.515Z</lastmod>
@@ -201,13 +229,6 @@
     <loc>https://wangbjun.site/2018/coding/where-is-variable-value.html</loc>
     
     <lastmod>2020-03-05T14:51:07.511Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wangbjun.site/2015/coding/php/php-datastruct-btree.html</loc>
-    
-    <lastmod>2020-03-05T14:51:07.507Z</lastmod>
     
   </url>
   
@@ -359,14 +380,7 @@
   </url>
   
   <url>
-    <loc>https://wangbjun.site/2017/coding/php/php-priority-queue.html</loc>
-    
-    <lastmod>2020-02-09T05:31:56.481Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wangbjun.site/2016/coding/php/php-designpattern-factory.html</loc>
+    <loc>https://wangbjun.site/2016/coding/php/php-designpattern-single.html</loc>
     
     <lastmod>2020-02-09T05:31:56.481Z</lastmod>
     
@@ -374,13 +388,6 @@
   
   <url>
     <loc>https://wangbjun.site/2017/coding/php/php-designpattern-filter.html</loc>
-    
-    <lastmod>2020-02-09T05:31:56.481Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wangbjun.site/2016/coding/php/php-array.html</loc>
     
     <lastmod>2020-02-09T05:31:56.481Z</lastmod>
     
@@ -401,21 +408,14 @@
   </url>
   
   <url>
-    <loc>https://wangbjun.site/2016/coding/php/php-designpattern-single.html</loc>
+    <loc>https://wangbjun.site/2017/coding/php/php-priority-queue.html</loc>
     
     <lastmod>2020-02-09T05:31:56.481Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://wangbjun.site/2018/coding/php/php-closure-function.html</loc>
-    
-    <lastmod>2020-02-09T05:31:56.481Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wangbjun.site/2016/coding/php/php-oop-thinking.html</loc>
+    <loc>https://wangbjun.site/2016/coding/php/php-designpattern-factory.html</loc>
     
     <lastmod>2020-02-09T05:31:56.481Z</lastmod>
     
