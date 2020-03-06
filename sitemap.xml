@@ -310,7 +310,7 @@
   </url>
   
   <url>
-    <loc>https://wangbjun.site/2016/coding/php/php-designpattern-decorator.html</loc>
+    <loc>https://wangbjun.site/2016/coding/php/php-designpattern-factory.html</loc>
     
     <lastmod>2020-02-09T05:31:56.481Z</lastmod>
     
@@ -338,13 +338,6 @@
   </url>
   
   <url>
-    <loc>https://wangbjun.site/2018/coding/golang/goroutine.html</loc>
-    
-    <lastmod>2020-02-09T05:31:56.481Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://wangbjun.site/2018/coding/php/php-closure-function.html</loc>
     
     <lastmod>2020-02-09T05:31:56.481Z</lastmod>
@@ -352,7 +345,14 @@
   </url>
   
   <url>
-    <loc>https://wangbjun.site/2019/coding/golang/golang-protobuf.html</loc>
+    <loc>https://wangbjun.site/2016/coding/php/php-designpattern-decorator.html</loc>
+    
+    <lastmod>2020-02-09T05:31:56.481Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wangbjun.site/2018/coding/golang/goroutine.html</loc>
     
     <lastmod>2020-02-09T05:31:56.481Z</lastmod>
     
@@ -366,7 +366,7 @@
   </url>
   
   <url>
-    <loc>https://wangbjun.site/2016/coding/php/php-designpattern-factory.html</loc>
+    <loc>https://wangbjun.site/2019/coding/golang/golang-tcp-package.html</loc>
     
     <lastmod>2020-02-09T05:31:56.481Z</lastmod>
     
@@ -380,14 +380,21 @@
   </url>
   
   <url>
-    <loc>https://wangbjun.site/2019/coding/golang/golang-tcp-package.html</loc>
+    <loc>https://wangbjun.site/2016/coding/php/php-designpattern-single.html</loc>
     
     <lastmod>2020-02-09T05:31:56.481Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://wangbjun.site/2016/coding/php/php-designpattern-single.html</loc>
+    <loc>https://wangbjun.site/2019/coding/golang/golang-string-function.html</loc>
+    
+    <lastmod>2020-02-09T05:31:56.481Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wangbjun.site/2019/coding/golang/golang-protobuf.html</loc>
     
     <lastmod>2020-02-09T05:31:56.481Z</lastmod>
     
@@ -401,13 +408,6 @@
   </url>
   
   <url>
-    <loc>https://wangbjun.site/2016/coding/php/php-oop-thinking.html</loc>
-    
-    <lastmod>2020-02-09T05:31:56.481Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://wangbjun.site/2019/coding/golang/golang-recover.html</loc>
     
     <lastmod>2020-02-09T05:31:56.481Z</lastmod>
@@ -415,7 +415,7 @@
   </url>
   
   <url>
-    <loc>https://wangbjun.site/2019/coding/golang/golang-string-function.html</loc>
+    <loc>https://wangbjun.site/2016/coding/php/php-oop-thinking.html</loc>
     
     <lastmod>2020-02-09T05:31:56.481Z</lastmod>
     
