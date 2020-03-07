@@ -65,7 +65,7 @@
 <link href="/css/main.css?v=5.1.8" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="短网址," />
+  <meta name="keywords" content="Golang," />
 
 
 
@@ -85,19 +85,17 @@
 
 
 
-<meta name="description" content="1.背景介绍相信很多人手机上都收到过一些营销短信，短信里面有时候会附带一些网址，如下图这些网址往往都是非常短，但是当我们打开之后，如果你仔细观察，中间会有跳转，最终浏览器地址栏显示的网址并不是你短信里面看到的网址，这就是短网址！">
+<meta name="description" content="前面这篇文章&lt;Golang里面MD5的写法和性能&gt;介绍了如何计算字符串的md5，下面我们来说说如何计算文件的md5。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="短网址原理和实现">
-<meta property="og:url" content="https://wangbjun.site/2019/coding/short-url.html">
+<meta property="og:title" content="Golang计算文件MD5">
+<meta property="og:url" content="https://wangbjun.site/2020/coding/golang/file-md5.html">
 <meta property="og:site_name" content="JWang的博客">
-<meta property="og:description" content="1.背景介绍相信很多人手机上都收到过一些营销短信，短信里面有时候会附带一些网址，如下图这些网址往往都是非常短，但是当我们打开之后，如果你仔细观察，中间会有跳转，最终浏览器地址栏显示的网址并不是你短信里面看到的网址，这就是短网址！">
-<meta property="og:image" content="https://wangbjun.github.io/images/old/16ada545111ae94d.jpg">
-<meta property="article:published_time" content="2019-07-09T11:02:46.000Z">
-<meta property="article:modified_time" content="2020-03-05T14:52:28.803Z">
+<meta property="og:description" content="前面这篇文章&lt;Golang里面MD5的写法和性能&gt;介绍了如何计算字符串的md5，下面我们来说说如何计算文件的md5。">
+<meta property="article:published_time" content="2020-03-07T02:42:22.000Z">
+<meta property="article:modified_time" content="2020-03-07T03:25:32.464Z">
 <meta property="article:author" content="Ben Jun">
-<meta property="article:tag" content="短网址">
+<meta property="article:tag" content="Golang">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://wangbjun.github.io/images/old/16ada545111ae94d.jpg">
 
 
 
@@ -126,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="https://wangbjun.site/2019/coding/short-url.html"/>
+  <link rel="canonical" href="https://wangbjun.site/2020/coding/golang/file-md5.html"/>
 
 
 
 
 
-  <title>短网址原理和实现 | JWang的博客</title>
+  <title>Golang计算文件MD5 | JWang的博客</title>
   
 
 
@@ -285,7 +283,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wangbjun.site/2019/coding/short-url.html">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.site/2020/coding/golang/file-md5.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ben Jun">
@@ -302,7 +300,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">短网址原理和实现</h2>
+          <h2 class="post-title" itemprop="name headline">Golang计算文件MD5</h2>
         
 
         <div class="post-meta">
@@ -314,8 +312,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-09T19:02:46+08:00">
-                2019-07-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-07T10:42:22+08:00">
+                2020-03-07
               </time>
             
 
@@ -330,8 +328,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-03-05T22:52:28+08:00">
-                2020-03-05
+              <time title="更新于" itemprop="dateModified" datetime="2020-03-07T11:25:32+08:00">
+                2020-03-07
               </time>
             
           </span>
@@ -387,7 +385,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1.6k
+                  678
                 </span>
               
 
@@ -412,41 +410,21 @@
       
 
       
-        <h2 id="1-背景介绍"><a href="#1-背景介绍" class="headerlink" title="1.背景介绍"></a>1.背景介绍</h2><p>相信很多人手机上都收到过一些营销短信，短信里面有时候会附带一些网址，如下图<br><img src="https://wangbjun.github.io/images/old/16ada545111ae94d.jpg" alt=""><br>这些网址往往都是非常短，但是当我们打开之后，如果你仔细观察，中间会有跳转，最终浏览器地址栏显示的网址并不是你短信里面看到的网址，这就是短网址！</p>
+        <p>前面这篇文章<a href="https://wangbjun.site/2020/coding/golang/md5.html">&lt;Golang里面MD5的写法和性能&gt;</a>介绍了如何计算字符串的md5，下面我们来说说如何计算文件的md5。</p>
 <a id="more"></a>
 
-<h2 id="2-原理和应用"><a href="#2-原理和应用" class="headerlink" title="2.原理和应用"></a>2.原理和应用</h2><p>短网址一般是采用一个非常短域名下，路径参数一般只有3-6个字符组成，非常简洁！</p>
-<p>使用短网址的前提是先生成短网址，主要是采用某种算法让一段短的字符对应一个长的字符，比如说从常用的0-9、a-z、A-Z共62个字符中选择6个字符，那意味着有62的6次方种组合，大概有568亿不重复的短网址可用！</p>
-<p>服务器通过路径参数查询到真实的长网址，然后使用301/302跳转到真实的网址即可！</p>
-<p>关于跳转，301 是永久重定向，302 是临时重定向。短地址一经生成就不会变化，所以用 301 是符合 http 语义的，浏览器会记录跳转地址，同时对服务器压力也会有一定减少。但是如果使用了 301，我们就无法统计到短地址被点击的次数了，如果对数据统计有要求的话，使用302跳转可能比较好一些！</p>
-<p>短网址的主要好处是方便传输记忆，特别是在短信里面使用的时候，短信对内容字数有限制，还有比如说微博分享也使用了短网址！</p>
-<h2 id="3-市面现有案例"><a href="#3-市面现有案例" class="headerlink" title="3.市面现有案例"></a>3.市面现有案例</h2><p>目前市面上有很多免费的短链接服务，功能基本上都一样，也没有什么限制！</p>
-<p>(1)百度的短链接(<a href="https://dwz.cn/)，百度不仅仅提供了网页入口，也提供了接口和开发文档，简单易用！" target="_blank" rel="noopener">https://dwz.cn/)，百度不仅仅提供了网页入口，也提供了接口和开发文档，简单易用！</a></p>
-<p>(2)新浪的短链接(<a href="https://sina.lt/)，目前仅提供网页入口，未发现接口服务！" target="_blank" rel="noopener">https://sina.lt/)，目前仅提供网页入口，未发现接口服务！</a></p>
-<p>(3)淘宝的短链接(<a href="https://tb.am/)，目前仅提供网页入口，未发现接口服务！" target="_blank" rel="noopener">https://tb.am/)，目前仅提供网页入口，未发现接口服务！</a></p>
-<p>市面还有很多其它的小的公司提供短链接服务，有些是部分免费，有些短链接是有效期的，这里不一一介绍！</p>
-<h2 id="4-常用算法"><a href="#4-常用算法" class="headerlink" title="4.常用算法"></a>4.常用算法</h2><p>网上比较流行的算法有进制算法、摘要（Hash）算法、随机数算法，下面简单介绍一下：</p>
-<h3 id="一-进制算法"><a href="#一-进制算法" class="headerlink" title="一.进制算法"></a>一.进制算法</h3><p>这个算法网上也有叫作自增序列算法，特点就是永不重复，设置 id 自增，一个 10进制 id 对应一个62进制的数值，1对1，也就不会出现重复的情况，这个利用的就是低进制转化为高进制时，字符数会减少的特性。</p>
-<p>计算机中常见的进制有2进制，8进制，10进制，16进制，进制越大，能够表示的数越大，占用的字数也越少。下面举个例：</p>
-<p>10进制的1000，在8进制里面是1750，在16进制里面就是3E8，那在62进制里面呢？有人说，计算机里面没有62进制。。。虽然没有，但是我们可以造一个，进制的转换算法是固定的，最常见的就是“除基取余法”！</p>
-<p>我们假设62进制的字符序列为 0-9a-zA-Z，顺序可以打乱，但是应该固定下来，是一个从0角标开始的到61的数组，我们暂且称之为字母表！</p>
-<p>====&gt; 1000/62 = 16，余8</p>
-<p>====&gt; 16/62 = 0，余16</p>
-<p>余数得到的数字是16、8，然后找到字母表里面角标为16和8的字符拼起来，就是g8，非常短，只有2位数！假如说我们想至少产生6位字符，那么我们可以从一个比较大的数字开始，具体可以看下图：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1位	62	0 - 61</span><br><span class="line">2位	3844	62 - 3843</span><br><span class="line">3位	约 23万	3844 - 238327</span><br><span class="line">4位	约 1400万	238328 - 14776335</span><br><span class="line">5位	约 9.1亿	14776336 - 916132831</span><br><span class="line">6位	约 568亿	916132832 - 56800235583</span><br></pre></td></tr></table></figure>
-
-<h3 id="二-Hash算法"><a href="#二-Hash算法" class="headerlink" title="二.Hash算法"></a>二.Hash算法</h3><h4 id="第一种方式："><a href="#第一种方式：" class="headerlink" title="第一种方式："></a>第一种方式：</h4><p>简单的对长链接进行加盐md5，会生成一个32位的字符串，随机从里面取6个字符，或者简单粗暴取最后6位，但是md5只包含0-9A-Fa-f,比字母表的里面字符还少，冲突几率更大！</p>
-<h4 id="第二种方式："><a href="#第二种方式：" class="headerlink" title="第二种方式："></a>第二种方式：</h4><p>1.将长网址 md5 生成 32 位签名串,分为 4 段, 每段 8 个字节</p>
-<p>2.对这四段循环处理, 取 8 个字节, 将他看成 16 进制串与 0x3fffffff(30位1) 与操作, 即超过 30 位的忽略处理</p>
-<p>3.这 30 位分成 6 段, 每 5 位的数字作为字母表的索引取得特定字符, 依次进行获得 6 位字符串</p>
-<p>4.总的 md5 串可以获得 4 个 6 位串,取里面的任意一个就可作为这个长 url 的短 url 地址</p>
-<p>生成的方式更加复杂，重复的几率低，但是依然会出现冲突！</p>
-<h3 id="三-随机数算法"><a href="#三-随机数算法" class="headerlink" title="三.随机数算法"></a>三.随机数算法</h3><p>这个更简单，直接对这个62个字符数组做随机选择，选择其中6个字符当作短链接码，简单易用，但是难免会出现重复冲突！</p>
-<h3 id="四-算法对比"><a href="#四-算法对比" class="headerlink" title="四.算法对比"></a>四.算法对比</h3><p>第一种算法只要解决自增id问题就可以避免冲突，自增id可以采用数据库自增主键，每次生成短码只需一次数据库操作（insert操作，获取主键id，然后算出短码即可）</p>
-<p>第二种和第三种算法其实都差不多，都是依赖于程序随机，容易出现冲突，这就需要每次在插入数据库的时候判重，效率低一些！</p>
-<h2 id="5-安全"><a href="#5-安全" class="headerlink" title="5.安全"></a>5.安全</h2><p>短链接虽然方便了传输和记忆，但是由于链接组成的字符个数少，更容易被爆破、猜测攻击，攻击者可以轻松遍历所有字符组成的链接！</p>
-<p>所以不建议使用短链接发送具有私密性的网址，比如说重置密码链接，对一些权限、敏感信息的链接要做好二次鉴权！</p>
-<p>最后，推荐一个使用golang写的短网址项目，可以作为一个单独服务部署使用: <a href="https://github.com/praglody/shorturl" target="_blank" rel="noopener">https://github.com/praglody/shorturl</a></p>
+<h2 id="1-错误的方式"><a href="#1-错误的方式" class="headerlink" title="1.错误的方式"></a>1.错误的方式</h2><p>有人说，文件可以读取成字符串，然后再计算就可以了，如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">FileMD5</span><span class="params">(filePath <span class="keyword">string</span>)</span> <span class="params">(<span class="keyword">string</span>, error)</span></span> &#123;</span><br><span class="line">    file, err := os.Open(filePath)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">""</span>, err</span><br><span class="line">    &#125;</span><br><span class="line">    all, err := ioutil.ReadAll(file)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">""</span>, err</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> MD5(<span class="keyword">string</span>(all)), <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此方法确实没问题，但是需要考虑一个问题，假如文件比较大呢？比如有好几个GB，如果按这个做法也得占用好几个GB内存，肯定存在问题。</p>
+<p>经过我测试，在实际运行中，这种方式占用的内存是文件大小的好几倍，1个GB的文件需要大概4个GB的内存，太恐怖了。</p>
+<h2 id="2-正确的方式"><a href="#2-正确的方式" class="headerlink" title="2.正确的方式"></a>2.正确的方式</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">FileMD5</span><span class="params">(filePath <span class="keyword">string</span>)</span> <span class="params">(<span class="keyword">string</span>, error)</span></span> &#123;</span><br><span class="line">	file, err := os.Open(filePath)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">""</span>, err</span><br><span class="line">	&#125;</span><br><span class="line">	hash := md5.New()</span><br><span class="line">	_, _ = io.Copy(hash, file)</span><br><span class="line">	<span class="keyword">return</span> hex.EncodeToString(hash.Sum(<span class="literal">nil</span>)), <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>经过实际测试发现占用内存几乎非常非常少，这里大家就会发现md5.New()的用途所在了，简单分析一下为什么这种方式占用内存少。</p>
+<p>首先要了解<strong>io.Copy</strong>方法的含义，可以先看看注释：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Copy copies from src to dst until either EOF is reached</span></span><br><span class="line"><span class="comment">// on src or an error occurs. It returns the number of bytes</span></span><br><span class="line"><span class="comment">// copied and the first error encountered while copying, if any.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// A successful Copy returns err == nil, not err == EOF.</span></span><br><span class="line"><span class="comment">// Because Copy is defined to read from src until EOF, it does</span></span><br><span class="line"><span class="comment">// not treat an EOF from Read as an error to be reported.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// If src implements the WriterTo interface,</span></span><br><span class="line"><span class="comment">// the copy is implemented by calling src.WriteTo(dst).</span></span><br><span class="line"><span class="comment">// Otherwise, if dst implements the ReaderFrom interface,</span></span><br><span class="line"><span class="comment">// the copy is implemented by calling dst.ReadFrom(src).</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Copy</span><span class="params">(dst Writer, src Reader)</span> <span class="params">(written <span class="keyword">int64</span>, err error)</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> copyBuffer(dst, src, <span class="literal">nil</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看出来，它底层调用了一个copyBuffer，这个方法底层在copy的时候会临时分配一个buffer缓存区，默认大小32k，每次只会占用32k大小内存，如果想自定义缓存区大小可以使用<strong>CopyBuffer</strong>:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// CopyBuffer is identical to Copy except that it stages through the</span></span><br><span class="line"><span class="comment">// provided buffer (if one is required) rather than allocating a</span></span><br><span class="line"><span class="comment">// temporary one. If buf is nil, one is allocated; otherwise if it has</span></span><br><span class="line"><span class="comment">// zero length, CopyBuffer panics.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">CopyBuffer</span><span class="params">(dst Writer, src Reader, buf []<span class="keyword">byte</span>)</span> <span class="params">(written <span class="keyword">int64</span>, err error)</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> buf != <span class="literal">nil</span> &amp;&amp; <span class="built_in">len</span>(buf) == <span class="number">0</span> &#123;</span><br><span class="line">        <span class="built_in">panic</span>(<span class="string">"empty buffer in io.CopyBuffer"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> copyBuffer(dst, src, buf)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后配合Sum方法，每次计算32k，不断循环计算，直到算完，所以几乎不占用内存。</p>
+<h2 id="3-总结"><a href="#3-总结" class="headerlink" title="3.总结"></a>3.总结</h2><p>如果计算的文件都是小文件，内存比较大的话，追求速度的话可以使用第一种方法，如果你计算的文件非常大，务必使用第二种方法，不然内存会爆掉。</p>
 
       
     </div>
@@ -464,7 +442,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/%E7%9F%AD%E7%BD%91%E5%9D%80/" rel="tag"># 短网址</a>
+            <a href="/tags/Golang/" rel="tag"># Golang</a>
           
         </div>
       
@@ -477,8 +455,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/linux/ubuntu-nvidia-dirver.html" rel="next" title="Ubuntu 下nvidia显卡驱动安装">
-                <i class="fa fa-chevron-left"></i> Ubuntu 下nvidia显卡驱动安装
+              <a href="/2020/coding/golang/md5.html" rel="next" title="Golang里面MD5的写法和性能">
+                <i class="fa fa-chevron-left"></i> Golang里面MD5的写法和性能
               </a>
             
           </div>
@@ -486,10 +464,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/coding/golang/golang-grpc.html" rel="prev" title="GRPC入门和实践">
-                GRPC入门和实践 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -632,7 +606,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-背景介绍"><span class="nav-text">1.背景介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-原理和应用"><span class="nav-text">2.原理和应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-市面现有案例"><span class="nav-text">3.市面现有案例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-常用算法"><span class="nav-text">4.常用算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-进制算法"><span class="nav-text">一.进制算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-Hash算法"><span class="nav-text">二.Hash算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第一种方式："><span class="nav-text">第一种方式：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第二种方式："><span class="nav-text">第二种方式：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-随机数算法"><span class="nav-text">三.随机数算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四-算法对比"><span class="nav-text">四.算法对比</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-安全"><span class="nav-text">5.安全</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-错误的方式"><span class="nav-text">1.错误的方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-正确的方式"><span class="nav-text">2.正确的方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-总结"><span class="nav-text">3.总结</span></a></li></ol></div>
             
 
           </div>
