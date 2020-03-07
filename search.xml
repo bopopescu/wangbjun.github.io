@@ -27,7 +27,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Golang里面MD5的写法和性能</title>
+    <title>Golang计算MD5的写法和性能</title>
     <url>/2020/coding/golang/md5.html</url>
     <content><![CDATA[<p>用过PHP的童鞋知道在PHP里面md5很简单，是一个内置函数，可以直接调用：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">jwang@jun:~$ php -a</span><br><span class="line">Interactive mode enabled</span><br><span class="line"></span><br><span class="line">php &gt; <span class="built_in">echo</span> md5(<span class="string">"12345"</span>);</span><br><span class="line">827ccb0eea8a706c4c34a16891f84e7b</span><br></pre></td></tr></table></figure>
