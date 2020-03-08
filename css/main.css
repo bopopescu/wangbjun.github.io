@@ -294,7 +294,7 @@ img {
   display: block;
   margin: auto;
   max-width: 100%;
-  width: 90%;
+  height: auto;
 }
 hr {
   margin: 40px 0;
@@ -1828,7 +1828,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #f44e81;
+  background: #a34e03;
 }
 .links-of-blogroll {
   font-size: 13px;
