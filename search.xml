@@ -8,7 +8,7 @@
 <a id="more"></a>
 
 <p>本篇文章不是讲如何在Go里面实现这些加密算法，仔细看一下Go标准库里面<strong>crypto</strong>库，你会发现其实Go已经实现很多了加密算法，但是很多人不知道咋用，正如MD5算法一样，它没有提供一个非常简单易用的对外接口，需要你自己再封装一遍，如果你急着用，我建议你去Github上面找一下封装好的库，文章最后我会推荐一个。</p>
-<img src="/images/2020-03-08_17-00.png" width="50%" />
+<img src="/images/2020-03-08_17-00.png" />
 
 <p>今天我们主要说两种最常用的加密算法：AES对称加密、ESA非对称加密。</p>
 <h2 id="AES对称加密"><a href="#AES对称加密" class="headerlink" title="AES对称加密"></a>AES对称加密</h2><p>AES（Advanced Encryption Standard）是最常见的对称加密算法，但是这个算法分很多模式，不同模式的实现方式又有很大差异，比如ECB、CBC、OFB、CFB，详细技术细节这里就不多说了。</p>
@@ -116,7 +116,7 @@
 <p>在学生时代，我也算是班级里面名列前茅的选手，在别人眼里我很厉害，每次考试都能考一个非常高的分数，但是我自己却感觉很轻松，我每天和其它同学一样，一起上课学习、按时完成老师安排的作业，没有什么额外的事情。而我周围的也有些同学非常努力，早起晚睡，周末还会上家教，但成绩却一般般。举一个不太恰当的例子，10万块钱在你眼里可能是巨款，但是在有钱人的眼里那只是零花钱。所以在一些牛人的眼里有些问题太简单了，他们可以分分钟钟给你手写一个翻转二叉树算法，这真的不是他们很努力，有些只不过是天分而已，而你刷了几百遍leetcode依然达不到人家的水平。</p>
 <p>正视智商上的差距并不意味着努力没用，因为在大部分时候，我们远远没有达到需要拼智商的地步，努力能够弥补很多差距，即使智商很高的人也需要努力，不然也就是当代“伤仲永”而已。</p>
 <h1 id="方法论"><a href="#方法论" class="headerlink" title="方法论"></a>方法论</h1><p>在我很早学习Java的时候，我在网上看过一个叫韩顺平的人的视频教程，他在开课之前有一小节专门讲了如何高效的学习编程这个话题，他总结了几个点，我觉得非常有道理，后来得知，他不仅仅教Java，也教PHP、Linux、Go，但是每次开课的时候都会讲一下这几点学习方法，个人感觉这几点讲的非常好，这里和大家分享一下：</p>
-<img src="/images/2020-03-03-1.png" width=70% /> 
+<img src="/images/2020-03-03-1.png" /> 
 
 <ul>
 <li><p>高效而愉快的学习</p>
@@ -206,27 +206,27 @@
 
 <p>在Ta们中，有人是纯粹出来旅游散心，有人是挑战自我，有人是对自然的热爱，有人是为了结交更多的朋友，也有人是在躲避生活。记得有一次在丽江一家青旅认识一位小姑凉，她说她在读高三，看长相似乎与我年龄相仿，曾一起骑车游逛古镇，后来听说她被她爸“抓”回去了，原来她父母离异，她这次是私自离校出来玩，她爸报警之后通过公安局查到青旅，做飞机从千里之外上门把人带走了。一个人出去旅行的人往往都有自己的故事，Ta们也许是习惯一个人，也许是追求流浪的状态，或许是想找个人倾诉，或借机摆脱烦恼，无论如何，这都是Ta们的旅行。</p>
 <p>时间回到林芝，咱们继续说318的故事，林芝算是西藏地区非常大的一个城市，四面环山，云雾缭绕，旁边一条河流流过，自然环境非常好，本地也没什么工业，空气质量非常好，但是湿度也大，林芝这属于亚热带气候，夏天的时候下雨，雨蒸发变成云雾，然后又变成雨，一天可以下好几次雨。</p>
-<img src="/images/2020-02-26-1.jpeg" width=70% /> 
+<img src="/images/2020-02-26-1.jpeg" /> 
 
-<img src="/images/2020-02-26-2.jpeg" width=70% /> 
+<img src="/images/2020-02-26-2.jpeg" /> 
 
 <p>我在林芝总共待了2天，随处逛了下，整个城市是一个严重依赖外部资源输入的地方，只有往西可以去西藏，往东就是2000多公里的318国道。期间去了一个国家森林公园，站在山上俯视了下整个城市，可以看见整个城市在一片河滩冲积平原上面，有很多在建的工程。</p>
-<img src="/images/2020-02-26-3.jpeg" width=70% /> 
+<img src="/images/2020-02-26-3.jpeg" /> 
 
-<img src="/images/2020-02-26-4.jpeg" width=70% /> 
+<img src="/images/2020-02-26-4.jpeg" /> 
 
 <p>这座山名字叫作“比日神山”，可能是当地藏族人民的神山，所以在山上的栈道两边全部挂满了经文，这在西藏非常常见！</p>
-<img src="/images/2020-02-26-5.jpeg" width=70% /> 
+<img src="/images/2020-02-26-5.jpeg" /> 
 
-<img src="/images/2020-02-26-7.jpeg" width=70% />
+<img src="/images/2020-02-26-7.jpeg" />
 
 <p>这条桥叫作八一大桥，其实最早林芝市也叫八一镇，只不过发展的比较大就改成市了。</p>
-<img src="/images/2020-02-26-6.jpeg" width=70% /> 
+<img src="/images/2020-02-26-6.jpeg" /> 
 
 <p>刚刚去Google卫星地图上面看了下，发现虽然5年过去了，似乎变化并不大，从卫星地图上也可以看出来整个城市围绕着河道而建，这条河最终流向印度洋。</p>
-<img src="/images/2020-02-26-9.jpeg" width=70% /> 
+<img src="/images/2020-02-26-9.jpeg" /> 
 
-<img src="/images/2020-02-26-8.jpeg" width=70% /> 
+<img src="/images/2020-02-26-8.jpeg" /> 
 
 <p>这样的城市看起来很好，但是似乎不是太适合现代人，除了空气比较好之外，周围被大山包围，阳光并不多。另外这地方太过偏远，离拉萨还有几百公里，网上买东西太慢，上网的话网速也慢，如果要去别的地方不坐飞机就更远了，虽然有机场，但是票价不便宜，另外各种生活物资，比如蔬菜、水果、海鲜水产基本上全靠外部输入，种类少价格高，可能适合有钱人买套房在这偶尔坐飞机过来度假，待上一段时间，感受一下慢生活。</p>
 ]]></content>
@@ -246,7 +246,7 @@
 </blockquote>
 <a id="more"></a>
 
-<img src="/images/2020-02-12-1.jpeg" width=70% /> 
+<img src="/images/2020-02-12-1.jpeg" /> 
 
 <div align="center">
     <audio controls autoplay loop>
@@ -255,17 +255,17 @@
 </div>
 
 <p>说走就走，第一站是<code>林芝市</code>，早上我告别青旅，坐车前往距离拉萨几十公里外的一个县（墨竹工卡县），等等，不是说好的徒步搭车吗？其实我在外一般能坐车的地方肯定是自己坐车，极少去坐“黑车”或者搭车。但是西藏这个地方客运车辆很少，有些地方根本不通车，或者车次非常少（有些地区1-2天才发一趟车）。在国道上跑的车一类是大货车，大多都是从云南四川过来的货运车辆，珍惜生命远离大货车；另一类是私家车，以川字牌居多，其中大部分都是自驾游或者租的车，也有不少是藏族人当地车，还有部分以盈利为目的的“黑车”。</p>
-<img src="/images/2020-02-12-2.jpeg" width=70% /> 
+<img src="/images/2020-02-12-2.jpeg" /> 
 
 <p>大约中午的时候才到达了这个县，说是县城，但规模比我国中东部地区的一个镇都还小，基本上就是沿着国道2边有一些房子，路边商店买了一瓶水，望了望这街道，再看了下地图我离林芝还有300多公里。。。我决定开始搭车了。第一次搭车没什么经验，站路边招手半天没人停，也记不清大概过了多久，有一辆车停了，直接招呼我上车，车上有很多藏族人，车主的普通话很糟糕，我觉得大概是在问我去哪里，我说去林芝，也不知道他听懂了没，后面就一直没交流过，车上这些人说话我也听不懂，也没和我搭话，我自顾自刷着手机，中间路过<code>米拉山口</code>下来拍了张照，第一次在海拔这么高的地方，感觉脑袋有点懵，腿有点软，也不知道是不是因为坐的太久了。。。</p>
 <blockquote>
 <p>米拉山口是318国道海拔最高点，5000多米，当时下面已经在修隧道了，现在估计早已经修好了。其实318国道那几年到处都在架桥修隧道，路况好很多，现在估计随便一个车也能开过去。</p>
 </blockquote>
-<img src="/images/2020-02-12-3.jpeg" width=70% /> 
+<img src="/images/2020-02-12-3.jpeg" /> 
 
 <p>大概5点多的时候，车子到了国道旁一个像是镇的地方，那块有一个岔路口，往前走是318，拐进去不知道是什么地方，看地图里面也没什么县或镇，估计这些藏族人家在深山。车上人都下来休息，这时候车主和我说，他们不往前面走了，要拐进去，离林芝也不远了，让我自己在路边再拦个车，最后让我让把<code>路费</code>付一下。其实付路费这事我觉得没啥问题，毕竟上车那会也没说不要钱，现在回忆起来也记不清楚是他到底开口要了多少钱，反正我记得我那会还还价了，最后给了100块外加一些零钱，可能不合他意，但是他也没做出什么出格的举动，因为那会我兜里也就踹了几百块钱，自己总得留点，再多要我确实也没有。</p>
 <p>然而这里距离这个林芝还有100多公里，路边已经基本上没有什么车了，再过1个多小时天也快黑了。我进镇看了下，这个镇也很小，不过好在还有旅店和饭店，于是背着包在镇里面过了一遍，然后又回到了318国道，最后决定还是继续往前，先往前走着一边再搭车，如果实在搭不到车那就再往回走晚上住这里。</p>
-<img src="/images/2020-02-12-4.jpeg" width=70% /> 
+<img src="/images/2020-02-12-4.jpeg" /> 
 
 <p>这次运气比较好，很快就有一辆川字牌的车停下来了，车主是不是藏族人，上车后发现车子非常新，连后座的膜都还在，简单聊了几句，他说他是去云南送车的，让我不要动车上的东西，具体我也没多问。不过这大哥的车技确实了得，318上面弯道非常多，很多地方道路也不宽敞，但是这大哥每次转弯、会车的时候甚至都不用减速。虽然这次语言不是障碍，但是2个大老爷们也没什么太多可聊的，最后晚上9点多的时候到了林芝，我说了声谢谢后就下了车，这大哥什么也没说啥，一脚油门就走了，颇有几分干练和爽快。</p>
 <p>虽然有点折腾，但是最终还是到达林芝市，迈出了318国道的第一步，万事开头难，谁知道接下来又会发生什么呢？</p>
@@ -331,16 +331,16 @@
     <url>/2020/linux/do-you-need-linux.html</url>
     <content><![CDATA[<p>自从跨入IT编程行业一直都在使用Linux桌面系统办公（尝试过挺多发行版，最终选择Ubuntu），平时生活也在用，不知不觉已经4年多了，也安利了身边很多人使用Linux，从最早的疯狂折腾到现在追求稳定，其实也颇有感触，闲来无事聊一聊。</p>
 <p>我和很多人一样，最早接触的都是<code>Windows</code>系统的电脑，我也一度是Windows的爱好者，记得当年还对XP、IE情有独钟，装系统、优化系统这些事情当年也没少做，也没少折腾，基本上到了打开任务管理器，对里面每一个进程的作用以及关闭某个进程会导致什么问题都了解的地步。而当时我对Linux的印象也停留在黑框框上面，觉得很神秘，对技术要求很高，只在很多电影里面看见黑客会用到，毕竟那会我对OS需求只是到用的地步，并没有接触编程开发。</p>
-<img src="/images/2020-02-10-1.jpeg" width=60% /> 
+<img src="/images/2020-02-10-1.jpeg" /> 
 
 <a id="more"></a>
 
 <p>实际上，踏入编程行业之后，我发现很多教学教程用的还是Windows居多，或者是Mac OS，使用Linux的人还真不多，那会我无意间了解到一个叫<code>Kali</code>的系统，了解这个系统的都知道，Kali这个系统是专门用于<code>安全渗透测试</code>，它开箱自带了很多非常有用的工具，比如说可以用于制作木马、中间人攻击、钓鱼、抓包破解WiFi等等，我最初也是因为对黑客比较感兴趣才会去使用这个系统。具体的话我在另一篇文章说到，我拿Kali做了很多有意思的事情，不过后来渐渐就不用了，毕竟我从事的不是IT网络安全行业。</p>
 <p>我最早使用Ubuntu的时候，那会的版本使用的还是unity桌面，我个人非常喜欢这个桌面，但是Ubuntu 18.04之后的版本换成gnome了。目前我依然坚持使用unity的一个原因就是unity桌面的沉浸式状态栏非常好看，其次unity桌面的颜值很高，另外就是习惯了，毕竟用了好几年了，可惜被官方抛弃了。</p>
-<img src="/images/2020-02-10-2.png" width=60% /> 
+<img src="/images/2020-02-10-2.png" /> 
 
 <p>大约2年前，我建了一个Ubuntu桌面的交流QQ群(<code>群号: 541114553</code>)，那会只有几个人，后来一直也没打理，没想到最近半年陆续有很多人申请加入，现在已经有100多人了。</p>
-<img src="/images/2020-02-10-3.png" width=60% /> 
+<img src="/images/2020-02-10-3.png" /> 
 
 <p>但是我发现加群的人大部分都是小白，都是来问问题的，问的最多的问题都是关于安装的问题。诚然，Linux系统的安装确实是个头疼的事情，特别是在有独显的机器上面，可能还涉及到硬件驱动兼容性问题。有时候并不是我不想回答问题，只是有些问题完全是可以搜索解决的，只是很多伸手党懒的去研究，我在不同机器上面安装Linux的次数没有上百次也有几十次了，也安装过双系统，包括黑苹果双系统，折腾系统很多年，什么样的问题都遇到过，所以我这里总结一下解决问题的思路：</p>
 <ul>
@@ -349,7 +349,7 @@
 <li><p>其次，先<code>百度|Google</code>一下，99%的问题网上都有答案，就看你会不会搜索。英文确实很主要，Google搜出来的很多都是英文的，如果你看不懂那确实有点难，毕竟翻译有时候并不准确。</p>
 </li>
 </ul>
-<img src="/images/2020-02-10-4.png" width=60% /> 
+<img src="/images/2020-02-10-4.png" /> 
 
 <ul>
 <li><p>然后，提问的艺术。提问要准确描述你要干什么？、你遇到的问题？、然后最好附上截图或者视频。</p>
@@ -370,7 +370,7 @@
 </ul>
 <p>最后，我想说一个比较重要的话题，那就是你为什么要使用Linux？</p>
 <p>首先，我不建议非IT行业从事者使用Linux，操作系统本质上只是一个工具，大部分非IT技术行业者可能只是好奇，但他们没有相关技术能力解决一些问题，他们可以选择更好用的面向消费者的Windows或Mac，少折腾多花点时间放在工作上会更好。</p>
-<img src="/images/2020-02-10-5.png" width=60% />
+<img src="/images/2020-02-10-5.png" />
 
 <p>本人使用Ubuntu原因主要有下面几点：</p>
 <ul>
@@ -412,7 +412,7 @@
 <p>有人说现在很多的城里人以前也是农村人，确实是这样，中国的城市化的快步发展很大程度上得益于国家政策的变化，也就是房地产市场化，开放城市落户，差不多是最近20年才完成的事情。我们盖了大概可以容纳30亿人的房子，全民都在买房、炒房，房子成为每个人最值钱的财产。</p>
 <h2 id="落寞的小洋楼"><a href="#落寞的小洋楼" class="headerlink" title="落寞的小洋楼"></a>落寞的小洋楼</h2><p>我记得我上小学初中的时候那会，大约在03年左右，农村都在盖自建房以代替之前的土瓦房，那会很流行盖“小洋楼”，一般多为2-3层的楼房，现在你去农村看看还有很多，大部分都荒废了，因为农村根本没人了，即使现在农村几乎家家都有水泥路，有些地方甚至都通了自来水，光纤网络，虽然基础设施建设并不差，但是没人愿意住农村。</p>
 <p>我在想，那会为什么没有人去城里买房呢？那会估计房子几百块一平方米就可以吧？</p>
-<img src="/images/2020-02-07.jpeg" width=70% /> 
+<img src="/images/2020-02-07.jpeg" /> 
 
 <p>其实并不是他们不想买，是因为根本买不到，我不知道中国房地产正式市场化具体时间点是什么时候，但是我肯定那会你在城里面买不到房子，也落不了户口，孩子更上不了学。</p>
 <h2 id="割裂的家族"><a href="#割裂的家族" class="headerlink" title="割裂的家族"></a>割裂的家族</h2><p>农村有很多小村庄，一个村里面的基本上都是亲戚，毕竟那会兄弟姐妹很多，我有一个大伯，早年当兵，部队退伍之后给安排在省会，之后他们那一岔全部都在城里面发展了，他的子女就是原生的城里人了。早些年，村里老一辈在世的时候有时候还会回农村过年，清明节也会回家祭祖，小时候他们经常回来带着胶卷相机给我们拍照。</p>
@@ -434,7 +434,7 @@
 <p>但是光把房子盖起来，没有配套的工作，买了房又有什么用？这是很多三四线城市面临的问题</p>
 <h2 id="房子还是公寓？"><a href="#房子还是公寓？" class="headerlink" title="房子还是公寓？"></a>房子还是公寓？</h2><p>在美国，一般说房子（house），是指那种带院子的独栋建筑，而中国所说的房子其实在美国一般被称为公寓（department），也就是格子房。在中国也有房子，不过一般都是别墅，很多大城市郊区都遍布了大规模的别墅群，但是和美国比还是差远了，而中国农村的自建房其实也可以算是别墅的一种。</p>
 <p>如果你用过Google的卫星地图，你可以看看美国的城市，你会发现美国的城市规模非常之大，全部都是独栋建筑，很少有类似中国的高层小区。所以很多人戏称美国是大农村，没毛病，和中国农村差不多。</p>
-<img src="/images/2020-02-07-2.jpeg" width=70% /> 
+<img src="/images/2020-02-07-2.jpeg" /> 
 
 <p>中国这种密集的高层小区便于管理，可以很好利用公共基础设施，同时方便了快递、外卖、共享单车等行业发展，但是其弊端已经在慢慢展现。</p>
 <p>如果能解决交通问题，我相信很多人还是愿意住在郊区、住在农村，每天开车去城里上班，而不用住在城中心拥挤的出租房或者监狱一样的格子楼。</p>
@@ -443,7 +443,7 @@
 <p>我们父母这一代现在很多已经50多岁，基本快干不动，90后已经快30岁了，这群人马上就要成为社会主力。在未来，只要是涉及人力的活以后的成本会越来越高，这一点我们可以参考美国等发达社会，蓝领的工资很多时候比在办公室的白领还高，这种趋势势不可挡。</p>
 <h2 id="李子柒式农村生活"><a href="#李子柒式农村生活" class="headerlink" title="李子柒式农村生活"></a>李子柒式农村生活</h2><p>中国的农村在很多人的印象里面只有一个字：穷，农村人几乎已经成了穷人的代言词，现在除了个别风景优美的地区被开发成了风景区，大部分农村和美也沾不上边。</p>
 <p>李子柒给大家营造了一个梦想中的田园生活，而现实中的农村生活往往充满了破败荒芜，每个人都在努力工作努力赚钱，憧憬着买房买车，亦或是为子女忙碌。大部分农村人背井离乡，只为在城里面买房定居，过上更好的生活。</p>
-<img src="/images/2020-02-07-1.jpeg" width=50% /> 
+<img src="/images/2020-02-07-1.jpeg" /> 
 
 <p>或许当我们无欲无求的时候，才可以像李子柒视频那样潇洒，日出而作，日落而息，双手去耕作，用汗水收获果实。</p>
 <p>农村的田园生活已经离我们太遥远了，在工业化时代，规模经济是趋势，社会分工日益明确，你不用亲手去种植蔬菜，你只需要选择一个可以挣钱的工作就行，你可以是流水线工人，也可以是办公室白领。</p>
@@ -460,7 +460,7 @@
     <title>“武汉肺炎”小记</title>
     <url>/2020/life/wuhan-ncp.html</url>
     <content><![CDATA[<p>截止我写这篇文章的时候，这次肺炎病毒已经感染了数万人，而且还在持续增长！</p>
-<img src="/images/2020-02-06.jpg" width=60% /> 
+<img src="/images/2020-02-06.jpg" /> 
 
 <p>每天醒来第一件事情就是打开手机，刷新一下数据，从最开始的几百人、到几千人、再到现在的几万人。。。在这里我想说说自己看到或者了解到的一些社会现象，谈谈自己的感受。</p>
 <p>在我的记忆力，2003年还非常遥远，那时候我应该还在上初中，记得那时候学校被封闭，外人不得进出，教室每天早上都会有一股浓厚的消毒水味。</p>
@@ -470,15 +470,15 @@
 <p>2020年1月19日，新闻说北京大兴有2例确诊，当天上班的时候也有很多讨论这件事，这时候很多人开始慌张了，公司前台给大家发口罩，不过我并没有要。</p>
 <p>我当时觉得这事并没有多大，毕竟连政府都没什么行动，北京才2例，觉得很多人有点大惊小怪，有些朋友开始跑医院买口罩，很多医院的口罩卖空，一下子口罩成了稀缺品。晚上坐地铁的时候发现大约有50%的人都戴了口罩。那会我还没有把这事放在心上，因为买不到口罩所以上班也没戴口罩，甚至感觉某些人反应过度，开始拼命的要买口罩。</p>
 <p>我是2020年1月22日的火车，从北京南站出发，那时候我发现候车厅大约80%的人都戴了口罩，感觉事态有点严峻，由于我自己没口罩，所以刻意和其他人保持了距离。</p>
-<img src="/images/2020-01-22.jpeg" width=60% /> 
+<img src="/images/2020-01-22.jpeg" /> 
 
 <p>2020年1月22日晚，坊间传言武汉要封城，我一个朋友这时候正在回家的火车上，她刚好要从武汉转车，听她说车上人都慌了，有人怕封城出不去直接在中途郑州站下车了。后来正式新闻出来了，1月23日10点，武汉正式封城。</p>
 <p>实际上，这会官方数据确诊只有几百人，但是这种封城动作让人胆战心惊，网上各种“谣言”四起，其实很多“谣言”都是来自墙外新闻，我一直也在油管上关注，有人说凡是官方辟谣的都是真的，不管你们信不信，我反正是信了。</p>
 <p>过年这段时间，非常糟糕，在家里哪里都不能去，走亲访友的计划全部取消。。。然后接连不断的新闻爆出: 出门不戴口罩违法、封城、封村、挖坑断路、假期延长、武汉人被举报排挤，只见疫情事态逐步升级！</p>
-<img src="/images/2020-01-27.jpeg" width=60% />
+<img src="/images/2020-01-27.jpeg" />
 
 <p>由于我所在公司宣布2月3日起在家办公，但是我回家的时候并没有电脑，所以我决定2月2日返京。我们那高铁依然正常运行，入站的时候需要测体温，听说我走后第二天村就被封路了。</p>
-<img src="/images/2020-02-02.jpeg" width=60% />
+<img src="/images/2020-02-02.jpeg" />
 
 <p>火车站人确实很少，不过我那车刚好是晚上，本身人就不多，火车上卧铺上我那间6个床位只有我一个人，我走了一圈看了下，大部分床位都没人，看来返京的人确实不多。</p>
 <p>到了北京，我进地铁的时候看见几个安检员在那嬉笑，居然没有给我测体温。网上新闻报道北京很多小区不允许租房的人进小区，我并没有遇到这种情况，只是在门口登记了一下，虽然配备了测温枪，但是那保安并没有给我测量体温。</p>
@@ -506,14 +506,14 @@
 
 <p>他吞吞吐吐说因为什么线上bug，但是也说不清楚，说只是通知我一声，怕我不了解情况以为是漏发了。</p>
 <p>后来得知不止我一个人，总共有好几个人都没有年终奖，据老员工透露一般没有年终奖的过完年会给n+1，意思就是过完年裁员会给n+1赔偿，公司也不是第一次这样干。</p>
-<img src="/images/20200202152512.jpg" width=60% /> 
+<img src="/images/20200202152512.jpg" /> 
 
 <p>其实裁员我可以理解，为什么都是我们年初刚入职的员工呢？了解才得知原来整个公司去年早就换血了，只剩下几个小组leader是老员工，其它都是新来的。</p>
 <p>我更不理解，虽然这一年我表现不算突出，但也算是兢兢业业，努力工作，为什么选择我呢？我想过很多原因，直到离职后来听一个同事说，公司给他们涨薪了，但是名额有限，老大给他自己河南老乡全部涨了…</p>
 <p>我平时大多数都是埋头写代码，不擅长在领导面前表现，一年下来基本上没有和老大聊过什么，他也只在周会的时候会询问项目进度，更别说其它的事情了，如果说bug的话，写代码谁没有bug。</p>
 <p>这时候我突然想起来公司年初的骚操作，年初公司入职的人非常多，正常是3个月试用期，然而就在试用期快结束的时候，有几个同事被告知试用期不合格，被辞退，我在办的入职他们在办离职。如果不合适就不要招人进来，招人之后干了3个月最后一天辞退，这种行为实在恶心。</p>
 <p>过完年回来之后，我在忙完手头的工作，拿了2个月补偿就走了，对这种公司我没有什么留恋，也不想多待一天。</p>
-<img src="/images/20200202152503.jpg" width=60% /> 
+<img src="/images/20200202152503.jpg" /> 
 
 <p>公司有一个同事和我比较熟，后来聊天的时候他说他工资比较低，只有12k，老大过年前和他说年后给他涨工资，但是一直到次年6月份都没有兑现，最后他也走了。</p>
 <blockquote>
@@ -526,7 +526,7 @@
 <blockquote>
 <p>刚入职那会我对p2p还没什么概念，虽然也看了新闻，知道国家一直在管理规范p2p，清退一些不合格企业，但是这个公司借贷规模上百亿，也是上市公司，论体量也属于头部公司了，应该没问题。</p>
 </blockquote>
-<img src="/images/20200202154032.jpg" width=60% /> 
+<img src="/images/20200202154032.jpg" /> 
 
 <p>2019年07月，董事长突然来公司给大家开了一个临时会议，给大家透露了一些情况，主要就是说政策又变了，公司非常难，他在努力解决困难，公司平台遭到挤兑，暂停提现了，如果大家有人要走，他也不拦着。这时候我才知道事情的严峻性，国家可能不会给p2p活路了。</p>
 <p>一直在公司被抓之前，公司陆续有人离职，也在陆续招人，我们部门走了2个，我心里知道其实早就会有这一天，只是时间问题，但是我没有选择走，一方面是我们部门领导对我还行，中间还给我提了一次涨薪，虽然不多，还有就考虑到我刚来公司不久离职工作也不好找工作，决定再坚持一段时间，心想至少等过完年再看吧。</p>
@@ -568,7 +568,7 @@
 <p>后来得知，其实这个公司也不完全是缺人，他们之前有一个不到10人的开发团队，但是项目开发进度缓慢，处于失败的边缘。听说老板花了上百万开了一个盛大的发布会，但是APP还没上线，延期很久，老板非常生气，想把技术团队都开除。</p>
 </blockquote>
 <p>我们空降之后，就立马开始了1个多月的封闭开发，加班加点，Q哥也一直盯着开发进度，最终顺利完成了预期目标。作为奖励，年底整个技术团队获得了一次海南三亚游，次年6月，公司搬入望京SOHO，换了一个非常大的办公室。</p>
-<img src="/images/2020-01-03-1.jpg" width=60% /> 
+<img src="/images/2020-01-03-1.jpg" /> 
 
 <blockquote>
 <p>后来了解，这老板花钱请了很多大公司的顾问，有几个BAT的技术顾问，也许是出于融资对外宣传需求，给人感觉很强大，而且技术团队之前一直是有这个百度的大佬兼职带队，就是不知道为什么进度缓慢，也没做出什么东西，据说他们之前已经做了一年多了。</p>
@@ -576,7 +576,7 @@
 <p>APP顺利上线后，看上去公司蒸蒸日上，但运营了几个月后发现并没有什么效果，此时Q哥主要心思不在技术上，甚至说他几乎不管技术，突然搞起运营了，亲自带队搞运营，这也最终导致了他的出走。</p>
 <p>公司失败的原因有很多种，可能是这个老头子最终发现很多人都在围着他转，看上的是他的钱并没有用心做事，再加上他本身喜欢对产品指指点点，喜欢按着自己的想法做，比如说根据自己的想法给APP加一个功能，也从不考虑用户，整个公司说是面向老板开发也不过分。</p>
 <p>2017年10月，由于业务基本上无增长，而且据说一年花了2000万，老板不想再投钱了，公司开始裁员，裁了几个人，办公室也从望京SOHO搬到望京西很偏的一个小商住两用办公楼，各种福利缩减，刚开始工资还能正常发放，后来每月都要拖欠工资，很多人开始离职。</p>
-<img src="/images/2020-01-04-1.jpg" width=60% /> 
+<img src="/images/2020-01-04-1.jpg" /> 
 
 <blockquote>
 <p>老板其实挺有钱，早年发家，经常去美国，那边也有业务，家人都在国外，拔过他的背景，也有些黑料，但人并不傻。这次创业应该在我来之前大约2年前就开始了，只不过不是这个公司，这个公司是后来重新注册，应该属于第二波尝试，这样几番折腾，几年下来基本上算是创业失败了。</p>
@@ -591,7 +591,7 @@
 <p>Q哥说他技术入股，先带一个人过去，又拉了一个他以前的同事，等这边搞起来后期我们一起再过去。</p>
 <p>可是好景不长，这家公司只持续了几个月，他们第一版东西做完之后，这个华为出来的老板居然打了退堂鼓，不想干了，不仅没有和他们签合同，连工资都一直拖着不发，最后沟通很久说可以搬电脑抵工资。。。结局就是就这么狗血！</p>
 <p>这时候Q哥说又有朋友介绍一家新公司，说这家公司就是为了上市，资金实力雄厚，他以顾问的身份进去，可以推荐我们进去。。。说实话，经过这么多，我有点怕了，怕了创业公司。。。另外对Q哥的信任度也大大降低!</p>
-<img src="/images/2020-01-17.jpg" width=60% /> 
+<img src="/images/2020-01-17.jpg" /> 
 
 <blockquote>
 <p>Q哥是第一代北漂，比我们大不了多少岁，也是农村出来，但是来的早，赶上了IT行业发展的黄金时代，而且那会北京房价也不高，现在在北京有房有车，老婆孩子都很好，在我看来，算上成功人士了。但他自己好像并不是这么觉得，他觉得自己还没财务自由，总想做点事情出来，30多岁也算年轻，不想写代码，创业是个不错的选择。</p>
@@ -630,7 +630,7 @@
 </blockquote>
 <p>时间回到2015年10月，这时候我已经有一定的经济能力，但是工作依然不稳定和明朗，也不知道该干啥去，但是觉得不能一直这么干下去，最终选择来北京培训，这个培训班的学费也从当年的几千块涨到1万多，不过尚可以接受。</p>
 <p>不过最终报名的时候我选择了PHP，并没有学习Java，我当时主要是因为有人说PHP适合个人等中小型开发，而Java主要适合大型企业公司，其实现在这个说法也没错，但是当时我并不了解其实国内大厂都是Java的天下，PHP最终走向穷途末路。</p>
-<img src="/images/2020-01-02.jpg" width=60% />  
+<img src="/images/2020-01-02.jpg" />  
 
 <p>由于我几年前学过C和Java，相当于有基础，所以在培训班非常轻松，很多知识似曾相识，甚至觉得老师讲的太无聊，基本上就是照本宣书，填鸭式教学。同时也发现培训班就像高中一样，有很多学习能力超级差的同学，也有学习能力强的人，我旁边有一些让我感觉属于那种怎么教都教不会的人，非常可惜他们听了培训机构的忽悠，花了很多钱，最终可能无法找到工作。</p>
 <blockquote>
@@ -643,7 +643,7 @@
 <p>那会2016年正是创业潮，初创企业层出不穷，所以市场对开发人员有很大需求，所以像我这种半路出家的非科班选手依然有市场。</p>
 </blockquote>
 <p>第一次正式参加公司的编程开发工作，心里还有点紧张，很努力，不过也基本上都hold住了，然而这段工作并没有维持多久。。。</p>
-<img src="/images/2020-01-03.jpg" width=60% /> 
+<img src="/images/2020-01-03.jpg" /> 
 
 <p>2016年11月，公司突然撑不住了。我之前一直没有关注这方面的消息，直到某一天老板说公司融资断了，发不起工资了，如果大家继续留下来也没有工资发，晚上一起吃个散伙饭吧！</p>
 <p>那天是当月的20号，公司最后给每个人发了3000块钱，剩下的说先欠着，等哪天融到钱会第一时间给大家发工资，也可以继续回来工作，公司40多号人没有一个人提赔偿的事情，大家吃完饭喝完酒默默走人了，毕竟老板平时为人不错，不摆架子，好聚好散。</p>
@@ -2203,6 +2203,56 @@
       </tags>
   </entry>
   <entry>
+    <title>PHP匿名函数和闭包</title>
+    <url>/2018/coding/php/php-closure-function.html</url>
+    <content><![CDATA[<h3 id="一-什么是闭包？"><a href="#一-什么是闭包？" class="headerlink" title="一.什么是闭包？"></a>一.什么是闭包？</h3><p>先看看百度百科的介绍：</p>
+<blockquote>
+<p>闭包包含自由（未绑定到特定对象）变量，这些变量不是在这个代码块内或者任何全局上下文中定义的，而是在定义代码块的环境中定义（局部变量）。<br>“闭包” 一词来源于以下两者的结合：要执行的代码块（由于自由变量被包含在代码块中，这些自由变量以及它们引用的对象没有被释放）和为自由变量提供绑定的计算环境（作用域）。<br>在PHP、Scala、Scheme、Common Lisp、Smalltalk、Groovy、JavaScript、Ruby、 Python、Go、Lua、objective c、swift 以及Java（Java8及以上）等语言中都能找到对闭包不同程度的支持。</p>
+</blockquote>
+<p>说实话，这个介绍虽然专业，但是有点僵硬不太容易理解，闭包是一种设计思想，而不是一种语法特性，在PHP语言里面，匿名函数就是闭包的一种实现。</p>
+<h3 id="二-匿名函数"><a href="#二-匿名函数" class="headerlink" title="二.匿名函数"></a>二.匿名函数</h3><p>这个我相信大家都多多少少用过，看一下代码：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">$f = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    $a = <span class="number">1</span>;</span><br><span class="line">    $b = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">return</span> $a + $b;</span><br><span class="line">&#125;;</span><br><span class="line">var_dump($f);</span><br></pre></td></tr></table></figure>
+<p>输出结果是：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Closure#1 (0) &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<p>可见，PHP中匿名函数就是闭包，也可以理解为闭包就是把这个函数赋值给一个变量，这时候这个变量保存的就是这个函数的内存地址。</p>
+<p>如何去调用这个闭包函数呢？很简单，在这个例子里面只要 <strong>$f()</strong> 就可以了</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var_dump($f()); #结果是：3</span><br></pre></td></tr></table></figure>
+
+<p>当然这个匿名函数也是可以传参的，你可以这样写：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$f &#x3D; function ($c) &#123;</span><br><span class="line">    $a &#x3D; 1;</span><br><span class="line">    $b &#x3D; 2;</span><br><span class="line">    return $a + $b + $c;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>这样你在调用的时候就可以传入参数，类似 <strong>$f(3)</strong>, 但是有一点需要注意，如果这时候你想在定义闭包函数的时候使用外部变量，举个例子</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$out &#x3D; 100;</span><br><span class="line">$f &#x3D; function ($c) &#123;</span><br><span class="line">    $a &#x3D; 1;</span><br><span class="line">    $b &#x3D; 2;</span><br><span class="line">    return $out - ($a + $b + $c); #报错，无法引用外部变量out</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>这时候就体现了闭包封闭的特性，但是PHP提供了一个 use 关键字，可以使用下面这个写法：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$out &#x3D; 100;</span><br><span class="line">$f &#x3D; function ($c) use ($out) &#123;</span><br><span class="line">    $a &#x3D; 1;</span><br><span class="line">    $b &#x3D; 2;</span><br><span class="line">    return $out - ($a + $b + $c);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="三-闭包到底有啥用？"><a href="#三-闭包到底有啥用？" class="headerlink" title="三.闭包到底有啥用？"></a>三.闭包到底有啥用？</h3><p>一般来说还是在框架以及一些架构设计里面会用到，这里先举2个小例子：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$arr &#x3D; [1, 2, 3, 4, 5];</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;使用array_reduce求和</span><br><span class="line"></span><br><span class="line">function sum($arr)</span><br><span class="line">&#123;</span><br><span class="line">    return array_reduce($arr, function ($x, $y) &#123;</span><br><span class="line">        return $x + $y;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var_dump(sum($arr));</span><br></pre></td></tr></table></figure>
+<p>代码里面使用了 array_reduce 这个函数求一个数组的和，但是，如果不需要立刻求和，而是在后面的代码中，根据需要再计算怎么办？可以不返回求和的结果，而是返回求和的函数！</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">lazySum</span><span class="params">($arr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="params">()</span> <span class="title">use</span> <span class="params">($arr)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> array_reduce($arr, <span class="function"><span class="keyword">function</span> <span class="params">($x, $y)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> $x + $y;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line">$sum = lazySum($arr);</span><br><span class="line">var_dump($sum());</span><br></pre></td></tr></table></figure>
+<p>结果是一样的，虽然这种写法有点奇怪</p>
+<hr>
+<p>有一道面试题就涉及到了闭包的特性：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">plus</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    $funcArr = [];</span><br><span class="line">    <span class="keyword">for</span> ($i = <span class="number">1</span>; $i &lt;= <span class="number">3</span>; $i++) &#123;</span><br><span class="line">        $funcArr[] = <span class="function"><span class="keyword">function</span> <span class="params">()</span> <span class="title">use</span> <span class="params">(&amp;$i)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> $i * $i;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> $funcArr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$res = plus();</span><br><span class="line"></span><br><span class="line">var_dump($res[<span class="number">0</span>]());</span><br><span class="line">var_dump($res[<span class="number">1</span>]());</span><br><span class="line">var_dump($res[<span class="number">2</span>]());</span><br></pre></td></tr></table></figure>
+<p>plus 函数会返回3个闭包函数，然后依次调用这个几个函数, 有人以为结果可能是1,4,9，其实结果都是16，需要注意的是use 那里使用的是引用传递，这就意味着在生成这3个闭包函数的时候i的值并不是循环的时候的1,2,3，而且到最后 $i++ 之后的值也就是 4，这说明闭包函数是调用的时候才会执行。</p>
+<h3 id="四-闭包在PHP框架里面使用"><a href="#四-闭包在PHP框架里面使用" class="headerlink" title="四.闭包在PHP框架里面使用"></a>四.闭包在PHP框架里面使用</h3><p>1.一个是IOC容器</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 闭包的使用IOC</span></span><br><span class="line"><span class="comment"> * Class Container</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Container</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> $bindings;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">bind</span><span class="params">(string $abstract, Closure $concrete)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">static</span>::$bindings[$abstract] = $concrete;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">make</span><span class="params">(string $abstract)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> call_user_func(<span class="keyword">static</span>::$bindings[$abstract]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">talk</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">greet</span><span class="params">($target)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"Hello "</span> . $target-&gt;getName();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">say</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getName</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"World\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$talk = <span class="keyword">new</span> talk();</span><br><span class="line"></span><br><span class="line">Container::bind(<span class="string">'foo'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> say();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$talk-&gt;greet(Container::make(<span class="string">'foo'</span>));</span><br></pre></td></tr></table></figure>
+<p>接触过laravel框架的应该都见过这种写法，laravel框架称之为服务容器，其设计思想基本上就是这样，也就是在框架初始化的时候注册绑定一堆服务，然后框架里面随时就可以调用这些服务了。</p>
+<p>2.闭包路由</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 演示闭包的使用,路由</span></span><br><span class="line"><span class="comment"> * Class App</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> $routes = [];</span><br><span class="line">    <span class="keyword">protected</span> $responseStatus = <span class="string">'200 OK'</span>;</span><br><span class="line">    <span class="keyword">protected</span> $responseContentType = <span class="string">'text/html'</span>;</span><br><span class="line">    <span class="keyword">protected</span> $responseBody = <span class="string">'Hello World'</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">addRoute</span><span class="params">(string $path, Closure $callback)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;routes[$path] = $callback-&gt;bindTo(<span class="keyword">$this</span>, <span class="keyword">__CLASS__</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">dispatch</span><span class="params">(string $path)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">foreach</span> (<span class="keyword">$this</span>-&gt;routes <span class="keyword">as</span> $routePath =&gt; $callback) &#123;</span><br><span class="line">            <span class="keyword">if</span> ($routePath === $path) &#123;</span><br><span class="line">                $callback();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        header(<span class="string">'HTTP/1.1 '</span> . <span class="keyword">$this</span>-&gt;responseStatus);</span><br><span class="line">        header(<span class="string">'Content-Type: '</span> . <span class="keyword">$this</span>-&gt;responseContentType);</span><br><span class="line">        header(<span class="string">'Content-Length: '</span> . mb_strlen(<span class="keyword">$this</span>-&gt;responseBody));</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">$this</span>-&gt;responseBody;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">require &#39;App.php&#39;;</span><br><span class="line"></span><br><span class="line">$app &#x3D; new App();</span><br><span class="line"></span><br><span class="line">$app-&gt;addRoute(&quot;&#x2F;&quot;, function () &#123;</span><br><span class="line">    $this-&gt;responseBody &#x3D; &quot;Hello Closure!\n&quot;;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$app-&gt;dispatch(&quot;&#x2F;&quot;);</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>编程开发</category>
+      </categories>
+      <tags>
+        <tag>PHP</tag>
+        <tag>Closure</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>PHP Socket 网络编程</title>
     <url>/2018/coding/php/php-socket-programing.html</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在做PHP开发的过程中，大部分我们都在和http协议打交道，在ISO模型里面，http属于应用层协议，它底层会用到TCP协议。http协议非常简单，它是一个文本协议，一个请求对应一个响应，客户端发起一个请求，服务端响应这个请求。http是一个一问一答的对话，每次请求都得重新建立对话（这里暂不讨论Keep-Alive），如果你想通过一个请求进行多次对话，那就是长连接通信，必须使用TCP或者UDP协议。</p>
@@ -2266,56 +2316,6 @@
       <tags>
         <tag>PHP</tag>
         <tag>Socket</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>PHP匿名函数和闭包</title>
-    <url>/2018/coding/php/php-closure-function.html</url>
-    <content><![CDATA[<h3 id="一-什么是闭包？"><a href="#一-什么是闭包？" class="headerlink" title="一.什么是闭包？"></a>一.什么是闭包？</h3><p>先看看百度百科的介绍：</p>
-<blockquote>
-<p>闭包包含自由（未绑定到特定对象）变量，这些变量不是在这个代码块内或者任何全局上下文中定义的，而是在定义代码块的环境中定义（局部变量）。<br>“闭包” 一词来源于以下两者的结合：要执行的代码块（由于自由变量被包含在代码块中，这些自由变量以及它们引用的对象没有被释放）和为自由变量提供绑定的计算环境（作用域）。<br>在PHP、Scala、Scheme、Common Lisp、Smalltalk、Groovy、JavaScript、Ruby、 Python、Go、Lua、objective c、swift 以及Java（Java8及以上）等语言中都能找到对闭包不同程度的支持。</p>
-</blockquote>
-<p>说实话，这个介绍虽然专业，但是有点僵硬不太容易理解，闭包是一种设计思想，而不是一种语法特性，在PHP语言里面，匿名函数就是闭包的一种实现。</p>
-<h3 id="二-匿名函数"><a href="#二-匿名函数" class="headerlink" title="二.匿名函数"></a>二.匿名函数</h3><p>这个我相信大家都多多少少用过，看一下代码：</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">$f = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    $a = <span class="number">1</span>;</span><br><span class="line">    $b = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">return</span> $a + $b;</span><br><span class="line">&#125;;</span><br><span class="line">var_dump($f);</span><br></pre></td></tr></table></figure>
-<p>输出结果是：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Closure#1 (0) &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<a id="more"></a>
-
-<p>可见，PHP中匿名函数就是闭包，也可以理解为闭包就是把这个函数赋值给一个变量，这时候这个变量保存的就是这个函数的内存地址。</p>
-<p>如何去调用这个闭包函数呢？很简单，在这个例子里面只要 <strong>$f()</strong> 就可以了</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var_dump($f()); #结果是：3</span><br></pre></td></tr></table></figure>
-
-<p>当然这个匿名函数也是可以传参的，你可以这样写：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$f &#x3D; function ($c) &#123;</span><br><span class="line">    $a &#x3D; 1;</span><br><span class="line">    $b &#x3D; 2;</span><br><span class="line">    return $a + $b + $c;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>这样你在调用的时候就可以传入参数，类似 <strong>$f(3)</strong>, 但是有一点需要注意，如果这时候你想在定义闭包函数的时候使用外部变量，举个例子</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$out &#x3D; 100;</span><br><span class="line">$f &#x3D; function ($c) &#123;</span><br><span class="line">    $a &#x3D; 1;</span><br><span class="line">    $b &#x3D; 2;</span><br><span class="line">    return $out - ($a + $b + $c); #报错，无法引用外部变量out</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>这时候就体现了闭包封闭的特性，但是PHP提供了一个 use 关键字，可以使用下面这个写法：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$out &#x3D; 100;</span><br><span class="line">$f &#x3D; function ($c) use ($out) &#123;</span><br><span class="line">    $a &#x3D; 1;</span><br><span class="line">    $b &#x3D; 2;</span><br><span class="line">    return $out - ($a + $b + $c);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h3 id="三-闭包到底有啥用？"><a href="#三-闭包到底有啥用？" class="headerlink" title="三.闭包到底有啥用？"></a>三.闭包到底有啥用？</h3><p>一般来说还是在框架以及一些架构设计里面会用到，这里先举2个小例子：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$arr &#x3D; [1, 2, 3, 4, 5];</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;使用array_reduce求和</span><br><span class="line"></span><br><span class="line">function sum($arr)</span><br><span class="line">&#123;</span><br><span class="line">    return array_reduce($arr, function ($x, $y) &#123;</span><br><span class="line">        return $x + $y;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var_dump(sum($arr));</span><br></pre></td></tr></table></figure>
-<p>代码里面使用了 array_reduce 这个函数求一个数组的和，但是，如果不需要立刻求和，而是在后面的代码中，根据需要再计算怎么办？可以不返回求和的结果，而是返回求和的函数！</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">lazySum</span><span class="params">($arr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="params">()</span> <span class="title">use</span> <span class="params">($arr)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> array_reduce($arr, <span class="function"><span class="keyword">function</span> <span class="params">($x, $y)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> $x + $y;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line">$sum = lazySum($arr);</span><br><span class="line">var_dump($sum());</span><br></pre></td></tr></table></figure>
-<p>结果是一样的，虽然这种写法有点奇怪</p>
-<hr>
-<p>有一道面试题就涉及到了闭包的特性：</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">plus</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    $funcArr = [];</span><br><span class="line">    <span class="keyword">for</span> ($i = <span class="number">1</span>; $i &lt;= <span class="number">3</span>; $i++) &#123;</span><br><span class="line">        $funcArr[] = <span class="function"><span class="keyword">function</span> <span class="params">()</span> <span class="title">use</span> <span class="params">(&amp;$i)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> $i * $i;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> $funcArr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$res = plus();</span><br><span class="line"></span><br><span class="line">var_dump($res[<span class="number">0</span>]());</span><br><span class="line">var_dump($res[<span class="number">1</span>]());</span><br><span class="line">var_dump($res[<span class="number">2</span>]());</span><br></pre></td></tr></table></figure>
-<p>plus 函数会返回3个闭包函数，然后依次调用这个几个函数, 有人以为结果可能是1,4,9，其实结果都是16，需要注意的是use 那里使用的是引用传递，这就意味着在生成这3个闭包函数的时候i的值并不是循环的时候的1,2,3，而且到最后 $i++ 之后的值也就是 4，这说明闭包函数是调用的时候才会执行。</p>
-<h3 id="四-闭包在PHP框架里面使用"><a href="#四-闭包在PHP框架里面使用" class="headerlink" title="四.闭包在PHP框架里面使用"></a>四.闭包在PHP框架里面使用</h3><p>1.一个是IOC容器</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 闭包的使用IOC</span></span><br><span class="line"><span class="comment"> * Class Container</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Container</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> $bindings;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">bind</span><span class="params">(string $abstract, Closure $concrete)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">static</span>::$bindings[$abstract] = $concrete;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">make</span><span class="params">(string $abstract)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> call_user_func(<span class="keyword">static</span>::$bindings[$abstract]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">talk</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">greet</span><span class="params">($target)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"Hello "</span> . $target-&gt;getName();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">say</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getName</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"World\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$talk = <span class="keyword">new</span> talk();</span><br><span class="line"></span><br><span class="line">Container::bind(<span class="string">'foo'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> say();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$talk-&gt;greet(Container::make(<span class="string">'foo'</span>));</span><br></pre></td></tr></table></figure>
-<p>接触过laravel框架的应该都见过这种写法，laravel框架称之为服务容器，其设计思想基本上就是这样，也就是在框架初始化的时候注册绑定一堆服务，然后框架里面随时就可以调用这些服务了。</p>
-<p>2.闭包路由</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 演示闭包的使用,路由</span></span><br><span class="line"><span class="comment"> * Class App</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> $routes = [];</span><br><span class="line">    <span class="keyword">protected</span> $responseStatus = <span class="string">'200 OK'</span>;</span><br><span class="line">    <span class="keyword">protected</span> $responseContentType = <span class="string">'text/html'</span>;</span><br><span class="line">    <span class="keyword">protected</span> $responseBody = <span class="string">'Hello World'</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">addRoute</span><span class="params">(string $path, Closure $callback)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;routes[$path] = $callback-&gt;bindTo(<span class="keyword">$this</span>, <span class="keyword">__CLASS__</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">dispatch</span><span class="params">(string $path)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">foreach</span> (<span class="keyword">$this</span>-&gt;routes <span class="keyword">as</span> $routePath =&gt; $callback) &#123;</span><br><span class="line">            <span class="keyword">if</span> ($routePath === $path) &#123;</span><br><span class="line">                $callback();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        header(<span class="string">'HTTP/1.1 '</span> . <span class="keyword">$this</span>-&gt;responseStatus);</span><br><span class="line">        header(<span class="string">'Content-Type: '</span> . <span class="keyword">$this</span>-&gt;responseContentType);</span><br><span class="line">        header(<span class="string">'Content-Length: '</span> . mb_strlen(<span class="keyword">$this</span>-&gt;responseBody));</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">$this</span>-&gt;responseBody;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">require &#39;App.php&#39;;</span><br><span class="line"></span><br><span class="line">$app &#x3D; new App();</span><br><span class="line"></span><br><span class="line">$app-&gt;addRoute(&quot;&#x2F;&quot;, function () &#123;</span><br><span class="line">    $this-&gt;responseBody &#x3D; &quot;Hello Closure!\n&quot;;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$app-&gt;dispatch(&quot;&#x2F;&quot;);</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>编程开发</category>
-      </categories>
-      <tags>
-        <tag>PHP</tag>
-        <tag>Closure</tag>
       </tags>
   </entry>
   <entry>

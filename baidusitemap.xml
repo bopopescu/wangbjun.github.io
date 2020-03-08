@@ -1,7 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://wangbjun.site/2020/life/city-and-county.html</loc>
+    <lastmod>2020-03-08</lastmod>
+  </url>  <url>
+    <loc>https://wangbjun.site/2020/life/wuhan-ncp.html</loc>
+    <lastmod>2020-03-08</lastmod>
+  </url>  <url>
+    <loc>https://wangbjun.site/2020/life/2019-2.html</loc>
+    <lastmod>2020-03-08</lastmod>
+  </url>  <url>
+    <loc>https://wangbjun.site/2020/life/walk-on-the-318-road-1.html</loc>
+    <lastmod>2020-03-08</lastmod>
+  </url>  <url>
     <loc>https://wangbjun.site/2020/coding/golang/crypt.html</loc>
+    <lastmod>2020-03-08</lastmod>
+  </url>  <url>
+    <loc>https://wangbjun.site/2020/life/2019-1.html</loc>
+    <lastmod>2020-03-08</lastmod>
+  </url>  <url>
+    <loc>https://wangbjun.site/2020/life/2019-3.html</loc>
+    <lastmod>2020-03-08</lastmod>
+  </url>  <url>
+    <loc>https://wangbjun.site/2020/life/walk-on-the-318-road.html</loc>
+    <lastmod>2020-03-08</lastmod>
+  </url>  <url>
+    <loc>https://wangbjun.site/2020/life/how-to-learn.html</loc>
+    <lastmod>2020-03-08</lastmod>
+  </url>  <url>
+    <loc>https://wangbjun.site/2020/linux/do-you-need-linux.html</loc>
     <lastmod>2020-03-08</lastmod>
   </url>  <url>
     <loc>https://wangbjun.site/2020/coding/golang/md5.html</loc>
@@ -67,12 +94,6 @@
     <loc>https://wangbjun.site/2016/coding/php/php-autoload.html</loc>
     <lastmod>2020-03-05</lastmod>
   </url>  <url>
-    <loc>https://wangbjun.site/2020/life/2019-2.html</loc>
-    <lastmod>2020-03-05</lastmod>
-  </url>  <url>
-    <loc>https://wangbjun.site/2020/life/2019-1.html</loc>
-    <lastmod>2020-03-05</lastmod>
-  </url>  <url>
     <loc>https://wangbjun.site/2019/linux/ubuntu-nvidia-dirver.html</loc>
     <lastmod>2020-03-05</lastmod>
   </url>  <url>
@@ -133,12 +154,6 @@
     <loc>https://wangbjun.site/2018/coding/mysql-master-slave-copy.html</loc>
     <lastmod>2020-03-05</lastmod>
   </url>  <url>
-    <loc>https://wangbjun.site/2020/life/wuhan-ncp.html</loc>
-    <lastmod>2020-03-03</lastmod>
-  </url>  <url>
-    <loc>https://wangbjun.site/2020/life/how-to-learn.html</loc>
-    <lastmod>2020-03-03</lastmod>
-  </url>  <url>
     <loc>https://wangbjun.site/2018/linux/qt-can-not-find-igl.html</loc>
     <lastmod>2020-03-03</lastmod>
   </url>  <url>
@@ -160,25 +175,13 @@
     <loc>https://wangbjun.site/2020/life/2019-4.html</loc>
     <lastmod>2020-03-01</lastmod>
   </url>  <url>
-    <loc>https://wangbjun.site/2020/life/walk-on-the-318-road-1.html</loc>
-    <lastmod>2020-02-26</lastmod>
-  </url>  <url>
-    <loc>https://wangbjun.site/2020/life/walk-on-the-318-road.html</loc>
-    <lastmod>2020-02-13</lastmod>
-  </url>  <url>
-    <loc>https://wangbjun.site/2020/linux/do-you-need-linux.html</loc>
-    <lastmod>2020-02-10</lastmod>
-  </url>  <url>
-    <loc>https://wangbjun.site/2017/coding/php/php-designpattern-filter.html</loc>
-    <lastmod>2020-02-09</lastmod>
-  </url>  <url>
-    <loc>https://wangbjun.site/2016/coding/php/php-designpattern-single.html</loc>
+    <loc>https://wangbjun.site/2016/coding/php/php-designpattern-decorator.html</loc>
     <lastmod>2020-02-09</lastmod>
   </url>  <url>
     <loc>https://wangbjun.site/2016/coding/php/php-designpattern-factory.html</loc>
     <lastmod>2020-02-09</lastmod>
   </url>  <url>
-    <loc>https://wangbjun.site/2016/coding/php/php-designpattern-decorator.html</loc>
+    <loc>https://wangbjun.site/2016/coding/php/php-designpattern-single.html</loc>
     <lastmod>2020-02-09</lastmod>
   </url>  <url>
     <loc>https://wangbjun.site/2017/coding/php/php-multi-process.html</loc>
@@ -187,7 +190,7 @@
     <loc>https://wangbjun.site/2017/coding/php/php-priority-queue.html</loc>
     <lastmod>2020-02-09</lastmod>
   </url>  <url>
-    <loc>https://wangbjun.site/2020/life/city-and-county.html</loc>
+    <loc>https://wangbjun.site/2017/coding/php/php-designpattern-filter.html</loc>
     <lastmod>2020-02-09</lastmod>
   </url>  <url>
     <loc>https://wangbjun.site/2015/linux/kali-wifi-password.html</loc>
@@ -204,9 +207,6 @@
   </url>  <url>
     <loc>https://wangbjun.site/2018/linux/ssh-port-redirect.html</loc>
     <lastmod>2020-02-09</lastmod>
-  </url>  <url>
-    <loc>https://wangbjun.site/2020/life/2019-3.html</loc>
-    <lastmod>2020-02-06</lastmod>
   </url>  <url>
     <loc>https://wangbjun.site/2019/coding/jwt-token-usage.html</loc>
     <lastmod>2020-01-09</lastmod>
