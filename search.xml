@@ -8,7 +8,7 @@
 <a id="more"></a>
 
 <p>本篇文章不是讲如何在Go里面实现这些加密算法，仔细看一下Go标准库里面<strong>crypto</strong>库，你会发现其实Go已经实现很多了加密算法，但是很多人不知道咋用，正如MD5算法一样，它没有提供一个非常简单易用的对外接口，需要你自己再封装一遍，如果你急着用，我建议你去Github上面找一下封装好的库，文章最后我会推荐一个。</p>
-<img src="/images/2020-03-08_17-00.png" width="50" />
+<img src="/images/2020-03-08_17-00.png" width="50%" />
 
 <p>今天我们主要说两种最常用的加密算法：AES对称加密、ESA非对称加密。</p>
 <h2 id="AES对称加密"><a href="#AES对称加密" class="headerlink" title="AES对称加密"></a>AES对称加密</h2><p>AES（Advanced Encryption Standard）是最常见的对称加密算法，但是这个算法分很多模式，不同模式的实现方式又有很大差异，比如ECB、CBC、OFB、CFB，详细技术细节这里就不多说了。</p>
