@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://wangbjun.site/2020/coding/golang/crypt.html</loc>
+    
+    <lastmod>2020-03-08T12:37:31.348Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://wangbjun.site/2020/coding/golang/md5.html</loc>
     
     <lastmod>2020-03-07T03:32:59.994Z</lastmod>
@@ -387,14 +394,7 @@
   </url>
   
   <url>
-    <loc>https://wangbjun.site/2017/coding/php/php-multi-process.html</loc>
-    
-    <lastmod>2020-02-09T05:31:56.481Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wangbjun.site/2016/coding/php/php-designpattern-factory.html</loc>
+    <loc>https://wangbjun.site/2016/coding/php/php-designpattern-decorator.html</loc>
     
     <lastmod>2020-02-09T05:31:56.481Z</lastmod>
     
@@ -415,7 +415,7 @@
   </url>
   
   <url>
-    <loc>https://wangbjun.site/2016/coding/php/php-designpattern-decorator.html</loc>
+    <loc>https://wangbjun.site/2016/coding/php/php-designpattern-factory.html</loc>
     
     <lastmod>2020-02-09T05:31:56.481Z</lastmod>
     
@@ -423,6 +423,13 @@
   
   <url>
     <loc>https://wangbjun.site/2017/coding/php/php-designpattern-filter.html</loc>
+    
+    <lastmod>2020-02-09T05:31:56.481Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wangbjun.site/2017/coding/php/php-multi-process.html</loc>
     
     <lastmod>2020-02-09T05:31:56.481Z</lastmod>
     
