@@ -1,6 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://wangbjun.site/2020/life/walk-on-the-318-road.html</loc>
+    <lastmod>2020-03-09</lastmod>
+  </url>  <url>
+    <loc>https://wangbjun.site/2020/life/walk-on-the-318-road-1.html</loc>
+    <lastmod>2020-03-09</lastmod>
+  </url>  <url>
+    <loc>https://wangbjun.site/2020/life/2019-2.html</loc>
+    <lastmod>2020-03-09</lastmod>
+  </url>  <url>
+    <loc>https://wangbjun.site/2020/life/how-to-learn.html</loc>
+    <lastmod>2020-03-09</lastmod>
+  </url>  <url>
+    <loc>https://wangbjun.site/2020/life/2019-4.html</loc>
+    <lastmod>2020-03-09</lastmod>
+  </url>  <url>
+    <loc>https://wangbjun.site/2020/life/wuhan-ncp.html</loc>
+    <lastmod>2020-03-09</lastmod>
+  </url>  <url>
+    <loc>https://wangbjun.site/2020/life/city-and-county.html</loc>
+    <lastmod>2020-03-09</lastmod>
+  </url>  <url>
+    <loc>https://wangbjun.site/2020/life/2019-3.html</loc>
+    <lastmod>2020-03-09</lastmod>
+  </url>  <url>
+    <loc>https://wangbjun.site/2020/life/2019-1.html</loc>
+    <lastmod>2020-03-09</lastmod>
+  </url>  <url>
     <loc>https://wangbjun.site/2019/coding/web-cache-usage.html</loc>
     <lastmod>2020-03-09</lastmod>
   </url>  <url>
@@ -136,30 +163,6 @@
     <loc>https://wangbjun.site/2018/coding/golang/goroutine.html</loc>
     <lastmod>2020-03-09</lastmod>
   </url>  <url>
-    <loc>https://wangbjun.site/2020/life/city-and-county.html</loc>
-    <lastmod>2020-03-08</lastmod>
-  </url>  <url>
-    <loc>https://wangbjun.site/2020/life/wuhan-ncp.html</loc>
-    <lastmod>2020-03-08</lastmod>
-  </url>  <url>
-    <loc>https://wangbjun.site/2020/life/2019-2.html</loc>
-    <lastmod>2020-03-08</lastmod>
-  </url>  <url>
-    <loc>https://wangbjun.site/2020/life/walk-on-the-318-road-1.html</loc>
-    <lastmod>2020-03-08</lastmod>
-  </url>  <url>
-    <loc>https://wangbjun.site/2020/life/2019-1.html</loc>
-    <lastmod>2020-03-08</lastmod>
-  </url>  <url>
-    <loc>https://wangbjun.site/2020/life/2019-3.html</loc>
-    <lastmod>2020-03-08</lastmod>
-  </url>  <url>
-    <loc>https://wangbjun.site/2020/life/walk-on-the-318-road.html</loc>
-    <lastmod>2020-03-08</lastmod>
-  </url>  <url>
-    <loc>https://wangbjun.site/2020/life/how-to-learn.html</loc>
-    <lastmod>2020-03-08</lastmod>
-  </url>  <url>
     <loc>https://wangbjun.site/2020/linux/do-you-need-linux.html</loc>
     <lastmod>2020-03-08</lastmod>
   </url>  <url>
@@ -195,9 +198,6 @@
   </url>  <url>
     <loc>https://wangbjun.site/2015/linux/linux-custom-shell.html</loc>
     <lastmod>2020-03-03</lastmod>
-  </url>  <url>
-    <loc>https://wangbjun.site/2020/life/2019-4.html</loc>
-    <lastmod>2020-03-01</lastmod>
   </url>  <url>
     <loc>https://wangbjun.site/2015/linux/kali-wifi-password.html</loc>
     <lastmod>2020-02-09</lastmod>
