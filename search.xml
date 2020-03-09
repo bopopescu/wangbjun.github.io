@@ -40,6 +40,8 @@
       </categories>
       <tags>
         <tag>Golang</tag>
+        <tag>RSA</tag>
+        <tag>AES</tag>
       </tags>
   </entry>
   <entry>
@@ -66,6 +68,7 @@
       </categories>
       <tags>
         <tag>Golang</tag>
+        <tag>MD5</tag>
       </tags>
   </entry>
   <entry>
@@ -115,6 +118,7 @@
       </categories>
       <tags>
         <tag>Golang</tag>
+        <tag>MD5</tag>
       </tags>
   </entry>
   <entry>
