@@ -36,7 +36,7 @@
 <p>总之，在Go里面使用加密的话需要根据实际情况调整，不同加密方式的实现细节有很多不一样的地方，好在标准库大部分都实现了，只需要我们花点功夫研究一下咋去使用。</p>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>Golang</category>
       </categories>
       <tags>
         <tag>Golang</tag>
@@ -64,7 +64,7 @@
 <h2 id="3-总结"><a href="#3-总结" class="headerlink" title="3.总结"></a>3.总结</h2><p>如果计算的文件都是小文件，内存比较大的话，追求速度的话可以使用第一种方法，如果你计算的文件非常大，务必使用第二种方法，不然内存会爆掉。</p>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>Golang</category>
       </categories>
       <tags>
         <tag>Golang</tag>
@@ -114,7 +114,7 @@
 <p>我也测了一下性能，它们之间的差距很小，md5是163ns/op，sha1是206ns/op，毕竟sha1比md5长一点。。。</p>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>Golang</category>
       </categories>
       <tags>
         <tag>Golang</tag>
@@ -335,7 +335,7 @@
 <p>国内很多公司对测试要求并不严格，很多公司都不要求写测试，有些虽然有测试覆盖率要求，但是也是为了应付（代码都写完了，后面再加测试也就图个心理安慰），测试用例并无法保证代码质量，我觉得真正想提高代码质量还是得靠<code>code review</code>。</p>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>Golang</category>
       </categories>
       <tags>
         <tag>Golang</tag>
@@ -777,7 +777,7 @@
 <p>各位有什么更好的方法吗？有的话请留言指教</p>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>Golang</category>
       </categories>
       <tags>
         <tag>Golang</tag>
@@ -817,7 +817,7 @@
 <p>最后，总结一下，Go的异常处理机制虽然没有很多其它语言高效，但是基本上还是能满足需求，目前官方已经在着完善这一点，Go2可能会见到。</p>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>Golang</category>
       </categories>
       <tags>
         <tag>Golang</tag>
@@ -880,7 +880,7 @@
 <h2 id="7-总结"><a href="#7-总结" class="headerlink" title="7.总结"></a>7.总结</h2><p>Protobuf作为一种新的数据交换编码方式，虽然使用起来麻烦点，但是在性能和大小上面领先很多，可以用来替换json，使用在一些对性能要求高的场景，比如移动端设备通信。除此之外，目前Protobuf主要用在gRPC用作默认数据编码格式。</p>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>Golang</category>
       </categories>
       <tags>
         <tag>Golang</tag>
@@ -961,7 +961,7 @@
 <p>目前来说gPRC比较适合用在一些对性能要求高而且比较稳定的场景，比如项目内部微服务之间的通信，这也是大多数rpc框架的主要应用场景。</p>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>Golang</category>
       </categories>
       <tags>
         <tag>Grpc</tag>
@@ -1112,7 +1112,7 @@
 <p>好了，今天就介绍这么多了，谢谢！</p>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>Golang</category>
       </categories>
       <tags>
         <tag>Golang</tag>
@@ -1186,7 +1186,7 @@
 <p>其实还是看用法，官方推荐在应用程序启动的时候注入所有依赖，而不是在运行中注入依赖，这样即使慢，也只是程序每次启动的时候慢，并不影响后续的运行情况。</p>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>Golang</category>
       </categories>
       <tags>
         <tag>Golang</tag>
@@ -1248,7 +1248,7 @@
 <h2 id="6-总结"><a href="#6-总结" class="headerlink" title="6.总结"></a>6.总结</h2><p>世界上本没有“粘包”，只不过是少数人没有正确处理TCP数据边界问题，成熟的应用层协议（http、ssh）都不会存在这个问题。但是如果你使用纯TCP自定义协议，那就需要自己处理好了。</p>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>Golang</category>
       </categories>
       <tags>
         <tag>Golang</tag>
@@ -1327,7 +1327,7 @@
 <p>划重点，在GO里面只要一个结构体（struct）定义了一个接口(interface)里面的所有方法，就意味着这个这个struct实现了这个接口，这是隐式的。可见，在Go里面接口还是挺好用的。</p>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>Golang</category>
       </categories>
       <tags>
         <tag>Golang</tag>
@@ -1415,7 +1415,7 @@
 <h3 id="3-https-github-com-jianfengye-collection"><a href="#3-https-github-com-jianfengye-collection" class="headerlink" title="3.https://github.com/jianfengye/collection"></a>3.<a href="https://github.com/jianfengye/collection" target="_blank" rel="noopener">https://github.com/jianfengye/collection</a></h3><p>Collection包目标是用于替换golang原生的Slice，使用场景是在大量不追求极致性能，追求业务开发效能的场景。</p>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>Golang</category>
       </categories>
       <tags>
         <tag>Golang</tag>
@@ -1604,7 +1604,7 @@
 <p>几乎所有IO密集型的应用，都可以利用协程提高速度，提高程序并发能力，不必把CPU时间浪费在等待的过程中，同时还可以充分利用多核CPU的计算能力。</p>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>Golang</category>
       </categories>
       <tags>
         <tag>Golang</tag>
@@ -2276,7 +2276,7 @@
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过上面的简单介绍，希望大家都对PHP Socket编程有一些了解和认识，其实作为Web开发来说，很少会用到裸TCP去连接，大部分时候都是使用基于TCP的http协议，只有涉及到一些对响应速度要求非常高的应用，比如说游戏、实时通信、物联网才会用到，如果真的用到，不妨尝试一下Workman、Swoole这些成熟的框架！</p>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>PHP</category>
       </categories>
       <tags>
         <tag>PHP</tag>
@@ -2326,7 +2326,7 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">require &#39;App.php&#39;;</span><br><span class="line"></span><br><span class="line">$app &#x3D; new App();</span><br><span class="line"></span><br><span class="line">$app-&gt;addRoute(&quot;&#x2F;&quot;, function () &#123;</span><br><span class="line">    $this-&gt;responseBody &#x3D; &quot;Hello Closure!\n&quot;;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$app-&gt;dispatch(&quot;&#x2F;&quot;);</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>PHP</category>
       </categories>
       <tags>
         <tag>PHP</tag>
@@ -2551,7 +2551,7 @@
 
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>PHP</category>
       </categories>
       <tags>
         <tag>PHP</tag>
@@ -2654,7 +2654,7 @@ start get url: https://www.qingyidai.com
 <p>感兴趣的可以再看看PHP的官方文档，上面提供了非常丰富的函数！<a href="https://www.php.net/manual/zh/book.pcntl.php" target="_blank" rel="noopener">https://www.php.net/manual/zh/book.pcntl.php</a> 和 <a href="https://www.php.net/manual/zh/book.posix.php" target="_blank" rel="noopener">https://www.php.net/manual/zh/book.posix.php</a></p>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>PHP</category>
       </categories>
       <tags>
         <tag>PHP</tag>
@@ -2692,7 +2692,7 @@ start get url: https://www.qingyidai.com
 <p>大家看懂了吗？如果错误欢迎指正！</p>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>PHP</category>
       </categories>
       <tags>
         <tag>PHP</tag>
@@ -2771,7 +2771,7 @@ start get url: https://www.qingyidai.com
 <p>对于很多用户量巨大的web项目来说，数据库可能还有分库分表、读写分离等操作，使用ORM就可能会有很多问题要去解决了，直接拼SQL虽然难看了点，麻烦了点，但是可控性比较高！大家怎么看呢？</p>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>PHP</category>
       </categories>
       <tags>
         <tag>PHP</tag>
@@ -2817,7 +2817,7 @@ start get url: https://www.qingyidai.com
 <p>在下一篇文章里面，我们会看一下sfServiceContainerBuilder类，它简化了服务定义的过程。</p>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>PHP</category>
       </categories>
       <tags>
         <tag>PHP</tag>
@@ -2861,7 +2861,7 @@ start get url: https://www.qingyidai.com
 <p>当然，通过手动创建和维护容器类可能会成为噩梦。但是一个可以使用的容器的要求还是很低的，很容易实现。下一章我会介绍Symfony2框架里面依赖注入的实现</p>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>PHP</category>
       </categories>
       <tags>
         <tag>PHP</tag>
@@ -2919,7 +2919,7 @@ start get url: https://www.qingyidai.com
 <p>好了，就说这么多了，我希望你现在对依赖注入有更好的理解，本系列的下一章我会讲关于依赖注入容器</p>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>PHP</category>
       </categories>
       <tags>
         <tag>PHP</tag>
@@ -2958,7 +2958,7 @@ start get url: https://www.qingyidai.com
 <p>这个例子比较简单，也不算太恰当，实际应用中，过滤器模式很多地方都用，比如PHP自带的就有一个Filter类,有一些类似 filter_input 这样的方法可以用来过滤变量。在laravel框架里面利用管道过滤器模式实现了middleware(中间件)，非常方便，在实现功能的同时增加了项目的可维护性。</p>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>PHP</category>
       </categories>
       <tags>
         <tag>PHP</tag>
@@ -2989,7 +2989,7 @@ start get url: https://www.qingyidai.com
 <p>有个小坑，需要说一下，PHP有多进程的扩展pcntl 和 多线程扩展pthread，如果你使用了这些扩展的话，最好不要使用单例模式，这会带来争用问题，<br>产生很多意想不到的结果，而PHP又没提供类似Java那样的synchronized关键字用于加锁，所以咯，最简单的方法就是在每个进程\线程里面单独实例化。</p>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>PHP</category>
       </categories>
       <tags>
         <tag>PHP</tag>
@@ -3020,7 +3020,7 @@ start get url: https://www.qingyidai.com
 <p>从这里看出，使用装饰模式，我们可以非常方便的动态扩展当前类的功能，可以随意组合装饰类实现类功能扩展！</p>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>PHP</category>
       </categories>
       <tags>
         <tag>PHP</tag>
@@ -3125,7 +3125,7 @@ start get url: https://www.qingyidai.com
 <p>接下来我们会讲一下工厂方法模式，这是简单工厂模式的改进版！</p>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>PHP</category>
       </categories>
       <tags>
         <tag>PHP</tag>
@@ -3164,7 +3164,7 @@ start get url: https://www.qingyidai.com
 <p>好啦,就说这么多了,如果不恰当的地方请指正哈!</p>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>PHP</category>
       </categories>
       <tags>
         <tag>PHP</tag>
@@ -3196,7 +3196,7 @@ start get url: https://www.qingyidai.com
 <p>其实我觉得大部分时候并不要死记硬背，面试除外，当你遇到问题的时候至少心里有点数，具体参数可以查下文档，或者使用IDE的联想功能，平时没事多看看官方文档也挺好的。</p>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>PHP</category>
       </categories>
       <tags>
         <tag>PHP</tag>
@@ -3257,7 +3257,7 @@ start get url: https://www.qingyidai.com
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">insertAvl</span><span class="params">(&amp;$root, int $key, string $data, bool &amp;$taller = false)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!$root) &#123;</span><br><span class="line">        $root           = <span class="keyword">new</span> Node($key, $data);</span><br><span class="line">        $root-&gt;leftNode = $root-&gt;rightNode = <span class="keyword">null</span>;</span><br><span class="line">        $root-&gt;bf       = EH;</span><br><span class="line">        $taller         = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> ($key == $root-&gt;key) &#123;</span><br><span class="line">            $taller = <span class="keyword">false</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> ($key &lt; $root-&gt;key) &#123;</span><br><span class="line">            <span class="comment">//在左子树中搜索</span></span><br><span class="line">            <span class="keyword">if</span> (!<span class="keyword">self</span>::insertAvl($root-&gt;leftNode, $key, $data, $taller)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> ($taller) &#123;</span><br><span class="line">                <span class="keyword">switch</span> ($root-&gt;bf) &#123; <span class="comment">//检查树的平衡度</span></span><br><span class="line">                    <span class="keyword">case</span> LH:</span><br><span class="line">                        <span class="keyword">self</span>::leftBalance($root);</span><br><span class="line">                        $taller = <span class="keyword">false</span>;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    <span class="keyword">case</span> EH:</span><br><span class="line">                        $root-&gt;bf = LH;</span><br><span class="line">                        $taller   = <span class="keyword">true</span>;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    <span class="keyword">case</span> RH:</span><br><span class="line">                        $root-&gt;bf = EH;</span><br><span class="line">                        $taller   = <span class="keyword">false</span>;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//在右子树中搜索</span></span><br><span class="line">            <span class="keyword">if</span> (!<span class="keyword">self</span>::insertAvl($root-&gt;rightNode, $key, $data, $taller)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> ($taller) &#123;</span><br><span class="line">                <span class="keyword">switch</span> ($root-&gt;bf) &#123; <span class="comment">//检查树的平衡度</span></span><br><span class="line">                    <span class="keyword">case</span> LH:</span><br><span class="line">                        $root-&gt;bf = EH;</span><br><span class="line">                        $taller   = <span class="keyword">false</span>;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    <span class="keyword">case</span> EH:</span><br><span class="line">                        $root-&gt;bf = RH;</span><br><span class="line">                        $taller   = <span class="keyword">true</span>;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    <span class="keyword">case</span> RH:</span><br><span class="line">                        <span class="keyword">self</span>::rightBalance($root);</span><br><span class="line">                        $taller = <span class="keyword">false</span>;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>PHP</category>
       </categories>
       <tags>
         <tag>PHP</tag>
@@ -3326,7 +3326,7 @@ start get url: https://www.qingyidai.com
 <p>现在大多数Web框架都是采用MVC模式，一般都有一个统一的入口文件，比如index.php, 通常会在这个入口文件定义自动加载机制，使用composer的话只需要include一个autoload.php文件即可！</p>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>PHP</category>
       </categories>
       <tags>
         <tag>PHP</tag>
@@ -3375,7 +3375,7 @@ start get url: https://www.qingyidai.com
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 前序遍历算法</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> $node</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">preOrderTraverse</span><span class="params">($node)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> ($node == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">echo</span> $node-&gt;key . <span class="string">'---&gt;'</span> . $node-&gt;data . <span class="string">"\n"</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">$this</span>-&gt;preOrderTraverse($node-&gt;leftNode);</span><br><span class="line">    <span class="keyword">$this</span>-&gt;preOrderTraverse($node-&gt;rightNode);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>PHP</category>
       </categories>
       <tags>
         <tag>PHP</tag>
@@ -3411,7 +3411,7 @@ start get url: https://www.qingyidai.com
 <p>最后谈谈应用，由于PHP用来写web应用，每个请求完了就销毁了，很多设计模式和数据结构基本上很难用到，除非拿来写一些常驻后台应用。<br>比如说队列，一般都是用redis队列，或者rabbitmq等专业软件实现。但是你如果问可以用PHP来实现一个队列服务常驻后台吗？那是肯定可以的，但是意义不大,<br>PHP的运行效率和C等静态语言那比是差了10万八千里…so,多了解了解一些也是不错的，虽然不一定用得上</p>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>PHP</category>
       </categories>
       <tags>
         <tag>PHP</tag>
@@ -3567,7 +3567,7 @@ start get url: https://www.qingyidai.com
 <p>以上就是全部步骤，剩下的大家发挥想象力，比如定时给你播报一些股票信息、播放歌曲、早上定时叫你起床。从理论上说我们还可以调用百度API接口去识别我们的语音命令，<br>然后根据命令去执行操作，这样岂不是就是一个AI音响了？哈哈，纯属娱乐，这个方案有一个问题就是你得保证你的电脑一直是开机状态，有点浪费电，有兴趣的童鞋可以买个类似树莓派这样的低功耗设备去运行。<br>有一个小坑，就是假如你电脑正在播放视频或者音乐，这时候可能无法播报，好像是音频冲突，具体原因未知，找了好久没找到解决方案～</p>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>PHP</category>
       </categories>
       <tags>
         <tag>PHP</tag>
