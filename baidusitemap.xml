@@ -1,6 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://wangbjun.site/2019/coding/web-cache-usage.html</loc>
+    <lastmod>2020-03-09</lastmod>
+  </url>  <url>
+    <loc>https://wangbjun.site/2018/coding/mysql-group-orderby.html</loc>
+    <lastmod>2020-03-09</lastmod>
+  </url>  <url>
+    <loc>https://wangbjun.site/2019/coding/short-url.html</loc>
+    <lastmod>2020-03-09</lastmod>
+  </url>  <url>
+    <loc>https://wangbjun.site/2019/coding/jwt-token-info.html</loc>
+    <lastmod>2020-03-09</lastmod>
+  </url>  <url>
+    <loc>https://wangbjun.site/2018/coding/di-and-ioc.html</loc>
+    <lastmod>2020-03-09</lastmod>
+  </url>  <url>
+    <loc>https://wangbjun.site/2016/coding/scrapy-param-pass.html</loc>
+    <lastmod>2020-03-09</lastmod>
+  </url>  <url>
+    <loc>https://wangbjun.site/2019/coding/designpattern-middleware.html</loc>
+    <lastmod>2020-03-09</lastmod>
+  </url>  <url>
+    <loc>https://wangbjun.site/2018/coding/mysql-master-slave-copy.html</loc>
+    <lastmod>2020-03-09</lastmod>
+  </url>  <url>
+    <loc>https://wangbjun.site/2019/coding/jwt-token-usage.html</loc>
+    <lastmod>2020-03-09</lastmod>
+  </url>  <url>
+    <loc>https://wangbjun.site/2018/coding/where-is-variable-value.html</loc>
+    <lastmod>2020-03-09</lastmod>
+  </url>  <url>
+    <loc>https://wangbjun.site/2018/coding/bitmap.html</loc>
+    <lastmod>2020-03-09</lastmod>
+  </url>  <url>
     <loc>https://wangbjun.site/2016/coding/php/php-oop-thinking.html</loc>
     <lastmod>2020-03-09</lastmod>
   </url>  <url>
@@ -139,13 +172,7 @@
     <loc>https://wangbjun.site/2018/linux/deepin-wine-qq-bug.html</loc>
     <lastmod>2020-03-05</lastmod>
   </url>  <url>
-    <loc>https://wangbjun.site/2018/coding/mysql-group-orderby.html</loc>
-    <lastmod>2020-03-05</lastmod>
-  </url>  <url>
     <loc>https://wangbjun.site/2018/linux/linux-tools-software.html</loc>
-    <lastmod>2020-03-05</lastmod>
-  </url>  <url>
-    <loc>https://wangbjun.site/2019/coding/short-url.html</loc>
     <lastmod>2020-03-05</lastmod>
   </url>  <url>
     <loc>https://wangbjun.site/2019/linux/ubuntu-4k-scale.html</loc>
@@ -154,31 +181,10 @@
     <loc>https://wangbjun.site/2018/linux/linux-ntfs-samba.html</loc>
     <lastmod>2020-03-05</lastmod>
   </url>  <url>
-    <loc>https://wangbjun.site/2018/coding/bitmap.html</loc>
-    <lastmod>2020-03-05</lastmod>
-  </url>  <url>
-    <loc>https://wangbjun.site/2018/coding/where-is-variable-value.html</loc>
-    <lastmod>2020-03-05</lastmod>
-  </url>  <url>
-    <loc>https://wangbjun.site/2018/coding/di-and-ioc.html</loc>
-    <lastmod>2020-03-05</lastmod>
-  </url>  <url>
     <loc>https://wangbjun.site/2018/linux/git-branch-usage.html</loc>
     <lastmod>2020-03-05</lastmod>
   </url>  <url>
-    <loc>https://wangbjun.site/2019/coding/jwt-token-info.html</loc>
-    <lastmod>2020-03-05</lastmod>
-  </url>  <url>
-    <loc>https://wangbjun.site/2019/coding/designpattern-middleware.html</loc>
-    <lastmod>2020-03-05</lastmod>
-  </url>  <url>
     <loc>https://wangbjun.site/2018/linux/git-base-usage.html</loc>
-    <lastmod>2020-03-05</lastmod>
-  </url>  <url>
-    <loc>https://wangbjun.site/2019/coding/web-cache-usage.html</loc>
-    <lastmod>2020-03-05</lastmod>
-  </url>  <url>
-    <loc>https://wangbjun.site/2018/coding/mysql-master-slave-copy.html</loc>
     <lastmod>2020-03-05</lastmod>
   </url>  <url>
     <loc>https://wangbjun.site/2018/linux/qt-can-not-find-igl.html</loc>
@@ -208,13 +214,7 @@
     <loc>https://wangbjun.site/2018/linux/ssh-port-redirect.html</loc>
     <lastmod>2020-02-09</lastmod>
   </url>  <url>
-    <loc>https://wangbjun.site/2019/coding/jwt-token-usage.html</loc>
-    <lastmod>2020-01-09</lastmod>
-  </url>  <url>
     <loc>https://wangbjun.site/2018/linux/custom-google-tz.html</loc>
-    <lastmod>2020-01-09</lastmod>
-  </url>  <url>
-    <loc>https://wangbjun.site/2016/coding/scrapy-param-pass.html</loc>
     <lastmod>2020-01-09</lastmod>
   </url>  <url>
     <loc>https://wangbjun.site/2016/linux/linux-command-usage.html</loc>

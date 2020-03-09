@@ -1007,7 +1007,7 @@
 <p>最后，推荐一个使用golang写的短网址项目，可以作为一个单独服务部署使用: <a href="https://github.com/praglody/shorturl" target="_blank" rel="noopener">https://github.com/praglody/shorturl</a></p>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>Coding</category>
       </categories>
       <tags>
         <tag>短网址</tag>
@@ -1370,7 +1370,7 @@
 <p>仔细看一下这个结果，是不是非常像第一张图那样，不过这个例子里面少了一个非常重要的request对象，这里纯粹只是展示中间件运行原理，完整的实战代码可以参考laravel框架里面的源码，实现原理差不多，只不过框架功能更加全面，考虑的东西更多。</p>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>Coding</category>
       </categories>
       <tags>
         <tag>中间件</tag>
@@ -1458,7 +1458,7 @@
 <h3 id="2-redis"><a href="#2-redis" class="headerlink" title="2.redis"></a>2.redis</h3><p>基本上可以说memcached有的redis都有，memcached没有的redis也有，redis支持的数据类型非常多，功能强大，而且支持持久化，自带集群功能，社区活跃。所以基本上现在使用redis居多，memcached用来存储session这样的临时数据比较合适。如果只做缓存的话，memcached性能要比redis好那么一丢丢而已，但是redis的功能可不仅仅是缓存。</p>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>Coding</category>
       </categories>
       <tags>
         <tag>Cache</tag>
@@ -1501,7 +1501,7 @@
 <p>至于用不用我觉得还是看需求，你觉得呢？</p>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>Coding</category>
       </categories>
       <tags>
         <tag>JWT</tag>
@@ -1539,7 +1539,7 @@
 <p>最后再说说session和jwt的选择问题，网上随便搜搜就可以看到很多文章比较这2者优劣，总结就是各有利弊，实际上很多公司既不是session，也不是jwt，可能就是自己搞的类似jwt token这样的一个字符串，然后放在cookies里面，只要这个串能够代表一个用户都可以。</p>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>Coding</category>
       </categories>
       <tags>
         <tag>JWT</tag>
@@ -1833,7 +1833,7 @@
 <p>理论上讲，setbit的大小在0到2的32次方（最大使用512M内存）之间，即0~4294967296之间，也就说最多可以存储42亿用户的签到情况。和数据库相比，这种方式查询的效率非常高，并不会因为数据大而变慢，而且比较节省内存，操作上也不是太复杂！</p>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>Coding</category>
       </categories>
       <tags>
         <tag>Bitmap</tag>
@@ -1961,7 +1961,7 @@
 <p>最后，show slave status\G 查看一下从库的状态</p>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>Coding</category>
       </categories>
       <tags>
         <tag>MySQL</tag>
@@ -2084,7 +2084,7 @@
 <p>我们只需要在方法的参数上面标明所需的方法，就可以在代码直接用了，ioc容器替我们自动注入了依赖！</p>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>Coding</category>
       </categories>
       <tags>
         <tag>PHP</tag>
@@ -2211,7 +2211,7 @@
 <p>变量名在代码运行的时候都会被一些特殊的符号代替，内存里面并不会有变量名，所以变量名写的长并不会影响运行速度，用中文还是英文也不影响。而变量无论什么类型，最终运行的时候操作的还是内存地址里面数据，变量之所以有类型，是为了方便编译器处理。</p>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>Coding</category>
       </categories>
       <tags>
         <tag>变量名</tag>
@@ -2498,7 +2498,7 @@
 <p>后面的操作只能拿到代码里面处理了，可能需要循环取出所有id，然后批量获取数据，最后再拼接出来想要的数据！虽然比较麻烦，在代码里面需要多出很多次for循环操作，但是相比于多查几十次库，这点代码运行开销还是很小的！</p>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>Coding</category>
       </categories>
       <tags>
         <tag>MySQL</tag>
@@ -3223,7 +3223,7 @@ start get url: https://www.qingyidai.com
 <p>然后问题解决，新技能get！</p>
 ]]></content>
       <categories>
-        <category>编程开发</category>
+        <category>Coding</category>
       </categories>
       <tags>
         <tag>Scrapy</tag>
