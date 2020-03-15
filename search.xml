@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Ubuntu Nautilus下隐藏文件</title>
+    <title>Ubuntu Nautilus隐藏文件|夹</title>
     <url>/2020/linux/ubuntu-hidden-file.html</url>
     <content><![CDATA[<p>如何在Ubuntu自带的文件夹管理器Nautilus里面隐藏文件或文件夹呢？</p>
 <p>先说一下背景，之所以想到这个问题是因为我的电脑是 Win10+Ubuntu 双系统，有一块硬盘是共享的NTFS格式，在Windows下面分区会有2个文件夹，了解Windows的人应该知道，这是垃圾回收站和磁盘卷信息。</p>
