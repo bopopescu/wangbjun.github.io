@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.8" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="golang,单元测试，功能测试" />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="JWang的博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.8" />
+
+
+
+
+
+
+<meta name="description" content="如果你看过很多开源库的源码，你会发现大部分项目都有很多详细的测试代码，一般来说测试覆盖率越高说明这个项目的质量越高，所以好的项目测试是少不了的。很多公司对代码测试覆盖率也有要求，不为别的，只为更好的代码质量。 1.分类虽然业界有一直开发模式叫做测试驱动开发（TDD），但是了解的人都知道TDD对开发要求太高了，它要求你先写测试用例然后再写代码，需要你写代码之前思考很多，需要大量时间，我实际开发中并没">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Golang测试用例编写">
+<meta property="og:url" content="https://wangbjun.site/2020/coding/golang/unit-and-functional-test.html">
+<meta property="og:site_name" content="JWang的博客">
+<meta property="og:description" content="如果你看过很多开源库的源码，你会发现大部分项目都有很多详细的测试代码，一般来说测试覆盖率越高说明这个项目的质量越高，所以好的项目测试是少不了的。很多公司对代码测试覆盖率也有要求，不为别的，只为更好的代码质量。 1.分类虽然业界有一直开发模式叫做测试驱动开发（TDD），但是了解的人都知道TDD对开发要求太高了，它要求你先写测试用例然后再写代码，需要你写代码之前思考很多，需要大量时间，我实际开发中并没">
+<meta property="article:published_time" content="2020-02-10T10:15:00.000Z">
+<meta property="article:modified_time" content="2020-03-09T01:56:24.547Z">
+<meta property="article:author" content="Ben Jun">
+<meta property="article:tag" content="golang">
+<meta property="article:tag" content="单元测试，功能测试">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    tabs: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://wangbjun.site/2020/coding/golang/unit-and-functional-test.html"/>
+
+
+
+
+
+  <title>Golang测试用例编写 | JWang的博客</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?693026bcab850159c3d74a57dd104734";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">JWang的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">一点记录，一点想法，一点思考</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.site/2020/coding/golang/unit-and-functional-test.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben Jun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JWang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Golang测试用例编写</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-10T18:15:00+08:00">
+                2020-02-10
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-03-09T09:56:24+08:00">
+                2020-03-09
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Golang/" itemprop="url" rel="index">
+                    <span itemprop="name">Golang</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><span class="post-meta-item-icon"><i class="fa fa-eye"></i></span><span class="post-meta-item-text"> 浏览数</span>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  1.8k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>如果你看过很多开源库的源码，你会发现大部分项目都有很多详细的测试代码，一般来说测试覆盖率越高说明这个项目的质量越高，所以好的项目测试是少不了的。很多公司对代码测试覆盖率也有要求，不为别的，只为更好的代码质量。</p>
+<h2 id="1-分类"><a href="#1-分类" class="headerlink" title="1.分类"></a>1.分类</h2><p>虽然业界有一直开发模式叫做测试驱动开发（TDD），但是了解的人都知道<code>TDD</code>对开发要求太高了，它要求你先写测试用例然后再写代码，需要你写代码之前思考很多，需要大量时间，我实际开发中并没有采用过这种模式，估计国内都应该很少。</p>
+<p>我们可以粗略的把测试用例简单划分为2种类型，一种是<code>单元测试</code>，它是针对某个模块、函数、方法的测试，另一种是<code>功能测试（集成测试）</code>，它是针对整个项目功能是否可用的测试。举个例子，你写个了Web服务接口，单元测试可能是针对这个接口里面调用的一个函数测试，而功能测试就是测试这个接口是否可用，因为一个接口可能调用了多个函数。</p>
+<h2 id="2-单元测试"><a href="#2-单元测试" class="headerlink" title="2.单元测试"></a>2.单元测试</h2><p>Golang里面的测试和其它大部分语言的测试不多，只不过表示形式略有不同，比如Go的单元测试通常情况下是和被测试的代码放在一起的，以<code>xxx_test.go</code>命名并且测试的函数名必须以<code>Test</code>开头。</p>
+<a id="more"></a>
+
+<p>例如：<br>math.go 有以下2个函数</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"errors"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Div</span><span class="params">(a, b <span class="keyword">int</span>)</span> <span class="params">(<span class="keyword">int</span>, error)</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> b == <span class="number">0</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>, errors.New(<span class="string">"division by zero"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> a / b, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果想测试这个文件，那么测试文件名字就应该叫 math_test.go</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"testing"</span></span><br><span class="line">)</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestDiv</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">    i, err := Div(<span class="number">4</span>, <span class="number">2</span>)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        t.Fail()</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> i != <span class="number">2</span> &#123;</span><br><span class="line">        t.Fail()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>切换到工作目录下执行 <code>go test</code>即可，这个命令有很多附加参数，比如说<code>-v</code>可以查看详细情况，<code>-coverprofile</code>可以看测试覆盖率。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">jwang@jun:~&#x2F;Documents&#x2F;Work&#x2F;test$ go test -v -coverprofile&#x3D;c.out</span><br><span class="line">&#x3D;&#x3D;&#x3D; RUN   TestDiv</span><br><span class="line">--- PASS: TestDiv (0.00s)</span><br><span class="line">PASS</span><br><span class="line">coverage: 66.7% of statements</span><br><span class="line">ok      _&#x2F;home&#x2F;jwang&#x2F;Documents&#x2F;Work&#x2F;test       0.001s</span><br></pre></td></tr></table></figure>
+
+<p>根据测试函数参数类型的不同，Go里面把测试又细分为<code>*testing.T和*testing.B</code>，其实B是性能基准测试，通常用来测试算法性能，这里就不多说了。</p>
+<p>单元测试的目的就是尽可能的覆盖到所有情况，说白了，就是枚举各种情况，根据输入的参数人工推导正确的结果，然后和实际得出的结果做比对，如果失败则说明程序有bug，比如上面的例子明显没有覆盖到所有情况，只达到了66.7%。</p>
+<p>上面这段测试代码主要是没有覆盖到被除数为0的情况，下面完善一下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"testing"</span></span><br><span class="line">)</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestDiv</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">    i, err := Div(<span class="number">4</span>, <span class="number">2</span>)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        t.Fail()</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> i != <span class="number">2</span> &#123;</span><br><span class="line">        t.Fail()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    i, err = Div(<span class="number">4</span>, <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">if</span> err == <span class="literal">nil</span> &#123;</span><br><span class="line">        t.Fail()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>重新执行<code>go test</code>会发现覆盖率达到了100%，也就是所有语句都覆盖到。</p>
+<blockquote>
+<p>请注意，覆盖率达到100%并不意味着代码没有问题。</p>
+</blockquote>
+<h2 id="3-表格测试"><a href="#3-表格测试" class="headerlink" title="3.表格测试"></a>3.表格测试</h2><p>表格测试严格来说并不是一种测试类型，只是一种测试方式，就是一种套路，上面的例子里面，我们需要手动构造每一个测试的入参和出参后执行、断言结果，有很多重复代码，我们可以使用表格测试优化一下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"testing"</span></span><br><span class="line">)</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestDiv</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> tests = []<span class="keyword">struct</span> &#123;</span><br><span class="line">        a        <span class="keyword">int</span></span><br><span class="line">        b        <span class="keyword">int</span></span><br><span class="line">        expected <span class="keyword">int</span></span><br><span class="line">        err      error</span><br><span class="line">    &#125;&#123;</span><br><span class="line">        &#123;<span class="number">4</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="literal">nil</span>&#125;,</span><br><span class="line">        &#123;<span class="number">4</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="literal">nil</span>&#125;,</span><br><span class="line">        &#123;<span class="number">5</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="literal">nil</span>&#125;,</span><br><span class="line">        &#123;<span class="number">4</span>, <span class="number">0</span>, <span class="number">0</span>, DivisionByZeroError&#125;,</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> _, v := <span class="keyword">range</span> tests &#123;</span><br><span class="line">        i, err := Div(v.a, v.b)</span><br><span class="line">        <span class="keyword">if</span> i != v.expected || err != v.err &#123;</span><br><span class="line">            t.Errorf(<span class="string">"input %d, %d, expected %d, got %d"</span>, v.a, v.b, v.expected, i)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这种方式比较简洁，参数一目了然，而且方便扩展添加新的用例，这里需要注意一下那个error，可以先定义一个自定义的error方便判断，同时使用了<code>t.Errorf</code>格式化入参和出参方便排查错误。</p>
+<blockquote>
+<p>为了更方便的断言结果，我们可以使用第三方的assert库，Github上面也有很多开源的测试库，可以简化你的操作，更快速的编写测试用例。</p>
+</blockquote>
+<h2 id="4-功能测试"><a href="#4-功能测试" class="headerlink" title="4.功能测试"></a>4.功能测试</h2><p>功能测试就和你用Postman去测试一样，我们需要把这个服务启动起来，然后模拟用户的操作，去测试结果是否符合预期。测试本身是个非常广泛的话题，有很多种方式，这里我只说说平时用的比较多的Http服务的接口测试。</p>
+<p>首先，我们需要了解一下Go里面Http服务的创建方式，最简单的方式莫过于下面这种：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"net/http"</span></span><br><span class="line">    <span class="string">"strconv"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    http.HandleFunc(<span class="string">"/div"</span>, DivHandler)</span><br><span class="line">    _ = http.ListenAndServe(<span class="string">":8888"</span>, <span class="literal">nil</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">DivHandler</span><span class="params">(writer http.ResponseWriter, request *http.Request)</span></span>  &#123;</span><br><span class="line">    a := request.PostFormValue(<span class="string">"a"</span>)</span><br><span class="line">    b := request.PostFormValue(<span class="string">"b"</span>)</span><br><span class="line"></span><br><span class="line">    paramA, _ := strconv.Atoi(a)</span><br><span class="line">    paramB, _ := strconv.Atoi(b)</span><br><span class="line"></span><br><span class="line">    i, err := Div(paramA, paramB)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        _, _ = writer.Write([]<span class="keyword">byte</span>(<span class="string">"error"</span>))</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    _, _ = writer.Write([]<span class="keyword">byte</span>(strconv.Itoa(i)))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面这段代码就是使用了Go自带的http库创建了一个Web服务，它提供了一个接口，功能和之前的函数一样，如果出错的话就返回error。</p>
+<p>我们可以使用Go的一个http recorder对这个http服务进行测试，方法如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"io/ioutil"</span></span><br><span class="line">    <span class="string">"net/http"</span></span><br><span class="line">    <span class="string">"net/http/httptest"</span></span><br><span class="line">    <span class="string">"net/url"</span></span><br><span class="line">    <span class="string">"strings"</span></span><br><span class="line">    <span class="string">"testing"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestDivHandler</span><span class="params">(t *testing.T)</span></span>  &#123;</span><br><span class="line">    recorder := httptest.NewRecorder()</span><br><span class="line"></span><br><span class="line">    params := url.Values&#123;&#125;</span><br><span class="line">    params.Add(<span class="string">"a"</span>, <span class="string">"42"</span>)</span><br><span class="line">    params.Add(<span class="string">"b"</span>, <span class="string">"2"</span>)</span><br><span class="line"></span><br><span class="line">    request, _ := http.NewRequest(<span class="string">"POST"</span>, <span class="string">"/div"</span>, strings.NewReader(params.Encode()))</span><br><span class="line">    request.Header.Add(<span class="string">"Content-Type"</span>, <span class="string">"application/x-www-form-urlencoded"</span>)</span><br><span class="line"></span><br><span class="line">    DivHandler(recorder, request)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> recorder.Result().StatusCode != <span class="number">200</span> &#123;</span><br><span class="line">        t.Error(<span class="string">"Test failed"</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    body, _ := ioutil.ReadAll(recorder.Result().Body)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">string</span>(body) != <span class="string">"21"</span> &#123;</span><br><span class="line">        t.Error(<span class="string">"Test failed"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在这个测试用例里面，我主要测试了2点，一个是返回码是不是200，另外测试了一下正常的返回结果。不过很明显，我这里并没有覆盖到异常情况。</p>
+<p>很多Go的Web框架，比如Beego和Gin，框架本身会多一层路由，但是测试方式大同小异，主要还是使用http recorder来实现，这里就不多说了。</p>
+<h2 id="5-总结"><a href="#5-总结" class="headerlink" title="5.总结"></a>5.总结</h2><p>这里介绍的只是最简单测试方式，实际开发中想要完全做好测试还有很多问题，比如有些系统有很多外部依赖，在测试的时候可能还要借助于mock。再比如有很多Web服务还涉及到数据库层，想要完整测试还要做好数据回滚。</p>
+<p>国内很多公司对测试要求并不严格，很多公司都不要求写测试，有些虽然有测试覆盖率要求，但是也是为了应付（代码都写完了，后面再加测试也就图个心理安慰），测试用例并无法保证代码质量，我觉得真正想提高代码质量还是得靠<code>code review</code>。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Golang/" rel="tag"># Golang</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/linux/do-you-need-linux.html" rel="next" title="你是否真的需要使用Linux？">
+                <i class="fa fa-chevron-left"></i> 你是否真的需要使用Linux？
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/life/walk-on-the-318-road.html" rel="prev" title="那些年，318徒步搭车之旅（一）">
+                那些年，318徒步搭车之旅（一） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80ODIxNi8yNDcxMg"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Ben Jun" />
+          <p class="site-author-name" itemprop="name">Ben Jun</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">76</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-分类"><span class="nav-text">1.分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-单元测试"><span class="nav-text">2.单元测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-表格测试"><span class="nav-text">3.表格测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-功能测试"><span class="nav-text">4.功能测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-总结"><span class="nav-text">5.总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ben Jun</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Gemini
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="/lib/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user">UV</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye">PV</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.8"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.8"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.8"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.8"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.8"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.8"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.8"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
