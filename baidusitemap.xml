@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://wangbjun.site/2019/linux/ubuntu-4k-scale.html</loc>
+    <lastmod>2020-04-25</lastmod>
+  </url>  <url>
+    <loc>https://wangbjun.site/2019/coding/short-url.html</loc>
+    <lastmod>2020-04-25</lastmod>
+  </url>  <url>
     <loc>https://wangbjun.site/2020/coding/golang/go_convey.html</loc>
     <lastmod>2020-04-13</lastmod>
   </url>  <url>
@@ -22,10 +28,10 @@
     <loc>https://wangbjun.site/2020/life/2019-2.html</loc>
     <lastmod>2020-03-09</lastmod>
   </url>  <url>
-    <loc>https://wangbjun.site/2020/life/2019-4.html</loc>
+    <loc>https://wangbjun.site/2020/life/how-to-learn.html</loc>
     <lastmod>2020-03-09</lastmod>
   </url>  <url>
-    <loc>https://wangbjun.site/2020/life/how-to-learn.html</loc>
+    <loc>https://wangbjun.site/2020/life/2019-4.html</loc>
     <lastmod>2020-03-09</lastmod>
   </url>  <url>
     <loc>https://wangbjun.site/2020/life/wuhan-ncp.html</loc>
@@ -44,9 +50,6 @@
     <lastmod>2020-03-09</lastmod>
   </url>  <url>
     <loc>https://wangbjun.site/2018/coding/mysql-group-orderby.html</loc>
-    <lastmod>2020-03-09</lastmod>
-  </url>  <url>
-    <loc>https://wangbjun.site/2019/coding/short-url.html</loc>
     <lastmod>2020-03-09</lastmod>
   </url>  <url>
     <loc>https://wangbjun.site/2019/coding/jwt-token-info.html</loc>
@@ -188,9 +191,6 @@
     <lastmod>2020-03-05</lastmod>
   </url>  <url>
     <loc>https://wangbjun.site/2018/linux/linux-tools-software.html</loc>
-    <lastmod>2020-03-05</lastmod>
-  </url>  <url>
-    <loc>https://wangbjun.site/2019/linux/ubuntu-4k-scale.html</loc>
     <lastmod>2020-03-05</lastmod>
   </url>  <url>
     <loc>https://wangbjun.site/2018/linux/linux-ntfs-samba.html</loc>

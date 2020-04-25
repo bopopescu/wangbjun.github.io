@@ -1057,7 +1057,7 @@
   <entry>
     <title>短网址原理和实现</title>
     <url>/2019/coding/short-url.html</url>
-    <content><![CDATA[<h2 id="1-背景介绍"><a href="#1-背景介绍" class="headerlink" title="1.背景介绍"></a>1.背景介绍</h2><p>相信很多人手机上都收到过一些营销短信，短信里面有时候会附带一些网址，如下图<br><img src="https://wangbjun.github.io/images/old/16ada545111ae94d.jpg" alt=""><br>这些网址往往都是非常短，但是当我们打开之后，如果你仔细观察，中间会有跳转，最终浏览器地址栏显示的网址并不是你短信里面看到的网址，这就是短网址！</p>
+    <content><![CDATA[<h2 id="1-背景介绍"><a href="#1-背景介绍" class="headerlink" title="1.背景介绍"></a>1.背景介绍</h2><p>相信很多人手机上都收到过一些营销短信，短信里面有时候会附带一些网址，如下图<br><img src="https://wangbjun.site/images/old/16ada545111ae94d.jpg" alt=""><br>这些网址往往都是非常短，但是当我们打开之后，如果你仔细观察，中间会有跳转，最终浏览器地址栏显示的网址并不是你短信里面看到的网址，这就是短网址！</p>
 <a id="more"></a>
 
 <h2 id="2-原理和应用"><a href="#2-原理和应用" class="headerlink" title="2.原理和应用"></a>2.原理和应用</h2><p>短网址一般是采用一个非常短域名下，路径参数一般只有3-6个字符组成，非常简洁！</p>
@@ -1344,7 +1344,7 @@
   <entry>
     <title>Ubuntu 4K显示器缩放设置</title>
     <url>/2019/linux/ubuntu-4k-scale.html</url>
-    <content><![CDATA[<p><img src="https://wangbjun.github.io/images/old/16d0f0f03263cb7b.jpg" alt=""></p>
+    <content><![CDATA[<p><img src="https://wangbjun.site/images/old/16d0f0f03263cb7b.jpg" alt=""></p>
 <p>开头一张图介绍一下我现在日常生活和开发使用的电脑配置：Ubuntu 16.04 + i7-8700k + 1060 + nvme ssd + 32G RAM + 4k显示器，这个配置倒不算很高端，但是开发用体验很高，系统的流畅程度非常高</p>
 <a id="more"></a>
 
@@ -1353,17 +1353,17 @@
 <p>换句话说，买Mac买的就是显示屏，没有屏幕的硬件加持，什么操作系统优化都是扯淡！有了4k显示器，你发现装上Windows显示效果也不差，不过这块我需要说一下，同等硬件下，Linux和Mac的显示效果确实要比Windows好一点，对高分屏的支持好很多。</p>
 <h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><p>我个人比较喜欢unity桌面，所以还是用Ubuntu 16.04，我曾经尝试过Ubuntu 18.04，但是感觉gnome桌面在流畅度和易用性方面和unity还是有不少差距，所以本篇文章可能支持适合unity桌面吧</p>
 <h2 id="硬件"><a href="#硬件" class="headerlink" title="硬件"></a>硬件</h2><p>如果你要换4k显示屏，有一点需要注意，不少i7 CPU 内置集显理论上是带的动4k+60fps的，但是只支持dp接口，不支持hdmi，这一点可以在intel官网的cpu详细规格里面可以查阅。但是大部分主板都不会带dp接口，很少很少，只有极少部分高端主板会带，而现在大部分独显都会带dp口。</p>
-<p>众所周知，NVIDIA的独显在Linux上面的驱动支持都不是太好，但是intel的集显支持非常好，如果你想要使用4k显示器，一个独显少不了，不过据我目前的使用体验来说，1060 表现还不错，建议大家开启高性能模式，如下图：<br><img src="https://wangbjun.github.io/images/old/16d0f203bbf9601b.jpg" alt=""></p>
-<h2 id="缩放设置"><a href="#缩放设置" class="headerlink" title="缩放设置"></a>缩放设置</h2><p>这是重点，根据我经验，在4k+27英寸显示器的配置下，缩放设置很简单，不需要什么环境变量，直接在显示里面设置缩放就行，默认是1，设置一个1.75-2比较合适。<br><img src="https://wangbjun.github.io/images/old/16d0f23300cd21d1.jpg" alt=""><br>实际上，上面这个设置好，已经可以解决99%的缩放问题了，不需要什么环境变量，上一些应用的图给大家看看：</p>
-<p><img src="https://wangbjun.github.io/images/old/16d0f26799e5bf08.jpg" alt=""></p>
-<p><img src="https://wangbjun.github.io/images/old/16d0f27645283d4e.jpg" alt=""></p>
-<p><img src="https://wangbjun.github.io/images/old/16d0f27f294742ce.jpg" alt=""></p>
+<p>众所周知，NVIDIA的独显在Linux上面的驱动支持都不是太好，但是intel的集显支持非常好，如果你想要使用4k显示器，一个独显少不了，不过据我目前的使用体验来说，1060 表现还不错，建议大家开启高性能模式，如下图：<br><img src="https://wangbjun.site/images/old/16d0f203bbf9601b.jpg" alt=""></p>
+<h2 id="缩放设置"><a href="#缩放设置" class="headerlink" title="缩放设置"></a>缩放设置</h2><p>这是重点，根据我经验，在4k+27英寸显示器的配置下，缩放设置很简单，不需要什么环境变量，直接在显示里面设置缩放就行，默认是1，设置一个1.75-2比较合适。<br><img src="https://wangbjun.site/images/old/16d0f23300cd21d1.jpg" alt=""><br>实际上，上面这个设置好，已经可以解决99%的缩放问题了，不需要什么环境变量，上一些应用的图给大家看看：</p>
+<p><img src="https://wangbjun.site/images/old/16d0f26799e5bf08.jpg" alt=""></p>
+<p><img src="https://wangbjun.site/images/old/16d0f27645283d4e.jpg" alt=""></p>
+<p><img src="https://wangbjun.site/images/old/16d0f27f294742ce.jpg" alt=""></p>
 <h2 id="deepin缩放"><a href="#deepin缩放" class="headerlink" title="deepin缩放"></a>deepin缩放</h2><p>有些软件不走上面的缩放设置，比如deepin qq或wechat，估计很多用Linux的都会使用移植的deepin应用，但是也有办法:</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">WINEPREFIX&#x3D;~&#x2F;.deepinwine&#x2F;Deepin-WeChat deepin-wine winecfg</span><br></pre></td></tr></table></figure>
-<p>在弹出的对话框里面找到graphics设置，设置一个比较合适的dpi，以我个人经验，150-170比较合适，如下图：<br><img src="https://wangbjun.github.io/images/old/16d0f2ba8e833515.jpg" alt=""></p>
+<p>在弹出的对话框里面找到graphics设置，设置一个比较合适的dpi，以我个人经验，150-170比较合适，如下图：<br><img src="https://wangbjun.site/images/old/16d0f2ba8e833515.jpg" alt=""></p>
 <h2 id="网易云音乐"><a href="#网易云音乐" class="headerlink" title="网易云音乐"></a>网易云音乐</h2><p>网易云的软件在4k下面也是个刺头，暂时没有完美的方案，但是有一个可以凑合用，在网易的desktop文件Exec配置里面加入：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">--force-device-scale-factor&#x3D;1.75</span><br></pre></td></tr></table></figure>
-<h2 id="搜狗输入法"><a href="#搜狗输入法" class="headerlink" title="搜狗输入法"></a>搜狗输入法</h2><p>搜狗输入法其实也是不支持4k自动缩放的，不过我们可以把皮肤的字体设置大一点，达到的效果是一样的：<br><img src="https://wangbjun.github.io/images/old/16d0f301af11cca2.jpg" alt=""></p>
+<h2 id="搜狗输入法"><a href="#搜狗输入法" class="headerlink" title="搜狗输入法"></a>搜狗输入法</h2><p>搜狗输入法其实也是不支持4k自动缩放的，不过我们可以把皮肤的字体设置大一点，达到的效果是一样的：<br><img src="https://wangbjun.site/images/old/16d0f301af11cca2.jpg" alt=""></p>
 <h2 id="QT系列软件"><a href="#QT系列软件" class="headerlink" title="QT系列软件"></a>QT系列软件</h2><p>Linux下面有很多基于QT开发的软件，它的缩放有可能是跟系统走的，但是也有可能不是，根据我的经验，QT需要设置一下2个环境变量：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">export QT_DEVICE_PIXEL_RATIO&#x3D;2</span><br><span class="line">export QT_AUTO_SCREEN_SCALE_FACTOR&#x3D;1</span><br></pre></td></tr></table></figure>
 <p>为什么有2个呢？据说第一个是老版本会用到，但是这个缩放因子只支持整数倍，你不能写1.5，有点蛋疼！</p>
