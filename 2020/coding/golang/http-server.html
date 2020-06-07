@@ -92,11 +92,11 @@
 <meta property="og:site_name" content="JWang的博客">
 <meta property="og:description" content="Golang之所以非常适合用于网络编程的原因之一就是其自带网络库可以非常简单快速的建立一个基于http或者tcp的服务应用，以http服务为例，只需几行代码： 12345678910111213package mainimport &quot;net&#x2F;http&quot;func main() &amp;#123;    http.HandleFunc(&quot;&#x2F;&quot;, func(writer http.ResponseWriter">
 <meta property="og:image" content="https://wangbjun.site/images/old/5f6e3e27ly1g371bhib22j20da0dn0t2.jpg">
-<meta property="og:image" content="https://wangbjun.site/image/2020-06-07_16-30.png">
-<meta property="og:image" content="https://wangbjun.site/image/2020-06-07_19-01.png">
-<meta property="og:image" content="https://wangbjun.site/image/2020-06-07_21-46.png">
+<meta property="og:image" content="https://wangbjun.site/images/2020-06-07_16-30.png">
+<meta property="og:image" content="https://wangbjun.site/images/2020-06-07_19-01.png">
+<meta property="og:image" content="https://wangbjun.site/images/2020-06-07_21-46.png">
 <meta property="article:published_time" content="2020-06-06T15:42:22.000Z">
-<meta property="article:modified_time" content="2020-06-07T13:56:51.357Z">
+<meta property="article:modified_time" content="2020-06-07T14:00:52.012Z">
 <meta property="article:author" content="Ben Jun">
 <meta property="article:tag" content="Golang">
 <meta property="article:tag" content="Http">
@@ -334,7 +334,7 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-06-07T21:56:51+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2020-06-07T22:00:52+08:00">
                 2020-06-07
               </time>
             
@@ -427,14 +427,14 @@
 <p>说到tcp就不得不说下socket网络编程，上面这张图基本上描述了tcp网络通信的一个流程，这和http有什么关系呢？</p>
 <p>实际上，这种图里面<code>处理请求</code>这部分则是http服务应该做的东西，tcp只负责传输控制，至于内容，其协议可能是http，也可能是ftp，甚至有可能是自定义的协议。</p>
 <p>网上借张http协议报文的图看一下：</p>
-<img src="/image/2020-06-07_16-30.png" />
+<img src="/images/2020-06-07_16-30.png" />
 
 <p>实际上，协议内容非常复杂，对于每一个字段代表的意思和应该出现的位置都有规定，有人可能说，我拿chrome F12打开控制台看到和这个不一样啊，那是因为浏览器把请求解析了一行行显示出来方便咱调试而已。</p>
 <p>如果你理解了这2张图，你应该理解了一个http请求是怎么发起，怎么响应的，但是实际应用中，Go又是怎么做到解析协议并且响应结果的呢？</p>
 <h2 id="2-DefaultServeMux"><a href="#2-DefaultServeMux" class="headerlink" title="2.DefaultServeMux"></a>2.DefaultServeMux</h2><p>让我们点开源码，看看这几行代码到底干了啥，首先看一下个 <code>HandlFunc()</code>，Go里面关于http server的代码都在server.go这个文件里面，总共3000多行，有点多，这里摘取部分。</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> ServeMux <span class="keyword">struct</span> &#123;</span><br><span class="line">	mu    sync.RWMutex</span><br><span class="line">	m     <span class="keyword">map</span>[<span class="keyword">string</span>]muxEntry</span><br><span class="line">	es    []muxEntry <span class="comment">// slice of entries sorted from longest to shortest.</span></span><br><span class="line">	hosts <span class="keyword">bool</span>       <span class="comment">// whether any patterns contain hostnames</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">type</span> muxEntry <span class="keyword">struct</span> &#123;</span><br><span class="line">	h       Handler</span><br><span class="line">	pattern <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// DefaultServeMux is the default ServeMux used by Serve.</span></span><br><span class="line"><span class="keyword">var</span> DefaultServeMux = &amp;defaultServeMux</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> defaultServeMux ServeMux</span><br><span class="line"></span><br><span class="line"><span class="comment">// HandleFunc registers the handler function for the given pattern</span></span><br><span class="line"><span class="comment">// in the DefaultServeMux.</span></span><br><span class="line"><span class="comment">// The documentation for ServeMux explains how patterns are matched.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">HandleFunc</span><span class="params">(pattern <span class="keyword">string</span>, handler <span class="keyword">func</span>(ResponseWriter, *Request)</span>)</span> &#123;</span><br><span class="line">	DefaultServeMux.HandleFunc(pattern, handler)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// HandleFunc registers the handler function for the given pattern.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(mux *ServeMux)</span> <span class="title">HandleFunc</span><span class="params">(pattern <span class="keyword">string</span>, handler <span class="keyword">func</span>(ResponseWriter, *Request)</span>)</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> handler == <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(<span class="string">"http: nil handler"</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	mux.Handle(pattern, HandlerFunc(handler))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这里的核心是<code>ServeMux</code>这个结构体，按照注释的介绍，这个是一个http server的多路复用分发器，顾名思义，它是用来处理分发请求的，下面是它实现的一些方法：</p>
-<img src="/image/2020-06-07_19-01.png" />
+<img src="/images/2020-06-07_19-01.png" />
 
 <p>这个结构体有4个成员属性，其中mu是一个读写互斥锁；m是一个map，其key是一个string（实际上也是路由），value是一个muxEntry；这个muxEntry则是代表了handler和pattern，其中pattern就是咱说的路由，又叫请求path。</p>
 <p>HandleFunc最终调用了Handle方法，其主要目的是把路由和handler函数做一个映射关系，简单说就是注册路由：</p>
@@ -461,7 +461,7 @@
 <p>后面的代码非常之多，不太好解析，这里捡个重点说说，其中解析http协议调用的是<code>readRequest</code>方法，里面做了很多操作，比如说解析请求头的一些属性，比如请求类型、协议版本、请求URI、缓存控制等等，把他们放入到<code>Request</code>对象里面，这个结构体也是我们日常开发中最常用到的，我们会从这里获取所需要的请求信息。</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// parseRequestLine parses "GET /foo HTTP/1.1" into its three parts.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">parseRequestLine</span><span class="params">(line <span class="keyword">string</span>)</span> <span class="params">(method, requestURI, proto <span class="keyword">string</span>, ok <span class="keyword">bool</span>)</span></span> &#123;</span><br><span class="line">    s1 := strings.Index(line, <span class="string">" "</span>)</span><br><span class="line">    s2 := strings.Index(line[s1+<span class="number">1</span>:], <span class="string">" "</span>)</span><br><span class="line">    <span class="keyword">if</span> s1 &lt; <span class="number">0</span> || s2 &lt; <span class="number">0</span> &#123;</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    s2 += s1 + <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> line[:s1], line[s1+<span class="number">1</span> : s2], line[s2+<span class="number">1</span>:], <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>当然其中还有一个非常重要的操作，那就是调用我们之前注册的handler，这个操作是在解析完http请求之后的地方，然后后面就是一些收尾操作。</p>
-<img src="/image/2020-06-07_21-46.png" />
+<img src="/images/2020-06-07_21-46.png" />
 
 <h2 id="3-总结"><a href="#3-总结" class="headerlink" title="3.总结"></a>3.总结</h2><p>相信很多人看完之后还是一脸懵逼，我也差不多，虽然说看上去都是合情合理，但是很多细节并没有深入去研究，虽然说http协议是一个文本协议，但是其解析处理也绝非易事。对于很多使用Go做Web开发的人来说，有必要简单了解一下，有助于了解网络请求的处理过程，加深对协议的理解。</p>
 
