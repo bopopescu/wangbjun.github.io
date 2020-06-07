@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://wangbjun.site/2020/life/ali-waibao.html</loc>
+    
+    <lastmod>2020-06-07T16:19:03.465Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://wangbjun.site/2020/coding/golang/http-server.html</loc>
     
     <lastmod>2020-06-07T14:03:32.839Z</lastmod>
