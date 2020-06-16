@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.8" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Golang," />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="JWang的博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.8" />
+
+
+
+
+
+
+<meta name="description" content="今天来说说限速算法，其实这个倒不是什么神秘的事情，本文主要做一个总结，并且从Golang这么语言的角度做一个实践。 假设作为一个完全不懂算法的人，让你去实现一个限速功能（1秒内最多100次），你可能会想到的最简单方式就是记录一个开始时间，然后开始计数，当计数达到100之后限制调用，等待时间间隔达到1秒的时候重置计数器，然后重新计数，如此往复。 这种算法也是日常生活中应用广泛，比如说坐地铁，在北京，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Golang限速算法和应用">
+<meta property="og:url" content="https://wangbjun.site/2020/coding/golang/limiter.html">
+<meta property="og:site_name" content="JWang的博客">
+<meta property="og:description" content="今天来说说限速算法，其实这个倒不是什么神秘的事情，本文主要做一个总结，并且从Golang这么语言的角度做一个实践。 假设作为一个完全不懂算法的人，让你去实现一个限速功能（1秒内最多100次），你可能会想到的最简单方式就是记录一个开始时间，然后开始计数，当计数达到100之后限制调用，等待时间间隔达到1秒的时候重置计数器，然后重新计数，如此往复。 这种算法也是日常生活中应用广泛，比如说坐地铁，在北京，">
+<meta property="og:image" content="https://wangbjun.site/images/2020-06-16_22-52.png">
+<meta property="article:published_time" content="2020-06-15T14:00:00.000Z">
+<meta property="article:modified_time" content="2020-06-16T16:21:49.994Z">
+<meta property="article:author" content="Ben Jun">
+<meta property="article:tag" content="Golang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wangbjun.site/images/2020-06-16_22-52.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    tabs: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://wangbjun.site/2020/coding/golang/limiter.html"/>
+
+
+
+
+
+  <title>Golang限速算法和应用 | JWang的博客</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?693026bcab850159c3d74a57dd104734";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">JWang的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">一点记录，一点想法，一点思考</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangbjun.site/2020/coding/golang/limiter.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ben Jun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JWang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Golang限速算法和应用</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-15T22:00:00+08:00">
+                2020-06-15
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-06-17T00:21:49+08:00">
+                2020-06-17
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Golang/" itemprop="url" rel="index">
+                    <span itemprop="name">Golang</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><span class="post-meta-item-icon"><i class="fa fa-eye"></i></span><span class="post-meta-item-text"> 浏览数</span>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  1.4k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>今天来说说限速算法，其实这个倒不是什么神秘的事情，本文主要做一个总结，并且从Golang这么语言的角度做一个实践。</p>
+<p>假设作为一个完全不懂算法的人，让你去实现一个限速功能（1秒内最多100次），你可能会想到的最简单方式就是记录一个开始时间，然后开始计数，当计数达到100之后限制调用，等待时间间隔达到1秒的时候重置计数器，然后重新计数，如此往复。</p>
+<p>这种算法也是日常生活中应用广泛，比如说坐地铁，在北京，很多地铁站在早晚高峰时期都会限流，方法非常简单，地铁站门口有安检员，每过一段时间放几个人进去，虽然安检员也不会掐着表计时，但是基本上是这个规律。</p>
+<p>这种方式被称为<code>计数器算法</code>，有些文章也称之为<code>固定时间窗口计数法</code>，因为与之对应的还有一个方法叫作<code>滑动时间窗口计数法</code>。</p>
+<a id="more"></a>
+
+<h2 id="1-计数器法"><a href="#1-计数器法" class="headerlink" title="1.计数器法"></a>1.计数器法</h2><p>这种算法实现起来并不难，主要要点在于重置计数器和开始时间，我这里用Go，以一个方法的调用为例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"time"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> count = <span class="number">1</span></span><br><span class="line">    <span class="keyword">var</span> sTime = time.Now()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> time.Now().Sub(sTime).Seconds() &gt; <span class="number">1</span>  &#123;</span><br><span class="line">            count = <span class="number">1</span></span><br><span class="line">            sTime = time.Now()</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> count &gt; <span class="number">100</span>  &#123;</span><br><span class="line">            time.Sleep(time.Millisecond * <span class="number">10</span>)</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        &#125;</span><br><span class="line">        doSomething(count)</span><br><span class="line">        count++</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">doSomething</span><span class="params">(n <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">    fmt.Printf(<span class="string">"do something #%d\n"</span>, n)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这种算法最大问题在于临界点问题，比如说在上面这个例子里面，假设我们在前面1秒钟中最后999ms的时候打印了100个，又在第二个1秒的前1ms内又打印了100个，那么总得算起来，其在2ms内就打印了200个，超出了我们限制。</p>
+<p>另外，还有一个问题就是1ms就会打印完100个，后面999ms都会在等待中，假设在实际应用中，比如说接口限流，假如说某个客户端请求速度比较快，那么就会瞬间消耗所有配额，导致其它用户无法正常访问，这是不可接受的。</p>
+<p>但是这不意味着这个算法没用，很多时候我们的需求就是很简单，只需要控制并发数，如果不考虑上述情况的话是完全可用的。</p>
+<h2 id="2-滑动窗口计数法"><a href="#2-滑动窗口计数法" class="headerlink" title="2.滑动窗口计数法"></a>2.滑动窗口计数法</h2><p>这个算法实际上是前面这种算法的改进版，第一种方法的问题在于统计的时间太粗了，不够精细，假设我们把1s细分为1000ms，那么也就是10ms一个请求，这时候我们只需要统计最近100个10ms段内的请求数就可以了，而不是一个固定的开始时间。这个算法有一个非常知名的应用就是在TCP网络中流量控制中用于计算窗口大小。</p>
+<img src="/images/2020-06-16_22-52.png" />
+
+<p>滑动窗口的核心思想是把时间段切割成更小的区块，每个区块单独计数，最后统计这个时间段内各个小区块的总计数，其重点在于这个时间段并不是一个固定的时间段，而是在动态变化。</p>
+<p>为了便于演示，这里假设限流条件为10s内最多500个请求，我们以1s为区块划分为10个区块，每个区块单独计数，这个算法实现的核心在于维持一个队列，这里使用了Go自带的list实现，参考代码如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"container/list"</span></span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"time"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> part <span class="keyword">struct</span> &#123;</span><br><span class="line">    Time <span class="keyword">int64</span></span><br><span class="line">    Count <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> listPart = list.New()</span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">        <span class="keyword">var</span> nowSecond = time.Now().Unix()</span><br><span class="line">        <span class="keyword">if</span> listPart.Len() == <span class="number">0</span> &#123;</span><br><span class="line">            <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">                listPart.PushBack(part&#123;</span><br><span class="line">                    Time: nowSecond+<span class="keyword">int64</span>(i),</span><br><span class="line">                    Count: <span class="number">0</span>,</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 打印方便调试</span></span><br><span class="line">        <span class="keyword">for</span> e := listPart.Front(); e != <span class="literal">nil</span>; e = e.Next() &#123;</span><br><span class="line">            fmt.Printf(<span class="string">"e = %v\n"</span>, e.Value)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> listSum(listPart) &gt;= <span class="number">500</span> &#123;</span><br><span class="line">            <span class="comment">// 右移动队列元素</span></span><br><span class="line">            <span class="keyword">if</span> listPart.Back().Value.(part).Time == nowSecond&#123;</span><br><span class="line">                listPart.Remove(listPart.Front())</span><br><span class="line">                listPart.PushBack(part&#123;</span><br><span class="line">                    Time: nowSecond+<span class="number">1</span>,</span><br><span class="line">                    Count: <span class="number">0</span>,</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                fmt.Println(<span class="string">"reach limit"</span>)</span><br><span class="line">                time.Sleep(time.Second)</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        time.Sleep(time.Millisecond*<span class="number">10</span>)</span><br><span class="line">        doSomething()</span><br><span class="line"></span><br><span class="line">        element := listGet(listPart, nowSecond)</span><br><span class="line">        count := element.Value.(part).Count</span><br><span class="line">        element.Value = part&#123;</span><br><span class="line">            Time: nowSecond,</span><br><span class="line">            Count: count+<span class="number">1</span>,</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">doSomething</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Printf(<span class="string">"do something \n"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 队列求和</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">listSum</span><span class="params">(l *list.List)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> sum <span class="keyword">int</span></span><br><span class="line">    <span class="keyword">for</span> e := l.Front(); e != <span class="literal">nil</span>; e = e.Next() &#123;</span><br><span class="line">        sum += e.Value.(part).Count</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 查找队列元素</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">listGet</span><span class="params">(l *list.List, t <span class="keyword">int64</span>)</span> *<span class="title">list</span>.<span class="title">Element</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> e := l.Front(); e != <span class="literal">nil</span>; e = e.Next() &#123;</span><br><span class="line">        <span class="keyword">if</span> e.Value.(part).Time == t &#123;</span><br><span class="line">            <span class="keyword">return</span> e</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>实际运行中，整个队列元素保持不变，一直是10个，但是其时间段一直在变，比如下面这个情况下，前面所有的时间区块计数之和已经达到500，开始限流。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">e &#x3D; &#123;1592323440 53&#125; &#x2F;&#x2F;即将被移除</span><br><span class="line">------------------------------------</span><br><span class="line">e &#x3D; &#123;1592323441 98&#125;</span><br><span class="line">e &#x3D; &#123;1592323442 98&#125;</span><br><span class="line">e &#x3D; &#123;1592323443 98&#125;</span><br><span class="line">e &#x3D; &#123;1592323444 98&#125;</span><br><span class="line">e &#x3D; &#123;1592323445 55&#125;</span><br><span class="line">e &#x3D; &#123;1592323446 0&#125;</span><br><span class="line">e &#x3D; &#123;1592323447 0&#125;</span><br><span class="line">e &#x3D; &#123;1592323448 0&#125;</span><br><span class="line">e &#x3D; &#123;1592323449 0&#125;</span><br><span class="line">-------------------------------------</span><br><span class="line">e &#x3D; &#123;1592323450 0&#125; &#x2F;&#x2F;即将新入列</span><br><span class="line">-------------------------------------</span><br></pre></td></tr></table></figure>
+<p>随着时间的推进，新加入一个区块，就有新的流量可用了，如此往复不间断，实现了动态时间窗口！</p>
+<p>这种实现方法区块划分的越多越精确,但是到底该设置多少个格子才足够精确呢？而且这种方式依然没有解决突发流量瞬间占用的情况，所以又延伸出了2种流行的平滑限流算法分别是<code>漏桶算法</code>和<code>令牌桶算法</code>。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Golang/" rel="tag"># Golang</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/life/ali-waibao.html" rel="next" title="再谈阿里外包">
+                <i class="fa fa-chevron-left"></i> 再谈阿里外包
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80ODIxNi8yNDcxMg"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Ben Jun" />
+          <p class="site-author-name" itemprop="name">Ben Jun</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">85</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-计数器法"><span class="nav-text">1.计数器法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-滑动窗口计数法"><span class="nav-text">2.滑动窗口计数法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ben Jun</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Gemini
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="/lib/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user">UV</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye">PV</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.8"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.8"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.8"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.8"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.8"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.8"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.8"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
