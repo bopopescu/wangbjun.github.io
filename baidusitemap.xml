@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://wangbjun.site/2020/coding/golang/ticker.html</loc>
+    <lastmod>2020-06-18</lastmod>
+  </url>  <url>
     <loc>https://wangbjun.site/2020/coding/golang/limiter.html</loc>
     <lastmod>2020-06-17</lastmod>
   </url>  <url>
