@@ -18,8 +18,10 @@
 </ul>
 <p>所以，我基于Gin加上一些开源的组件，封装了一个不算是框架的框架，这里暂且称其为Gen，主要是便于快速开发，解决一些通用性的问题。</p>
 <p>地址：<a href="https://github.com/wangbjun/gen" target="_blank" rel="noopener">https://github.com/wangbjun/gen</a></p>
+<a id="more"></a>
+
 <h2 id="1-项目结构"><a href="#1-项目结构" class="headerlink" title="1.项目结构"></a>1.项目结构</h2><p>这里参照了PHP的Web框架 <strong>Laravel</strong> 的结构，整体上是一个MVC结构：</p>
-<img src="/images/2020-07-01_22-15.png" />
+<img src="/images/2020-07-01_22-15.png" width="50%"/>
 
 <p>基本上包含一个Web框架应该有的东西，包括路由、控制器层、模型层、service层等，便于我们存放代码，开发起来也方便很多，通过文件夹名字我们就能了解各个包的主要作用。</p>
 <p>项目使用Go Mod解决依赖，接下来我依次介绍一些主要模块的功能</p>

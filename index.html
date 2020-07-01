@@ -330,7 +330,7 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-07-01T23:16:23+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2020-07-01T23:18:09+08:00">
                 2020-07-01
               </time>
             
@@ -408,12 +408,21 @@
 
       
         
-          
-          众所周知，Golang非常适合用于开发高性能的API，开源的Web框架也很多，比如国产的Beego，以及在目前最流行的Gin，还有Echo、Iris、Revel等框架。
-由于博主之前从事过PHP，相比来说，感觉Go的这些框架都比较轻量，很多时候还需要自己花点功夫再打理一下，比如这些框架都没有处理数据库这块，Beego虽然自带了一个ORM，但是可用性极差，需要我们自己手动去集成一些开源的组件。
-就拿我用过比较多的Gin框架（ https://github.com/gin-gonic/gin ）来说，它属于其中最轻量级的框架，主要功能包括路由、请求参数、中间件、模板等，存在一些缺失的东西，比如：
-
-          ...
+          <p>众所周知，Golang非常适合用于开发高性能的API，开源的Web框架也很多，比如国产的Beego，以及在目前最流行的Gin，还有Echo、Iris、Revel等框架。</p>
+<p>由于博主之前从事过PHP，相比来说，感觉Go的这些框架都比较轻量，很多时候还需要自己花点功夫再打理一下，比如这些框架都没有处理数据库这块，Beego虽然自带了一个ORM，但是可用性极差，需要我们自己手动去集成一些开源的组件。</p>
+<p>就拿我用过比较多的Gin框架（ <a href="https://github.com/gin-gonic/gin" target="_blank" rel="noopener">https://github.com/gin-gonic/gin</a> ）来说，它属于其中最轻量级的框架，主要功能包括路由、请求参数、中间件、模板等，存在一些缺失的东西，比如：</p>
+<ul>
+<li><p>没有推荐项目结构模块划分，很多人不知道代码咋存放</p>
+</li>
+<li><p>缺少数据库ORM，虽说Go标准库支持数据库，但是缺少封装，用起来麻烦</p>
+</li>
+<li><p>缺少配置文件加载功能，任何项目都少不了配置文件</p>
+</li>
+<li><p>日志处理功能不够强大</p>
+</li>
+</ul>
+<p>所以，我基于Gin加上一些开源的组件，封装了一个不算是框架的框架，这里暂且称其为Gen，主要是便于快速开发，解决一些通用性的问题。</p>
+<p>地址：<a href="https://github.com/wangbjun/gen" target="_blank" rel="noopener">https://github.com/wangbjun/gen</a></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2020/coding/golang/gen.html" rel="contents">
