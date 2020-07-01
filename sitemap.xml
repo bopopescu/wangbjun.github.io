@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://wangbjun.site/2020/coding/golang/gen.html</loc>
+    
+    <lastmod>2020-07-01T15:16:23.457Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://wangbjun.site/2020/coding/golang/tcp-programing.html</loc>
     
     <lastmod>2020-06-22T15:06:29.295Z</lastmod>
