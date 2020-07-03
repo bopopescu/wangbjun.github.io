@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://wangbjun.site/2020/coding/golang/ticker.html</loc>
+    
+    <lastmod>2020-07-03T12:42:31.149Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://wangbjun.site/2020/coding/golang/locker.html</loc>
     
-    <lastmod>2020-07-02T16:46:18.389Z</lastmod>
+    <lastmod>2020-07-03T12:40:18.061Z</lastmod>
     
   </url>
   
@@ -26,13 +33,6 @@
     <loc>https://wangbjun.site/2020/coding/golang/limiter.html</loc>
     
     <lastmod>2020-06-19T14:19:02.624Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wangbjun.site/2020/coding/golang/ticker.html</loc>
-    
-    <lastmod>2020-06-18T16:03:51.778Z</lastmod>
     
   </url>
   
